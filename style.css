@@ -1,0 +1,160 @@
+:root {
+
+    /* COLOR SYSTEM */
+
+    --color-bg: hsl(26, 15%, 91%);
+    --color-bg1: hsl(26, 15%, 85%);
+    --color-bg2: hsl(26, 15%, 80%);
+    --color-bg3: hsl(26, 15%, 75%);
+
+    --color-header: hsl(0, 0%, 93%);
+    --color-input: hsl(0, 0%, 95%);
+    --color-border: hsl(0, 0%, 85%);
+    --color-text: hsl(0, 0%, 10%);
+    --color-white: hsl(0, 0%, 100%);
+
+    /* SIZE */
+
+    --space-sm: 10px;
+    --space-md: 20px;
+    --space-lg: 40px;
+
+    /* RADIUS */
+
+    --radius-pill: 25px;
+
+    /* SHADOW */
+
+    --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+
+/* HEADER */
+
+.header {
+    background: var(--color-header);
+    box-shadow: var(--shadow-soft);
+}
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+
+/* SEARCH */
+
+.search input {
+
+    width: 500px;
+    padding: 12px 20px;
+    border-radius: var(--radius-pill);
+    border: none;
+    background: var(--color-input);
+
+}
+
+
+/* ICONS */
+
+.icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-size: 14px;
+}
+
+
+/* MENU */
+
+.menu {
+    border-top: 1px solid var(--color-border);
+    padding: 12px 0;
+}
+
+.menu ul {
+
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    list-style: none;
+    font-weight: 500;
+
+}
+
+.menu li {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu li:hover {
+    opacity: 0.7;
+}
+
+
+
+/* HERO */
+
+.hero {
+
+    height: 600px;
+    background: url("hero.jpg") center/cover no-repeat;
+
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+
+}
+
+
+.hero button {
+
+    padding: 14px 30px;
+
+    border: 2px solid var(--color-white);
+
+    background: transparent;
+
+    color: var(--color-white);
+
+    font-size: 16px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+.hero button:hover {
+
+    background: var(--color-white);
+    color: black;
+
+}
