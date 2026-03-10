@@ -36,7 +36,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
 }
 
 body {
@@ -83,7 +83,7 @@ body {
 
 .icons {
     display: flex;
-    gap: 20px;
+    gap: 0px;
     align-items: center;
     font-size: 14px;
 }
