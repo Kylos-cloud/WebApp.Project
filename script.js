@@ -1,32 +1,17 @@
-const categories = document.querySelector(".categories");
+const slider = document.querySelector(".categories");
+const leftBtn = document.querySelector(".left");
+const rightBtn = document.querySelector(".right");
 
-let isDown = false;
-let startX;
-let scrollLeft;
-
-categories.addEventListener("mousedown", e => {
-  isDown = true;
-  startX = e.pageX - categories.offsetLeft;
-  scrollLeft = categories.scrollLeft;
+rightBtn.addEventListener("click", () => {
+  slider.scrollBy({
+    left: 350,
+    behavior: "smooth"
+  });
 });
 
-categories.addEventListener("mouseleave", () => {
-  isDown = false;
-});
-
-categories.addEventListener("mouseup", () => {
-  isDown = false;
-});
-
-categories.addEventListener("mousemove", e => {
-
-  if (!isDown) return;
-
-  e.preventDefault();
-
-  const x = e.pageX - categories.offsetLeft;
-  const walk = (x - startX) * 2;
-
-  categories.scrollLeft = scrollLeft - walk;
-
+leftBtn.addEventListener("click", () => {
+  slider.scrollBy({
+    left: -350,
+    behavior: "smooth"
+  });
 });
