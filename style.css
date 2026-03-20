@@ -1,22 +1,34 @@
-:root{
+:root {
+  --color-bg: hsl(0, 0%, 97%);
+  --color-surface: hsl(0, 0%, 100%);
+  --color-bg1: hsl(0, 0%, 92%);
 
-/* MONOCHROME LIGHT THEME */
+  --color-header: hsl(0, 0%, 100%);
+  --color-input: hsl(0, 0%, 94%);
+  --color-border: hsl(0, 0%, 82%);
 
---color-bg: hsl(0,0%,95%);
---color-bg1: hsl(0,0%,90%);
---color-header: hsl(0,0%,98%);
---color-input: hsl(0,0%,96%);
---color-border: hsl(0,0%,88%);
---color-text: hsl(0,0%,15%);
---color-white: hsl(0,0%,100%);
+  --color-text: hsl(0, 0%, 10%);
+  --color-text-muted: hsl(0, 0%, 45%);
 
-/* subtle shadow */
 
---shadow-soft: 0 8px 20px hsl(0 0% 0% / 0.06);
+  --color-accent: hsl(0, 0%, 12%);
+  --color-accent-hover: hsl(0, 0%, 5%);
+  --color-white: hsl(0, 0%, 100%);
 
+  --shadow-soft: 0 8px 24px hsl(0 0% 0% / 0.08);
+  --shadow-card: 0 4px 12px hsl(0 0% 0% / 0.06);
+  --shadow-hover: 0 12px 32px hsl(0 0% 0% / 0.12);
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
 }
-/* RESET */
-
 * {
     margin: 0;
     padding: 0;
@@ -27,9 +39,8 @@
 body {
     background: var(--color-bg);
     color: var(--color-text);
+    font-weight: 400;
 }
-
-
 
 /* HEADER */
 
@@ -38,6 +49,13 @@ body {
     border-bottom: 1px solid var(--color-border);
 }
 
+h1, h2{
+    font-weight: 600;
+}
+
+.small-text {
+    color:hsl(0, 0%, 40%);
+}
 
 .top-bar {
     display: flex;
@@ -52,22 +70,22 @@ body {
     font-weight: 600;
     letter-spacing: 3px;
 }
+.logo a {
+    text-decoration: none;
+    color: var(--color-text);
+}
 
 
 
 /* SEARCH */
 
 .search input {
-
     width: 500px;
     padding: 12px 20px;
     border-radius: 30px;
     border: none;
     background: var(--color-input);
-
 }
-
-
 
 /* ICONS */
 
@@ -78,6 +96,32 @@ body {
     font-size: 14px;
 }
 
+.icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--color-text);
+  fill: none;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+.icon-house {
+  transform: scale(0.8);
+}
+
+.menu-item.active .icon {
+  fill: var(--color-accent);
+}
+
+.icons a {
+    text-decoration: none;
+    color: var(--color-text);
+    position: relative;
+}
+
+.icons a:hover {
+  opacity: 0.6;
+}
 
 
 /* MENU */
@@ -103,7 +147,130 @@ body {
 .menu li:hover {
     opacity: 0.6;
 }
+.menu-search {
+    margin-bottom: var(--space-md);
+}
 
+.menu-search input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    background: var(--color-input);
+    outline: none;
+    font-size: 14px;
+}
+
+/* OVERLAY */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 100;
+}
+
+/* SIDEBAR */
+.category-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 800px;
+    height: 100%;
+    background: var(--color-surface);
+    z-index: 200;
+    transition: 0.3s ease;
+    box-shadow: var(--shadow-hover);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ACTIVE STATE */
+.category-menu.active {
+    left: 0;
+}
+
+#overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* HEADER */
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.menu-header span {
+    cursor: pointer;
+}
+
+/* CONTENT */
+.menu-content {
+    display: flex;
+    height: 100%;
+}
+
+/* LEFT SIDE */
+.menu-left {
+    width: 40%;
+    border-right: 1px solid var(--color-border);
+    padding: var(--space-md);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu-item.active {
+  background: var(--color-bg1);
+  color: var(--color-accent);
+}
+
+.menu-item.active svg {
+  stroke: var(--color-accent);
+}
+.menu-item:hover,
+
+/* RIGHT SIDE */
+.menu-right {
+    width: 60%;
+    padding: var(--space-md);
+}
+
+.submenu-item {
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submenu-item:hover {
+    background: var(--color-bg1);
+}
 
 
 /* HERO */

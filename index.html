@@ -14,24 +14,41 @@
 
         <div class="top-bar">
 
-            <div class="logo">SHOP</div>
+            <div class="logo"><a href="#">SHOP</a></div>
 
             <div class="search">
                 <input type="text" placeholder="Бараа хайх...">
             </div>
 
             <div class="icons">
-                <a href="#">Нэвтрэх</a>
-                <span>♡</span>
-                <span>🛒</span>
+                <a href="#"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-width="2"
+                            d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg></a>
+                <a href="#">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                    </svg>
+
+                </a>
+                <a href="#">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                    </svg>
+
+                </a>
             </div>
 
         </div>
 
-
         <nav class="menu">
             <ul>
-                <li>БҮХ АНГИЛАЛ</li>
+                <li onclick="openMenu()">☰ БҮХ АНГИЛАЛ</li>
                 <li>NEW</li>
                 <li>SALES</li>
                 <li>SPECIAL</li>
@@ -39,6 +56,119 @@
             </ul>
         </nav>
 
+        <!-- OVERLAY -->
+        <div id="overlay" onclick="closeMenu()"></div>
+
+        <!-- CATEGORY SIDEBAR -->
+        <div id="categoryMenu" class="category-menu">
+
+            <div class="menu-header">
+                <h2>БҮХ АНГИЛАЛ</h2>
+                <span onclick="closeMenu()">✕</span>
+            </div>
+
+            <div class="menu-content">
+
+                <div class="menu-left">
+
+                    <!-- SEARCH -->
+                    <div class="menu-search">
+                        <input type="text" id="categorySearch" placeholder="Ангилал хайх...">
+                    </div>
+                    <div class="menu-item"><svg class="icon" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z"
+                                fill="#000000" />
+                        </svg>
+                        Цахилгаан бараа</div>
+                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+                        </svg>
+                        Гэр ахуй</div>
+                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 10.0419c-1.3902 0-1.3935-1.1249-4.20643-1.037-1.73056.05408-3.15551 2.2303-2.71168 5.3081C5.35949 16.2381 6.98619 21 8.99172 21c2.00548 0 2.07358-.8508 3.00828-.8508.9347 0 .8551.8508 3.0083.8508s3.6322-4.7619 3.9098-6.687c.4438-3.0778-.9811-5.25402-2.7117-5.3081-2.8129-.0879-2.8162 1.037-4.2064 1.037Zm2.3598-4.2126c-.8779.74829-1.8612.71957-2.7221.71957 0-.62576.0792-1.94012.8609-2.76911.7817-.82898 2.1271-.7664 2.6434-.7664 0 .59448.0956 2.06766-.7822 2.81594Z" />
+                        </svg>
+
+                        Шинэ хүнс</div>
+                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18.011 13H20c-.367 2.5551-2.32 4.6825-4.9766 5.6162V20H8.97661v-1.3838C6.31996 17.6825 4.36697 15.5551 4 13h14.011Zm0 0c1.0995-.0059 1.989-.8991 1.989-2 0-.8637-.5475-1.59948-1.3143-1.87934M18.011 13H18m0-3.99997c.2409 0 .4718.04258.6857.12063m0 0c.8367-1.0335.7533-2.67022-.2802-3.50694-1.0335-.83672-2.5496-.6772-3.3864.35631-.293-1.50236-1.7485-2.15377-3.2509-1.8607-1.5023.29308-2.48263 1.74856-2.18956 3.25092C8.9805 6.17263 7.6182 5.26418 6.15462 6.00131 4.967 6.59945 4.45094 8.19239 5.04909 9.38002m0 0C4.37083 9.66467 4 10.3357 4 11.1174 4 12.1571 4.84288 13 5.88263 13m-.83354-3.61998c.2866-.12029 1.09613-.40074 2.04494.3418m5.27497-.89091c1.0047-.4589 2.1913-.01641 2.6502.98832" />
+                        </svg>
+                        Боловсруулсан хүнс</div>
+                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 6v2s-3 1-3 3.25 1 2.25 1 3-1 1.125-1 2.25V19c0 .9375 1 2 2.5 2s2-.9375 2-.9375S13 21 14.5 21s2.5-1.0625 2.5-2v-2.5c0-1.125-1-1.5-1-2.25s1-.75 1-3S14 8 14 8V6m-3 0h-1V3h5v3h-1m-3 0h3m-5.95629 6h8.91259M8 17h9" />
+                        </svg>
+                        Шингэн хүнс</div>
+                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-width="2"
+                                d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z" />
+                        </svg>
+                        Гоо сайхан</div>
+                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5h-.16667c-.86548 0-1.70761.28071-2.4.8L3.5 8l2 3.5L8 10v9h8v-9l2.5 1.5 2-3.5-2.9333-2.2c-.6924-.51929-1.5346-.8-2.4-.8H15M9 5c0 1.5 1.5 3 3 3s3-1.5 3-3M9 5h6" />
+                        </svg>
+                        Хувцас, Гутал</div>
+                    <div class="menu-item"><svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M10,10a1,1,0,1,0-1,1A1,1,0,0,0,10,10Zm4.5,4.06a1,1,0,0,0-1.37.36,1.3,1.3,0,0,1-2.26,0,1,1,0,0,0-1.37-.36,1,1,0,0,0-.37,1.36,3.31,3.31,0,0,0,5.74,0A1,1,0,0,0,14.5,14.06ZM15,9a1,1,0,1,0,1,1A1,1,0,0,0,15,9ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18A8,8,0,0,1,9,4.57,3,3,0,0,0,9,5a3,3,0,0,0,3,3,1,1,0,0,0,0-2,1,1,0,0,1,0-2,8,8,0,0,1,0,16Z" />
+                        </svg>Хүүхдийн бараа</div>
+                        <div class="menu-item">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M3 8L5.72 10.27C5.9 10.42 6.13 10.5 6.36 10.5H17.64C17.87 10.5 18.1 10.42 18.28 10.27L21 8M6.5 14h.01M17.5 14h.01M8.16 4.5h7.68c.72 0 1.38.38 1.74 1l2.9 5.07c.34.6.52 1.28.52 1.99V18.5c0 .55-.45 1-1 1h-1c-.55 0-1-.45-1-1v-1H6v1c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-5.94c0-.71.18-1.39.52-1.99l2.9-5.07c.36-.62 1.02-1 1.74-1Z" />
+                            </svg>
+                            Авто
+                        </div>
+                        <div class="menu-item">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <rect x="7" y="10" width="10" height="4" transform="rotate(-45 12 12)" />
+                                <circle cx="18" cy="6" r="3" />
+                                <circle cx="6" cy="18" r="3" />
+                            </svg>
+                            Барилгын материал
+                        </div>
+                        <div class="menu-item"><svg class="icon icon-house" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M11.4187 3.18627C11.7664 2.93791 12.2335 2.93791 12.5812 3.18627L19.2081 7.91974C19.6819 8.25817 19.9847 8.78627 20.0374 9.36613L20.8967 18.8189C21.0032 19.9902 20.081 21 18.9049 21H13H11H5.09501C3.91895 21 2.99675 19.9902 3.10323 18.8189L3.96257 9.36613C4.01528 8.78627 4.31808 8.25817 4.79188 7.91974L11.4187 3.18627ZM12 5.2289L5.95436 9.5472L5.09501 19L9.99998 19V13C9.99998 12.4477 10.4477 12 11 12H13C13.5523 12 14 12.4477 14 13V19L18.9049 19L18.0456 9.54721L12 5.2289Z"/>
+                            </svg>Аялал зугаалга</div>
+                            <div class="menu-item"><svg class="icon icon-house" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3 12C3 10.0017 3.65127 8.15549 4.75313 6.66208M3 12C3 13.9931 3.64785 15.8348 4.74444 17.3261M3 12H21M4.75313 6.66208C6.39201 4.4408 9.02775 3 12 3M4.75313 6.66208C5.97869 7.42812 6.97956 8.34298 7.54328 9.70393C7.84481 10.4319 8 11.2121 8 12C8 12.788 7.84481 13.5682 7.54328 14.2961C6.96816 15.6846 5.96869 16.5246 4.74444 17.3261M12 3C14.9786 3 17.6192 4.44695 19.2573 6.6763M12 3V21M12 21C9.02249 21 6.38269 19.5541 4.74444 17.3261M12 21C14.9665 21 17.5977 19.5648 19.2373 17.3509M19.2573 6.6763C20.3529 8.1672 21 10.008 21 12M19.2573 6.6763C18.0306 7.47481 17.0319 8.31521 16.4567 9.70387C16.1552 10.4318 16 11.212 16 12C16 12.7879 16.1552 13.5681 16.4567 14.2961C17.0356 15.6937 18.0451 16.4972 19.2373 17.3509M21 12C21 14.0041 20.345 15.8552 19.2373 17.3509"
+                                        stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>Спорт</div>
+                    <div class="menu-item">Тоглоом хобби</div>
+                    <div class="menu-item">Бичиг хэрэг</div>
+                    <div class="menu-item">Баяр ёслол, Тэмдэглэлт өдрийн хэрэгсэл</div>
+                    <div class="menu-item">Magestic Номын дэлгүүр</div>
+                    <div class="menu-item">Эрүүл мэнд</div>
+                    <div class="menu-item">Тэжээвэр амьтан</div>
+                    <div class="menu-item">Хямдрал</div>
+                </div>
+
+                <div class="menu-right">
+                    <div class="submenu-item">Цахилгаан бараа</div>
+                    <div class="submenu-item">Гэр ахуйн бараа</div>
+                    <div class="submenu-item">Хүнс</div>
+                    <div class="submenu-item">Гутал хувцас</div>
+                    <div class="submenu-item">Гоо сайхан</div>
+                    <div class="submenu-item">Авто бараа</div>
+                </div>
+
+            </div>
+        </div>
     </header>
 
     <section class="hero">
