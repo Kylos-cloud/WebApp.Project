@@ -25,6 +25,8 @@
 body {
     background: var(--color-bg);
     color: var(--color-text);
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 
@@ -165,6 +167,14 @@ body {
     gap: 30px;
     overflow-x: auto;
 
+
+
+
+
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
 }
 
 .category {
