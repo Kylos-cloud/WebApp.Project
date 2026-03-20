@@ -1,19 +1,18 @@
 :root {
-  --color-bg: hsl(0, 0%, 97%);
-  --color-surface: hsl(0, 0%, 100%);
-  --color-bg1: hsl(0, 0%, 92%);
 
-  --color-header: hsl(0, 0%, 100%);
-  --color-input: hsl(0, 0%, 94%);
-  --color-border: hsl(0, 0%, 82%);
+    /* MONOCHROME LIGHT THEME */
 
-  --color-text: hsl(0, 0%, 10%);
-  --color-text-muted: hsl(0, 0%, 45%);
+    --color-bg: hsl(0, 0%, 95%);
+    --color-bg1: hsl(0, 0%, 90%);
+    --color-header: hsl(0, 0%, 98%);
+    --color-input: hsl(0, 0%, 96%);
+    --color-border: hsl(0, 0%, 88%);
+    --color-text: hsl(0, 0%, 15%);
+    --color-white: hsl(0, 0%, 100%);
 
+    /* subtle shadow */
 
-  --color-accent: hsl(0, 0%, 12%);
-  --color-accent-hover: hsl(0, 0%, 5%);
-  --color-white: hsl(0, 0%, 100%);
+    --shadow-soft: 0 8px 20px hsl(0 0% 0% / 0.06);
 
   --shadow-soft: 0 8px 24px hsl(0 0% 0% / 0.08);
   --shadow-card: 0 4px 12px hsl(0 0% 0% / 0.06);
@@ -29,6 +28,9 @@
   --radius-md: 10px;
   --radius-lg: 16px;
 }
+
+/* RESET */
+
 * {
     margin: 0;
     padding: 0;
@@ -39,7 +41,8 @@
 body {
     background: var(--color-bg);
     color: var(--color-text);
-    font-weight: 400;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 /* HEADER */
@@ -319,9 +322,7 @@ h1, h2{
 /* CATEGORIES */
 
 .categories-section {
-
     padding: 70px 80px;
-
 }
 
 .categories-section h2 {
@@ -334,27 +335,77 @@ h1, h2{
 
 .categories {
     display: flex;
-    gap: 30px;
+    gap: 25px;
     overflow-x: auto;
     overflow-y: hidden;
+    padding: 10px 20px;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     padding: 10px 40px;
     scrollbar-width: none;
+    align-items: flex-start;
 }
 
 .categories::-webkit-scrollbar {
     display: none;
 }
 
+/* CATEGORY CARD */
+
 .category {
-    min-width: 300px;
-    height: 200px;
+    min-width: 200px;
     border-radius: 20px;
     overflow: hidden;
-    scroll-snap-align: start;
+    flex: 0 0 200px;
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: start;
+    position: relative;
 }
+
+/* IMAGE WRAPPER */
+
+.category-img {
+    width: 100%;
+    height: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* IMAGE */
+
+.category-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* HOVER EFFECT (зөвхөн зураг) */
+
+.category:hover img {
+    transform: scale(1.08);
+}
+
+/* TEXT */
+
+.category-info {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.category-info h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.category-info p {
+    font-size: 14px;
+    color: gray;
+}
+
+/* SLIDER BUTTON */
 
 .slider-btn {
     position: absolute;
@@ -378,30 +429,6 @@ h1, h2{
 .slider-btn.right {
     right: 10px;
 }
-.category img {
-
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-}
-
-.category span {
-    position: hidden;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: black;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 2px;
-}
-
-.category:hover {
-    transform: scale(1.03);
-}
-
-
 
 /* PRODUCTS */
 
@@ -430,15 +457,15 @@ h1, h2{
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 35px;
+    gap: 5px;
 
 }
 
 .product {
 
     background: white;
-    padding: 10px;
-    border-radius: 20px;
+    padding: 3%;
+    border-radius: 8px;
     position: relative;
     box-shadow: var(--shadow-soft);
     transition: 0.3s;
@@ -452,16 +479,15 @@ h1, h2{
 .product img {
 
     width: 100%;
-    height: 240px;
+    aspect-ratio: 1/1;
     object-fit: cover;
-    border-radius: 15px;
-
+    border-radius: 8px;
 }
 
 .product h3 {
 
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 13px;
+    margin-top: 6px;
 
 }
 
@@ -486,17 +512,52 @@ h1, h2{
 
 }
 
+.product-img {
+    position: relative;
+}
+
+
+.product-img img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
 .discount {
 
     position: absolute;
-    top: 15px;
-    left: 15px;
-    background: #ff3d3d;
+    top: 10px;
+    right: 10px;
+    background: #dd3030;
     color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
+    padding: 0px 10px;
+    border-radius: 8px;
     font-size: 12px;
+    font-weight: 600;
+    line-height: 2;
 
+}
+
+.brand-logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    padding: 0;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.brand-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 
