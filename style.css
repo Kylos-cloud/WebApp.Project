@@ -1,17 +1,20 @@
 :root {
 
-    --color-bg: hsl(26, 15%, 91%);
-    --color-bg1: hsl(26, 15%, 85%);
-    --color-header: hsl(0, 0%, 95%);
-    --color-input: hsl(0, 0%, 97%);
-    --color-border: hsl(0, 0%, 85%);
-    --color-text: hsl(0, 0%, 10%);
+    /* MONOCHROME LIGHT THEME */
+
+    --color-bg: hsl(0, 0%, 95%);
+    --color-bg1: hsl(0, 0%, 90%);
+    --color-header: hsl(0, 0%, 98%);
+    --color-input: hsl(0, 0%, 96%);
+    --color-border: hsl(0, 0%, 88%);
+    --color-text: hsl(0, 0%, 15%);
     --color-white: hsl(0, 0%, 100%);
 
-    --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.08);
+    /* subtle shadow */
+
+    --shadow-soft: 0 8px 20px hsl(0 0% 0% / 0.06);
 
 }
-
 
 /* RESET */
 
@@ -161,32 +164,59 @@ body {
     margin-bottom: 30px;
 }
 
-.categories {
+.categories-wrapper {
+    position: relative;
+}
 
+.categories {
     display: flex;
     gap: 30px;
     overflow-x: auto;
-
-
-
-
-
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding: 10px 40px;
+    scrollbar-width: none;
 }
+
+
+
+
 
 .categories::-webkit-scrollbar {
     display: none;
 }
 
 .category {
-
-    position: relative;
     min-width: 300px;
     height: 200px;
     border-radius: 20px;
     overflow: hidden;
-    cursor: pointer;
-    transition: 0.3s;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+}
 
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    font-size: 22px;
+    z-index: 10;
+}
+
+.slider-btn.left {
+    left: 10px;
+}
+
+.slider-btn.right {
+    right: 10px;
 }
 
 .category img {
@@ -198,16 +228,14 @@ body {
 }
 
 .category span {
-
-    position: absolute;
+    position: hidden;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
+    color: black;
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 2px;
-
 }
 
 .category:hover {
