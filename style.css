@@ -316,7 +316,7 @@ h2 {
 
 .hero button:hover {
 
-    background: white;
+    background: --color-white;
     color: black;
 
 }
@@ -415,7 +415,7 @@ h2 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: white;
+    background: var(--color-white);
     border: none;
     width: 45px;
     height: 45px;
@@ -599,7 +599,8 @@ h2 {
 
 .product-img {
     position: relative;
-    background: var(--color-bg) padding: 20px;
+    background: var(--color-bg);
+    padding: 20px;
 }
 
 
