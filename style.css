@@ -260,8 +260,8 @@ h2 {
 }
 
 .menu-item.active svg {
-  stroke: var(--color-accent);
-  fill: none;
+    stroke: var(--color-accent);
+    fill: none;
 }
 .menu-item:hover {
     background: var(--color-bg1);
