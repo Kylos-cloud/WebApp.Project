@@ -27,6 +27,11 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* Таагуудын шинэчлэгдсэн reset */
+        menu { list-style: none; padding: 0; }
+        fieldset { border: none; padding: 0; margin: 0; }
+        button { background: none; border: none; font: inherit; cursor: pointer; }
+
         body {
             font-family: 'DM Sans', sans-serif;
             background: var(--color-bg);
@@ -36,7 +41,7 @@
             flex-direction: column;
         }
 
-        /* TOP NAV */
+        /* TOP NAV */ 
         .nav {
             background: var(--color-surface);
             border-bottom: 1px solid var(--color-border);
@@ -104,7 +109,6 @@
             padding: 10px;
             font-size: 14px;
             font-weight: 500;
-            cursor: pointer;
             color: var(--color-muted);
             border-bottom: 2px solid transparent;
             margin-bottom: -1px;
@@ -133,10 +137,7 @@
         }
 
         /* FIELDS */
-        .field {
-            margin-bottom: 18px;
-        }
-
+        .field { margin-bottom: 18px; }
         .field label {
             display: block;
             font-size: 12px;
@@ -165,27 +166,12 @@
             box-shadow: 0 0 0 3px hsl(0 0% 30% / 0.08);
         }
 
-        .field-row {
-            display: flex;
-            gap: 12px;
-        }
-
+        .field-row { display: flex; gap: 12px; }
         .field-row .field { flex: 1; }
 
         /* FORGOT LINK */
-        .forgot {
-            text-align: right;
-            margin-top: -10px;
-            margin-bottom: 18px;
-        }
-
-        .forgot a {
-            font-size: 12px;
-            color: var(--color-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
+        .forgot { text-align: right; margin-top: -10px; margin-bottom: 18px; }
+        .forgot a { font-size: 12px; color: var(--color-muted); text-decoration: none; transition: color 0.2s; }
         .forgot a:hover { color: var(--color-text); }
 
         /* SUBMIT BUTTON */
@@ -210,123 +196,78 @@
 
         /* DIVIDER */
         .divider {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 24px 0;
-            color: var(--color-muted);
-            font-size: 12px;
+            display: flex; align-items: center; gap: 12px;
+            margin: 24px 0; color: var(--color-muted); font-size: 12px;
         }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--color-border);
-        }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--color-border); }
 
         /* SOCIAL BUTTONS */
-        .social-btns {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
+        .social-btns { display: flex; flex-direction: column; gap: 10px; }
         .btn-social {
-            width: 100%;
-            padding: 11px 14px;
-            background: var(--color-surface);
-            color: var(--color-text);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: background 0.2s, transform 0.15s;
+            width: 100%; padding: 11px 14px; background: var(--color-surface);
+            color: var(--color-text); border: 1px solid var(--color-border);
+            border-radius: var(--radius-md); font-family: 'DM Sans', sans-serif;
+            font-size: 13px; font-weight: 500; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px; transition: background 0.2s, transform 0.15s;
         }
 
         .btn-social:hover { background: var(--color-bg); transform: translateY(-1px); }
-
         .btn-social svg { width: 18px; height: 18px; flex-shrink: 0; }
 
         /* SUCCESS / ERROR MSG */
-        .msg {
-            padding: 10px 14px;
-            border-radius: var(--radius-sm);
-            font-size: 13px;
-            margin-bottom: 18px;
-            display: none;
-        }
-
+        .msg { padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; margin-bottom: 18px; display: none; }
         .msg.success { background: hsl(140, 40%, 94%); color: hsl(140, 50%, 30%); display: block; }
         .msg.error   { background: hsl(0, 40%, 94%);   color: hsl(0, 50%, 40%);   display: block; }
 
-        /* FORGOT PANEL */
-        #forgotLink { display: inline; }
-
         /* TERMS */
-        .terms {
-            font-size: 11px;
-            color: var(--color-muted);
-            text-align: center;
-            margin-top: 20px;
-            line-height: 1.6;
-        }
-
+        .terms { font-size: 11px; color: var(--color-muted); text-align: center; margin-top: 20px; line-height: 1.6; }
         .terms a { color: var(--color-accent); text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <nav class="nav">
-        <a href="index.html" class="nav-logo">SHOP</a>
-        <a href="index.html" class="nav-back">
-            ← Дэлгүүр рүү буцах
-        </a>
-    </nav>
+    <header class="nav">
+        <h1><a href="index.html" class="nav-logo">SHOP</a></h1>
+        <a href="index.html" class="nav-back">← Дэлгүүр рүү буцах</a>
+    </header>
 
-    <div class="page">
-        <div class="card">
+    <main class="page">
+        <article class="card">
 
             <!-- TABS -->
-            <div class="tabs">
-                <div class="tab active" onclick="switchTab('login')">Нэвтрэх</div>
-                <div class="tab" onclick="switchTab('register')">Бүртгүүлэх</div>
-            </div>
+            <menu class="tabs">
+                <li><button class="tab active" onclick="switchTab('login')">Нэвтрэх</button></li>
+                <li><button class="tab" onclick="switchTab('register')">Бүртгүүлэх</button></li>
+            </menu>
 
             <!-- MESSAGE -->
-            <div class="msg" id="formMsg"></div>
+            <output class="msg" id="formMsg"></output>
 
             <!-- LOGIN PANEL -->
-            <div class="panel active" id="panel-login">
+            <form class="panel active" id="panel-login" onsubmit="handleLogin(event)">
                 <h2 class="panel-title">Сайн байна уу!</h2>
 
-                <div class="field">
+                <fieldset class="field">
                     <label>И-мэйл</label>
-                    <input type="email" id="loginEmail" placeholder="example@email.com">
-                </div>
+                    <input type="email" id="loginEmail" placeholder="example@email.com" required>
+                </fieldset>
 
-                <div class="field">
+                <fieldset class="field">
                     <label>Нууц үг</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••">
-                </div>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </fieldset>
 
                 <div class="forgot">
                     <a href="#" onclick="switchTab('forgot'); return false;">Нууц үг мартсан уу?</a>
                 </div>
 
-                <button class="btn-primary" onclick="handleLogin()">Нэвтрэх</button>
+                <button type="submit" class="btn-primary">Нэвтрэх</button>
 
                 <div class="divider">эсвэл</div>
 
                 <div class="social-btns">
-                    <button class="btn-social" onclick="handleSocial('Google')">
+                    <button type="button" class="btn-social" onclick="handleSocial('Google')">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                             <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -335,7 +276,7 @@
                         </svg>
                         Google-ээр нэвтрэх
                     </button>
-                    <button class="btn-social" onclick="handleSocial('Facebook')">
+                    <button type="button" class="btn-social" onclick="handleSocial('Facebook')">
                         <svg viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
@@ -346,45 +287,45 @@
                 <p class="terms">
                     Нэвтэрснээр та манай <a href="#">Үйлчилгээний нөхцөл</a> болон <a href="#">Нууцлалын бодлого</a>-той зөвшөөрч байна.
                 </p>
-            </div>
+            </form>
 
             <!-- REGISTER PANEL -->
-            <div class="panel" id="panel-register">
+            <form class="panel" id="panel-register" onsubmit="handleRegister(event)">
                 <h2 class="panel-title">Бүртгүүлэх</h2>
                 <p class="panel-sub">Шинэ данс үүсгэх</p>
 
                 <div class="field-row">
-                    <div class="field">
+                    <fieldset class="field">
                         <label>Нэр</label>
-                        <input type="text" id="regFirst" placeholder="Батболд">
-                    </div>
-                    <div class="field">
+                        <input type="text" id="regFirst" placeholder="Батболд" required>
+                    </fieldset>
+                    <fieldset class="field">
                         <label>Овог</label>
                         <input type="text" id="regLast" placeholder="Дорж">
-                    </div>
+                    </fieldset>
                 </div>
 
-                <div class="field">
+                <fieldset class="field">
                     <label>И-мэйл</label>
-                    <input type="email" id="regEmail" placeholder="example@email.com">
-                </div>
+                    <input type="email" id="regEmail" placeholder="example@email.com" required>
+                </fieldset>
 
-                <div class="field">
+                <fieldset class="field">
                     <label>Нууц үг</label>
-                    <input type="password" id="regPassword" placeholder="••••••••">
-                </div>
+                    <input type="password" id="regPassword" placeholder="••••••••" required>
+                </fieldset>
 
-                <div class="field">
+                <fieldset class="field">
                     <label>Нууц үг давтах</label>
-                    <input type="password" id="regPassword2" placeholder="••••••••">
-                </div>
+                    <input type="password" id="regPassword2" placeholder="••••••••" required>
+                </fieldset>
 
-                <button class="btn-primary" onclick="handleRegister()">Бүртгүүлэх</button>
+                <button type="submit" class="btn-primary">Бүртгүүлэх</button>
 
                 <div class="divider">эсвэл</div>
 
                 <div class="social-btns">
-                    <button class="btn-social" onclick="handleSocial('Google')">
+                    <button type="button" class="btn-social" onclick="handleSocial('Google')">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                             <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -398,29 +339,29 @@
                 <p class="terms">
                     Бүртгүүлснээр та манай <a href="#">Үйлчилгээний нөхцөл</a> болон <a href="#">Нууцлалын бодлого</a>-той зөвшөөрч байна.
                 </p>
-            </div>
+            </form>
 
             <!-- FORGOT PASSWORD PANEL -->
-            <div class="panel" id="panel-forgot">
+            <form class="panel" id="panel-forgot" onsubmit="handleForgot(event)">
                 <h2 class="panel-title">Нууц үг сэргээх</h2>
                 <p class="panel-sub">И-мэйл хаягаа оруулна уу, бид сэргээх холбоос илгээнэ.</p>
 
-                <div class="field">
+                <fieldset class="field">
                     <label>И-мэйл</label>
-                    <input type="email" id="forgotEmail" placeholder="example@email.com">
-                </div>
+                    <input type="email" id="forgotEmail" placeholder="example@email.com" required>
+                </fieldset>
 
-                <button class="btn-primary" onclick="handleForgot()">Холбоос илгээх</button>
+                <button type="submit" class="btn-primary">Холбоос илгээх</button>
 
                 <div style="text-align:center; margin-top: 20px;">
                     <a href="#" onclick="switchTab('login'); return false;" style="font-size:13px; color: var(--color-muted); text-decoration:none;">
                         ← Нэвтрэх рүү буцах
                     </a>
                 </div>
-            </div>
+            </form>
 
-        </div>
-    </div>
+        </article>
+    </main>
 
     <script>
         function switchTab(tab) {
@@ -451,10 +392,10 @@
             el.textContent = '';
         }
 
-        function handleLogin() {
+        function handleLogin(e) {
+            e.preventDefault(); // Хуудас уншихыг зогсоох (Шинэ Form ашиглаж буй үед заавал байх)
             const email = document.getElementById('loginEmail').value.trim();
             const pass  = document.getElementById('loginPassword').value;
-            if (!email || !pass) return showMsg('И-мэйл болон нууц үгээ оруулна уу.', 'error');
 
             // Demo: admin shortcut
             if (email === 'admin@shop.mn' && pass === 'admin123') {
@@ -467,13 +408,11 @@
             setTimeout(() => window.location.href = 'index.html', 1200);
         }
 
-        function handleRegister() {
-            const first = document.getElementById('regFirst').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
+        function handleRegister(e) {
+            e.preventDefault();
             const pass  = document.getElementById('regPassword').value;
             const pass2 = document.getElementById('regPassword2').value;
 
-            if (!first || !email) return showMsg('Бүх талбарыг бөглөнө үү.', 'error');
             if (pass.length < 6) return showMsg('Нууц үг хамгийн багадаа 6 тэмдэгт байх ёстой.', 'error');
             if (pass !== pass2) return showMsg('Нууц үг таарахгүй байна.', 'error');
 
@@ -481,9 +420,9 @@
             setTimeout(() => switchTab('login'), 1800);
         }
 
-        function handleForgot() {
+        function handleForgot(e) {
+            e.preventDefault();
             const email = document.getElementById('forgotEmail').value.trim();
-            if (!email) return showMsg('И-мэйл хаягаа оруулна уу.', 'error');
             showMsg('Сэргээх холбоос ' + email + ' хаяг руу илгээлээ.', 'success');
         }
 

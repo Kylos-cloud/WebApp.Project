@@ -14,13 +14,13 @@
 
         <div class="top-bar">
 
-            <div class="logo"><a href="#">SHOP</a></div>
+            <h1 class="logo"><a href="#">SHOP</a></h1>
 
-            <div class="search">
+            <search class="search">
                 <input type="text" placeholder="Бараа хайх...">
-            </div>
+            </search>
 
-            <div class="icons">
+            <nav class="icons">
                 <a href="login.html"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-width="2"
@@ -42,7 +42,7 @@
                     </svg>
 
                 </a>
-            </div>
+            </nav>
 
         </div>
 
@@ -56,183 +56,210 @@
             </ul>
         </nav>
 
-        <!-- OVERLAY -->
         <div id="overlay" onclick="closeMenu()"></div>
 
-        <!-- CATEGORY SIDEBAR -->
-        <div id="categoryMenu" class="category-menu">
+        <aside id="categoryMenu" class="category-menu">
 
-            <div class="menu-header">
+            <header class="menu-header">
                 <h2>БҮХ АНГИЛАЛ</h2>
                 <span onclick="closeMenu()">✕</span>
-            </div>
+            </header>
 
             <div class="menu-content">
 
-                <div class="menu-left">
+                <nav class="menu-left">
 
                     <!-- SEARCH-->
-                    <div class="menu-search">
+                    <search class="menu-search">
                         <input type="text" id="categorySearch" placeholder="Ангилал хайх...">
-                    </div>
-                    <div class="menu-item" data-category="tsakhilgaan"><svg class="icon" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z"
-                                fill="#000000" />
-                        </svg>
-                        Цахилгаан бараа</div>
-                    <div class="menu-item" data-category="ger-ahui"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
-                        </svg>
-                        Гэр ахуй</div>
-                    <div class="menu-item" data-category="shine-huns"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 10.0419c-1.3902 0-1.3935-1.1249-4.20643-1.037-1.73056.05408-3.15551 2.2303-2.71168 5.3081C5.35949 16.2381 6.98619 21 8.99172 21c2.00548 0 2.07358-.8508 3.00828-.8508.9347 0 .8551.8508 3.0083.8508s3.6322-4.7619 3.9098-6.687c.4438-3.0778-.9811-5.25402-2.7117-5.3081-2.8129-.0879-2.8162 1.037-4.2064 1.037Zm2.3598-4.2126c-.8779.74829-1.8612.71957-2.7221.71957 0-.62576.0792-1.94012.8609-2.76911.7817-.82898 2.1271-.7664 2.6434-.7664 0 .59448.0956 2.06766-.7822 2.81594Z" />
-                        </svg>
+                    </search>
 
-                        Шинэ хүнс</div>
-                    <div class="menu-item" data-category="bolovsruulsan-huns"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M18.011 13H20c-.367 2.5551-2.32 4.6825-4.9766 5.6162V20H8.97661v-1.3838C6.31996 17.6825 4.36697 15.5551 4 13h14.011Zm0 0c1.0995-.0059 1.989-.8991 1.989-2 0-.8637-.5475-1.59948-1.3143-1.87934M18.011 13H18m0-3.99997c.2409 0 .4718.04258.6857.12063m0 0c.8367-1.0335.7533-2.67022-.2802-3.50694-1.0335-.83672-2.5496-.6772-3.3864.35631-.293-1.50236-1.7485-2.15377-3.2509-1.8607-1.5023.29308-2.48263 1.74856-2.18956 3.25092C8.9805 6.17263 7.6182 5.26418 6.15462 6.00131 4.967 6.59945 4.45094 8.19239 5.04909 9.38002m0 0C4.37083 9.66467 4 10.3357 4 11.1174 4 12.1571 4.84288 13 5.88263 13m-.83354-3.61998c.2866-.12029 1.09613-.40074 2.04494.3418m5.27497-.89091c1.0047-.4589 2.1913-.01641 2.6502.98832" />
-                        </svg>
-                        Боловсруулсан хүнс</div>
-                    <div class="menu-item" data-category="shingen-huns"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M11 6v2s-3 1-3 3.25 1 2.25 1 3-1 1.125-1 2.25V19c0 .9375 1 2 2.5 2s2-.9375 2-.9375S13 21 14.5 21s2.5-1.0625 2.5-2v-2.5c0-1.125-1-1.5-1-2.25s1-.75 1-3S14 8 14 8V6m-3 0h-1V3h5v3h-1m-3 0h3m-5.95629 6h8.91259M8 17h9" />
-                        </svg>
-                        Шингэн хүнс</div>
-                    <div class="menu-item" data-category="goo-saikhan"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-width="2"
-                                d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z" />
-                        </svg>
-                        Гоо сайхан</div>
-                    <div class="menu-item" data-category="huvtsas"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5h-.16667c-.86548 0-1.70761.28071-2.4.8L3.5 8l2 3.5L8 10v9h8v-9l2.5 1.5 2-3.5-2.9333-2.2c-.6924-.51929-1.5346-.8-2.4-.8H15M9 5c0 1.5 1.5 3 3 3s3-1.5 3-3M9 5h6" />
-                        </svg>
-                        Хувцас, Гутал</div>
-                    <div class="menu-item" data-category="huuhdiin"><svg class="icon" viewBox="0 0 24 24">
-                            <path
-                                d="M10,10a1,1,0,1,0-1,1A1,1,0,0,0,10,10Zm4.5,4.06a1,1,0,0,0-1.37.36,1.3,1.3,0,0,1-2.26,0,1,1,0,0,0-1.37-.36,1,1,0,0,0-.37,1.36,3.31,3.31,0,0,0,5.74,0A1,1,0,0,0,14.5,14.06ZM15,9a1,1,0,1,0,1,1A1,1,0,0,0,15,9ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18A8,8,0,0,1,9,4.57,3,3,0,0,0,9,5a3,3,0,0,0,3,3,1,1,0,0,0,0-2,1,1,0,0,1,0-2,8,8,0,0,1,0,16Z" />
-                        </svg>Хүүхдийн бараа</div>
-                    <div class="menu-item" data-category="avto">
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <path
-                                d="M3 8L5.72 10.27C5.9 10.42 6.13 10.5 6.36 10.5H17.64C17.87 10.5 18.1 10.42 18.28 10.27L21 8M6.5 14h.01M17.5 14h.01M8.16 4.5h7.68c.72 0 1.38.38 1.74 1l2.9 5.07c.34.6.52 1.28.52 1.99V18.5c0 .55-.45 1-1 1h-1c-.55 0-1-.45-1-1v-1H6v1c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-5.94c0-.71.18-1.39.52-1.99l2.9-5.07c.36-.62 1.02-1 1.74-1Z" />
-                        </svg>
-                        Авто
-                    </div>
-                    <div class="menu-item" data-category="barilga">
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <rect x="7" y="10" width="10" height="4" transform="rotate(-45 12 12)" />
-                            <circle cx="18" cy="6" r="3" />
-                            <circle cx="6" cy="18" r="3" />
-                        </svg>
-                        Барилгын материал
-                    </div>
-                    <div class="menu-item" data-category="ayalal"><svg class="icon icon-house" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M11.4187 3.18627C11.7664 2.93791 12.2335 2.93791 12.5812 3.18627L19.2081 7.91974C19.6819 8.25817 19.9847 8.78627 20.0374 9.36613L20.8967 18.8189C21.0032 19.9902 20.081 21 18.9049 21H13H11H5.09501C3.91895 21 2.99675 19.9902 3.10323 18.8189L3.96257 9.36613C4.01528 8.78627 4.31808 8.25817 4.79188 7.91974L11.4187 3.18627ZM12 5.2289L5.95436 9.5472L5.09501 19L9.99998 19V13C9.99998 12.4477 10.4477 12 11 12H13C13.5523 12 14 12.4477 14 13V19L18.9049 19L18.0456 9.54721L12 5.2289Z" />
-                        </svg>Аялал зугаалга</div>
-                    <div class="menu-item" data-category="sport"><svg class="icon icon-house" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M3 12C3 10.0017 3.65127 8.15549 4.75313 6.66208M3 12C3 13.9931 3.64785 15.8348 4.74444 17.3261M3 12H21M4.75313 6.66208C6.39201 4.4408 9.02775 3 12 3M4.75313 6.66208C5.97869 7.42812 6.97956 8.34298 7.54328 9.70393C7.84481 10.4319 8 11.2121 8 12C8 12.788 7.84481 13.5682 7.54328 14.2961C6.96816 15.6846 5.96869 16.5246 4.74444 17.3261M12 3C14.9786 3 17.6192 4.44695 19.2573 6.6763M12 3V21M12 21C9.02249 21 6.38269 19.5541 4.74444 17.3261M12 21C14.9665 21 17.5977 19.5648 19.2373 17.3509M19.2573 6.6763C20.3529 8.1672 21 10.008 21 12M19.2573 6.6763C18.0306 7.47481 17.0319 8.31521 16.4567 9.70387C16.1552 10.4318 16 11.212 16 12C16 12.7879 16.1552 13.5681 16.4567 14.2961C17.0356 15.6937 18.0451 16.4972 19.2373 17.3509M21 12C21 14.0041 20.345 15.8552 19.2373 17.3509"
-                                stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>Спорт</div>
-                    <div class="menu-item" data-category="togloom">
-                        <svg class="icon icon-house" fill="#000000" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M15.5,6H13V4a1,1,0,0,0-2,0V6H8.5a7.5,7.5,0,0,0,0,15h7a7.5,7.5,0,0,0,0-15Zm0,13h-7a5.5,5.5,0,0,1,0-11h7a5.5,5.5,0,0,1,0,11ZM11,13.5a1,1,0,0,1-1,1H9v1a1,1,0,0,1-2,0v-1H6a1,1,0,0,1,0-2H7v-1a1,1,0,0,1,2,0v1h1A1,1,0,0,1,11,13.5ZM19,12a1,1,0,1,1-1-1A1,1,0,0,1,19,12Zm-2,3a1,1,0,1,1-1-1A1,1,0,0,1,17,15Z" />
-                        </svg>Тоглоом хобби</div>
-                    <div class="menu-item" data-category="bichig">
-                        <svg class="icon icon-house" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 19V6.2C4 5.0799 4 4.51984 4.21799 4.09202C4.40973 3.71569 4.71569 3.40973 5.09202
-                                3.21799C5.51984 3 6.0799 3 7.2 3H16.8C17.9201 3 18.4802 3 18.908 3.21799C19.2843 3.40973
-                                19.5903 3.71569 19.782 4.09202C20 4.51984 20 5.0799 20 6.2V17H6C4.89543 17 4 17.8954 4
-                                19ZM4 19C4 20.1046 4.89543 21 6 21H20M9 7H15M9 11H15M19 17V21" stroke="#000000"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>Бичиг хэрэг</div>
-                    <div class="menu-item" data-category="bayar">
-                        <?xml version="1.0" encoding="utf-8"?>
-                        <svg class="icon icon-house" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M3 15.9248C3 13.5162 3.51623 13 5.9248 13H18.0752C20.4838 13 21 13.5162 21 15.9248V18.0752C21 20.4838 20.4838 21 18.0752 21H5.9248C3.51623 21 3 20.4838 3 18.0752V15.9248Z"
-                                stroke="#323232" stroke-width="2" />
-                            <path d="M6 13V11.656C6 9.46878 6.46878 9 8.656 9H15.344C17.5312 9 18 9.46878 18 11.656V13"
-                                stroke="#323232" stroke-width="2" stroke-linecap="round" />
-                            <path d="M9 9V7" stroke="#323232" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M9 3.5V3" stroke="#323232" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M15 9V7" stroke="#323232" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M15 3.5V3" stroke="#323232" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M12 9V7" stroke="#323232" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M12 3.5V3" stroke="#323232" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M3 16.0397C3.30926 16.0122 3.63847 16 4 16C5.61017 16 6.38983 17 8 17C9.61017 17 10.3898 16 12 16C13.6102 16 14.3898 17 16 17C17.6102 17 18.3898 16 20 16C20.3615 16 20.6907 16.0122 21 16.0397"
-                                stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>Баяр ёслол, Тэмдэглэлт өдрийн хэрэгсэл</div>
-                    <div class="menu-item" data-category="eruul">
-                        <svg class="icon icon-house" fill="#000000" viewBox="0 0 32 32">
-                            <path
-                                d="M15.988,1.988c-7.727,-0 -14,6.273 -14,14c-0,7.726 6.273,14 14,14c7.726,-0 14,-6.274 14,-14c-0,-7.727 -6.274,-14 -14,-14Zm-0,2c6.623,-0 12,5.377 12,12c-0,6.623 -5.377,12 -12,12c-6.623,-0 -12,-5.377 -12,-12c-0,-6.623 5.377,-12 12,-12Z" />
-                            <path
-                                d="M11.976,11.992l-2.976,-0c-1.657,-0 -3,1.343 -3,3l0,2.023c0,1.657 1.343,3 3,3c0,-0 2.976,-0 2.976,-0c-0,-0 -0,2.998 -0,2.998c-0,1.657 1.343,3 3,3l2.023,0c1.657,0 3,-1.343 3,-3c-0,0 -0,-2.998 -0,-2.998c-0,-0 3.001,-0 3.001,-0c1.657,-0 3,-1.343 3,-3l-0,-2.023c-0,-1.657 -1.343,-3 -3,-3c-0,-0 -3.001,-0 -3.001,-0c-0,-0 -0,-2.953 -0,-2.953c-0,-1.657 -1.343,-3 -3,-3l-2.023,-0c-1.657,-0 -3,1.343 -3,3l-0,2.953Zm1,2c0.552,-0 1,-0.448 1,-1l-0,-3.953c-0,-0.553 0.447,-1 1,-1c-0,-0 2.023,-0 2.023,-0c0.552,-0 1,0.447 1,1l-0,3.953c-0,0.552 0.447,1 1,1l4.001,-0c0.552,-0 1,0.447 1,1c0,-0 -0,2.023 -0,2.023c-0,0.552 -0.448,1 -1,1l-4.001,-0c-0.553,-0 -1,0.447 -1,1l-0,3.998c-0,0.553 -0.448,1 -1,1c-0,0 -2.023,0 -2.023,0c-0.553,0 -1,-0.447 -1,-1l-0,-3.998c-0,-0.553 -0.448,-1 -1,-1l-3.976,-0c-0.552,-0 -1,-0.448 -1,-1c-0,-0 0,-2.023 0,-2.023c0,-0.553 0.448,-1 1,-1l3.976,-0Z" />
-                        </svg>Эрүүл мэнд</div>
-                    <div class="menu-item" data-category="tejeewr">
-                        <svg class="icon icon-house" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M4.41003 16.75C4.17003 19.64 6.35003 22 9.25003 22H14.04C17.3 22 19.54 19.37 19 16.15C18.43 12.77 15.17 10 11.74 10C8.02003 10 4.72003 13.04 4.41003 16.75Z"
-                                stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M10.47 7.5C11.8507 7.5 12.97 6.38071 12.97 5C12.97 3.61929 11.8507 2.5 10.47 2.5C9.08926 2.5 7.96997 3.61929 7.96997 5C7.96997 6.38071 9.08926 7.5 10.47 7.5Z"
-                                stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M17.3 8.69995C18.4046 8.69995 19.3 7.80452 19.3 6.69995C19.3 5.59538 18.4046 4.69995 17.3 4.69995C16.1955 4.69995 15.3 5.59538 15.3 6.69995C15.3 7.80452 16.1955 8.69995 17.3 8.69995Z"
-                                stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M21 12.7C21.8284 12.7 22.5 12.0284 22.5 11.2C22.5 10.3715 21.8284 9.69995 21 9.69995C20.1716 9.69995 19.5 10.3715 19.5 11.2C19.5 12.0284 20.1716 12.7 21 12.7Z"
-                                stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M3.96997 10.7C5.07454 10.7 5.96997 9.80452 5.96997 8.69995C5.96997 7.59538 5.07454 6.69995 3.96997 6.69995C2.8654 6.69995 1.96997 7.59538 1.96997 8.69995C1.96997 9.80452 2.8654 10.7 3.96997 10.7Z"
-                                stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>Тэжээвэр амьтан</div>
-                    <div class="menu-item" data-category="hyamdral">
-                        <svg class="icon icon-house" viewBox="0 0 24 24" fill="none">
-                            <path d="M9 15L15 9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
-                            <path
-                                d="M15.5 14.5C15.5 15.0523 15.0523 15.5 14.5 15.5C13.9477 15.5 13.5 15.0523 13.5 14.5C13.5 13.9477 13.9477 13.5 14.5 13.5C15.0523 13.5 15.5 13.9477 15.5 14.5Z"
-                                fill="#1C274C" />
-                            <path
-                                d="M10.5 9.5C10.5 10.0523 10.0523 10.5 9.5 10.5C8.94772 10.5 8.5 10.0523 8.5 9.5C8.5 8.94772 8.94772 8.5 9.5 8.5C10.0523 8.5 10.5 8.94772 10.5 9.5Z"
-                                fill="#1C274C" />
-                            <path
-                                d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"
-                                stroke="#1C274C" stroke-width="1.5" />
-                        </svg>Хямдрал</div>
-                    </div>
+                    <!-- АНГИЛЛЫН ЖАГСААЛТ -->
+                    <ul class="category-list">
+                        <li class="menu-item" data-category="tsakhilgaan"><svg class="icon" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z"
+                                    fill="#000000" />
+                            </svg>
+                            Цахилгаан бараа</li>
+                        <li class="menu-item" data-category="ger-ahui"><svg
+                                class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+                            </svg>
+                            Гэр ахуй</li>
+                        <li class="menu-item" data-category="shine-huns"><svg
+                                class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M12 10.0419c-1.3902 0-1.3935-1.1249-4.20643-1.037-1.73056.05408-3.15551 2.2303-2.71168 5.3081C5.35949 16.2381 6.98619 21 8.99172 21c2.00548 0 2.07358-.8508 3.00828-.8508.9347 0 .8551.8508 3.0083.8508s3.6322-4.7619 3.9098-6.687c.4438-3.0778-.9811-5.25402-2.7117-5.3081-2.8129-.0879-2.8162 1.037-4.2064 1.037Zm2.3598-4.2126c-.8779.74829-1.8612.71957-2.7221.71957 0-.62576.0792-1.94012.8609-2.76911.7817-.82898 2.1271-.7664 2.6434-.7664 0 .59448.0956 2.06766-.7822 2.81594Z" />
+                            </svg>
 
-                <div class="menu-right" id="menuRight">
+                            Шинэ хүнс</li>
+                        <li class="menu-item" data-category="bolovsruulsan-huns"><svg
+                                class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M18.011 13H20c-.367 2.5551-2.32 4.6825-4.9766 5.6162V20H8.97661v-1.3838C6.31996 17.6825 4.36697 15.5551 4 13h14.011Zm0 0c1.0995-.0059 1.989-.8991 1.989-2 0-.8637-.5475-1.59948-1.3143-1.87934M18.011 13H18m0-3.99997c.2409 0 .4718.04258.6857.12063m0 0c.8367-1.0335.7533-2.67022-.2802-3.50694-1.0335-.83672-2.5496-.6772-3.3864.35631-.293-1.50236-1.7485-2.15377-3.2509-1.8607-1.5023.29308-2.48263 1.74856-2.18956 3.25092C8.9805 6.17263 7.6182 5.26418 6.15462 6.00131 4.967 6.59945 4.45094 8.19239 5.04909 9.38002m0 0C4.37083 9.66467 4 10.3357 4 11.1174 4 12.1571 4.84288 13 5.88263 13m-.83354-3.61998c.2866-.12029 1.09613-.40074 2.04494.3418m5.27497-.89091c1.0047-.4589 2.1913-.01641 2.6502.98832" />
+                            </svg>
+                            Боловсруулсан хүнс</li>
+                        <li class="menu-item" data-category="shingen-huns"><svg
+                                class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M11 6v2s-3 1-3 3.25 1 2.25 1 3-1 1.125-1 2.25V19c0 .9375 1 2 2.5 2s2-.9375 2-.9375S13 21 14.5 21s2.5-1.0625 2.5-2v-2.5c0-1.125-1-1.5-1-2.25s1-.75 1-3S14 8 14 8V6m-3 0h-1V3h5v3h-1m-3 0h3m-5.95629 6h8.91259M8 17h9" />
+                            </svg>
+                            Шингэн хүнс</li>
+                        <li class="menu-item" data-category="goo-saikhan"><svg
+                                class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-width="2"
+                                    d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z" />
+                            </svg>
+                            Гоо сайхан</li>
+                        <li class="menu-item" data-category="huvtsas"><svg class="w-6 h-6 text-gray-800 dark:text-white"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5h-.16667c-.86548 0-1.70761.28071-2.4.8L3.5 8l2 3.5L8 10v9h8v-9l2.5 1.5 2-3.5-2.9333-2.2c-.6924-.51929-1.5346-.8-2.4-.8H15M9 5c0 1.5 1.5 3 3 3s3-1.5 3-3M9 5h6" />
+                            </svg>
+                            Хувцас, Гутал</li>
+                        <li class="menu-item" data-category="huuhdiin"><svg class="icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M10,10a1,1,0,1,0-1,1A1,1,0,0,0,10,10Zm4.5,4.06a1,1,0,0,0-1.37.36,1.3,1.3,0,0,1-2.26,0,1,1,0,0,0-1.37-.36,1,1,0,0,0-.37,1.36,3.31,3.31,0,0,0,5.74,0A1,1,0,0,0,14.5,14.06ZM15,9a1,1,0,1,0,1,1A1,1,0,0,0,15,9ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18A8,8,0,0,1,9,4.57,3,3,0,0,0,9,5a3,3,0,0,0,3,3,1,1,0,0,0,0-2,1,1,0,0,1,0-2,8,8,0,0,1,0,16Z" />
+                            </svg>Хүүхдийн бараа</li>
+                        <li class="menu-item" data-category="avto">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M3 8L5.72 10.27C5.9 10.42 6.13 10.5 6.36 10.5H17.64C17.87 10.5 18.1 10.42 18.28 10.27L21 8M6.5 14h.01M17.5 14h.01M8.16 4.5h7.68c.72 0 1.38.38 1.74 1l2.9 5.07c.34.6.52 1.28.52 1.99V18.5c0 .55-.45 1-1 1h-1c-.55 0-1-.45-1-1v-1H6v1c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-5.94c0-.71.18-1.39.52-1.99l2.9-5.07c.36-.62 1.02-1 1.74-1Z" />
+                            </svg>
+                            Авто
+                        </li>
+                        <li class="menu-item" data-category="barilga">
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <rect x="7" y="10" width="10" height="4" transform="rotate(-45 12 12)" />
+                                <circle cx="18" cy="6" r="3" />
+                                <circle cx="6" cy="18" r="3" />
+                            </svg>
+                            Барилгын материал
+                        </li>
+                        <li class="menu-item" data-category="ayalal"><svg class="icon icon-house" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M11.4187 3.18627C11.7664 2.93791 12.2335 2.93791 12.5812 3.18627L19.2081 7.91974C19.6819 8.25817 19.9847 8.78627 20.0374 9.36613L20.8967 18.8189C21.0032 19.9902 20.081 21 18.9049 21H13H11H5.09501C3.91895 21 2.99675 19.9902 3.10323 18.8189L3.96257 9.36613C4.01528 8.78627 4.31808 8.25817 4.79188 7.91974L11.4187 3.18627ZM12 5.2289L5.95436 9.5472L5.09501 19L9.99998 19V13C9.99998 12.4477 10.4477 12 11 12H13C13.5523 12 14 12.4477 14 13V19L18.9049 19L18.0456 9.54721L12 5.2289Z" />
+                            </svg>Аялал зугаалга</li>
+                        <li class="menu-item" data-category="sport"><svg class="icon icon-house" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3 12C3 10.0017 3.65127 8.15549 4.75313 6.66208M3 12C3 13.9931 3.64785 15.8348 4.74444 17.3261M3 12H21M4.75313 6.66208C6.39201 4.4408 9.02775 3 12 3M4.75313 6.66208C5.97869 7.42812 6.97956 8.34298 7.54328 9.70393C7.84481 10.4319 8 11.2121 8 12C8 12.788 7.84481 13.5682 7.54328 14.2961C6.96816 15.6846 5.96869 16.5246 4.74444 17.3261M12 3C14.9786 3 17.6192 4.44695 19.2573 6.6763M12 3V21M12 21C9.02249 21 6.38269 19.5541 4.74444 17.3261M12 21C14.9665 21 17.5977 19.5648 19.2373 17.3509M19.2573 6.6763C20.3529 8.1672 21 10.008 21 12M19.2573 6.6763C18.0306 7.47481 17.0319 8.31521 16.4567 9.70387C16.1552 10.4318 16 11.212 16 12C16 12.7879 16.1552 13.5681 16.4567 14.2961C17.0356 15.6937 18.0451 16.4972 19.2373 17.3509M21 12C21 14.0041 20.345 15.8552 19.2373 17.3509"
+                                    stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>Спорт</li>
+                        <li class="menu-item" data-category="togloom">
+                            <svg class="icon icon-house" fill="#000000" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M15.5,6H13V4a1,1,0,0,0-2,0V6H8.5a7.5,7.5,0,0,0,0,15h7a7.5,7.5,0,0,0,0-15Zm0,13h-7a5.5,5.5,0,0,1,0-11h7a5.5,5.5,0,0,1,0,11ZM11,13.5a1,1,0,0,1-1,1H9v1a1,1,0,0,1-2,0v-1H6a1,1,0,0,1,0-2H7v-1a1,1,0,0,1,2,0v1h1A1,1,0,0,1,11,13.5ZM19,12a1,1,0,1,1-1-1A1,1,0,0,1,19,12Zm-2,3a1,1,0,1,1-1-1A1,1,0,0,1,17,15Z" />
+                            </svg>Тоглоом хобби</li>
+                        <li class="menu-item" data-category="bichig">
+                            <svg class="icon icon-house" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 19V6.2C4 5.0799 4 4.51984 4.21799 4.09202C4.40973 3.71569 4.71569 3.40973 5.09202
+                                    3.21799C5.51984 3 6.0799 3 7.2 3H16.8C17.9201 3 18.4802 3 18.908 3.21799C19.2843 3.40973
+                                    19.5903 3.71569 19.782 4.09202C20 4.51984 20 5.0799 20 6.2V17H6C4.89543 17 4 17.8954 4
+                                    19ZM4 19C4 20.1046 4.89543 21 6 21H20M9 7H15M9 11H15M19 17V21" stroke="#000000"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>Бичиг хэрэг</li>
+                        <li class="menu-item" data-category="bayar">
+                            <?xml version="1.0" encoding="utf-8"?>
+                            <svg class="icon icon-house" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3 15.9248C3 13.5162 3.51623 13 5.9248 13H18.0752C20.4838 13 21 13.5162 21 15.9248V18.0752C21 20.4838 20.4838 21 18.0752 21H5.9248C3.51623 21 3 20.4838 3 18.0752V15.9248Z"
+                                    stroke="#323232" stroke-width="2" />
+                                <path
+                                    d="M6 13V11.656C6 9.46878 6.46878 9 8.656 9H15.344C17.5312 9 18 9.46878 18 11.656V13"
+                                    stroke="#323232" stroke-width="2" stroke-linecap="round" />
+                                <path d="M9 9V7" stroke="#323232" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M9 3.5V3" stroke="#323232" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M15 9V7" stroke="#323232" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M15 3.5V3" stroke="#323232" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12 9V7" stroke="#323232" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12 3.5V3" stroke="#323232" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M3 16.0397C3.30926 16.0122 3.63847 16 4 16C5.61017 16 6.38983 17 8 17C9.61017 17 10.3898 16 12 16C13.6102 16 14.3898 17 16 17C17.6102 17 18.3898 16 20 16C20.3615 16 20.6907 16.0122 21 16.0397"
+                                    stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>Баяр ёслол, Тэмдэглэлт өдрийн хэрэгсэл</li>
+                        <li class="menu-item" data-category="eruul">
+                            <svg class="icon icon-house" fill="#000000" viewBox="0 0 32 32">
+                                <path
+                                    d="M15.988,1.988c-7.727,-0 -14,6.273 -14,14c-0,7.726 6.273,14 14,14c7.726,-0 14,-6.274 14,-14c-0,-7.727 -6.274,-14 -14,-14Zm-0,2c6.623,-0 12,5.377 12,12c-0,6.623 -5.377,12 -12,12c-6.623,-0 -12,-5.377 -12,-12c-0,-6.623 5.377,-12 12,-12Z" />
+                                <path
+                                    d="M11.976,11.992l-2.976,-0c-1.657,-0 -3,1.343 -3,3l0,2.023c0,1.657 1.343,3 3,3c0,-0 2.976,-0 2.976,-0c-0,-0 -0,2.998 -0,2.998c-0,1.657 1.343,3 3,3l2.023,0c1.657,0 3,-1.343 3,-3c-0,0 -0,-2.998 -0,-2.998c-0,-0 3.001,-0 3.001,-0c1.657,-0 3,-1.343 3,-3l-0,-2.023c-0,-1.657 -1.343,-3 -3,-3c-0,-0 -3.001,-0 -3.001,-0c-0,-0 -0,-2.953 -0,-2.953c-0,-1.657 -1.343,-3 -3,-3l-2.023,-0c-1.657,-0 -3,1.343 -3,3l-0,2.953Zm1,2c0.552,-0 1,-0.448 1,-1l-0,-3.953c-0,-0.553 0.447,-1 1,-1c-0,-0 2.023,-0 2.023,-0c0.552,-0 1,0.447 1,1l-0,3.953c-0,0.552 0.447,1 1,1l4.001,-0c0.552,-0 1,0.447 1,1c0,-0 -0,2.023 -0,2.023c-0,0.552 -0.448,1 -1,1l-4.001,-0c-0.553,-0 -1,0.447 -1,1l-0,3.998c-0,0.553 -0.448,1 -1,1c-0,0 -2.023,0 -2.023,0c-0.553,0 -1,-0.447 -1,-1l-0,-3.998c-0,-0.553 -0.448,-1 -1,-1l-3.976,-0c-0.552,-0 -1,-0.448 -1,-1c-0,-0 0,-2.023 0,-2.023c0,-0.553 0.448,-1 1,-1l3.976,-0Z" />
+                            </svg>Эрүүл мэнд</li>
+                        <li class="menu-item" data-category="tejeewr">
+                            <svg class="icon icon-house" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M4.41003 16.75C4.17003 19.64 6.35003 22 9.25003 22H14.04C17.3 22 19.54 19.37 19 16.15C18.43 12.77 15.17 10 11.74 10C8.02003 10 4.72003 13.04 4.41003 16.75Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M10.47 7.5C11.8507 7.5 12.97 6.38071 12.97 5C12.97 3.61929 11.8507 2.5 10.47 2.5C9.08926 2.5 7.96997 3.61929 7.96997 5C7.96997 6.38071 9.08926 7.5 10.47 7.5Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M17.3 8.69995C18.4046 8.69995 19.3 7.80452 19.3 6.69995C19.3 5.59538 18.4046 4.69995 17.3 4.69995C16.1955 4.69995 15.3 5.59538 15.3 6.69995C15.3 7.80452 16.1955 8.69995 17.3 8.69995Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M21 12.7C21.8284 12.7 22.5 12.0284 22.5 11.2C22.5 10.3715 21.8284 9.69995 21 9.69995C20.1716 9.69995 19.5 10.3715 19.5 11.2C19.5 12.0284 20.1716 12.7 21 12.7Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M3.96997 10.7C5.07454 10.7 5.96997 9.80452 5.96997 8.69995C5.96997 7.59538 5.07454 6.69995 3.96997 6.69995C2.8654 6.69995 1.96997 7.59538 1.96997 8.69995C1.96997 9.80452 2.8654 10.7 3.96997 10.7Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>Тэжээвэр амьтан</li>
+                        <li class="menu-item" data-category="hyamdral">
+                            <svg class="icon icon-house" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 15L15 9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                                <path
+                                    d="M15.5 14.5C15.5 15.0523 15.0523 15.5 14.5 15.5C13.9477 15.5 13.5 15.0523 13.5 14.5C13.5 13.9477 13.9477 13.5 14.5 13.5C15.0523 13.5 15.5 13.9477 15.5 14.5Z"
+                                    fill="#1C274C" />
+                                <path
+                                    d="M10.5 9.5C10.5 10.0523 10.0523 10.5 9.5 10.5C8.94772 10.5 8.5 10.0523 8.5 9.5C8.5 8.94772 8.94772 8.5 9.5 8.5C10.0523 8.5 10.5 8.94772 10.5 9.5Z"
+                                    fill="#1C274C" />
+                                <path
+                                    d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"
+                                    stroke="#1C274C" stroke-width="1.5" />
+                            </svg>Хямдрал</li>
+                    </ul>
+
+                </nav>
+
+                <section class="menu-right" id="menuRight">
                     <p class="menu-right-hint">Ангилал сонгоно уу</p>
-                </div>
+                </section>
 
             </div>
-        </div>
+        </aside>
     </header>
 
     <section class="hero">
@@ -253,72 +280,70 @@
 
             <div class="categories">
 
-                <div class="category">
+                <figure class="category">
                     <div class="category-img">
                         <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38">
                     </div>
-                    <div class=" category-info">
+                    <figcaption class=" category-info">
                         <h3>CLOTHES</h3>
-                    </div>
-                </div>
+                    </figcaption>
+                </figure>
 
-                <div class="category">
+                <figure class="category">
                     <div class="category-img">
                         <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
                     </div>
-                    <div class=" category-info">
+                    <figcaption class=" category-info">
                         <h3>ELECTRONICS</h3>
-                    </div>
-                </div>
+                    </figcaption>
+                </figure>
 
-                <div class="category">
+                <figure class="category">
                     <div class="category-img">
                         <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
-
                     </div>
-                    <div class=" category-info">
+                    <figcaption class=" category-info">
                         <h3>HOME</h3>
-                    </div>
-                </div>
+                    </figcaption>
+                </figure>
 
-                <div class="category">
+                <figure class="category">
                     <div class="category-img">
                         <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
-
                     </div>
-                    <div class=" category-info">
+                    <figcaption class=" category-info">
                         <h3>BEAUTY</h3>
-                    </div>
-                </div>
+                    </figcaption>
+                </figure>
 
-                <div class="category">
+                <figure class="category">
                     <div class="category-img">
                         <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
                         <h3>PET</h3>
                     </div>
-                    <div class=" category-info">
+                    <figcaption class=" category-info">
                         <h3>PET</h3>
-                    </div>
-                </div>
+                    </figcaption>
+                </figure>
 
-                <div class="category">
+                <figure class="category">
                     <div class="category-img">
                         <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
-
                     </div>
-                    <div class=" category-info">
+                    <figcaption class=" category-info">
                         <h3>Хувцас</h3>
-                    </div>
-                </div>
-                <div class="category">
+                    </figcaption>
+                </figure>
+
+                <figure class="category">
                     <div class="category-img">
                         <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
                         <h3>PET</h3>
                     </div>
-                    <div class=" category-info">
+                    <figcaption class=" category-info">
                         <h3>PET</h3>
-                    </div>
-                </div>
+                    </figcaption>
+                </figure>
 
             </div>
 
@@ -330,17 +355,16 @@
 
     <section class="products-section">
 
-        <div class="section-header">
-
+        <header class="section-header">
             <h2>Хямдралтай</h2>
             <a href="#">Бүгдийг харах →</a>
+        </header>
 
-        </div>
         <div class="products">
 
-            <div class="product">
-                <div class="product-img">
-                    <div class="discount">-30%</div>
+            <article class="product">
+                <figure class="product-img">
+                    <span class="discount">-30%</span>
                     <div class="brand-logo">
                         <img
                             src="https://media.about.nike.com/img/cf68f541-fc92-4373-91cb-086ae0fe2f88/002-nike-logos-swoosh-white.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjozMzQsInRvcCI6MCwid2lkdGgiOjQwOTAsImhlaWdodCI6MjcyOH0sInJlc2l6ZSI6eyJ3aWR0aCI6OTAwfX19&s=b47e8cc4991bc508a5b762df7d8679aa1406407f56bc774089362de8797930f1">
@@ -350,19 +374,15 @@
 
                     <h3>Luxury Minimal Watch</h3>
 
-                    <div class="price">
-
+                    <p class="price">
                         <span class="new">₮450,000</span>
                         <span class="old">₮650,000</span>
+                    </p>
+                </figure>
+            </article>
 
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="product">
-
-                <div class="discount">-30%</div>
+            <article class="product">
+                <span class="discount">-30%</span>
                 <div class="brand-logo">
                     <img
                         src="https://media.about.nike.com/img/cf68f541-fc92-4373-91cb-086ae0fe2f88/002-nike-logos-swoosh-white.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjozMzQsInRvcCI6MCwid2lkdGgiOjQwOTAsImhlaWdodCI6MjcyOH0sInJlc2l6ZSI6eyJ3aWR0aCI6OTAwfX19&s=b47e8cc4991bc508a5b762df7d8679aa1406407f56bc774089362de8797930f1">
@@ -372,19 +392,14 @@
 
                 <h3>Premium Sneakers</h3>
 
-                <div class="price">
-
+                <p class="price">
                     <span class="new">₮280,000</span>
                     <span class="old">₮400,000</span>
+                </p>
+            </article>
 
-                </div>
-
-            </div>
-
-
-            <div class="product">
-
-                <div class="discount">-25%</div>
+            <article class="product">
+                <span class="discount">-25%</span>
                 <div class="brand-logo">
                     <img
                         src="https://media.about.nike.com/img/cf68f541-fc92-4373-91cb-086ae0fe2f88/002-nike-logos-swoosh-white.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjozMzQsInRvcCI6MCwid2lkdGgiOjQwOTAsImhlaWdodCI6MjcyOH0sInJlc2l6ZSI6eyJ3aWR0aCI6OTAwfX19&s=b47e8cc4991bc508a5b762df7d8679aa1406407f56bc774089362de8797930f1">
@@ -394,19 +409,14 @@
 
                 <h3>Modern Product</h3>
 
-                <div class="price">
-
+                <p class="price">
                     <span class="new">₮180,000</span>
                     <span class="old">₮240,000</span>
+                </p>
+            </article>
 
-                </div>
-
-            </div>
-
-
-            <div class="product">
-
-                <div class="discount">-28%</div>
+            <article class="product">
+                <span class="discount">-28%</span>
                 <div class="brand-logo">
                     <img
                         src="https://media.about.nike.com/img/cf68f541-fc92-4373-91cb-086ae0fe2f88/002-nike-logos-swoosh-white.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjozMzQsInRvcCI6MCwid2lkdGgiOjQwOTAsImhlaWdodCI6MjcyOH0sInJlc2l6ZSI6eyJ3aWR0aCI6OTAwfX19&s=b47e8cc4991bc508a5b762df7d8679aa1406407f56bc774089362de8797930f1">
@@ -416,17 +426,14 @@
 
                 <h3>Elegant Fashion Piece</h3>
 
-                <div class="price">
-
+                <p class="price">
                     <span class="new">₮320,000</span>
                     <span class="old">₮450,000</span>
+                </p>
+            </article>
 
-                </div>
-
-            </div>
-            <div class="product">
-
-                <div class="discount">-28%</div>
+            <article class="product">
+                <span class="discount">-28%</span>
                 <div class="brand-logo">
                     <img
                         src="https://media.about.nike.com/img/cf68f541-fc92-4373-91cb-086ae0fe2f88/002-nike-logos-swoosh-white.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjozMzQsInRvcCI6MCwid2lkdGgiOjQwOTAsImhlaWdodCI6MjcyOH0sInJlc2l6ZSI6eyJ3aWR0aCI6OTAwfX19&s=b47e8cc4991bc508a5b762df7d8679aa1406407f56bc774089362de8797930f1">
@@ -436,18 +443,14 @@
 
                 <h3>Elegant Fashion Piece</h3>
 
-                <div class="price">
-
+                <p class="price">
                     <span class="new">₮320,000</span>
                     <span class="old">₮450,000</span>
+                </p>
+            </article>
 
-                </div>
-
-            </div>
-
-            <div class="product">
-
-                <div class="discount">-28%</div>
+            <article class="product">
+                <span class="discount">-28%</span>
                 <div class="brand-logo">
                     <img
                         src="https://media.about.nike.com/img/cf68f541-fc92-4373-91cb-086ae0fe2f88/002-nike-logos-swoosh-white.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjozMzQsInRvcCI6MCwid2lkdGgiOjQwOTAsImhlaWdodCI6MjcyOH0sInJlc2l6ZSI6eyJ3aWR0aCI6OTAwfX19&s=b47e8cc4991bc508a5b762df7d8679aa1406407f56bc774089362de8797930f1">
@@ -457,18 +460,14 @@
 
                 <h3>Elegant Fashion Piece</h3>
 
-                <div class="price">
-
+                <p class="price">
                     <span class="new">₮320,000</span>
                     <span class="old">₮450,000</span>
+                </p>
+            </article>
 
-                </div>
-
-            </div>
-
-            <div class="product">
-
-                <div class="discount">-28%</div>
+            <article class="product">
+                <span class="discount">-28%</span>
                 <div class="brand-logo">
                     <img
                         src="https://media.about.nike.com/img/cf68f541-fc92-4373-91cb-086ae0fe2f88/002-nike-logos-swoosh-white.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjozMzQsInRvcCI6MCwid2lkdGgiOjQwOTAsImhlaWdodCI6MjcyOH0sInJlc2l6ZSI6eyJ3aWR0aCI6OTAwfX19&s=b47e8cc4991bc508a5b762df7d8679aa1406407f56bc774089362de8797930f1">
@@ -478,18 +477,14 @@
 
                 <h3>Elegant Fashion Piece</h3>
 
-                <div class="price">
-
+                <p class="price">
                     <span class="new">₮320,000</span>
                     <span class="old">₮450,000</span>
+                </p>
+            </article>
 
-                </div>
-
-            </div>
-
-            <div class="product">
-
-                <div class="discount">-28%</div>
+            <article class="product">
+                <span class="discount">-28%</span>
                 <div class="brand-logo">
                     <img
                         src="https://media.about.nike.com/img/cf68f541-fc92-4373-91cb-086ae0fe2f88/002-nike-logos-swoosh-white.jpg?m=eyJlZGl0cyI6eyJqcGVnIjp7InF1YWxpdHkiOjEwMH0sIndlYnAiOnsicXVhbGl0eSI6MTAwfSwiZXh0cmFjdCI6eyJsZWZ0IjozMzQsInRvcCI6MCwid2lkdGgiOjQwOTAsImhlaWdodCI6MjcyOH0sInJlc2l6ZSI6eyJ3aWR0aCI6OTAwfX19&s=b47e8cc4991bc508a5b762df7d8679aa1406407f56bc774089362de8797930f1">
@@ -499,59 +494,53 @@
 
                 <h3>Elegant Fashion Piece</h3>
 
-                <div class="price">
-
+                <p class="price">
                     <span class="new">₮320,000</span>
                     <span class="old">₮450,000</span>
-
-                </div>
-
-            </div>
+                </p>
+            </article>
 
         </div>
 
     </section>
 
-
-    <!-- FOOTER -->
-
     <footer class="footer">
 
         <div class="footer-grid">
 
-            <div>
+            <section>
                 <h3>SHOP</h3>
                 <p>Minimal marketplace</p>
-            </div>
+            </section>
 
-            <div>
+            <section>
                 <h4>АНГИЛАЛ</h4>
                 <p>Хувцас</p>
                 <p>Электроникс</p>
                 <p>Гэр ахуй</p>
                 <p>Гоо сайхан</p>
-            </div>
+            </section>
 
-            <div>
+            <section>
                 <h4>ТУСЛАМЖ</h4>
                 <p>Холбоо барих</p>
                 <p>Хүргэлт</p>
                 <p>Буцаалт</p>
                 <p>FAQ</p>
-            </div>
+            </section>
 
-            <div>
+            <section>
                 <h4>БИДЭНТЭЙ</h4>
                 <p>Instagram</p>
                 <p>Facebook</p>
                 <p>Twitter</p>
-            </div>
+            </section>
 
         </div>
 
-        <div class="copyright">
+        <small class="copyright">
             © 2026 SHOP. All rights reserved.
-        </div>
+        </small>
 
     </footer>
 
