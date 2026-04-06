@@ -185,29 +185,35 @@ const categoryData = {
   }
 };
 
-// =====================
 // RENDER MENU RIGHT
-// =====================
 const menuRight = document.getElementById("menuRight");
 
 function renderSubcategories(categoryKey) {
   const data = categoryData[categoryKey];
+
   if (!data) {
     menuRight.innerHTML = '<p class="menu-right-hint">Удахгүй нэмэгдэнэ</p>';
     return;
   }
 
+  // <section> болон <h3> ашиглаж, item-ийг <button> болголоо.
   let html = '';
   data.subcategories.forEach((sub, subIndex) => {
-    html += `<div class="submenu-section">
-      <div class="submenu-section-title">${sub.name}</div>`;
+    html += `
+      <section class="submenu-section">
+        <h3 class="submenu-section-title">${sub.name}</h3>
+    `;
     sub.items.forEach((item, itemIndex) => {
-      html += `<div class="submenu-item-link"
-        onclick="navigateToItem('${categoryKey}', ${subIndex}, ${itemIndex})">
-        ${item}
-      </div>`;
+      html += `
+        <button class="submenu-item-link" 
+          onclick="navigateToItem('${categoryKey}', ${subIndex}, ${itemIndex})"
+          style="width: 100%; text-align: left; background: none; border: none; font: inherit;"
+        >
+          ${item}
+        </button>
+      `;
     });
-    html += `</div>`;
+    html += `</section>`;
   });
 
   menuRight.innerHTML = html;
@@ -220,25 +226,20 @@ function navigateToItem(categoryKey, subIndex, itemIndex) {
 
   closeMenu();
 
-  // Try to scroll to a matching section on the page by id
   const sectionId = item.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]/g, '');
   const target = document.getElementById(sectionId);
   if (target) {
     target.scrollIntoView({ behavior: 'smooth' });
   } else {
-    // Fallback: scroll to products section
     const productsSection = document.querySelector('.products-section');
     if (productsSection) {
       productsSection.scrollIntoView({ behavior: 'smooth' });
     }
-    // Hook up to your real filter/routing here:
     console.log(`Navigate → ${data.label} > ${sub.name} > ${item}`);
   }
 }
 
-// =====================
 // MENU ITEM CLICK
-// =====================
 document.querySelectorAll(".menu-item").forEach(item => {
   item.addEventListener("click", function () {
     document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));

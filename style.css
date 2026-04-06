@@ -40,6 +40,40 @@
     font-family: Arial, sans-serif;
 }
 
+/* --- Added Semantic Tag Resets (Алдаа заасан таагуудын өгөгдмөл зайг арилгах) --- */
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+search {
+    display: block;
+}
+
+ul.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.logo {
+    margin: 0;
+}
+
+.price {
+    margin-bottom: 0;
+}
+
+.copyright {
+    display: block;
+}
+
+span.discount {
+    display: inline-block;
+}
+
+/* --------------------------------------------------------------------------------- */
+
 body {
     background: var(--color-bg);
     color: var(--color-text);
@@ -232,16 +266,6 @@ h2 {
     width: 40%;
     border-right: 1px solid var(--color-border);
     padding: var(--space-md);
-}
-
-.menu-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: var(--space-sm);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: 0.2s;
 }
 
 .menu-item {
@@ -672,12 +696,7 @@ h2 {
 .product-img {
     position: relative;
     background: var(--color-bg);
-    display: flex;
     padding: 20px;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    height: 160px;
 }
 
 
