@@ -9,6 +9,8 @@
     --color-border: hsl(0, 0%, 88%);
     --color-text: hsl(0, 0%, 15%);
     --color-white: hsl(0, 0%, 100%);
+    --color-surface: hsl(0, 0%, 100%);
+    --color-accent: hsl(0, 0%, 30%);
 
     /* subtle shadow */
 
@@ -37,6 +39,40 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+
+/* --- Added Semantic Tag Resets (Алдаа заасан таагуудын өгөгдмөл зайг арилгах) --- */
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+search {
+    display: block;
+}
+
+ul.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.logo {
+    margin: 0;
+}
+
+.price {
+    margin-bottom: 0;
+}
+
+.copyright {
+    display: block;
+}
+
+span.discount {
+    display: inline-block;
+}
+
+/* --------------------------------------------------------------------------------- */
 
 body {
     background: var(--color-bg);
@@ -116,6 +152,7 @@ h2 {
 
 .menu-item.active .icon {
     fill: var(--color-accent);
+    fill: none;
 }
 
 .icons a {
@@ -241,16 +278,6 @@ h2 {
     transition: 0.2s;
 }
 
-.menu-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: var(--space-sm);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: 0.2s;
-}
-
 .menu-item.active {
     background: var(--color-bg1);
     color: var(--color-accent);
@@ -258,9 +285,12 @@ h2 {
 
 .menu-item.active svg {
     stroke: var(--color-accent);
+    fill: none;
 }
 
-.menu-item:hover,
+.menu-item:hover {
+    background: var(--color-bg1);
+}
 
 /* RIGHT SIDE */
 .menu-right {
@@ -277,6 +307,68 @@ h2 {
 
 .submenu-item:hover {
     background: var(--color-bg1);
+}
+
+.menu-right-hint {
+    color: hsl(0, 0%, 60%);
+    font-size: 14px;
+    padding: var(--space-sm);
+}
+
+.submenu-section {
+    margin-bottom: var(--space-md);
+}
+
+.submenu-section-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: hsl(0, 0%, 50%);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: var(--space-sm) var(--space-sm) 4px;
+    margin-bottom: 2px;
+}
+
+.submenu-item-link {
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.submenu-item-link:hover {
+    background: var(--color-bg1);
+}
+
+.submenu-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-sm);
+    color: hsl(0, 0%, 40%);
+    transition: 0.2s;
+}
+
+.submenu-back:hover {
+    background: var(--color-bg1);
+}
+
+.menu-right {
+    overflow-y: auto;
+}
+
+.level3-items {
+    display: flex;
+    flex-direction: column;
 }
 
 
