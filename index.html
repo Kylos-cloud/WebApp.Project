@@ -21,7 +21,7 @@
             </div>
 
             <div class="icons">
-                <a href="#"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                <a href="login.html"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-width="2"
                             d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -49,10 +49,10 @@
         <nav class="menu">
             <ul>
                 <li onclick="openMenu()">☰ БҮХ АНГИЛАЛ</li>
-                <li>NEW</li>
-                <li>SALES</li>
-                <li>SPECIAL</li>
-                <li>BRANDS</li>
+                <li>Demo</li>
+                <li>Demo</li>
+                <li>Demo</li>
+                <li>Demo</li>
             </ul>
         </nav>
 
@@ -71,55 +71,61 @@
 
                 <div class="menu-left">
 
-                    <!-- SEARCH -->
+                    <!-- SEARCH-->
                     <div class="menu-search">
                         <input type="text" id="categorySearch" placeholder="Ангилал хайх...">
                     </div>
-                    <div class="menu-item"><svg class="icon" viewBox="0 0 24 24" fill="none"
+                    <div class="menu-item" data-category="tsakhilgaan"><svg class="icon" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z"
                                 fill="#000000" />
                         </svg>
                         Цахилгаан бараа</div>
-                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <div class="menu-item" data-category="ger-ahui"><svg class="w-6 h-6 text-gray-800 dark:text-white"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
                         </svg>
                         Гэр ахуй</div>
-                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <div class="menu-item" data-category="shine-huns"><svg class="w-6 h-6 text-gray-800 dark:text-white"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 10.0419c-1.3902 0-1.3935-1.1249-4.20643-1.037-1.73056.05408-3.15551 2.2303-2.71168 5.3081C5.35949 16.2381 6.98619 21 8.99172 21c2.00548 0 2.07358-.8508 3.00828-.8508.9347 0 .8551.8508 3.0083.8508s3.6322-4.7619 3.9098-6.687c.4438-3.0778-.9811-5.25402-2.7117-5.3081-2.8129-.0879-2.8162 1.037-4.2064 1.037Zm2.3598-4.2126c-.8779.74829-1.8612.71957-2.7221.71957 0-.62576.0792-1.94012.8609-2.76911.7817-.82898 2.1271-.7664 2.6434-.7664 0 .59448.0956 2.06766-.7822 2.81594Z" />
                         </svg>
 
                         Шинэ хүнс</div>
-                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                    <div class="menu-item" data-category="bolovsruulsan-huns"><svg
+                            class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M18.011 13H20c-.367 2.5551-2.32 4.6825-4.9766 5.6162V20H8.97661v-1.3838C6.31996 17.6825 4.36697 15.5551 4 13h14.011Zm0 0c1.0995-.0059 1.989-.8991 1.989-2 0-.8637-.5475-1.59948-1.3143-1.87934M18.011 13H18m0-3.99997c.2409 0 .4718.04258.6857.12063m0 0c.8367-1.0335.7533-2.67022-.2802-3.50694-1.0335-.83672-2.5496-.6772-3.3864.35631-.293-1.50236-1.7485-2.15377-3.2509-1.8607-1.5023.29308-2.48263 1.74856-2.18956 3.25092C8.9805 6.17263 7.6182 5.26418 6.15462 6.00131 4.967 6.59945 4.45094 8.19239 5.04909 9.38002m0 0C4.37083 9.66467 4 10.3357 4 11.1174 4 12.1571 4.84288 13 5.88263 13m-.83354-3.61998c.2866-.12029 1.09613-.40074 2.04494.3418m5.27497-.89091c1.0047-.4589 2.1913-.01641 2.6502.98832" />
                         </svg>
                         Боловсруулсан хүнс</div>
-                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                    <div class="menu-item" data-category="shingen-huns"><svg
+                            class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M11 6v2s-3 1-3 3.25 1 2.25 1 3-1 1.125-1 2.25V19c0 .9375 1 2 2.5 2s2-.9375 2-.9375S13 21 14.5 21s2.5-1.0625 2.5-2v-2.5c0-1.125-1-1.5-1-2.25s1-.75 1-3S14 8 14 8V6m-3 0h-1V3h5v3h-1m-3 0h3m-5.95629 6h8.91259M8 17h9" />
                         </svg>
                         Шингэн хүнс</div>
-                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                    <div class="menu-item" data-category="goo-saikhan"><svg
+                            class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-width="2"
                                 d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z" />
                         </svg>
                         Гоо сайхан</div>
-                    <div class="menu-item"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <div class="menu-item" data-category="huvtsas"><svg class="w-6 h-6 text-gray-800 dark:text-white"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5h-.16667c-.86548 0-1.70761.28071-2.4.8L3.5 8l2 3.5L8 10v9h8v-9l2.5 1.5 2-3.5-2.9333-2.2c-.6924-.51929-1.5346-.8-2.4-.8H15M9 5c0 1.5 1.5 3 3 3s3-1.5 3-3M9 5h6" />
                         </svg>
                         Хувцас, Гутал</div>
-                    <div class="menu-item"><svg class="icon" viewBox="0 0 24 24">
+                    <div class="menu-item" data-category="huuhdiin"><svg class="icon" viewBox="0 0 24 24">
                             <path
                                 d="M10,10a1,1,0,1,0-1,1A1,1,0,0,0,10,10Zm4.5,4.06a1,1,0,0,0-1.37.36,1.3,1.3,0,0,1-2.26,0,1,1,0,0,0-1.37-.36,1,1,0,0,0-.37,1.36,3.31,3.31,0,0,0,5.74,0A1,1,0,0,0,14.5,14.06ZM15,9a1,1,0,1,0,1,1A1,1,0,0,0,15,9ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18A8,8,0,0,1,9,4.57,3,3,0,0,0,9,5a3,3,0,0,0,3,3,1,1,0,0,0,0-2,1,1,0,0,1,0-2,8,8,0,0,1,0,16Z" />
                         </svg>Хүүхдийн бараа</div>
@@ -158,13 +164,8 @@
                     <div class="menu-item">Хямдрал</div>
                 </div>
 
-                <div class="menu-right">
-                    <div class="submenu-item">Цахилгаан бараа</div>
-                    <div class="submenu-item">Гэр ахуйн бараа</div>
-                    <div class="submenu-item">Хүнс</div>
-                    <div class="submenu-item">Гутал хувцас</div>
-                    <div class="submenu-item">Гоо сайхан</div>
-                    <div class="submenu-item">Авто бараа</div>
+                <div class="menu-right" id="menuRight">
+                    <p class="menu-right-hint">Ангилал сонгоно уу</p>
                 </div>
 
             </div>
@@ -384,7 +385,7 @@
             <div class="product">
                 <div class="product-img">
                     <div class="brand-logo"><img
-                            src="https://www.google.com/imgres?q=logo&imgurl=https%3A%2F%2Flogo-icons.com%2Fcdn%2Fshop%2Ffiles%2F291-logo-1711991296.916.svg%3Fv%3D1712759714%26width%3D533&imgrefurl=https%3A%2F%2Flogo-icons.com%2F%3Fsrsltid%3DAfmBOooRtu9zQXrgoKHiWxFH_QTP1yqpw1SJdSzPBfVW5Zc3iCsq2AOi&docid=aZtcdFVY7CGNlM&tbnid=JAxWcWimFb0OZM&vet=12ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB..i&w=1365&h=1365&hcb=2&ved=2ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB">
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVWHLV3aR_IG7sXbnYXC2KMKXSDGJ8gqqEXw&s">
                     </div>
 
                     <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff">
@@ -403,7 +404,7 @@
             <div class="product">
                 <div class="product-img">
                     <div class="brand-logo"><img
-                            src="https://www.google.com/imgres?q=logo&imgurl=https%3A%2F%2Flogo-icons.com%2Fcdn%2Fshop%2Ffiles%2F291-logo-1711991296.916.svg%3Fv%3D1712759714%26width%3D533&imgrefurl=https%3A%2F%2Flogo-icons.com%2F%3Fsrsltid%3DAfmBOooRtu9zQXrgoKHiWxFH_QTP1yqpw1SJdSzPBfVW5Zc3iCsq2AOi&docid=aZtcdFVY7CGNlM&tbnid=JAxWcWimFb0OZM&vet=12ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB..i&w=1365&h=1365&hcb=2&ved=2ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB">
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVWHLV3aR_IG7sXbnYXC2KMKXSDGJ8gqqEXw&s">
                     </div>
 
                     <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
@@ -422,7 +423,7 @@
             <div class="product">
                 <div class="product-img">
                     <div class="brand-logo"><img
-                            src="https://www.google.com/imgres?q=logo&imgurl=https%3A%2F%2Flogo-icons.com%2Fcdn%2Fshop%2Ffiles%2F291-logo-1711991296.916.svg%3Fv%3D1712759714%26width%3D533&imgrefurl=https%3A%2F%2Flogo-icons.com%2F%3Fsrsltid%3DAfmBOooRtu9zQXrgoKHiWxFH_QTP1yqpw1SJdSzPBfVW5Zc3iCsq2AOi&docid=aZtcdFVY7CGNlM&tbnid=JAxWcWimFb0OZM&vet=12ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB..i&w=1365&h=1365&hcb=2&ved=2ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB">
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVWHLV3aR_IG7sXbnYXC2KMKXSDGJ8gqqEXw&s">
                     </div>
 
                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
@@ -441,7 +442,7 @@
             <div class="product">
                 <div class="product-img">
                     <div class="brand-logo"><img
-                            src="https://www.google.com/imgres?q=logo&imgurl=https%3A%2F%2Flogo-icons.com%2Fcdn%2Fshop%2Ffiles%2F291-logo-1711991296.916.svg%3Fv%3D1712759714%26width%3D533&imgrefurl=https%3A%2F%2Flogo-icons.com%2F%3Fsrsltid%3DAfmBOooRtu9zQXrgoKHiWxFH_QTP1yqpw1SJdSzPBfVW5Zc3iCsq2AOi&docid=aZtcdFVY7CGNlM&tbnid=JAxWcWimFb0OZM&vet=12ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB..i&w=1365&h=1365&hcb=2&ved=2ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB">
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVWHLV3aR_IG7sXbnYXC2KMKXSDGJ8gqqEXw&s">
                     </div>
 
                     <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
@@ -460,7 +461,7 @@
             <div class="product">
                 <div class="product-img">
                     <div class="brand-logo"><img
-                            src="https://www.google.com/imgres?q=logo&imgurl=https%3A%2F%2Flogo-icons.com%2Fcdn%2Fshop%2Ffiles%2F291-logo-1711991296.916.svg%3Fv%3D1712759714%26width%3D533&imgrefurl=https%3A%2F%2Flogo-icons.com%2F%3Fsrsltid%3DAfmBOooRtu9zQXrgoKHiWxFH_QTP1yqpw1SJdSzPBfVW5Zc3iCsq2AOi&docid=aZtcdFVY7CGNlM&tbnid=JAxWcWimFb0OZM&vet=12ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB..i&w=1365&h=1365&hcb=2&ved=2ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB">
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVWHLV3aR_IG7sXbnYXC2KMKXSDGJ8gqqEXw&s">
                     </div>
 
                     <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
@@ -479,7 +480,7 @@
             <div class="product">
                 <div class="product-img">
                     <div class="brand-logo"><img
-                            src="https://www.google.com/imgres?q=logo&imgurl=https%3A%2F%2Flogo-icons.com%2Fcdn%2Fshop%2Ffiles%2F291-logo-1711991296.916.svg%3Fv%3D1712759714%26width%3D533&imgrefurl=https%3A%2F%2Flogo-icons.com%2F%3Fsrsltid%3DAfmBOooRtu9zQXrgoKHiWxFH_QTP1yqpw1SJdSzPBfVW5Zc3iCsq2AOi&docid=aZtcdFVY7CGNlM&tbnid=JAxWcWimFb0OZM&vet=12ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB..i&w=1365&h=1365&hcb=2&ved=2ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB">
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVWHLV3aR_IG7sXbnYXC2KMKXSDGJ8gqqEXw&s">
                     </div>
 
                     <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
@@ -498,7 +499,7 @@
             <div class="product">
                 <div class="product-img">
                     <div class="brand-logo"><img
-                            src="https://www.google.com/imgres?q=logo&imgurl=https%3A%2F%2Flogo-icons.com%2Fcdn%2Fshop%2Ffiles%2F291-logo-1711991296.916.svg%3Fv%3D1712759714%26width%3D533&imgrefurl=https%3A%2F%2Flogo-icons.com%2F%3Fsrsltid%3DAfmBOooRtu9zQXrgoKHiWxFH_QTP1yqpw1SJdSzPBfVW5Zc3iCsq2AOi&docid=aZtcdFVY7CGNlM&tbnid=JAxWcWimFb0OZM&vet=12ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB..i&w=1365&h=1365&hcb=2&ved=2ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB">
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVWHLV3aR_IG7sXbnYXC2KMKXSDGJ8gqqEXw&s">
                     </div>
 
                     <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d">
@@ -517,7 +518,7 @@
             <div class="product">
                 <div class="product-img">
                     <div class="brand-logo"><img
-                            src="https://www.google.com/imgres?q=logo&imgurl=https%3A%2F%2Flogo-icons.com%2Fcdn%2Fshop%2Ffiles%2F291-logo-1711991296.916.svg%3Fv%3D1712759714%26width%3D533&imgrefurl=https%3A%2F%2Flogo-icons.com%2F%3Fsrsltid%3DAfmBOooRtu9zQXrgoKHiWxFH_QTP1yqpw1SJdSzPBfVW5Zc3iCsq2AOi&docid=aZtcdFVY7CGNlM&tbnid=JAxWcWimFb0OZM&vet=12ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB..i&w=1365&h=1365&hcb=2&ved=2ahUKEwj1iNuw77eTAxWXYfUHHe3pNjwQnPAOegQIJBAB">
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVWHLV3aR_IG7sXbnYXC2KMKXSDGJ8gqqEXw&s">
                     </div>
 
                     <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e">
@@ -535,7 +536,9 @@
             <!-- 9 -->
             <div class="product">
                 <div class="product-img">
-                    <div class="brand-logo"><img src="https://via.placeholder.com/40"></div>
+                    <div class="brand-logo"><img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVWHLV3aR_IG7sXbnYXC2KMKXSDGJ8gqqEXw&s">
+                    </div>
 
                     <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8">
                 </div>
@@ -552,7 +555,9 @@
             <!-- 10 -->
             <div class="product">
                 <div class="product-img">
-                    <div class="brand-logo"><img src="https://via.placeholder.com/40"></div>
+                    <div class="brand-logo"><img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVWHLV3aR_IG7sXbnYXC2KMKXSDGJ8gqqEXw&s">
+                    </div>
 
                     <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d">
                 </div>
