@@ -239,6 +239,63 @@ function navigateToItem(categoryKey, subIndex, itemIndex) {
   }
 }
 
+// MOBILE SEARCH TOGGLE
+const searchToggle = document.getElementById("searchToggle");
+const searchEl = document.querySelector(".search");
+
+if (searchToggle && searchEl) {
+    searchToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile) return;
+
+        const isOpen = searchEl.classList.contains("open");
+        if (isOpen) {
+            searchEl.classList.remove("open");
+            searchToggle.classList.remove("hidden");
+        } else {
+            searchEl.classList.add("open");
+            searchToggle.classList.add("hidden");
+            setTimeout(() => searchEl.querySelector("input").focus(), 50);
+        }
+    });
+
+    // Close when clicking outside
+    document.addEventListener("click", (e) => {
+        if (window.innerWidth > 768) return;
+        if (!searchEl.contains(e.target) && e.target !== searchToggle && !searchToggle.contains(e.target)) {
+            searchEl.classList.remove("open");
+            searchToggle.classList.remove("hidden");
+        }
+    });
+}
+
+// SCROLL: hide bottom nav on scroll down, show on scroll up
+let lastScrollY = window.scrollY;
+
+window.addEventListener("scroll", () => {
+    const nav = document.querySelector(".bottom-nav");
+    if (!nav) return;
+
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        nav.style.transform = "translateY(100%)";
+    } else {
+        nav.style.transform = "translateY(0)";
+    }
+
+    lastScrollY = currentScrollY;
+});
+
+// BOTTOM NAV ACTIVE STATE
+document.querySelectorAll(".bottom-nav-item").forEach(item => {
+    item.addEventListener("click", function () {
+        document.querySelectorAll(".bottom-nav-item").forEach(i => i.classList.remove("active"));
+        this.classList.add("active");
+    });
+});
+
 // MENU ITEM CLICK
 document.querySelectorAll(".menu-item").forEach(item => {
   item.addEventListener("click", function () {
