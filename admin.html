@@ -28,12 +28,15 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+<<<<<<< HEAD
+=======
         
         /* Таагуудын шинэчлэгдсэн reset */
         h1, h2, h3, h4, h5, h6 { font-weight: 600; margin: 0; }
         menu, ul { list-style: none; padding: 0; }
         search { display: flex; }
         figure { margin: 0; display: flex; align-items: center; gap: 12px;}
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
 
         body {
             font-family: 'DM Sans', sans-serif;
@@ -71,6 +74,10 @@
         .admin-badge {
             font-family: 'DM Sans', sans-serif;
             font-size: 10px;
+<<<<<<< HEAD
+            font-weight: 600;
+=======
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
             background: var(--color-text);
             color: var(--color-white);
             padding: 2px 7px;
@@ -88,6 +95,10 @@
 
         .nav-section-label {
             font-size: 10px;
+<<<<<<< HEAD
+            font-weight: 600;
+=======
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--color-muted);
@@ -108,7 +119,16 @@
         }
 
         .nav-item:hover { background: var(--color-bg); color: var(--color-text); }
+<<<<<<< HEAD
+
+        .nav-item.active {
+            background: var(--color-text);
+            color: var(--color-white);
+        }
+
+=======
         .nav-item.active { background: var(--color-text); color: var(--color-white); }
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
         .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
 
         .nav-badge {
@@ -123,6 +143,33 @@
 
         .nav-item.active .nav-badge { background: hsl(0, 60%, 70%); }
 
+<<<<<<< HEAD
+        .sidebar-footer {
+            padding: 16px 12px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--color-text);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+=======
         .sidebar-footer { padding: 16px 12px; border-top: 1px solid var(--color-border); }
 
         .sidebar-user {
@@ -135,6 +182,7 @@
             background: var(--color-text); color: white;
             display: flex; align-items: center; justify-content: center;
             font-size: 12px; font-weight: 700; flex-shrink: 0;
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
         }
 
         .user-info { flex: 1; min-width: 0; }
@@ -142,24 +190,59 @@
         .user-role { font-size: 11px; color: var(--color-muted); }
 
         .logout-btn {
+<<<<<<< HEAD
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            color: var(--color-muted);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.18s;
+            margin-top: 4px;
+            text-decoration: none;
+=======
             display: flex; align-items: center; gap: 8px;
             padding: 8px 12px; border-radius: var(--radius-sm);
             cursor: pointer; color: var(--color-muted);
             font-size: 13px; font-weight: 500; transition: all 0.18s;
             margin-top: 4px; text-decoration: none;
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
         }
 
         .logout-btn:hover { background: hsl(0, 40%, 96%); color: var(--color-red); }
         .logout-btn svg { width: 15px; height: 15px; }
 
         /* ===================== MAIN ===================== */
+<<<<<<< HEAD
+        .main {
+            margin-left: var(--sidebar-w);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+=======
         .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
 
         .topbar {
             background: var(--color-surface);
             border-bottom: 1px solid var(--color-border);
+<<<<<<< HEAD
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+=======
             padding: 16px 32px; display: flex; align-items: center;
             justify-content: space-between; position: sticky; top: 0; z-index: 50;
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
         }
 
         .topbar-title { font-size: 18px; font-weight: 600; }
@@ -168,19 +251,48 @@
         .topbar-actions { display: flex; gap: 10px; align-items: center; }
 
         .btn {
+<<<<<<< HEAD
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.18s;
+=======
             padding: 8px 16px; border-radius: var(--radius-sm);
             font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
             cursor: pointer; border: none; transition: all 0.18s;
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
         }
 
         .btn-dark { background: var(--color-text); color: white; }
         .btn-dark:hover { opacity: 0.82; }
+<<<<<<< HEAD
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+        .btn-outline:hover { background: var(--color-bg); }
+
+        .btn-danger { background: var(--color-red); color: white; }
+        .btn-danger:hover { opacity: 0.82; }
+
+        .content {
+            padding: 32px;
+            flex: 1;
+        }
+=======
         .btn-outline { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
         .btn-outline:hover { background: var(--color-bg); }
         .btn-danger { background: var(--color-red); color: white; }
         .btn-danger:hover { opacity: 0.82; }
 
         .content { padding: 32px; flex: 1; }
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
 
         /* SECTIONS */
         .section { display: none; animation: fadeIn 0.25s ease; }
@@ -192,6 +304,72 @@
         }
 
         /* ===================== DASHBOARD ===================== */
+<<<<<<< HEAD
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            padding: 22px 24px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--color-border);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-muted);
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 600;
+            font-family: 'DM Serif Display', serif;
+            margin-bottom: 4px;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stat-change.up { color: var(--color-green); }
+        .stat-change.down { color: var(--color-red); }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title { font-weight: 600; font-size: 15px; }
+=======
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
 
         .stat-card {
@@ -214,10 +392,52 @@
 
         .card-header { padding: 18px 24px; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; }
         .card-title { font-weight: 600; font-size: 15px; margin: 0;}
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
         .card-body { padding: 0; }
 
         /* ===================== TABLE ===================== */
         .table-wrap { overflow-x: auto; }
+<<<<<<< HEAD
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            text-align: left;
+            padding: 12px 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-muted);
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            white-space: nowrap;
+        }
+
+        tbody td {
+            padding: 13px 20px;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: hsl(0,0%,98%); }
+
+        .product-cell { display: flex; align-items: center; gap: 12px; }
+
+        .product-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background: var(--color-bg1);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+=======
         table { width: 100%; border-collapse: collapse; }
         thead th { text-align: left; padding: 12px 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-muted); background: var(--color-bg); border-bottom: 1px solid var(--color-border); white-space: nowrap; }
         tbody td { padding: 13px 20px; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
@@ -225,11 +445,24 @@
         tbody tr:hover { background: hsl(0,0%,98%); }
 
         .product-thumb { width: 40px; height: 40px; border-radius: var(--radius-sm); background: var(--color-bg1); object-fit: cover; flex-shrink: 0; }
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
         .product-name { font-weight: 500; font-size: 13px; }
         .product-sku { font-size: 11px; color: var(--color-muted); }
 
         /* BADGES */
+<<<<<<< HEAD
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+=======
         .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
         .badge-green  { background: hsl(140,40%,92%); color: hsl(140,50%,30%); }
         .badge-yellow { background: hsl(40,80%,92%);  color: hsl(40,70%,30%); }
         .badge-red    { background: hsl(0,40%,92%);   color: hsl(0,50%,40%); }
@@ -237,12 +470,216 @@
 
         /* ACTION BTNS */
         .action-btns { display: flex; gap: 6px; }
+<<<<<<< HEAD
+
+        .btn-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+            color: var(--color-muted);
+        }
+
+=======
         .btn-icon { width: 30px; height: 30px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; color: var(--color-muted); }
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
         .btn-icon:hover { background: var(--color-bg1); color: var(--color-text); }
         .btn-icon.del:hover { background: hsl(0,40%,92%); color: var(--color-red); border-color: hsl(0,40%,85%); }
         .btn-icon svg { width: 14px; height: 14px; }
 
         /* SEARCH + FILTER BAR */
+<<<<<<< HEAD
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 8px 14px;
+            flex: 1;
+            max-width: 320px;
+        }
+
+        .search-box svg { width: 15px; height: 15px; color: var(--color-muted); flex-shrink: 0; }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            color: var(--color-text);
+            width: 100%;
+        }
+
+        .filter-select {
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            color: var(--color-text);
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* RECENT ORDERS MINI */
+        .order-mini {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .order-mini:last-child { border-bottom: none; }
+        .order-id { font-weight: 600; font-size: 13px; }
+        .order-customer { font-size: 12px; color: var(--color-muted); }
+        .order-amount { font-weight: 600; font-size: 13px; }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 24px 60px hsl(0 0% 0% / 0.2);
+            animation: fadeUp 0.25s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 22px 28px;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title { font-weight: 600; font-size: 16px; }
+
+        .modal-close {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            border: none; background: var(--color-bg1);
+            cursor: pointer; font-size: 16px;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s;
+        }
+
+        .modal-close:hover { background: var(--color-bg); }
+
+        .modal-body { padding: 28px; }
+
+        .form-field { margin-bottom: 18px; }
+
+        .form-field label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-muted);
+            margin-bottom: 6px;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 10px 13px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+            background: var(--color-input);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            color: var(--color-text);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            border-color: var(--color-accent);
+        }
+
+        .form-field textarea { resize: vertical; min-height: 80px; }
+
+        .form-row { display: flex; gap: 12px; }
+        .form-row .form-field { flex: 1; }
+
+        .modal-footer {
+            padding: 20px 28px;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        /* PAGINATION */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-top: 1px solid var(--color-border);
+            font-size: 12px;
+            color: var(--color-muted);
+        }
+
+        .page-btns { display: flex; gap: 4px; }
+
+        .page-btn {
+            width: 30px; height: 30px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+            background: transparent;
+            cursor: pointer;
+            font-size: 12px;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.15s;
+        }
+
+        .page-btn:hover, .page-btn.active {
+            background: var(--color-text);
+            color: white;
+            border-color: var(--color-text);
+        }
+=======
         .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
         
         .search-box {
@@ -288,12 +725,23 @@
         .page-btns { display: flex; gap: 4px; }
         .page-btn { width: 30px; height: 30px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: transparent; cursor: pointer; font-size: 12px; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
         .page-btn:hover, .page-btn.active { background: var(--color-text); color: white; border-color: var(--color-text); }
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
     </style>
 </head>
 <body>
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
+<<<<<<< HEAD
+        <div class="sidebar-logo">
+            SHOP
+            <span class="admin-badge">ADMIN</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Үндсэн</div>
+            <a class="nav-item active" onclick="switchSection('dashboard', this)">
+=======
         <header class="sidebar-logo">
             <h1>SHOP</h1>
             <span class="admin-badge">ADMIN</span>
@@ -302,59 +750,192 @@
         <nav class="sidebar-nav">
             <h3 class="nav-section-label">Үндсэн</h3>
             <a href="#" class="nav-item active" onclick="switchSection('dashboard', this)">
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
                 Хяналтын самбар
             </a>
 
+<<<<<<< HEAD
+            <div class="nav-section-label">Дэлгүүр</div>
+            <a class="nav-item" onclick="switchSection('products', this)">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>
+                Бараа
+            </a>
+            <a class="nav-item" onclick="switchSection('orders', this)">
+=======
             <h3 class="nav-section-label">Дэлгүүр</h3>
             <a href="#" class="nav-item" onclick="switchSection('products', this)">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>
                 Бараа
             </a>
             <a href="#" class="nav-item" onclick="switchSection('orders', this)">
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5h6"/></svg>
                 Захиалга
                 <span class="nav-badge">5</span>
             </a>
+<<<<<<< HEAD
+            <a class="nav-item" onclick="switchSection('users', this)">
+=======
             <a href="#" class="nav-item" onclick="switchSection('users', this)">
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 Хэрэглэгч
             </a>
         </nav>
 
+<<<<<<< HEAD
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="user-avatar">А</div>
+                <div class="user-info">
+                    <div class="user-name">Админ</div>
+                    <div class="user-role">admin@shop.mn</div>
+=======
         <footer class="sidebar-footer">
             <div class="sidebar-user">
                 <figure class="user-avatar">А</figure>
                 <div class="user-info">
                     <h4 class="user-name">Админ</h4>
                     <p class="user-role">admin@shop.mn</p>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                 </div>
             </div>
             <a href="index.html" class="logout-btn">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
                 Гарах
             </a>
+<<<<<<< HEAD
+        </div>
+=======
         </footer>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
     </aside>
 
     <!-- MAIN -->
     <main class="main">
 
         <!-- TOPBAR -->
+<<<<<<< HEAD
+        <div class="topbar">
+            <div>
+                <div class="topbar-title" id="pageTitle">Хяналтын самбар</div>
+                <div class="topbar-sub" id="pageSubtitle">Өнөөдрийн мэдээлэл — 2026 оны 3-р сар 24</div>
+=======
         <header class="topbar">
             <div>
                 <h2 class="topbar-title" id="pageTitle">Хяналтын самбар</h2>
                 <p class="topbar-sub" id="pageSubtitle">Өнөөдрийн мэдээлэл — 2026 оны 3-р сар 24</p>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
             </div>
             <div class="topbar-actions">
                 <button class="btn btn-outline" onclick="alert('Тайлан татаж байна...')">Тайлан татах</button>
                 <button class="btn btn-dark" id="addBtn" onclick="openModal('add')">+ Бараа нэмэх</button>
             </div>
+<<<<<<< HEAD
+        </div>
+=======
         </header>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
 
         <div class="content">
 
             <!-- ===================== DASHBOARD ===================== -->
+<<<<<<< HEAD
+            <div class="section active" id="section-dashboard">
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Нийт борлуулалт</div>
+                        <div class="stat-value">₮48.2M</div>
+                        <div class="stat-change up">↑ 12.4% өнгөрсөн сараас</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Захиалга</div>
+                        <div class="stat-value">1,284</div>
+                        <div class="stat-change up">↑ 8.1% өнгөрсөн сараас</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Хэрэглэгч</div>
+                        <div class="stat-value">3,491</div>
+                        <div class="stat-change up">↑ 5.3% өнгөрсөн сараас</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Буцаалт</div>
+                        <div class="stat-value">23</div>
+                        <div class="stat-change down">↑ 2 өнгөрсөн сараас</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Сүүлийн захиалгууд</span>
+                            <button class="btn btn-outline" onclick="switchSection('orders', document.querySelector('[onclick*=orders]'))">Бүгдийг харах</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="order-mini">
+                                <div><div class="order-id">#ORD-1049</div><div class="order-customer">Батболд Дорж</div></div>
+                                <span class="badge badge-green">Хүргэсэн</span>
+                                <div class="order-amount">₮124,000</div>
+                            </div>
+                            <div class="order-mini">
+                                <div><div class="order-id">#ORD-1048</div><div class="order-customer">Оюунцэцэг Н.</div></div>
+                                <span class="badge badge-yellow">Явж байгаа</span>
+                                <div class="order-amount">₮89,500</div>
+                            </div>
+                            <div class="order-mini">
+                                <div><div class="order-id">#ORD-1047</div><div class="order-customer">Мөнхбаяр Г.</div></div>
+                                <span class="badge badge-yellow">Явж байгаа</span>
+                                <div class="order-amount">₮210,000</div>
+                            </div>
+                            <div class="order-mini">
+                                <div><div class="order-id">#ORD-1046</div><div class="order-customer">Энхтуяа Б.</div></div>
+                                <span class="badge badge-gray">Хүлээгдэж байгаа</span>
+                                <div class="order-amount">₮67,000</div>
+                            </div>
+                            <div class="order-mini">
+                                <div><div class="order-id">#ORD-1045</div><div class="order-customer">Дэлгэрмаа С.</div></div>
+                                <span class="badge badge-red">Цуцласан</span>
+                                <div class="order-amount">₮45,000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Дууссан нөөц</span></div>
+                        <div class="card-body">
+                            <div class="order-mini">
+                                <div><div class="order-id">Nike Air Max</div><div class="order-customer">Гутал</div></div>
+                                <span class="badge badge-red">0 үлдсэн</span>
+                            </div>
+                            <div class="order-mini">
+                                <div><div class="order-id">iPhone 15 Case</div><div class="order-customer">Электроник</div></div>
+                                <span class="badge badge-yellow">3 үлдсэн</span>
+                            </div>
+                            <div class="order-mini">
+                                <div><div class="order-id">Дэр Premium</div><div class="order-customer">Гэр ахуй</div></div>
+                                <span class="badge badge-red">0 үлдсэн</span>
+                            </div>
+                            <div class="order-mini">
+                                <div><div class="order-id">Шампоо Kerastase</div><div class="order-customer">Гоо сайхан</div></div>
+                                <span class="badge badge-yellow">2 үлдсэн</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===================== PRODUCTS ===================== -->
+            <div class="section" id="section-products">
+
+                <div class="toolbar">
+                    <div class="search-box">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        <input type="text" placeholder="Бараа хайх..." oninput="filterTable(this, 'productsTable')">
+                    </div>
+=======
             <section class="section active" id="section-dashboard">
 
                 <div class="stats-grid">
@@ -448,6 +1029,7 @@
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                         <input type="text" placeholder="Бараа хайх..." oninput="filterTable(this, 'productsTable')">
                     </search>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                     <select class="filter-select">
                         <option>Бүх ангилал</option>
                         <option>Цахилгаан бараа</option>
@@ -461,9 +1043,15 @@
                         <option>Дууссан</option>
                         <option>Нуусан</option>
                     </select>
+<<<<<<< HEAD
+                </div>
+
+                <div class="card">
+=======
                 </menu>
 
                 <article class="card">
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                     <div class="table-wrap">
                         <table id="productsTable">
                             <thead>
@@ -478,7 +1066,11 @@
                             </thead>
                             <tbody>
                                 <tr>
+<<<<<<< HEAD
+                                    <td><div class="product-cell"><img class="product-thumb" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=80&h=80&fit=crop"><div><div class="product-name">Nike Air Max 270</div><div class="product-sku">SKU: NK-270-BLK</div></div></div></td>
+=======
                                     <td><figure><img class="product-thumb" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=80&h=80&fit=crop"><figcaption><div class="product-name">Nike Air Max 270</div><div class="product-sku">SKU: NK-270-BLK</div></figcaption></figure></td>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                                     <td>Гутал</td>
                                     <td>₮320,000</td>
                                     <td>0</td>
@@ -486,17 +1078,52 @@
                                     <td><div class="action-btns"><button class="btn-icon" onclick="openModal('edit')" title="Засах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
                                 </tr>
                                 <tr>
+<<<<<<< HEAD
+                                    <td><div class="product-cell"><img class="product-thumb" src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=80&h=80&fit=crop"><div><div class="product-name">Kerastase Shampoo</div><div class="product-sku">SKU: KR-SH-200</div></div></div></td>
+=======
                                     <td><figure><img class="product-thumb" src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=80&h=80&fit=crop"><figcaption><div class="product-name">Kerastase Shampoo</div><div class="product-sku">SKU: KR-SH-200</div></figcaption></figure></td>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                                     <td>Гоо сайхан</td>
                                     <td>₮89,000</td>
                                     <td>2</td>
                                     <td><span class="badge badge-yellow">Бага үлдсэн</span></td>
                                     <td><div class="action-btns"><button class="btn-icon" onclick="openModal('edit')" title="Засах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
                                 </tr>
+<<<<<<< HEAD
+                                <tr>
+                                    <td><div class="product-cell"><img class="product-thumb" src="https://images.unsplash.com/photo-1586495777744-4e6232bf2176?w=80&h=80&fit=crop"><div><div class="product-name">Дэр Premium Set</div><div class="product-sku">SKU: HP-PR-001</div></div></div></td>
+                                    <td>Гэр ахуй</td>
+                                    <td>₮145,000</td>
+                                    <td>0</td>
+                                    <td><span class="badge badge-red">Дууссан</span></td>
+                                    <td><div class="action-btns"><button class="btn-icon" onclick="openModal('edit')" title="Засах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="product-cell"><img class="product-thumb" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=80&h=80&fit=crop"><div><div class="product-name">Samsung Galaxy Watch</div><div class="product-sku">SKU: SG-W6-BLK</div></div></div></td>
+                                    <td>Цахилгаан бараа</td>
+                                    <td>₮890,000</td>
+                                    <td>14</td>
+                                    <td><span class="badge badge-green">Идэвхтэй</span></td>
+                                    <td><div class="action-btns"><button class="btn-icon" onclick="openModal('edit')" title="Засах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="product-cell"><img class="product-thumb" src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=80&h=80&fit=crop"><div><div class="product-name">Зуны цамц</div><div class="product-sku">SKU: CL-SM-WHT</div></div></div></td>
+                                    <td>Хувцас</td>
+                                    <td>₮45,000</td>
+                                    <td>38</td>
+                                    <td><span class="badge badge-green">Идэвхтэй</span></td>
+                                    <td><div class="action-btns"><button class="btn-icon" onclick="openModal('edit')" title="Засах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+=======
                             </tbody>
                         </table>
                     </div>
                     <footer class="pagination">
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                         <span>5 нийт 124 барааны</span>
                         <div class="page-btns">
                             <button class="page-btn active">1</button>
@@ -504,6 +1131,20 @@
                             <button class="page-btn">3</button>
                             <button class="page-btn">→</button>
                         </div>
+<<<<<<< HEAD
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== ORDERS ===================== -->
+            <div class="section" id="section-orders">
+
+                <div class="toolbar">
+                    <div class="search-box">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        <input type="text" placeholder="Захиалга хайх..." oninput="filterTable(this, 'ordersTable')">
+                    </div>
+=======
                     </footer>
                 </article>
             </section>
@@ -516,6 +1157,7 @@
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                         <input type="text" placeholder="Захиалга хайх..." oninput="filterTable(this, 'ordersTable')">
                     </search>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                     <select class="filter-select">
                         <option>Бүх статус</option>
                         <option>Хүлээгдэж байгаа</option>
@@ -523,9 +1165,15 @@
                         <option>Хүргэсэн</option>
                         <option>Цуцласан</option>
                     </select>
+<<<<<<< HEAD
+                </div>
+
+                <div class="card">
+=======
                 </menu>
 
                 <article class="card">
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                     <div class="table-wrap">
                         <table id="ordersTable">
                             <thead>
@@ -555,10 +1203,41 @@
                                     <td><span class="badge badge-yellow">Явж байгаа</span></td>
                                     <td><div class="action-btns"><button class="btn-icon" onclick="alert('Захиалгын дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
                                 </tr>
+<<<<<<< HEAD
+                                <tr>
+                                    <td><strong>#ORD-1047</strong></td>
+                                    <td>Мөнхбаяр Г.</td>
+                                    <td>2026.03.23</td>
+                                    <td>₮210,000</td>
+                                    <td><span class="badge badge-yellow">Явж байгаа</span></td>
+                                    <td><div class="action-btns"><button class="btn-icon" onclick="alert('Захиалгын дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD-1046</strong></td>
+                                    <td>Энхтуяа Б.</td>
+                                    <td>2026.03.22</td>
+                                    <td>₮67,000</td>
+                                    <td><span class="badge badge-gray">Хүлээгдэж байгаа</span></td>
+                                    <td><div class="action-btns"><button class="btn-icon" onclick="alert('Захиалгын дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD-1045</strong></td>
+                                    <td>Дэлгэрмаа С.</td>
+                                    <td>2026.03.21</td>
+                                    <td>₮45,000</td>
+                                    <td><span class="badge badge-red">Цуцласан</span></td>
+                                    <td><div class="action-btns"><button class="btn-icon" onclick="alert('Захиалгын дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+=======
                             </tbody>
                         </table>
                     </div>
                     <footer class="pagination">
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                         <span>5 нийт 1,284 захиалгын</span>
                         <div class="page-btns">
                             <button class="page-btn active">1</button>
@@ -566,6 +1245,20 @@
                             <button class="page-btn">3</button>
                             <button class="page-btn">→</button>
                         </div>
+<<<<<<< HEAD
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== USERS ===================== -->
+            <div class="section" id="section-users">
+
+                <div class="toolbar">
+                    <div class="search-box">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        <input type="text" placeholder="Хэрэглэгч хайх..." oninput="filterTable(this, 'usersTable')">
+                    </div>
+=======
                     </footer>
                 </article>
             </section>
@@ -578,14 +1271,21 @@
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                         <input type="text" placeholder="Хэрэглэгч хайх..." oninput="filterTable(this, 'usersTable')">
                     </search>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                     <select class="filter-select">
                         <option>Бүх үүрэг</option>
                         <option>Admin</option>
                         <option>Хэрэглэгч</option>
                     </select>
+<<<<<<< HEAD
+                </div>
+
+                <div class="card">
+=======
                 </menu>
 
                 <article class="card">
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                     <div class="table-wrap">
                         <table id="usersTable">
                             <thead>
@@ -600,7 +1300,11 @@
                             </thead>
                             <tbody>
                                 <tr>
+<<<<<<< HEAD
+                                    <td><div class="product-cell"><div class="user-avatar" style="width:34px;height:34px;font-size:13px">Б</div><div><div class="product-name">Батболд Дорж</div></div></div></td>
+=======
                                     <td><figure><div class="user-avatar" style="width:34px;height:34px;font-size:13px">Б</div><figcaption><div class="product-name">Батболд Дорж</div></figcaption></figure></td>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                                     <td>batbold@example.mn</td>
                                     <td>2025.11.14</td>
                                     <td>12</td>
@@ -608,31 +1312,81 @@
                                     <td><div class="action-btns"><button class="btn-icon" onclick="alert('Хэрэглэгчийн дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
                                 </tr>
                                 <tr>
+<<<<<<< HEAD
+                                    <td><div class="product-cell"><div class="user-avatar" style="width:34px;height:34px;font-size:13px">О</div><div><div class="product-name">Оюунцэцэг Н.</div></div></div></td>
+                                    <td>oyuntsetseg@example.mn</td>
+                                    <td>2025.12.02</td>
+                                    <td>7</td>
+                                    <td><span class="badge badge-gray">Хэрэглэгч</span></td>
+                                    <td><div class="action-btns"><button class="btn-icon" onclick="alert('Хэрэглэгчийн дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="product-cell"><div class="user-avatar" style="width:34px;height:34px;font-size:13px">А</div><div><div class="product-name">Админ</div></div></div></td>
+=======
                                     <td><figure><div class="user-avatar" style="width:34px;height:34px;font-size:13px">А</div><figcaption><div class="product-name">Админ</div></figcaption></figure></td>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                                     <td>admin@shop.mn</td>
                                     <td>2025.01.01</td>
                                     <td>—</td>
                                     <td><span class="badge badge-green">Admin</span></td>
                                     <td><div class="action-btns"><button class="btn-icon" onclick="alert('Системийн администратор')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
                                 </tr>
+<<<<<<< HEAD
+                                <tr>
+                                    <td><div class="product-cell"><div class="user-avatar" style="width:34px;height:34px;font-size:13px">М</div><div><div class="product-name">Мөнхбаяр Г.</div></div></div></td>
+                                    <td>munkhbayar@example.mn</td>
+                                    <td>2026.01.15</td>
+                                    <td>3</td>
+                                    <td><span class="badge badge-gray">Хэрэглэгч</span></td>
+                                    <td><div class="action-btns"><button class="btn-icon" onclick="alert('Хэрэглэгчийн дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+=======
                             </tbody>
                         </table>
                     </div>
                     <footer class="pagination">
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                         <span>4 нийт 3,491 хэрэглэгчийн</span>
                         <div class="page-btns">
                             <button class="page-btn active">1</button>
                             <button class="page-btn">2</button>
                             <button class="page-btn">→</button>
                         </div>
+<<<<<<< HEAD
+                    </div>
+                </div>
+            </div>
+=======
                     </footer>
                 </article>
             </section>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
 
         </div>
     </main>
 
     <!-- ADD/EDIT PRODUCT MODAL -->
+<<<<<<< HEAD
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title" id="modalTitle">Бараа нэмэх</span>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Барааны нэр</label>
+                        <input type="text" placeholder="Nike Air Max 270">
+                    </div>
+                    <div class="form-field">
+                        <label>SKU</label>
+                        <input type="text" placeholder="NK-270-BLK">
+=======
     <aside class="modal-overlay" id="productModal">
         <form class="modal" onsubmit="event.preventDefault(); saveProduct();">
             <header class="modal-header">
@@ -649,22 +1403,36 @@
                     <div class="form-field">
                         <label>SKU</label>
                         <input type="text" placeholder="NK-270-BLK" required>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-field">
                         <label>Үнэ (₮)</label>
+<<<<<<< HEAD
+                        <input type="number" placeholder="320000">
+                    </div>
+                    <div class="form-field">
+                        <label>Нөөц</label>
+                        <input type="number" placeholder="0">
+=======
                         <input type="number" placeholder="320000" required>
                     </div>
                     <div class="form-field">
                         <label>Нөөц</label>
                         <input type="number" placeholder="0" required>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                     </div>
                 </div>
                 <div class="form-field">
                     <label>Ангилал</label>
+<<<<<<< HEAD
+                    <select>
+                        <option>Ангилал сонгох</option>
+=======
                     <select required>
                         <option value="">Ангилал сонгох</option>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
                         <option>Цахилгаан бараа</option>
                         <option>Гэр ахуй</option>
                         <option>Хувцас, Гутал</option>
@@ -678,6 +1446,17 @@
                 </div>
                 <div class="form-field">
                     <label>Зураг URL</label>
+<<<<<<< HEAD
+                    <input type="text" placeholder="https://...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal()">Цуцлах</button>
+                <button class="btn btn-dark" onclick="saveProduct()">Хадгалах</button>
+            </div>
+        </div>
+    </div>
+=======
                     <input type="url" placeholder="https://...">
                 </div>
             </fieldset>
@@ -688,6 +1467,7 @@
             </footer>
         </form>
     </aside>
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
 
     <script>
         const titles = {
@@ -725,7 +1505,10 @@
 
         function saveProduct() {
             closeModal();
+<<<<<<< HEAD
+=======
             alert('Амжилттай хадгалагдлаа!');
+>>>>>>> 7bfb4599510f32a30c0114652aa5789972c70bb9
         }
 
         function deleteRow(btn) {

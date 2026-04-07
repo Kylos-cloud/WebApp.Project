@@ -190,7 +190,7 @@ const menuRight = document.getElementById("menuRight");
 
 function renderSubcategories(categoryKey) {
   const data = categoryData[categoryKey];
-  
+
   if (!data) {
     menuRight.innerHTML = '<p class="menu-right-hint">Удахгүй нэмэгдэнэ</p>';
     return;
