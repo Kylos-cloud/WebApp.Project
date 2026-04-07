@@ -14,8 +14,7 @@
 
     /* subtle shadow */
 
-    --shadow-soft;
-    0 8px 20px hsl(0 0% 0% / 0.06);
+    --shadow-soft: 0 8px 20px hsl(0 0% 0% / 0.06);
     --shadow-card: 0 4px 12px hsl(0 0% 0% / 0.06);
     --shadow-hover: 0 12px 32px hsl(0 0% 0% / 0.12);
 
