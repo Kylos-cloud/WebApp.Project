@@ -398,7 +398,7 @@ nav a {
 
     height: 520px;
 
-    background: url("image/nuur.jpg") center/cover no-repeat;
+    background: url("image/hero.webp") center/cover no-repeat;
 
     display: flex;
     align-items: center;
@@ -708,7 +708,6 @@ nav a {
     height: 120px;
     object-fit: cover;
     border-radius: 50%;
-    /* ðŸ”¥ Ð´ÑƒÐ³ÑƒÐ¹ */
     background: #f5f5f5;
     padding: 10px;
     transition: 0.3s;
@@ -769,6 +768,40 @@ nav a {
     text-align: center;
     color: #777;
 
+}
+
+.scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+
+    width: 40px;
+    height: 40px;
+
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: 10px;
+
+    font-size: 22px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+    transition: 0.3s;
+}
+
+.scroll-top.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.scroll-top:hover {
+    transform: translateY(-5px);
 }
 
 @media (max-width: 1024px) {
