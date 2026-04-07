@@ -247,3 +247,23 @@ document.querySelectorAll(".menu-item").forEach(item => {
     renderSubcategories(this.dataset.category);
   });
 });
+
+
+const btn = document.querySelector(".scroll-top");
+
+window.addEventListener("scroll", () => {
+  const scrollTop = document.documentElement.scrollTop;
+
+  if (scrollTop > 300) {
+    btn.classList.add("show");
+  } else {
+    btn.classList.remove("show");
+  }
+});
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
