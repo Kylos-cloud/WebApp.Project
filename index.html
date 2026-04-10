@@ -252,11 +252,24 @@
     </div>
   </section>
 
+  <!-- Stats bar — динамикаар дүүрнэ -->
+  <div id="statsBar"></div>
+
   <section class="categories-section">
     <h2>Ангилал</h2>
+    <!-- Ангиллаар шүүх товчнууд -->
+    <div class="filter-btns">
+      <button class="filter-btn active-filter" data-filter="all">Бүгд</button>
+      <button class="filter-btn" data-filter="huvtsas">Хувцас</button>
+      <button class="filter-btn" data-filter="tsakhilgaan">Электроникс</button>
+      <button class="filter-btn" data-filter="goo-saikhan">Гоо сайхан</button>
+      <button class="filter-btn" data-filter="ayalal">Аялал</button>
+      <button class="filter-btn" data-filter="eruul">Эрүүл мэнд</button>
+    </div>
     <div class="categories-wrapper">
       <button class="slider-btn left">‹</button>
-      <section class="categories">
+      <!-- Динамикаар дүүрнэ — app.js -->
+      <section class="categories" id="categoriesContainer">
         <article class="category">
           <a href="#">
             <figure>
@@ -358,7 +371,8 @@
 
     <div class="categories-wrapper">
       <button class="slider-btn left">‹</button>
-      <div class="brands">
+      <!-- Динамикаар дүүрнэ — app.js -->
+      <div class="brands" id="brandsContainer">
         <article class="brand">
           <img src="image/brand1.jpg" alt="AURA" />
           <p>AURA</p>
@@ -458,129 +472,17 @@
       <h2>Хямдралтай</h2>
       <a href="#">Бүгдийг харах →</a>
     </header>
+    <!-- Динамикаар дүүрнэ — getSaleProducts() filter ашиглана -->
+    <section class="products" id="saleGrid"></section>
+  </section>
 
-    <section class="products" id="sales">
-      <article class="product">
-        <figure>
-          <img src="image/product1.jpg" />
-        </figure>
-
-        <h3>Loewe liquid soap</h3>
-
-        <p class="price">
-          <span class="old">75,000₮</span>
-          <span class="new">60,000₮</span>
-        </p>
-      </article>
-
-      <article class="product">
-        <figure>
-          <img src="image/product2.jpg" />
-        </figure>
-
-        <h3>Chair</h3>
-
-        <p class="price">
-          <span class="old">450,000₮</span>
-          <span class="new">345,000₮</span>
-        </p>
-      </article>
-      <article class="product">
-        <figure>
-          <img src="image/product3.jpg" />
-        </figure>
-
-        <h3>Byredo perfume man</h3>
-
-        <p class="price">
-          <span class="old">510,000₮</span>
-          <span class="new">340,000₮</span>
-        </p>
-      </article>
-      <article class="product">
-        <figure>
-          <img src="image/product4.jpg" />
-        </figure>
-
-        <h3>Canon camera</h3>
-
-        <p class="price">
-          <span class="old">3,500,000₮</span>
-          <span class="new">3,210,000₮</span>
-        </p>
-      </article>
-      <article class="product">
-        <figure>
-          <img src="image/product5.jpg" />
-        </figure>
-
-        <h3>Luggage 25inch</h3>
-
-        <p class="price">
-          <span class="old">950,000₮</span>
-          <span class="new">740,000₮</span>
-        </p>
-      </article>
-      <article class="product">
-        <figure>
-          <img src="image/product6.jpg" />
-        </figure>
-
-        <h3>Sleep well gummie pill</h3>
-
-        <p class="price">
-          <span class="old">130,000₮</span>
-          <span class="new">97,000₮</span>
-        </p>
-      </article>
-      <article class="product">
-        <figure>
-          <img src="image/product7.png" />
-        </figure>
-
-        <h3>Iphone 17 Pro Max</h3>
-
-        <p class="price">
-          <span class="old">6,500,000₮</span>
-          <span class="new">6,100,000₮</span>
-        </p>
-      </article>
-      <article class="product">
-        <figure>
-          <img src="image/product8.jpg" />
-        </figure>
-
-        <h3>T-Shirt</h3>
-
-        <p class="price">
-          <span class="old">349,000₮</span>
-          <span class="new">300,000₮</span>
-        </p>
-      </article>
-      <article class="product">
-        <figure>
-          <img src="image/product9.jpg" />
-        </figure>
-
-        <h3>g</h3>
-
-        <p class="price">
-          <span class="old">400,000₮</span>
-          <span class="new">300,000₮</span>
-        </p>
-      </article>
-      <article class="product">
-        <figure>
-          <img src="image/product10.jpg" />
-        </figure>
-
-        <h3>h</h3>
-
-        <p class="price">
-          <span class="old">400,000₮</span>
-          <span class="new">300,000₮</span>
-        </p>
-      </article>
+  <!-- Бүх бараа — динамикаар дүүрнэ (filter товч + хайлт) -->
+  <section class="products-section" id="sales">
+    <header class="section-header">
+      <h2>Бүх бараа</h2>
+    </header>
+    <section class="products" id="productsGrid">
+      <!-- app.js динамикаар үүсгэнэ -->
     </section>
   </section>
 
@@ -621,6 +523,9 @@
   </footer>
 
   <script src="script.js"></script>
+  <!-- ES Module: app.js нь ProductStore, ProductRenderer модулиудыг import хийнэ -->
+  <script type="module" src="modules/app.js"></script>
+
 
   <!-- BOTTOM NAV (mobile only) -->
   <nav class="bottom-nav">

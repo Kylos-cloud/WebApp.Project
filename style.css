@@ -1006,3 +1006,102 @@ nav a {
     height: 180px;
   }
 }
+
+/* =========================
+   STATS BAR
+========================= */
+.stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 10px 80px;
+  background: var(--color-bg1);
+  font-size: 13px;
+  border-bottom: 1px solid var(--color-border);
+}
+.stats-bar span {
+  color: hsl(0, 0%, 40%);
+}
+.stats-bar strong {
+  color: var(--color-text);
+}
+.stats-brands {
+  margin-left: auto;
+}
+
+/* =========================
+   FILTER BUTTONS
+========================= */
+.filter-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.filter-btn {
+  padding: 7px 18px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 30px;
+  background: var(--color-white);
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.filter-btn:hover,
+.filter-btn.active-filter {
+  background: var(--color-text);
+  color: var(--color-white);
+  border-color: var(--color-text);
+}
+
+/* =========================
+   DYNAMIC PRODUCT TAGS
+========================= */
+.product {
+  position: relative;
+}
+.product-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.product-tag--sale {
+  background: red;
+  color: #fff;
+}
+.product-tag--new {
+  background: #222;
+  color: #fff;
+}
+.product-tag--out {
+  background: hsl(0, 0%, 65%);
+  color: #fff;
+  left: auto;
+  right: 8px;
+}
+.product--outofstock {
+  opacity: 0.6;
+}
+.discount-badge {
+  font-size: 12px;
+  background: hsl(0, 80%, 95%);
+  color: red;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.empty-msg {
+  grid-column: 1 / -1;
+  padding: 40px;
+  text-align: center;
+  color: hsl(0, 0%, 55%);
+}
+@media (max-width: 768px) {
+  .stats-bar {
+    padding: 10px 16px;
+  }
+}
