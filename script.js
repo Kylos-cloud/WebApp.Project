@@ -1,16 +1,21 @@
 // =====================
-// SLIDER
+// SLIDER — бүх slider-уудыг тус тусад нь холбох
 // =====================
-const slider = document.querySelector(".categories");
-const leftBtn = document.querySelector(".left");
-const rightBtn = document.querySelector(".right");
+document.querySelectorAll(".categories-wrapper").forEach(wrapper => {
+  const leftBtn  = wrapper.querySelector(".left");
+  const rightBtn = wrapper.querySelector(".right");
+  const slider   = wrapper.querySelector(".categories, .brands");
 
-rightBtn.addEventListener("click", () => {
-  slider.scrollBy({ left: 350, behavior: "smooth" });
-});
-
-leftBtn.addEventListener("click", () => {
-  slider.scrollBy({ left: -350, behavior: "smooth" });
+  if (rightBtn && slider) {
+    rightBtn.addEventListener("click", () => {
+      slider.scrollBy({ left: 350, behavior: "smooth" });
+    });
+  }
+  if (leftBtn && slider) {
+    leftBtn.addEventListener("click", () => {
+      slider.scrollBy({ left: -350, behavior: "smooth" });
+    });
+  }
 });
 
 // =====================

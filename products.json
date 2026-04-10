@@ -124,12 +124,15 @@
   "brands": [
     { "id": 1, "name": "AURA", "image": "image/brand1.jpg" },
     { "id": 2, "name": "ZARA", "image": "image/brand2.jpg" },
-    { "id": 3, "name": "Apple", "image": "image/brand7.jpg" },
+    { "id": 3, "name": "H&M", "image": "image/brand3.jpg" },
     { "id": 4, "name": "NIKE", "image": "image/brand4.jpg" },
     { "id": 5, "name": "ADIDAS", "image": "image/brand5.jpg" },
-    { "id": 6, "name": "Converse", "image": "image/brand6.jpg" },
-    { "id": 7, "name": "alim", "image": "image/brand7.jpg" },
-    { "id": 8, "name": "UGG", "image": "image/brand8.jpg" }
+    { "id": 6, "name": "CONVERSE", "image": "image/brand6.jpg" },
+    { "id": 7, "name": "APPLE", "image": "image/brand7.jpg" },
+    { "id": 8, "name": "UGG", "image": "image/brand8.jpg" },
+    { "id": 9, "name": "DYSON", "image": "image/brand9.jpg" },
+    { "id": 10, "name": "MIXSOON", "image": "image/brand10.jpg" },
+    { "id": 11, "name": "ALO", "image": "image/brand11.jpg" }
   ],
   "categories": [
     { "id": "huvtsas", "name": "Хувцас", "image": "image/clothes.jpg" },
