@@ -1,7 +1,9 @@
 // ============================================================
 // MODULE: ProductRenderer
-// HTML DOM ашиглан хуудасны агуулгыг динамикаар үүсгэх класс
 // ============================================================
+
+const PAGE_SIZE = 8;
+let _instanceCount = 0;
 
 export class ProductRenderer {
   constructor({ productsEl, brandsEl, categoriesEl, statsEl }) {
@@ -9,12 +11,17 @@ export class ProductRenderer {
     this.brandsEl     = brandsEl;
     this.categoriesEl = categoriesEl;
     this.statsEl      = statsEl;
+
+    // Тус бүрийн instance-д өөр өөр id өгнө
+    this._uid = "lmw_" + (++_instanceCount);
+
+    this._currentProducts = [];
+    this._visibleCount    = PAGE_SIZE;
   }
 
-  // --- Барааны карт HTML үүсгэх (private helper) ---
   _productCard(p) {
-    const discount = Math.round(((p.oldPrice - p.newPrice) / p.oldPrice) * 100);
-    const tagHTML  = p.tag
+    const discount   = Math.round(((p.oldPrice - p.newPrice) / p.oldPrice) * 100);
+    const tagHTML    = p.tag
       ? `<span class="product-tag product-tag--${p.tag}">${p.tag === "sale" ? "SALE" : "NEW"}</span>`
       : "";
     const stockClass = p.inStock ? "" : "product--outofstock";
@@ -36,41 +43,92 @@ export class ProductRenderer {
       </article>`;
   }
 
-  // --- Барааны жагсаалтыг DOM-д харуулах ---
+  // Шинэ шүүлт → reset хийж эхний PAGE_SIZE харуулна
   renderProducts(products) {
     if (!this.productsEl) return;
+
+    this._currentProducts = products;
+    this._visibleCount    = PAGE_SIZE;
+    this._removeLoadMore();
+
     if (!products.length) {
       this.productsEl.innerHTML = `<p class="empty-msg">Бараа олдсонгүй.</p>`;
       return;
     }
-    this.productsEl.innerHTML = products.map(p => this._productCard(p)).join("");
+
+    this.productsEl.innerHTML = products
+      .slice(0, PAGE_SIZE)
+      .map(p => this._productCard(p))
+      .join("");
+
+    this._updateLoadMoreBtn();
   }
 
-  // --- Брэндийг DOM-д харуулах ---
+  // Доод талд fade-in хийж НЭМНЭ
+  _loadMore() {
+    const from = this._visibleCount;
+    this._visibleCount = Math.min(from + PAGE_SIZE, this._currentProducts.length);
+
+    this._currentProducts.slice(from, this._visibleCount).forEach(p => {
+      const tmp = document.createElement("div");
+      tmp.innerHTML = this._productCard(p).trim();
+      const card = tmp.firstElementChild;
+      card.style.cssText = "opacity:0;transform:translateY(24px);transition:opacity .35s ease,transform .35s ease";
+      this.productsEl.appendChild(card);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        card.style.opacity   = "1";
+        card.style.transform = "translateY(0)";
+      }));
+    });
+
+    this._updateLoadMoreBtn();
+  }
+
+  _updateLoadMoreBtn() {
+    this._removeLoadMore();
+    const remaining = this._currentProducts.length - this._visibleCount;
+    if (remaining <= 0) return;
+
+    const wrap = document.createElement("div");
+    wrap.id = this._uid;                  // ← instance-д өвөрмөц id
+    wrap.className = "load-more-wrap";
+    wrap.innerHTML = `
+      <button class="load-more-btn">
+        Дахин бараа харах
+        <span class="load-more-count">${remaining} бараа үлдсэн</span>
+      </button>`;
+
+    // productsEl-ийн яг ДАРАА оруулна
+    this.productsEl.insertAdjacentElement("afterend", wrap);
+
+    wrap.querySelector(".load-more-btn")
+        .addEventListener("click", () => this._loadMore());
+  }
+
+  _removeLoadMore() {
+    document.getElementById(this._uid)?.remove();
+  }
+
   renderBrands(brands) {
     if (!this.brandsEl) return;
     this.brandsEl.innerHTML = brands.map(b => `
-      <div class="brand">
-        <img src="${b.image}" alt="${b.name}"
-             onerror="this.style.background='#eee'">
+      <a class="brand" href="brand.html?brand=${encodeURIComponent(b.name)}" style="text-decoration:none;color:inherit;display:block;text-align:center;min-width:120px;">
+        <img src="${b.image}" alt="${b.name}" onerror="this.style.background='#eee'">
         <p>${b.name}</p>
-      </div>`).join("");
+      </a>`).join("");
   }
 
-  // --- Ангиллыг DOM-д харуулах ---
   renderCategories(categories) {
     if (!this.categoriesEl) return;
     this.categoriesEl.innerHTML = categories.map(c => `
-      <div class="category">
+      <article class="category">
         <a href="#" data-filter="${c.id}">
-          <img src="${c.image}" alt="${c.name}"
-               onerror="this.style.background='#eee'">
+          <figure><img src="${c.image}" alt="${c.name}" onerror="this.style.background='#eee'"></figure>
           <h3>${c.name}</h3>
         </a>
-      </div>`).join("");
+      </article>`).join("");
   }
 
-  // --- Статистик мэдээллийг харуулах ---
   renderStats({ total, avgRating, totalDiscount, brandNames }) {
     if (!this.statsEl) return;
     this.statsEl.innerHTML = `
@@ -82,7 +140,6 @@ export class ProductRenderer {
       </div>`;
   }
 
-  // --- Үнийг форматлах helper ---
   _formatPrice(n) {
     return n.toLocaleString("mn-MN") + "₮";
   }

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHOP — Brand</title>
+  <link rel="stylesheet" href="/WebApp.Project/style.css" />
+  <link rel="stylesheet" href="/WebApp.Project/brandstyle.css" />
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="top-bar">
+      <h1 class="logo"><a href="index.html">SHOP</a></h1>
+      <search class="search">
+        <input type="text" placeholder="Бараа хайх..." />
+      </search>
+      <nav class="icons">
+        <a href="login.html" class="icon-profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-width="2"
+              d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+        </a>
+        <a href="hadgalsan.html" class="icon-heart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+          </svg>
+        </a>
+        <a href="basket.html" class="icon-cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+          </svg>
+        </a>
+      </nav>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">← Нүүр хуудас</a></li>
+        <li><a href="index.html#brand">BRANDS</a></li>
+        <li><a href="index.html#sales">SALES</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="brand-page">
+    <a href="index.html" class="back-btn">← Буцах</a>
+
+    <div class="brand-hero" id="brandHero">
+      <!-- JS-ээр дүүрнэ -->
+    </div>
+
+    <section class="products-section" style="padding:0; margin-top:0">
+      <header class="section-header">
+        <h2 id="brandProductTitle">Бараанууд</h2>
+      </header>
+      <section class="products" id="brandProductsGrid"></section>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="bottom-nav-item active">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+      </svg>
+      <span>Нүүр</span>
+    </a>
+    <a href="hadgalsan.html" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+      </svg>
+      <span>Хадгалсан</span>
+    </a>
+    <a href="basket.html" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+      </svg>
+      <span>Сагс</span>
+    </a>
+    <a href="login.html" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-width="2"
+          d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+      </svg>
+      <span>Профайл</span>
+    </a>
+  </nav>
+
+  <script src="script.js"></script>
+  <script type="module">
+    import { ProductStore } from "./modules/ProductStore.js";
+    import { ProductRenderer } from "./modules/ProductRenderer.js";
+
+    async function init() {
+      // URL-аас брэндийн нэр авах
+      const params = new URLSearchParams(window.location.search);
+      const brandName = params.get("brand") || "";
+
+      if (!brandName) {
+        window.location.href = "index.html";
+        return;
+      }
+
+      const res = await fetch("products.json");
+      const data = await res.json();
+      const store = new ProductStore(data);
+
+      // Брэндийн мэдээлэл олох
+      const brandInfo = data.brands.find(
+        b => b.name.toLowerCase() === brandName.toLowerCase()
+      );
+
+      // Hero хэсэг
+      document.title = `SHOP — ${brandName}`;
+      document.getElementById("brandHero").innerHTML = `
+        ${brandInfo
+          ? `<img class="brand-hero-logo" src="${brandInfo.image}" alt="${brandName}"
+                  onerror="this.style.display='none'">`
+          : ""}
+        <div class="brand-hero-info">
+          <h1>${brandName.toUpperCase()}</h1>
+          <p>${store.allProducts.filter(p =>
+            p.brand.toLowerCase() === brandName.toLowerCase()
+          ).length} бараа</p>
+        </div>`;
+
+      document.getElementById("brandProductTitle").textContent =
+        `${brandName} — бүх бараа`;
+
+      // Барааг шүүж харуулах
+      const filtered = store.allProducts.filter(
+        p => p.brand.toLowerCase() === brandName.toLowerCase()
+      );
+
+      const renderer = new ProductRenderer({
+        productsEl: document.getElementById("brandProductsGrid")
+      });
+
+      if (filtered.length === 0) {
+        document.getElementById("brandProductsGrid").innerHTML =
+          `<p class="empty-msg">${brandName} брэндийн бараа олдсонгүй.</p>`;
+      } else {
+        renderer.renderProducts(filtered);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+
+</html>
