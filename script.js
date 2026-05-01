@@ -1,21 +1,78 @@
 // =====================
-// SLIDER — бүх slider-уудыг тус тусад нь холбох
+// INFINITE CYCLING SLIDER
 // =====================
 document.querySelectorAll(".categories-wrapper").forEach(wrapper => {
   const leftBtn  = wrapper.querySelector(".left");
   const rightBtn = wrapper.querySelector(".right");
   const slider   = wrapper.querySelector(".categories, .brands");
+  if (!slider) return;
 
-  if (rightBtn && slider) {
+  let initialized = false;
+
+  function setupInfinite() {
+    if (initialized) return;
+    const items = Array.from(slider.children);
+    if (items.length === 0) return;
+    initialized = true;
+
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      clone.classList.add("clone");
+      slider.appendChild(clone);
+    });
+  }
+
+  // For statically rendered sliders (categories)
+  setupInfinite();
+
+  // For dynamically rendered sliders (brands via JS)
+  const observer = new MutationObserver((mutations, obs) => {
+    const hasRealItems = Array.from(slider.children).some(c => !c.classList.contains("clone"));
+    if (hasRealItems) {
+      obs.disconnect();
+      setupInfinite();
+    }
+  });
+  observer.observe(slider, { childList: true });
+
+  // Seamless loop reset
+  slider.addEventListener("scroll", () => {
+    const half = slider.scrollWidth / 2;
+    if (slider.scrollLeft >= half) {
+      slider.scrollLeft -= half;
+    } else if (slider.scrollLeft <= 0) {
+      slider.scrollLeft += half;
+    }
+  }, { passive: true });
+
+  const SCROLL_AMOUNT = 300;
+
+  if (rightBtn) {
     rightBtn.addEventListener("click", () => {
-      slider.scrollBy({ left: 350, behavior: "smooth" });
+      slider.scrollBy({ left: SCROLL_AMOUNT, behavior: "smooth" });
     });
   }
-  if (leftBtn && slider) {
+  if (leftBtn) {
     leftBtn.addEventListener("click", () => {
-      slider.scrollBy({ left: -350, behavior: "smooth" });
+      slider.scrollBy({ left: -SCROLL_AMOUNT, behavior: "smooth" });
     });
   }
+
+  // Auto-scroll on desktop only
+  let autoTimer;
+  function startAuto() {
+    autoTimer = setInterval(() => {
+      if (window.innerWidth > 768) {
+        slider.scrollBy({ left: SCROLL_AMOUNT, behavior: "smooth" });
+      }
+    }, 3000);
+  }
+  function stopAuto() { clearInterval(autoTimer); }
+
+  startAuto();
+  slider.addEventListener("mouseenter", stopAuto);
+  slider.addEventListener("mouseleave", startAuto);
+  slider.addEventListener("touchstart", stopAuto, { passive: true });
 });
 
 // =====================
@@ -252,7 +309,18 @@ if (searchToggle && searchEl) {
     searchToggle.addEventListener("click", (e) => {
         e.preventDefault();
         const isMobile = window.innerWidth <= 768;
-        if (!isMobile) return;
+
+        if (!isMobile) {
+            // Desktop: focus the search input and scroll to products section
+            const input = searchEl.querySelector("input");
+            input.focus();
+            input.select();
+            const salesSection = document.getElementById("sales");
+            if (salesSection) {
+                salesSection.scrollIntoView({ behavior: "smooth" });
+            }
+            return;
+        }
 
         const isOpen = searchEl.classList.contains("open");
         if (isOpen) {

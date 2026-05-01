@@ -78,6 +78,7 @@ export class ProductRenderer {
       requestAnimationFrame(() => requestAnimationFrame(() => {
         card.style.opacity   = "1";
         card.style.transform = "translateY(0)";
+        setTimeout(() => { card.style.cssText = ""; }, 360);
       }));
     });
 
