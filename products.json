@@ -38,12 +38,12 @@
     },
     {
       "id": 4,
-      "name": "Acne Studios bag",
+      "name": "Acne Studios camera",
       "category": "huvtsas",
       "tag": "sale",
       "image": "image/product4.jpg",
-      "oldPrice": 4200000,
-      "newPrice": 3210000,
+      "oldPrice": 10,
+      "newPrice": 10,
       "brand": "Acne Studios",
       "rating": 4.6,
       "inStock": true

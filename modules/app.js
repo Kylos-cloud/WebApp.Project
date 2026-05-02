@@ -1,7 +1,3 @@
-// ============================================================
-// MODULE: app.js  (type="module" шаардлагатай)
-// ============================================================
-
 import { ProductStore }    from "./ProductStore.js";
 import { ProductRenderer } from "./ProductRenderer.js";
 
@@ -22,8 +18,9 @@ async function init() {
   if (!data) return;
 
   const store = new ProductStore(data);
+  window._store = store;
+  window._data = data;
 
-  // ── "Бүх бараа" renderer (өөрийн uid: lmw_1) ─────────────
   const mainRenderer = new ProductRenderer({ productsEl, brandsEl, statsEl });
   mainRenderer.renderProducts(store.allProducts);
   mainRenderer.renderBrands(store.allBrands);
@@ -34,7 +31,7 @@ async function init() {
     brandNames:    store.getBrandNames()
   });
 
-  // ── "Хямдралтай" renderer (өөрийн uid: lmw_2) ────────────
+
   if (saleEl) {
     const saleRenderer = new ProductRenderer({ productsEl: saleEl });
     saleRenderer.renderProducts(store.getSaleProducts());
@@ -79,4 +76,36 @@ async function init() {
   }
 }
 
+// Listen for category menu navigation events from script.js
+window.addEventListener("categoryNavigation", (e) => {
+  const { categoryKey, subName, itemName } = e.detail;
+  const store = window._store;
+  const data = window._data;
+  if (!store) return;
+
+  // Filter products by category
+  let filtered = categoryKey
+    ? store.allProducts.filter(p => p.category === categoryKey)
+    : store.allProducts;
+
+  mainRenderer.renderProducts(filtered);
+
+  // Update filter buttons active state
+  document.querySelectorAll(".filter-btn[data-filter]").forEach(b => {
+    b.classList.toggle("active-filter", b.dataset.filter === categoryKey);
+  });
+
+  // Update section header
+  const header = document.querySelector("#sales .section-header h2");
+  if (header) {
+    const catLabel = data.categories?.find(c => c.id === categoryKey)?.name ?? categoryKey;
+    if (itemName) {
+      header.textContent = `${catLabel} › ${itemName} — ${filtered.length} бараа`;
+    } else if (catLabel) {
+      header.textContent = `${catLabel} — ${filtered.length} бараа`;
+    }
+  }
+});
+
 document.addEventListener("DOMContentLoaded", init);
+// ── Category menu navigation (from script.js) ────────────

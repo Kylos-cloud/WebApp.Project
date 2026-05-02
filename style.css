@@ -1,6 +1,4 @@
-/* =========================
-   ROOT VARIABLES
-========================= */
+/* ROOT VARIABLES*/
 :root {
   --color-bg: hsl(0, 0%, 95%);
   --color-bg1: hsl(0, 0%, 90%);
@@ -38,7 +36,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* --- Added Semantic Tag Resets (ÐÐ»Ð´Ð°Ð° Ð·Ð°Ð°ÑÐ°Ð½ Ñ‚Ð°Ð°Ð³ÑƒÑƒÐ´Ñ‹Ð½ Ó©Ð³Ó©Ð³Ð´Ð¼Ó©Ð» Ð·Ð°Ð¹Ð³ Ð°Ñ€Ð¸Ð»Ð³Ð°Ñ…) --- */
 figure {
   margin: 0;
   padding: 0;
@@ -77,9 +74,7 @@ body {
   overflow-y: auto;
 }
 
-/* =========================
-   HEADER
-========================= */
+/*HEADER */
 
 .header {
   background: var(--color-header);
@@ -175,9 +170,7 @@ h2 {
   opacity: 0.6;
 }
 
-/* =========================
-   MENU
-========================= */
+/*MENU*/
 
 .menu {
   border-top: 1px solid var(--color-border);
@@ -388,9 +381,7 @@ nav a {
   flex-direction: column;
 }
 
-/* =========================
-   HERO
-========================= */
+/*HERO */
 
 .hero {
   height: 520px;
@@ -422,9 +413,7 @@ nav a {
   color: black;
 }
 
-/* =========================
-   CATEGORIES
-========================= */
+/*CATEGORIES*/
 
 .categories-section {
   padding: 40px 80px 20px;
@@ -510,9 +499,7 @@ nav a {
   right: -60px;
 }
 
-/* =========================
-   ANIMATIONS
-========================= */
+/*ANIMATIONS*/
 
 @keyframes fadeSlideUp {
   from {
@@ -525,9 +512,7 @@ nav a {
   }
 }
 
-/* =========================
-   PRODUCTS
-========================= */
+/*PRODUCTS */
 .products {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -661,9 +646,7 @@ nav a {
   transition: 0.3s;
 }
 
-/* =========================
-   BRANDS
-========================= */
+/*BRANDS*/
 .brands-section {
   margin-top: 20px;
   padding: 0 80px;
@@ -715,9 +698,7 @@ nav a {
   transform: scale(1.1);
 }
 
-/* =========================
-   FOOTER
-========================= */
+/*FOOTER*/
 .footer {
   background: var(--color-bg1);
   padding: 70px 80px;
@@ -818,7 +799,6 @@ nav a {
 }
 
 @media (max-width: 768px) {
-  /* HEADER STACK */
   .top-bar {
     flex-direction: column;
     gap: 10px;
@@ -854,7 +834,7 @@ nav a {
 
   /* CATEGORY */
   .categories-section {
-    padding: 20px 0 20px 16px; /* left padding only, right stays open for scroll */
+    padding: 20px 0 20px 16px; /* left padding */
   }
 
   .categories-section h2 {
@@ -886,7 +866,6 @@ nav a {
   .categories {
     gap: 12px;
     padding: 8px 16px 16px;
-    /* Allow natural touch scroll — no snap interference */
     scroll-snap-type: none;
     -webkit-overflow-scrolling: touch;
   }
@@ -914,9 +893,7 @@ nav a {
     display: none;
   }
 }
-/* =========================
-   BOTTOM NAV (mobile only)
-========================= */
+/* BOTTOM NAV (mobile only) */
 .bottom-nav {
   display: none;
   transform: translateY(0);
@@ -1064,9 +1041,7 @@ nav a {
   }
 }
 
-/* =========================
-   STATS BAR
-========================= */
+/* STATS BAR*/
 .stats-bar {
   display: flex;
   flex-wrap: wrap;
@@ -1086,9 +1061,7 @@ nav a {
   margin-left: auto;
 }
 
-/* =========================
-   FILTER BUTTONS
-========================= */
+/* FILTER BUTTONS*/
 .filter-btns {
   display: flex;
   flex-wrap: wrap;
@@ -1111,9 +1084,7 @@ nav a {
   border-color: var(--color-text);
 }
 
-/* =========================
-   DYNAMIC PRODUCT TAGS
-========================= */
+/* DYNAMIC PRODUCT TAGS */
 .product {
   position: relative;
 }
@@ -1163,9 +1134,7 @@ nav a {
   }
 }
 
-/* =========================
-   LOAD MORE BUTTON
-========================= */
+/*LOAD MORE BUTTON*/
 .load-more-wrap {
   display: flex;
   justify-content: center;
