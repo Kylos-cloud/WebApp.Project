@@ -1,49 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="mn">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SHOP</title>
-  <link rel="stylesheet" href="/WebApp.Project/style.css">
+  <link rel="stylesheet" href="/WebApp.Project/style.css" />
 </head>
 
 <body>
-
   <header class="header">
-
     <div class="top-bar">
-
       <h1 class="logo"><a href="#">SHOP</a></h1>
 
       <search class="search">
-        <input type="text" placeholder="Бараа хайх...">
+        <input type="text" placeholder="Бараа хайх..." />
       </search>
 
       <nav class="icons">
-        <a href="login.html"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <a href="login.html" class="icon-profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-width="2"
               d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-          </svg></a>
-        <a href="#">
-          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24" fill="none" viewBox="0 0 24 24">
+          </svg>
+        </a>
+        <a href="hadgalsan.html" class="icon-heart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
           </svg>
-
         </a>
-        <a href="#">
-          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <!-- Mobile search toggle -->
+        <a href="#" class="icon-search-toggle" id="searchToggle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+              d="m21 21-3.5-3.5M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z" />
+          </svg>
+        </a>
+        <a href="basket.html" class="icon-cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
           </svg>
-
         </a>
       </nav>
-
     </div>
 
     <nav class="menu">
@@ -58,75 +58,81 @@
     <div id="overlay" onclick="closeMenu()"></div>
 
     <aside id="categoryMenu" class="category-menu">
-
       <header class="menu-header">
         <h2>БҮХ АНГИЛАЛ</h2>
         <span onclick="closeMenu()">✕</span>
       </header>
 
       <div class="menu-content">
-
         <nav class="menu-left">
-
           <search class="menu-search">
-            <input type="text" id="categorySearch" placeholder="Ангилал хайх...">
+            <input type="text" id="categorySearch" placeholder="Ангилал хайх..." />
           </search>
 
           <ul class="category-list">
-            <li class="menu-item" data-category="tsakhilgaan"><svg class="icon" viewBox="0 0 24 24" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+            <li class="menu-item" data-category="tsakhilgaan">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z"
                   fill="#000000" />
               </svg>
-              Цахилгаан бараа</li>
-            <li class="menu-item" data-category="ger-ahui"><svg class="w-6 h-6 text-gray-800 dark:text-white"
-                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                viewBox="0 0 24 24">
+              Цахилгаан бараа
+            </li>
+            <li class="menu-item" data-category="ger-ahui">
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
               </svg>
-              Гэр ахуй</li>
-            <li class="menu-item" data-category="shine-huns"><svg class="w-6 h-6 text-gray-800 dark:text-white"
-                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                viewBox="0 0 24 24">
+              Гэр ахуй
+            </li>
+            <li class="menu-item" data-category="shine-huns">
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M12 10.0419c-1.3902 0-1.3935-1.1249-4.20643-1.037-1.73056.05408-3.15551 2.2303-2.71168 5.3081C5.35949 16.2381 6.98619 21 8.99172 21c2.00548 0 2.07358-.8508 3.00828-.8508.9347 0 .8551.8508 3.0083.8508s3.6322-4.7619 3.9098-6.687c.4438-3.0778-.9811-5.25402-2.7117-5.3081-2.8129-.0879-2.8162 1.037-4.2064 1.037Zm2.3598-4.2126c-.8779.74829-1.8612.71957-2.7221.71957 0-.62576.0792-1.94012.8609-2.76911.7817-.82898 2.1271-.7664 2.6434-.7664 0 .59448.0956 2.06766-.7822 2.81594Z" />
               </svg>
 
-              Шинэ хүнс</li>
-            <li class="menu-item" data-category="bolovsruulsan-huns"><svg class="w-6 h-6 text-gray-800 dark:text-white"
-                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                viewBox="0 0 24 24">
+              Шинэ хүнс
+            </li>
+            <li class="menu-item" data-category="bolovsruulsan-huns">
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M18.011 13H20c-.367 2.5551-2.32 4.6825-4.9766 5.6162V20H8.97661v-1.3838C6.31996 17.6825 4.36697 15.5551 4 13h14.011Zm0 0c1.0995-.0059 1.989-.8991 1.989-2 0-.8637-.5475-1.59948-1.3143-1.87934M18.011 13H18m0-3.99997c.2409 0 .4718.04258.6857.12063m0 0c.8367-1.0335.7533-2.67022-.2802-3.50694-1.0335-.83672-2.5496-.6772-3.3864.35631-.293-1.50236-1.7485-2.15377-3.2509-1.8607-1.5023.29308-2.48263 1.74856-2.18956 3.25092C8.9805 6.17263 7.6182 5.26418 6.15462 6.00131 4.967 6.59945 4.45094 8.19239 5.04909 9.38002m0 0C4.37083 9.66467 4 10.3357 4 11.1174 4 12.1571 4.84288 13 5.88263 13m-.83354-3.61998c.2866-.12029 1.09613-.40074 2.04494.3418m5.27497-.89091c1.0047-.4589 2.1913-.01641 2.6502.98832" />
               </svg>
-              Боловсруулсан хүнс</li>
-            <li class="menu-item" data-category="shingen-huns"><svg class="w-6 h-6 text-gray-800 dark:text-white"
-                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                viewBox="0 0 24 24">
+              Боловсруулсан хүнс
+            </li>
+            <li class="menu-item" data-category="shingen-huns">
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M11 6v2s-3 1-3 3.25 1 2.25 1 3-1 1.125-1 2.25V19c0 .9375 1 2 2.5 2s2-.9375 2-.9375S13 21 14.5 21s2.5-1.0625 2.5-2v-2.5c0-1.125-1-1.5-1-2.25s1-.75 1-3S14 8 14 8V6m-3 0h-1V3h5v3h-1m-3 0h3m-5.95629 6h8.91259M8 17h9" />
               </svg>
-              Шингэн хүнс</li>
-            <li class="menu-item" data-category="goo-saikhan"><svg class="w-6 h-6 text-gray-800 dark:text-white"
-                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                viewBox="0 0 24 24">
+              Шингэн хүнс
+            </li>
+            <li class="menu-item" data-category="goo-saikhan">
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-width="2"
                   d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z" />
               </svg>
-              Гоо сайхан</li>
-            <li class="menu-item" data-category="huvtsas"><svg class="w-6 h-6 text-gray-800 dark:text-white"
-                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                viewBox="0 0 24 24">
+              Гоо сайхан
+            </li>
+            <li class="menu-item" data-category="huvtsas">
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
                   d="M9 5h-.16667c-.86548 0-1.70761.28071-2.4.8L3.5 8l2 3.5L8 10v9h8v-9l2.5 1.5 2-3.5-2.9333-2.2c-.6924-.51929-1.5346-.8-2.4-.8H15M9 5c0 1.5 1.5 3 3 3s3-1.5 3-3M9 5h6" />
               </svg>
-              Хувцас, Гутал</li>
-            <li class="menu-item" data-category="huuhdiin"><svg class="icon" viewBox="0 0 24 24">
+              Хувцас, Гутал
+            </li>
+            <li class="menu-item" data-category="huuhdiin">
+              <svg class="icon" viewBox="0 0 24 24">
                 <path
                   d="M10,10a1,1,0,1,0-1,1A1,1,0,0,0,10,10Zm4.5,4.06a1,1,0,0,0-1.37.36,1.3,1.3,0,0,1-2.26,0,1,1,0,0,0-1.37-.36,1,1,0,0,0-.37,1.36,3.31,3.31,0,0,0,5.74,0A1,1,0,0,0,14.5,14.06ZM15,9a1,1,0,1,0,1,1A1,1,0,0,0,15,9ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18A8,8,0,0,1,9,4.57,3,3,0,0,0,9,5a3,3,0,0,0,3,3,1,1,0,0,0,0-2,1,1,0,0,1,0-2,8,8,0,0,1,0,16Z" />
-              </svg>Хүүхдийн бараа</li>
+              </svg>Хүүхдийн бараа
+            </li>
             <li class="menu-item" data-category="avto">
               <svg class="icon" viewBox="0 0 24 24">
                 <path
@@ -142,17 +148,19 @@
               </svg>
               Барилгын материал
             </li>
-            <li class="menu-item" data-category="ayalal"><svg class="icon icon-house" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
+            <li class="menu-item" data-category="ayalal">
+              <svg class="icon icon-house" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M11.4187 3.18627C11.7664 2.93791 12.2335 2.93791 12.5812 3.18627L19.2081 7.91974C19.6819 8.25817 19.9847 8.78627 20.0374 9.36613L20.8967 18.8189C21.0032 19.9902 20.081 21 18.9049 21H13H11H5.09501C3.91895 21 2.99675 19.9902 3.10323 18.8189L3.96257 9.36613C4.01528 8.78627 4.31808 8.25817 4.79188 7.91974L11.4187 3.18627ZM12 5.2289L5.95436 9.5472L5.09501 19L9.99998 19V13C9.99998 12.4477 10.4477 12 11 12H13C13.5523 12 14 12.4477 14 13V19L18.9049 19L18.0456 9.54721L12 5.2289Z" />
-              </svg>Аялал зугаалга</li>
-            <li class="menu-item" data-category="sport"><svg class="icon icon-house" viewBox="0 0 24 24" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+              </svg>Аялал зугаалга
+            </li>
+            <li class="menu-item" data-category="sport">
+              <svg class="icon icon-house" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M3 12C3 10.0017 3.65127 8.15549 4.75313 6.66208M3 12C3 13.9931 3.64785 15.8348 4.74444 17.3261M3 12H21M4.75313 6.66208C6.39201 4.4408 9.02775 3 12 3M4.75313 6.66208C5.97869 7.42812 6.97956 8.34298 7.54328 9.70393C7.84481 10.4319 8 11.2121 8 12C8 12.788 7.84481 13.5682 7.54328 14.2961C6.96816 15.6846 5.96869 16.5246 4.74444 17.3261M12 3C14.9786 3 17.6192 4.44695 19.2573 6.6763M12 3V21M12 21C9.02249 21 6.38269 19.5541 4.74444 17.3261M12 21C14.9665 21 17.5977 19.5648 19.2373 17.3509M19.2573 6.6763C20.3529 8.1672 21 10.008 21 12M19.2573 6.6763C18.0306 7.47481 17.0319 8.31521 16.4567 9.70387C16.1552 10.4318 16 11.212 16 12C16 12.7879 16.1552 13.5681 16.4567 14.2961C17.0356 15.6937 18.0451 16.4972 19.2373 17.3509M21 12C21 14.0041 20.345 15.8552 19.2373 17.3509"
                   stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>Спорт</li>
+              </svg>Спорт
+            </li>
             <li class="menu-item" data-category="togloom">
               <svg class="icon icon-house" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -229,131 +237,134 @@
               </svg>Хямдрал
             </li>
           </ul>
-
         </nav>
 
         <section class="menu-right" id="menuRight">
           <p class="menu-right-hint">Ангилал сонгоно уу</p>
         </section>
-
       </div>
     </aside>
   </header>
 
   <section class="hero">
-
     <div class="hero-text">
       <button>БАРАА ҮЗЭХ</button>
     </div>
-
   </section>
 
+
   <section class="categories-section">
-
     <h2>Ангилал</h2>
+    <!-- Ангиллаар шүүх товчнууд -->
+    <div class="filter-btns">
+      <button class="filter-btn active-filter" data-filter="all">Бүгд</button>
+      <button class="filter-btn" data-filter="huvtsas">Хувцас</button>
+      <button class="filter-btn" data-filter="tsakhilgaan">Электроникс</button>
+      <button class="filter-btn" data-filter="goo-saikhan">Гоо сайхан</button>
+      <button class="filter-btn" data-filter="ayalal">Аялал</button>
+      <button class="filter-btn" data-filter="eruul">Эрүүл мэнд</button>
+      <button class="filter-btn" data-filter="ger-ahui">Гэр ахуй</button>
+      <button class="filter-btn" data-filter="togloom">Тоглоом</button>
+      <button class="filter-btn" data-filter="bichig">Бичиг хэрэг</button>
+      <button class="filter-btn" data-filter="tejeewr">Тэжээвэр амьтан</button>
+    </div>
     <div class="categories-wrapper">
-
       <button class="slider-btn left">‹</button>
-      <section class="categories">
-
+      <!-- Динамикаар дүүрнэ — app.js -->
+      <section class="categories" id="categoriesContainer">
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/clothes.jpg">
-            </figure>
+          <a href="#" data-filter="huvtsas">
+            <figure><img
+                src="https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Clothes" /></figure>
             <h3>CLOTHES</h3>
           </a>
         </article>
-
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/home.png">
-            </figure>
+          <a href="#" data-filter="ger-ahui">
+            <figure><img
+                src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Home" /></figure>
             <h3>HOME</h3>
           </a>
         </article>
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/electronic.png">
-            </figure>
+          <a href="#" data-filter="tsakhilgaan">
+            <figure><img
+                src="https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Electronics" /></figure>
             <h3>ELECTRONICS</h3>
           </a>
         </article>
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/sport.jpg">
-            </figure>
+          <a href="#" data-filter="eruul">
+            <figure><img
+                src="https://images.pexels.com/photos/3822621/pexels-photo-3822621.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Sport" /></figure>
             <h3>SPORT</h3>
           </a>
         </article>
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/beauty.jpg">
-            </figure>
+          <a href="#" data-filter="goo-saikhan">
+            <figure><img
+                src="https://images.pexels.com/photos/3762879/pexels-photo-3762879.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Beauty" /></figure>
             <h3>BEAUTY</h3>
           </a>
         </article>
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/stationary.jpg">
-            </figure>
+          <a href="#" data-filter="bichig">
+            <figure><img
+                src="https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Stationary" /></figure>
             <h3>STATIONARY</h3>
           </a>
         </article>
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/pet.jpg">
-            </figure>
+          <a href="#" data-filter="tejeewr">
+            <figure><img
+                src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Pet" /></figure>
             <h3>PET</h3>
           </a>
         </article>
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/travel.jpg">
-            </figure>
+          <a href="#" data-filter="ayalal">
+            <figure><img
+                src="https://images.pexels.com/photos/2697787/pexels-photo-2697787.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Travel" /></figure>
             <h3>TRAVEL</h3>
           </a>
         </article>
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/health.jpg">
-            </figure>
+          <a href="#" data-filter="eruul">
+            <figure><img
+                src="https://images.pexels.com/photos/4498154/pexels-photo-4498154.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Health" /></figure>
             <h3>HEALTH</h3>
           </a>
         </article>
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/grocery.jpg">
-            </figure>
-            <h3>GROCERY</h3>
+          <a href="#" data-filter="togloom">
+            <figure><img
+                src="https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Games" /></figure>
+            <h3>GAMES</h3>
           </a>
         </article>
         <article class="category">
-          <a href="#">
-            <figure>
-              <img src="image/barilga.jpg">
-            </figure>
+          <a href="#" data-filter="ger-ahui">
+            <figure><img
+                src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop"
+                alt="Tools" /></figure>
             <h3>TOOLS</h3>
           </a>
         </article>
-
       </section>
       <button class="slider-btn right">›</button>
-
     </div>
-
   </section>
   <section class="brands-section" id="brand">
-
     <div class="section-header">
       <h2>Brands</h2>
       <a href="#">Бүгдийг харах →</a>
@@ -361,239 +372,35 @@
 
     <div class="categories-wrapper">
       <button class="slider-btn left">‹</button>
-      <div class="brands">
-
-        <article class="brand"><img src="image/brand1.jpg" alt="AURA">
-          <p>AURA</p>
-        </article>
-        <article class="brand"><img src="image/brand2.jpg" alt="ZARA">
-          <p>ZARA</p>
-        </article>
-        <article class="brand"><img src="image/brand3.jpg" alt="H&M">
-          <p>H&M</p>
-        </article>
-        <article class="brand"><img src="image/brand4.jpg" alt="NIKE">
-          <p>NIKE</p>
-        </article>
-        <article class="brand"><img src="image/brand5.jpg" alt="ADIDAS">
-          <p>ADIDAS</p>
-        </article>
-        <article class="brand"><img src="image/brand6.jpg" alt="CONVERSE">
-          <p>CONVERSE</p>
-        </article>
-        <article class="brand"><img src="image/brand7.jpg" alt="APPLE">
-          <p>APPLE</p>
-        </article>
-        <article class="brand"><img src="image/brand8.jpg" alt="UGG">
-          <p>UGG</p>
-        </article>
-        <article class="brand"><img src="image/brand9.jpg" alt="DYSON">
-          <p>DYSON</p>
-        </article>
-        <article class="brand"><img src="image/brand10.jpg" alt="MIXSOON">
-          <p>MIXSOON</p>
-        </article>
-        <article class="brand"><img src="image/brand11.jpg" alt="ALO">
-          <p>ALO</p>
-        </article>
-
-        <article class="brand"><img src="image/brand1.jpg" alt="AURA">
-          <p>AURA</p>
-        </article>
-        <article class="brand"><img src="image/brand2.jpg" alt="ZARA">
-          <p>ZARA</p>
-        </article>
-        <article class="brand"><img src="image/brand3.jpg" alt="H&M">
-          <p>H&M</p>
-        </article>
-        <article class="brand"><img src="image/brand4.jpg" alt="NIKE">
-          <p>NIKE</p>
-        </article>
-        <article class="brand"><img src="image/brand5.jpg" alt="ADIDAS">
-          <p>ADIDAS</p>
-        </article>
-        <article class="brand"><img src="image/brand6.jpg" alt="CONVERSE">
-          <p>CONVERSE</p>
-        </article>
-        <article class="brand"><img src="image/brand7.jpg" alt="APPLE">
-          <p>APPLE</p>
-        </article>
-        <article class="brand"><img src="image/brand8.jpg" alt="UGG">
-          <p>UGG</p>
-        </article>
-        <article class="brand"><img src="image/brand9.jpg" alt="DYSON">
-          <p>DYSON</p>
-        </article>
-        <article class="brand"><img src="image/brand10.jpg" alt="MIXSOON">
-          <p>MIXSOON</p>
-        </article>
-        <article class="brand"><img src="image/brand11.jpg" alt="ALO">
-          <p>ALO</p>
-        </article>
-
-      </div>
+      <!-- Динамикаар дүүрнэ — app.js -->
+      <div class="brands" id="brandsContainer"></div>
       <button class="slider-btn right">›</button>
     </div>
   </section>
 
   <section class="products-section">
-
     <header class="section-header">
       <h2>Хямдралтай</h2>
       <a href="#">Бүгдийг харах →</a>
     </header>
+    <!-- Динамикаар дүүрнэ — getSaleProducts() filter ашиглана -->
+    <section class="products" id="saleGrid"></section>
+  </section>
 
-    <section class="products" id="sales">
-      <article class="product">
-
-        <figure>
-          <img src="image/product1.jpg">
-        </figure>
-
-        <h3>Loewe liquid soap</h3>
-
-        <p class="price">
-          <span class="old">75,000₮</span>
-          <span class="new">60,000₮</span>
-        </p>
-
-      </article>
-
-      <article class="product">
-
-        <figure>
-          <img src="image/product2.jpg">
-        </figure>
-
-        <h3>Chair</h3>
-
-        <p class="price">
-          <span class="old">450,000₮</span>
-          <span class="new">345,000₮</span>
-        </p>
-
-      </article>
-      <article class="product">
-
-        <figure>
-          <img src="image/product3.jpg">
-        </figure>
-
-        <h3>Byredo perfume man</h3>
-
-        <p class="price">
-          <span class="old">510,000₮</span>
-          <span class="new">340,000₮</span>
-        </p>
-
-      </article>
-      <article class="product">
-
-        <figure>
-          <img src="image/product4.jpg">
-        </figure>
-
-        <h3>Canon camera</h3>
-
-        <p class="price">
-          <span class="old">3,500,000₮</span>
-          <span class="new">3,210,000₮</span>
-        </p>
-
-      </article>
-      <article class="product">
-
-        <figure>
-          <img src="image/product5.jpg">
-        </figure>
-
-        <h3>Luggage 25inch</h3>
-
-        <p class="price">
-          <span class="old">950,000₮</span>
-          <span class="new">740,000₮</span>
-        </p>
-
-      </article>
-      <article class="product">
-
-        <figure>
-          <img src="image/product6.jpg">
-        </figure>
-
-        <h3>Sleep well gummie pill</h3>
-
-        <p class="price">
-          <span class="old">130,000₮</span>
-          <span class="new">97,000₮</span>
-        </p>
-
-      </article>
-      <article class="product">
-
-        <figure>
-          <img src="image/product7.png">
-        </figure>
-
-        <h3>Iphone 17 Pro Max </h3>
-
-        <p class="price">
-          <span class="old">6,500,000₮</span>
-          <span class="new">6,100,000₮</span>
-        </p>
-
-      </article>
-      <article class="product">
-
-        <figure>
-          <img src="image/product8.jpg">
-        </figure>
-
-        <h3>T-Shirt</h3>
-
-        <p class="price">
-          <span class="old">349,000₮</span>
-          <span class="new">300,000₮</span>
-        </p>
-
-      </article>
-      <article class="product">
-
-        <figure>
-          <img src="image/product9.jpg">
-        </figure>
-
-        <h3>g</h3>
-
-        <p class="price">
-          <span class="old">400,000₮</span>
-          <span class="new">300,000₮</span>
-        </p>
-
-      </article>
-      <article class="product">
-
-        <figure>
-          <img src="image/product10.jpg">
-        </figure>
-
-        <h3>h</h3>
-
-        <p class="price">
-          <span class="old">400,000₮</span>
-          <span class="new">300,000₮</span>
-        </p>
-
-      </article>
+  <!-- Бүх бараа — динамикаар дүүрнэ (filter товч + хайлт) -->
+  <section class="products-section" id="sales">
+    <header class="section-header">
+      <h2>Бүх бараа</h2>
+    </header>
+    <section class="products" id="productsGrid">
+      <!-- app.js динамикаар үүсгэнэ -->
     </section>
   </section>
 
   <button class="scroll-top" onclick="scrollToTop()">↑</button>
 
   <footer class="footer">
-
     <div class="footer-grid">
-
       <section>
         <h3>SHOP</h3>
         <p>Minimal marketplace</p>
@@ -623,14 +430,54 @@
       </section>
     </div>
 
-    <small class="copyright">
-      © 2026 SHOP. All rights reserved.
-    </small>
-
+    <small class="copyright"> © 2026 SHOP. All rights reserved. </small>
   </footer>
 
   <script src="script.js"></script>
+  <!-- ES Module: app.js нь ProductStore, ProductRenderer модулиудыг import хийнэ -->
+  <script type="module" src="modules/app.js"></script>
 
+
+  <!-- BOTTOM NAV (mobile only) -->
+  <nav class="bottom-nav">
+    <a href="#" class="bottom-nav-item active">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+      </svg>
+      <span>Нүүр</span>
+    </a>
+    <a href="#" class="bottom-nav-item" onclick="
+          openMenu();
+          return false;
+        ">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
+      </svg>
+      <span>Ангилал</span>
+    </a>
+    <a href="#sales" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 0 0-2 2v3a2 2 0 0 1 0 4v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3a2 2 0 0 1 0-4V7a2 2 0 0 0-2-2H5Z" />
+      </svg>
+      <span>Онцлох</span>
+    </a>
+    <a href="hadgalsan.html" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+      </svg>
+      <span>Хадгалсан</span>
+    </a>
+    <a href="login.html" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-width="2"
+          d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+      </svg>
+      <span>Профайл</span>
+    </a>
+  </nav>
 </body>
 
 </html>

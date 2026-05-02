@@ -1,16 +1,78 @@
 // =====================
-// SLIDER
+// INFINITE CYCLING SLIDER
 // =====================
-const slider = document.querySelector(".categories");
-const leftBtn = document.querySelector(".left");
-const rightBtn = document.querySelector(".right");
+document.querySelectorAll(".categories-wrapper").forEach(wrapper => {
+  const leftBtn = wrapper.querySelector(".left");
+  const rightBtn = wrapper.querySelector(".right");
+  const slider = wrapper.querySelector(".categories, .brands");
+  if (!slider) return;
 
-rightBtn.addEventListener("click", () => {
-  slider.scrollBy({ left: 350, behavior: "smooth" });
-});
+  let initialized = false;
 
-leftBtn.addEventListener("click", () => {
-  slider.scrollBy({ left: -350, behavior: "smooth" });
+  function setupInfinite() {
+    if (initialized) return;
+    const items = Array.from(slider.children);
+    if (items.length === 0) return;
+    initialized = true;
+
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      clone.classList.add("clone");
+      slider.appendChild(clone);
+    });
+  }
+
+  // For statically rendered sliders (categories)
+  setupInfinite();
+
+  // For dynamically rendered sliders (brands via JS)
+  const observer = new MutationObserver((mutations, obs) => {
+    const hasRealItems = Array.from(slider.children).some(c => !c.classList.contains("clone"));
+    if (hasRealItems) {
+      obs.disconnect();
+      setupInfinite();
+    }
+  });
+  observer.observe(slider, { childList: true });
+
+  // Seamless loop reset
+  slider.addEventListener("scroll", () => {
+    const half = slider.scrollWidth / 2;
+    if (slider.scrollLeft >= half) {
+      slider.scrollLeft -= half;
+    } else if (slider.scrollLeft <= 0) {
+      slider.scrollLeft += half;
+    }
+  }, { passive: true });
+
+  const SCROLL_AMOUNT = 300;
+
+  if (rightBtn) {
+    rightBtn.addEventListener("click", () => {
+      slider.scrollBy({ left: SCROLL_AMOUNT, behavior: "smooth" });
+    });
+  }
+  if (leftBtn) {
+    leftBtn.addEventListener("click", () => {
+      slider.scrollBy({ left: -SCROLL_AMOUNT, behavior: "smooth" });
+    });
+  }
+
+  // Auto-scroll on desktop only
+  let autoTimer;
+  function startAuto() {
+    autoTimer = setInterval(() => {
+      if (window.innerWidth > 768) {
+        slider.scrollBy({ left: SCROLL_AMOUNT, behavior: "smooth" });
+      }
+    }, 3000);
+  }
+  function stopAuto() { clearInterval(autoTimer); }
+
+  startAuto();
+  slider.addEventListener("mouseenter", stopAuto);
+  slider.addEventListener("mouseleave", startAuto);
+  slider.addEventListener("touchstart", stopAuto, { passive: true });
 });
 
 // =====================
@@ -238,6 +300,74 @@ function navigateToItem(categoryKey, subIndex, itemIndex) {
     console.log(`Navigate → ${data.label} > ${sub.name} > ${item}`);
   }
 }
+
+// MOBILE SEARCH TOGGLE
+const searchToggle = document.getElementById("searchToggle");
+const searchEl = document.querySelector(".search");
+
+if (searchToggle && searchEl) {
+  searchToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    const isMobile = window.innerWidth <= 768;
+
+    if (!isMobile) {
+      // Desktop: focus the search input and scroll to products section
+      const input = searchEl.querySelector("input");
+      input.focus();
+      input.select();
+      const salesSection = document.getElementById("sales");
+      if (salesSection) {
+        salesSection.scrollIntoView({ behavior: "smooth" });
+      }
+      return;
+    }
+
+    const isOpen = searchEl.classList.contains("open");
+    if (isOpen) {
+      searchEl.classList.remove("open");
+      searchToggle.classList.remove("hidden");
+    } else {
+      searchEl.classList.add("open");
+      searchToggle.classList.add("hidden");
+      setTimeout(() => searchEl.querySelector("input").focus(), 50);
+    }
+  });
+
+  // Close when clicking outside
+  document.addEventListener("click", (e) => {
+    if (window.innerWidth > 768) return;
+    if (!searchEl.contains(e.target) && e.target !== searchToggle && !searchToggle.contains(e.target)) {
+      searchEl.classList.remove("open");
+      searchToggle.classList.remove("hidden");
+    }
+  });
+}
+
+// SCROLL: hide bottom nav on scroll down, show on scroll up
+let lastScrollY = window.scrollY;
+
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector(".bottom-nav");
+  if (!nav) return;
+
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY > lastScrollY && currentScrollY > 60) {
+    nav.style.transform = "translateY(100%)";
+  } else {
+    nav.style.transform = "translateY(0)";
+  }
+
+  lastScrollY = currentScrollY;
+});
+
+// BOTTOM NAV ACTIVE STATE
+document.querySelectorAll(".bottom-nav-item").forEach(item => {
+  item.addEventListener("click", function () {
+    document.querySelectorAll(".bottom-nav-item").forEach(i => i.classList.remove("active"));
+    this.classList.add("active");
+  });
+});
 
 // MENU ITEM CLICK
 document.querySelectorAll(".menu-item").forEach(item => {
