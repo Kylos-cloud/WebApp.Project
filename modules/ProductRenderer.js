@@ -28,18 +28,20 @@ export class ProductRenderer {
 
     return `
       <article class="product ${stockClass}" data-id="${p.id}" data-category="${p.category}">
-        <figure>
-          <img src="${p.image}" alt="${p.name}" loading="lazy"
-               onerror="this.style.display='none'">
-          ${tagHTML}
-          ${!p.inStock ? `<span class="product-tag product-tag--out">ДУУССАН</span>` : ""}
-        </figure>
-        <h3>${p.name}</h3>
-        <p class="price">
-          <span class="old">${this._formatPrice(p.oldPrice)}</span>
-          <span class="new">${this._formatPrice(p.newPrice)}</span>
-          <span class="discount-badge">-${discount}%</span>
-        </p>
+        <a href="product.html?id=${p.id}" style="text-decoration:none;color:inherit;display:block;">
+          <figure>
+            <img src="${p.image}" alt="${p.name}" loading="lazy"
+                 onerror="this.style.display='none'">
+            ${tagHTML}
+            ${!p.inStock ? `<span class="product-tag product-tag--out">ДУУССАН</span>` : ""}
+          </figure>
+          <h3>${p.name}</h3>
+          <p class="price">
+            <span class="old">${this._formatPrice(p.oldPrice)}</span>
+            <span class="new">${this._formatPrice(p.newPrice)}</span>
+            <span class="discount-badge">-${discount}%</span>
+          </p>
+        </a>
       </article>`;
   }
 
@@ -134,10 +136,10 @@ export class ProductRenderer {
     if (!this.statsEl) return;
     this.statsEl.innerHTML = `
       <div class="stats-bar">
-        <span>📦 Нийт бараа: <strong>${total}</strong></span>
-        <span>⭐ Дундаж үнэлгээ: <strong>${avgRating}</strong></span>
-        <span>💰 Нийт хэмнэлт: <strong>${this._formatPrice(totalDiscount)}</strong></span>
-        <span class="stats-brands">🏷️ ${brandNames}</span>
+        <span> Нийт бараа: <strong>${total}</strong></span>
+        <span> Дундаж үнэлгээ: <strong>${avgRating}</strong></span>
+        <span> Нийт хэмнэлт: <strong>${this._formatPrice(totalDiscount)}</strong></span>
+        <span class="stats-brands"> ${brandNames}</span>
       </div>`;
   }
 
