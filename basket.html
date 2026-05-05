@@ -407,6 +407,33 @@
 
     <script src="script.js"></script>
     <script>
+        // ── Auth guard ──────────────────────────────────────────
+        (function () {
+            const me = JSON.parse(localStorage.getItem("shop_current_user") || "null");
+            if (!me) {
+                // Show a friendly gate instead of redirecting harshly
+                document.body.innerHTML = `
+              <style>
+                body { font-family: Arial, sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; background:#f5f5f5; gap:16px; }
+                .gate-box { background:#fff; border-radius:16px; padding:48px 40px; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,.10); max-width:380px; width:90%; }
+                .gate-box h2 { font-size:22px; margin-bottom:8px; }
+                .gate-box p { color:#777; font-size:14px; margin-bottom:28px; }
+                .gate-btn { display:inline-block; padding:12px 32px; background:#222; color:#fff; border-radius:30px; text-decoration:none; font-weight:600; font-size:14px; margin:6px; transition:opacity .2s; }
+                .gate-btn:hover { opacity:.8; }
+                .gate-btn.outline { background:transparent; border:2px solid #222; color:#222; }
+              </style>
+              <div class="gate-box">
+                <svg width="48" height="48" fill="none" stroke="#222" stroke-width="1.5" viewBox="0 0 24 24" style="margin-bottom:16px;">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+                </svg>
+                <h2>Нэвтрэх шаардлагатай</h2>
+                <p>Сагсаа харахын тулд эхлээд нэвтэрнэ үү.</p>
+                <a href="login.html" class="gate-btn">Нэвтрэх / Бүртгүүлэх</a>
+                <a href="index.html" class="gate-btn outline">Дэлгүүр үзэх</a>
+              </div>`;
+            }
+        })();
+
         function changeQty(btn, delta) {
             const qtyEl = btn.parentElement.querySelector(".qty-num");
             let qty = parseInt(qtyEl.textContent) + delta;

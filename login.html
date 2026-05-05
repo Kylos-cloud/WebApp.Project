@@ -5,97 +5,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SHOP — Нэвтрэх</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --color-bg: hsl(0, 0%, 95%);
-            --color-bg1: hsl(0, 0%, 90%);
-            --color-header: hsl(0, 0%, 98%);
-            --color-input: hsl(0, 0%, 96%);
-            --color-border: hsl(0, 0%, 88%);
-            --color-text: hsl(0, 0%, 15%);
-            --color-white: hsl(0, 0%, 100%);
-            --color-surface: hsl(0, 0%, 100%);
-            --color-accent: hsl(0, 0%, 30%);
-            --color-muted: hsl(0, 0%, 55%);
-            --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.08);
-            --shadow-hover: 0 12px 40px hsl(0 0% 0% / 0.14);
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 16px;
+            --bg: hsl(0, 0%, 95%);
+            --surface: hsl(0, 0%, 100%);
+            --border: hsl(0, 0%, 88%);
+            --input-bg: hsl(0, 0%, 96%);
+            --text: hsl(0, 0%, 15%);
+            --muted: hsl(0, 0%, 55%);
+            --accent: hsl(0, 0%, 15%);
+            --white: hsl(0, 0%, 100%);
+            --green: hsl(140, 50%, 40%);
+            --red: hsl(0, 60%, 50%);
+            --shadow: 0 8px 32px hsl(0 0% 0% / 0.10);
         }
 
-        * {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Таагуудын шинэчлэгдсэн reset */
-        menu {
-            list-style: none;
-            padding: 0;
-        }
-
-        fieldset {
-            border: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        button {
-            background: none;
-            border: none;
-            font: inherit;
-            cursor: pointer;
-        }
-
         body {
             font-family: 'DM Sans', sans-serif;
-            background: var(--color-bg);
-            color: var(--color-text);
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* TOP NAV */
-        .nav {
-            background: var(--color-surface);
-            border-bottom: 1px solid var(--color-border);
+        /* NAV */
+        nav {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
             padding: 18px 80px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .nav-logo {
+        .logo {
             font-family: 'DM Serif Display', serif;
             font-size: 28px;
             letter-spacing: 3px;
             text-decoration: none;
-            color: var(--color-text);
+            color: var(--text);
         }
 
-        .nav-back {
+        .back-link {
             font-size: 13px;
-            color: var(--color-muted);
+            color: var(--muted);
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.2s;
+            transition: color .2s;
         }
 
-        .nav-back:hover {
-            color: var(--color-text);
+        .back-link:hover {
+            color: var(--text);
         }
 
-        /* MAIN LAYOUT */
-        .page {
+        /* LAYOUT */
+        main {
             flex: 1;
             display: flex;
             align-items: center;
@@ -103,20 +78,21 @@
             padding: 60px 20px;
         }
 
+        /* CARD */
         .card {
-            background: var(--color-surface);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-card);
+            background: var(--surface);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
             width: 100%;
-            max-width: 440px;
+            max-width: 460px;
             padding: 48px;
-            animation: fadeUp 0.4s ease both;
+            animation: fadeUp .4s ease both;
         }
 
         @keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(16px);
+                transform: translateY(20px);
             }
 
             to {
@@ -128,7 +104,7 @@
         /* TABS */
         .tabs {
             display: flex;
-            border-bottom: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--border);
             margin-bottom: 36px;
             gap: 0;
         }
@@ -139,69 +115,103 @@
             padding: 10px;
             font-size: 14px;
             font-weight: 500;
-            color: var(--color-muted);
+            color: var(--muted);
+            border: none;
             border-bottom: 2px solid transparent;
+            background: none;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
             margin-bottom: -1px;
-            transition: all 0.2s;
+            transition: color .2s, border-color .2s;
         }
 
         .tab.active {
-            color: var(--color-text);
-            border-bottom-color: var(--color-text);
+            color: var(--text);
+            border-bottom-color: var(--text);
         }
 
-        /* FORM PANELS */
+        /* PANELS */
         .panel {
             display: none;
         }
 
         .panel.active {
             display: block;
+            animation: fadeUp .3s ease both;
         }
 
-        .panel-title {
+        h2.panel-title {
             font-family: 'DM Serif Display', serif;
             font-size: 26px;
             margin-bottom: 6px;
+            font-weight: 400;
         }
 
         .panel-sub {
             font-size: 13px;
-            color: var(--color-muted);
+            color: var(--muted);
             margin-bottom: 28px;
         }
 
         /* FIELDS */
         .field {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .field label {
             display: block;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            font-size: 11px;
+            font-weight: 700;
             text-transform: uppercase;
-            color: var(--color-muted);
+            letter-spacing: .5px;
+            color: var(--muted);
             margin-bottom: 6px;
+        }
+
+        .field-wrap {
+            position: relative;
         }
 
         .field input {
             width: 100%;
-            padding: 11px 14px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--color-border);
-            background: var(--color-input);
+            padding: 11px 42px 11px 14px;
+            border-radius: 8px;
+            border: 1.5px solid var(--border);
+            background: var(--input-bg);
             font-family: 'DM Sans', sans-serif;
             font-size: 14px;
-            color: var(--color-text);
+            color: var(--text);
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color .2s, background .2s, box-shadow .2s;
         }
 
         .field input:focus {
-            border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px hsl(0 0% 30% / 0.08);
+            border-color: var(--accent);
+            background: var(--white);
+            box-shadow: 0 0 0 3px hsl(0 0% 0% / 0.07);
+        }
+
+        .field input.error-field {
+            border-color: var(--red);
+        }
+
+        /* Eye toggle */
+        .eye-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--muted);
+            display: flex;
+            padding: 4px;
+            transition: color .2s;
+        }
+
+        .eye-btn:hover {
+            color: var(--text);
         }
 
         .field-row {
@@ -213,43 +223,90 @@
             flex: 1;
         }
 
-        /* FORGOT LINK */
+        /* Forgot */
         .forgot {
             text-align: right;
-            margin-top: -10px;
-            margin-bottom: 18px;
+            margin-top: -8px;
+            margin-bottom: 16px;
         }
 
-        .forgot a {
+        .forgot button {
             font-size: 12px;
-            color: var(--color-muted);
-            text-decoration: none;
-            transition: color 0.2s;
+            color: var(--muted);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: color .2s;
         }
 
-        .forgot a:hover {
-            color: var(--color-text);
+        .forgot button:hover {
+            color: var(--text);
         }
 
-        /* SUBMIT BUTTON */
+        /* Remember me */
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            font-size: 13px;
+            color: var(--muted);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .remember input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        /* Password strength */
+        .strength-bar {
+            height: 3px;
+            background: var(--border);
+            border-radius: 3px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            border-radius: 3px;
+            width: 0;
+            transition: width .3s, background .3s;
+        }
+
+        .strength-hint {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+
+        /* Primary button */
         .btn-primary {
             width: 100%;
             padding: 13px;
-            background: var(--color-text);
-            color: var(--color-white);
+            background: var(--text);
+            color: var(--white);
             border: none;
-            border-radius: var(--radius-md);
+            border-radius: 8px;
             font-family: 'DM Sans', sans-serif;
             font-size: 14px;
             font-weight: 600;
-            letter-spacing: 0.5px;
             cursor: pointer;
-            transition: opacity 0.2s, transform 0.15s;
-            margin-top: 4px;
+            transition: opacity .2s, transform .15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: .2px;
         }
 
         .btn-primary:hover {
-            opacity: 0.85;
+            opacity: .85;
             transform: translateY(-1px);
         }
 
@@ -257,322 +314,659 @@
             transform: translateY(0);
         }
 
-        /* DIVIDER */
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 24px 0;
-            color: var(--color-muted);
-            font-size: 12px;
+        .btn-primary:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+            transform: none;
         }
 
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--color-border);
-        }
-
-        /* SOCIAL BUTTONS */
-        .social-btns {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .btn-social {
-            width: 100%;
-            padding: 11px 14px;
-            background: var(--color-surface);
-            color: var(--color-text);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: background 0.2s, transform 0.15s;
-        }
-
-        .btn-social:hover {
-            background: var(--color-bg);
-            transform: translateY(-1px);
-        }
-
-        .btn-social svg {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-        }
-
-        /* SUCCESS / ERROR MSG */
-        .msg {
-            padding: 10px 14px;
-            border-radius: var(--radius-sm);
-            font-size: 13px;
-            margin-bottom: 18px;
+        /* Spinner */
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, .3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
             display: none;
         }
 
-        .msg.success {
-            background: hsl(140, 40%, 94%);
-            color: hsl(140, 50%, 30%);
-            display: block;
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
 
-        .msg.error {
+        /* Alert message */
+        .alert {
+            padding: 11px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 18px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .alert.show {
+            display: flex;
+        }
+
+        .alert.success {
+            background: hsl(140, 40%, 93%);
+            color: hsl(140, 50%, 28%);
+        }
+
+        .alert.error {
             background: hsl(0, 40%, 94%);
-            color: hsl(0, 50%, 40%);
-            display: block;
+            color: hsl(0, 55%, 40%);
         }
 
-        /* TERMS */
+        .alert svg {
+            flex-shrink: 0;
+        }
+
+        /* Terms */
         .terms {
             font-size: 11px;
-            color: var(--color-muted);
+            color: var(--muted);
             text-align: center;
             margin-top: 20px;
             line-height: 1.6;
         }
 
         .terms a {
-            color: var(--color-accent);
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        /* PROFILE PANEL */
+        .avatar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--text);
+            color: var(--white);
+            font-family: 'DM Serif Display', serif;
+            font-size: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 16px hsl(0 0% 0% / .12);
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .profile-email {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .profile-joined {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .stat-box {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 14px 8px;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'DM Serif Display', serif;
+            font-size: 22px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .stat-lbl {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-bottom: 20px;
+        }
+
+        .profile-action {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
             text-decoration: none;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: 'DM Sans', sans-serif;
+            width: 100%;
+            text-align: left;
+            transition: background .18s;
+        }
+
+        .profile-action:hover {
+            background: var(--bg);
+        }
+
+        .profile-action svg {
+            flex-shrink: 0;
+            color: var(--muted);
+        }
+
+        .profile-action .chev {
+            margin-left: auto;
+            color: var(--muted);
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: 12px;
+            background: none;
+            border: 1.5px solid hsl(0, 0%, 85%);
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--red);
+            cursor: pointer;
+            transition: background .2s, border-color .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-logout:hover {
+            background: hsl(0, 40%, 96%);
+            border-color: var(--red);
+        }
+
+        /* FORGOT PANEL */
+        #panel-forgot .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--muted);
+            background: none;
+            border: none;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: color .2s;
+        }
+
+        #panel-forgot .back-btn:hover {
+            color: var(--text);
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 16px 20px;
+            }
+
+            .card {
+                padding: 28px 20px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <header class="nav">
-        <h1><a href="index.html" class="nav-logo">SHOP</a></h1>
-        <a href="index.html" class="nav-back">← Дэлгүүр рүү буцах</a>
-    </header>
+    <nav>
+        <a href="index.html" class="logo">SHOP</a>
+        <a href="index.html" class="back-link">← Дэлгүүр рүү буцах</a>
+    </nav>
 
-    <main class="page">
+    <main>
         <article class="card">
 
-            <!-- TABS -->
-            <menu class="tabs">
-                <li><button class="tab active" onclick="switchTab('login')">Нэвтрэх</button></li>
-                <li><button class="tab" onclick="switchTab('register')">Бүртгүүлэх</button></li>
-            </menu>
+            <!-- TABS (hidden on profile) -->
+            <div class="tabs" id="tabs">
+                <button class="tab active" onclick="switchTab('login')">Нэвтрэх</button>
+                <button class="tab" onclick="switchTab('register')">Бүртгүүлэх</button>
+            </div>
 
-            <!-- MESSAGE -->
-            <output class="msg" id="formMsg"></output>
+            <!-- ALERT -->
+            <div class="alert" id="alert">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 8v4M12 16h.01" />
+                </svg>
+                <span id="alertText"></span>
+            </div>
 
-            <!-- LOGIN PANEL -->
-            <form class="panel active" id="panel-login" onsubmit="handleLogin(event)">
+            <!-- ===== LOGIN ===== -->
+            <form class="panel active" id="panel-login" onsubmit="handleLogin(event)" novalidate>
                 <h2 class="panel-title">Сайн байна уу!</h2>
+                <p class="panel-sub">Дансаараа нэвтэрнэ үү</p>
 
-                <fieldset class="field">
-                    <label>И-мэйл</label>
-                    <input type="email" id="loginEmail" placeholder="example@email.com" required>
-                </fieldset>
+                <div class="field">
+                    <label>И-мэйл хаяг</label>
+                    <div class="field-wrap">
+                        <input type="email" id="loginEmail" placeholder="example@email.com" autocomplete="email">
+                    </div>
+                </div>
 
-                <fieldset class="field">
+                <div class="field">
                     <label>Нууц үг</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••" required>
-                </fieldset>
+                    <div class="field-wrap">
+                        <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+                        <button type="button" class="eye-btn" onclick="togglePw('loginPass', this)">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
 
                 <div class="forgot">
-                    <a href="#" onclick="switchTab('forgot'); return false;">Нууц үг мартсан уу?</a>
+                    <button type="button" onclick="switchTab('forgot')">Нууц үг мартсан уу?</button>
                 </div>
 
-                <button type="submit" class="btn-primary">Нэвтрэх</button>
+                <label class="remember">
+                    <input type="checkbox" id="rememberMe"> Намайг сана
+                </label>
 
-                <div class="divider">эсвэл</div>
+                <button type="submit" class="btn-primary" id="loginBtn">
+                    <span class="spinner" id="loginSpinner"></span>
+                    Нэвтрэх
+                </button>
 
-                <div class="social-btns">
-                    <button type="button" class="btn-social" onclick="handleSocial('Google')">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                                fill="#4285F4" />
-                            <path
-                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                                fill="#34A853" />
-                            <path
-                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
-                                fill="#FBBC05" />
-                            <path
-                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                                fill="#EA4335" />
-                        </svg>
-                        Google-ээр нэвтрэх
-                    </button>
-                    <button type="button" class="btn-social" onclick="handleSocial('Facebook')">
-                        <svg viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                        </svg>
-                        Facebook-ээр нэвтрэх
-                    </button>
-                </div>
-
-                <p class="terms">
-                    Нэвтэрснээр та манай <a href="#">Үйлчилгээний нөхцөл</a> болон <a href="#">Нууцлалын бодлого</a>-той
-                    зөвшөөрч байна.
+                <p class="terms" style="margin-top:16px;">
+                    Данс байхгүй юу? <a href="#" onclick="switchTab('register');return false;">Бүртгүүлэх</a>
                 </p>
             </form>
 
-            <!-- REGISTER PANEL -->
-            <form class="panel" id="panel-register" onsubmit="handleRegister(event)">
-                <h2 class="panel-title">Бүртгүүлэх</h2>
-                <p class="panel-sub">Шинэ данс үүсгэх</p>
+            <!-- ===== REGISTER ===== -->
+            <form class="panel" id="panel-register" onsubmit="handleRegister(event)" novalidate>
+                <h2 class="panel-title">Данс үүсгэх</h2>
+                <p class="panel-sub">Бүртгүүлэн бүтэн эрхтэй болно</p>
 
                 <div class="field-row">
-                    <fieldset class="field">
+                    <div class="field">
                         <label>Нэр</label>
-                        <input type="text" id="regFirst" placeholder="Батболд" required>
-                    </fieldset>
-                    <fieldset class="field">
+                        <input type="text" id="regName" placeholder="Батболд" autocomplete="given-name">
+                    </div>
+                    <div class="field">
                         <label>Овог</label>
-                        <input type="text" id="regLast" placeholder="Дорж">
-                    </fieldset>
+                        <input type="text" id="regLastname" placeholder="Дорж" autocomplete="family-name">
+                    </div>
                 </div>
 
-                <fieldset class="field">
-                    <label>И-мэйл</label>
-                    <input type="email" id="regEmail" placeholder="example@email.com" required>
-                </fieldset>
+                <div class="field">
+                    <label>И-мэйл хаяг</label>
+                    <input type="email" id="regEmail" placeholder="example@email.com" autocomplete="email">
+                </div>
 
-                <fieldset class="field">
+                <div class="field">
                     <label>Нууц үг</label>
-                    <input type="password" id="regPassword" placeholder="••••••••" required>
-                </fieldset>
-
-                <fieldset class="field">
-                    <label>Нууц үг давтах</label>
-                    <input type="password" id="regPassword2" placeholder="••••••••" required>
-                </fieldset>
-
-                <button type="submit" class="btn-primary">Бүртгүүлэх</button>
-
-                <div class="divider">эсвэл</div>
-
-                <div class="social-btns">
-                    <button type="button" class="btn-social" onclick="handleSocial('Google')">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                                fill="#4285F4" />
-                            <path
-                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                                fill="#34A853" />
-                            <path
-                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
-                                fill="#FBBC05" />
-                            <path
-                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                                fill="#EA4335" />
-                        </svg>
-                        Google-ээр бүртгүүлэх
-                    </button>
+                    <div class="field-wrap">
+                        <input type="password" id="regPass" placeholder="••••••••" oninput="checkStrength(this)"
+                            autocomplete="new-password">
+                        <button type="button" class="eye-btn" onclick="togglePw('regPass', this)">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <p class="strength-hint" id="strengthHint"></p>
                 </div>
+
+                <div class="field">
+                    <label>Нууц үг давтах</label>
+                    <div class="field-wrap">
+                        <input type="password" id="regPass2" placeholder="••••••••" autocomplete="new-password">
+                        <button type="button" class="eye-btn" onclick="togglePw('regPass2', this)">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="regBtn">
+                    <span class="spinner" id="regSpinner"></span>
+                    Бүртгүүлэх
+                </button>
 
                 <p class="terms">
-                    Бүртгүүлснээр та манай <a href="#">Үйлчилгээний нөхцөл</a> болон <a href="#">Нууцлалын
-                        бодлого</a>-той зөвшөөрч байна.
+                    Бүртгүүлснээр та манай <a href="#">Үйлчилгээний нөхцөл</a>-той зөвшөөрч байна.<br>
+                    Данс байна уу? <a href="#" onclick="switchTab('login');return false;">Нэвтрэх</a>
                 </p>
             </form>
 
-            <!-- FORGOT PASSWORD PANEL -->
-            <form class="panel" id="panel-forgot" onsubmit="handleForgot(event)">
+            <!-- ===== FORGOT PASSWORD ===== -->
+            <form class="panel" id="panel-forgot" onsubmit="handleForgot(event)" novalidate>
                 <h2 class="panel-title">Нууц үг сэргээх</h2>
-                <p class="panel-sub">И-мэйл хаягаа оруулна уу, бид сэргээх холбоос илгээнэ.</p>
+                <p class="panel-sub">И-мэйл хаягаа оруулна уу</p>
 
-                <fieldset class="field">
-                    <label>И-мэйл</label>
-                    <input type="email" id="forgotEmail" placeholder="example@email.com" required>
-                </fieldset>
+                <div class="field">
+                    <label>И-мэйл хаяг</label>
+                    <input type="email" id="forgotEmail" placeholder="example@email.com">
+                </div>
 
-                <button type="submit" class="btn-primary">Холбоос илгээх</button>
+                <button type="submit" class="btn-primary">Нууц үг шинэчлэх</button>
 
-                <div style="text-align:center; margin-top: 20px;">
-                    <a href="#" onclick="switchTab('login'); return false;"
-                        style="font-size:13px; color: var(--color-muted); text-decoration:none;">
-                        ← Нэвтрэх рүү буцах
-                    </a>
+                <div style="text-align:center">
+                    <button type="button" class="back-btn" onclick="switchTab('login')">← Нэвтрэх рүү буцах</button>
                 </div>
             </form>
+
+            <!-- ===== PROFILE (shown when logged in) ===== -->
+            <div class="panel" id="panel-profile">
+                <div class="avatar-section">
+                    <div class="avatar" id="profileAvatar">А</div>
+                    <p class="profile-name" id="profileName">Нэр</p>
+                    <p class="profile-email" id="profileEmail">email@email.com</p>
+                    <p class="profile-joined" id="profileJoined"></p>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <span class="stat-num" id="statOrders">0</span>
+                        <span class="stat-lbl">Захиалга</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num" id="statSaved">0</span>
+                        <span class="stat-lbl">Хадгалсан</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num" id="statCart">0</span>
+                        <span class="stat-lbl">Сагсанд</span>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <a href="basket.html" class="profile-action">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                        </svg>
+                        Миний сагс
+                        <svg class="chev" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M9 18l6-6-6-6" />
+                        </svg>
+                    </a>
+                    <a href="hadgalsan.html" class="profile-action">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                        </svg>
+                        Хадгалсан бараанууд
+                        <svg class="chev" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M9 18l6-6-6-6" />
+                        </svg>
+                    </a>
+                    <a href="index.html" class="profile-action">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+                        </svg>
+                        Дэлгүүр үзэх
+                        <svg class="chev" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M9 18l6-6-6-6" />
+                        </svg>
+                    </a>
+                </div>
+
+                <button class="btn-logout" onclick="handleLogout()">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+                    </svg>
+                    Гарах
+                </button>
+            </div>
 
         </article>
     </main>
 
     <script>
+        // ── Storage helpers ──────────────────────────────────────
+        const USERS_KEY = "shop_users";
+        const AUTH_KEY = "shop_current_user";
+
+        function getUsers() { return JSON.parse(localStorage.getItem(USERS_KEY) || "[]"); }
+        function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
+        function getMe() { return JSON.parse(localStorage.getItem(AUTH_KEY) || "null"); }
+        function setMe(u) { localStorage.setItem(AUTH_KEY, JSON.stringify(u)); }
+        function clearMe() { localStorage.removeItem(AUTH_KEY); }
+
+        function getUserData(id) {
+            return getUsers().find(u => u.id === id) || null;
+        }
+
+        // ── UI helpers ───────────────────────────────────────────
+        function showAlert(msg, type = "error") {
+            const el = document.getElementById("alert");
+            document.getElementById("alertText").textContent = msg;
+            el.className = "alert show " + type;
+            setTimeout(() => el.classList.remove("show"), 4000);
+        }
+        function clearAlert() {
+            document.getElementById("alert").classList.remove("show");
+        }
+
+        function setLoading(btnId, spinnerId, loading) {
+            const btn = document.getElementById(btnId);
+            const sp = document.getElementById(spinnerId);
+            btn.disabled = loading;
+            sp.style.display = loading ? "block" : "none";
+        }
+
+        function togglePw(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const isText = input.type === "text";
+            input.type = isText ? "password" : "text";
+            btn.innerHTML = isText
+                ? `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`
+                : `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24M1 1l22 22"/></svg>`;
+        }
+
+        function checkStrength(input) {
+            const val = input.value;
+            const fill = document.getElementById("strengthFill");
+            const hint = document.getElementById("strengthHint");
+            let score = 0;
+            if (val.length >= 6) score++;
+            if (val.length >= 10) score++;
+            if (/[A-Z]/.test(val)) score++;
+            if (/[0-9]/.test(val)) score++;
+            if (/[^A-Za-z0-9]/.test(val)) score++;
+
+            const levels = [
+                { w: "0%", c: "transparent", t: "" },
+                { w: "25%", c: "#ef4444", t: "Маш сул" },
+                { w: "50%", c: "#f97316", t: "Сул" },
+                { w: "75%", c: "#eab308", t: "Дунд" },
+                { w: "90%", c: "#22c55e", t: "Хүчтэй" },
+                { w: "100%", c: "#16a34a", t: "Маш хүчтэй ✓" },
+            ];
+            const lv = levels[Math.min(score, 5)];
+            fill.style.width = val ? lv.w : "0";
+            fill.style.background = lv.c;
+            hint.textContent = val ? lv.t : "";
+            hint.style.color = lv.c;
+        }
+
+        // ── Tab switching ────────────────────────────────────────
         function switchTab(tab) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-            clearMsg();
+            clearAlert();
+            document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+            document.getElementById("tabs").style.display = (tab === "profile" || tab === "forgot") ? "none" : "flex";
 
-            if (tab === 'login') {
-                document.querySelectorAll('.tab')[0].classList.add('active');
-                document.getElementById('panel-login').classList.add('active');
-            } else if (tab === 'register') {
-                document.querySelectorAll('.tab')[1].classList.add('active');
-                document.getElementById('panel-register').classList.add('active');
-            } else if (tab === 'forgot') {
-                document.getElementById('panel-forgot').classList.add('active');
-            }
+            document.getElementById("panel-" + tab).classList.add("active");
+
+            if (tab === "login") document.querySelectorAll(".tab")[0].classList.add("active");
+            if (tab === "register") document.querySelectorAll(".tab")[1].classList.add("active");
         }
 
-        function showMsg(text, type) {
-            const el = document.getElementById('formMsg');
-            el.textContent = text;
-            el.className = 'msg ' + type;
-        }
-
-        function clearMsg() {
-            const el = document.getElementById('formMsg');
-            el.className = 'msg';
-            el.textContent = '';
-        }
-
+        // ── LOGIN ────────────────────────────────────────────────
         function handleLogin(e) {
-            e.preventDefault(); // Хуудас уншихыг зогсоох (Шинэ Form ашиглаж буй үед заавал байх)
-            const email = document.getElementById('loginEmail').value.trim();
-            const pass = document.getElementById('loginPassword').value;
+            e.preventDefault();
+            clearAlert();
+            const email = document.getElementById("loginEmail").value.trim();
+            const pass = document.getElementById("loginPass").value;
 
-            // Demo: admin shortcut
-            if (email === 'admin@shop.mn' && pass === 'admin123') {
-                showMsg('Амжилттай! Admin хуудас руу шилжиж байна...', 'success');
-                setTimeout(() => window.location.href = 'admin.html', 1200);
-                return;
+            if (!email || !pass) { showAlert("И-мэйл болон нууц үгээ оруулна уу."); return; }
+
+            // Admin shortcut
+            if (email === "admin@shop.mn" && pass === "admin123") {
+                window.location.href = "admin.html"; return;
             }
 
-            showMsg('Амжилттай нэвтэрлээ! Дэлгүүр рүү шилжиж байна...', 'success');
-            setTimeout(() => window.location.href = 'index.html', 1200);
+            setLoading("loginBtn", "loginSpinner", true);
+            setTimeout(() => {
+                const users = getUsers();
+                const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === pass);
+                setLoading("loginBtn", "loginSpinner", false);
+
+                if (!user) { showAlert("И-мэйл эсвэл нууц үг буруу байна."); return; }
+
+                setMe({ id: user.id, name: user.name, email: user.email });
+                showAlert("Амжилттай нэвтэрлээ! Дэлгүүр рүү шилжиж байна...", "success");
+                setTimeout(() => window.location.href = "index.html", 1000);
+            }, 700);
         }
 
+        // ── REGISTER ────────────────────────────────────────────
         function handleRegister(e) {
             e.preventDefault();
-            const pass = document.getElementById('regPassword').value;
-            const pass2 = document.getElementById('regPassword2').value;
+            clearAlert();
 
-            if (pass.length < 6) return showMsg('Нууц үг хамгийн багадаа 6 тэмдэгт байх ёстой.', 'error');
-            if (pass !== pass2) return showMsg('Нууц үг таарахгүй байна.', 'error');
+            const firstName = document.getElementById("regName").value.trim();
+            const lastName = document.getElementById("regLastname").value.trim();
+            const email = document.getElementById("regEmail").value.trim();
+            const pass = document.getElementById("regPass").value;
+            const pass2 = document.getElementById("regPass2").value;
 
-            showMsg('Амжилттай бүртгүүллээ! Нэвтрэх хуудас руу шилжиж байна...', 'success');
-            setTimeout(() => switchTab('login'), 1800);
+            if (!firstName) { showAlert("Нэрээ оруулна уу."); return; }
+            if (!email) { showAlert("И-мэйл хаягаа оруулна уу."); return; }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showAlert("И-мэйл хаяг буруу байна."); return; }
+            if (pass.length < 6) { showAlert("Нууц үг хамгийн багадаа 6 тэмдэгт байх ёстой."); return; }
+            if (pass !== pass2) { showAlert("Нууц үг таарахгүй байна."); return; }
+
+            setLoading("regBtn", "regSpinner", true);
+            setTimeout(() => {
+                const users = getUsers();
+                if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+                    setLoading("regBtn", "regSpinner", false);
+                    showAlert("Энэ и-мэйл хаяг бүртгэлтэй байна.");
+                    return;
+                }
+                const name = firstName + (lastName ? " " + lastName : "");
+                const newUser = {
+                    id: Date.now(),
+                    name, email, password: pass,
+                    joinedAt: new Date().toISOString(),
+                    orders: 0, saved: [], cart: []
+                };
+                users.push(newUser);
+                saveUsers(users);
+                setMe({ id: newUser.id, name: newUser.name, email: newUser.email });
+                setLoading("regBtn", "regSpinner", false);
+                showAlert("Амжилттай бүртгүүллээ! Дэлгүүр рүү шилжиж байна...", "success");
+                setTimeout(() => window.location.href = "index.html", 1000);
+            }, 800);
         }
 
+        // ── FORGOT PASSWORD ──────────────────────────────────────
         function handleForgot(e) {
             e.preventDefault();
-            const email = document.getElementById('forgotEmail').value.trim();
-            showMsg('Сэргээх холбоос ' + email + ' хаяг руу илгээлээ.', 'success');
+            const email = document.getElementById("forgotEmail").value.trim();
+            if (!email) { showAlert("И-мэйл хаягаа оруулна уу."); return; }
+
+            const users = getUsers();
+            const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+            if (!user) { showAlert("Тухайн и-мэйл хаягаар бүртгэл олдсонгүй."); return; }
+
+            // Simulate reset — in real app this'd send an email
+            showAlert(`${email} хаяг руу нууц үг сэргээх зааварчилгаа илгээлээ.`, "success");
         }
 
-        function handleSocial(provider) {
-            showMsg(provider + '-ээр нэвтрэх үйлчилгээ удахгүй нэмэгдэнэ.', 'success');
+        // ── LOGOUT ───────────────────────────────────────────────
+        function handleLogout() {
+            clearMe();
+            showAlert("Гарлаа. Баяртай!", "success");
+            setTimeout(() => { switchTab("login"); }, 800);
+        }
+
+        // ── PROFILE ─────────────────────────────────────────────
+        function loadProfile(me) {
+            document.getElementById("tabs").style.display = "none";
+            document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+            document.getElementById("panel-profile").classList.add("active");
+
+            const initial = me.name.charAt(0).toUpperCase();
+            document.getElementById("profileAvatar").textContent = initial;
+            document.getElementById("profileName").textContent = me.name;
+            document.getElementById("profileEmail").textContent = me.email;
+
+            const fullUser = getUsers().find(u => u.id === me.id);
+            if (fullUser) {
+                document.getElementById("statOrders").textContent = fullUser.orders || 0;
+                document.getElementById("statSaved").textContent = (fullUser.saved || []).length;
+                document.getElementById("statCart").textContent = (fullUser.cart || []).length;
+                const joined = new Date(fullUser.joinedAt);
+                document.getElementById("profileJoined").textContent =
+                    `Бүртгүүлсэн: ${joined.toLocaleDateString("mn-MN")}`;
+            }
+        }
+
+        // ── INIT ────────────────────────────────────────────────
+        const me = getMe();
+        if (me) {
+            loadProfile(me);
         }
     </script>
+
 </body>
 
 </html>

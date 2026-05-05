@@ -338,6 +338,32 @@
 
     <script src="script.js"></script>
     <script>
+        // ── Auth guard ──────────────────────────────────────────
+        (function () {
+            const me = JSON.parse(localStorage.getItem("shop_current_user") || "null");
+            if (!me) {
+                document.body.innerHTML = `
+              <style>
+                body { font-family: Arial, sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; background:#f5f5f5; }
+                .gate-box { background:#fff; border-radius:16px; padding:48px 40px; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,.10); max-width:380px; width:90%; }
+                .gate-box h2 { font-size:22px; margin-bottom:8px; }
+                .gate-box p { color:#777; font-size:14px; margin-bottom:28px; }
+                .gate-btn { display:inline-block; padding:12px 32px; background:#222; color:#fff; border-radius:30px; text-decoration:none; font-weight:600; font-size:14px; margin:6px; transition:opacity .2s; }
+                .gate-btn:hover { opacity:.8; }
+                .gate-btn.outline { background:transparent; border:2px solid #222; color:#222; }
+              </style>
+              <div class="gate-box">
+                <svg width="48" height="48" fill="none" stroke="#222" stroke-width="1.5" viewBox="0 0 24 24" style="margin-bottom:16px;">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                </svg>
+                <h2>Нэвтрэх шаардлагатай</h2>
+                <p>Хадгалсан барааг харахын тулд эхлээд нэвтэрнэ үү.</p>
+                <a href="login.html" class="gate-btn">Нэвтрэх / Бүртгүүлэх</a>
+                <a href="index.html" class="gate-btn outline">Дэлгүүр үзэх</a>
+              </div>`;
+            }
+        })();
+
         function unsave(btn) {
             const card = btn.closest(".saved-card");
             card.style.transition = "opacity 0.3s ease, transform 0.3s ease";
