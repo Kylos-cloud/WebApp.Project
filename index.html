@@ -408,6 +408,116 @@
 
   <button class="scroll-top" onclick="scrollToTop()">↑</button>
 
+  <!-- CONTACT MODAL -->
+  <div class="contact-overlay" id="contactOverlay" onclick="closeContact()"></div>
+  <section class="contact-section" id="contact">
+    <button class="contact-close" onclick="closeContact()" aria-label="Хаах">✕</button>
+    <div class="contact-inner">
+      <div class="contact-info">
+        <h2>Холбоо барих</h2>
+        <p class="contact-tagline">Асуулт байна уу? Бидэнтэй холбогдоорой.</p>
+
+        <ul class="contact-list">
+          <li>
+            <span class="contact-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M18.427 14.768 17.2 13.542a1.733 1.733 0 0 0-2.45 0l-.613.613a1.732 1.732 0 0 1-2.45 0l-1.838-1.84a1.735 1.735 0 0 1 0-2.452l.612-.613a1.735 1.735 0 0 0 0-2.452L9.237 5.572a1.6 1.6 0 0 0-2.45 0c-3.223 3.2-1.702 6.896 1.519 10.117 3.22 3.221 6.914 4.745 10.12 1.535a1.601 1.601 0 0 0 0-2.456Z"/>
+              </svg>
+            </span>
+            <div>
+              <strong>Утас</strong>
+              <span>+976 9900 0000</span>
+            </div>
+          </li>
+          <li>
+            <span class="contact-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z"/>
+              </svg>
+            </span>
+            <div>
+              <strong>И-мэйл</strong>
+              <span>info@shop.mn</span>
+            </div>
+          </li>
+          <li>
+            <span class="contact-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.18-6.351c.083-.1.164-.2.245-.3l.165-.211h.01Z"/>
+              </svg>
+            </span>
+            <div>
+              <strong>Хаяг</strong>
+              <span>Улаанбаатар хот, Сүхбаатар дүүрэг</span>
+            </div>
+          </li>
+          <li>
+            <span class="contact-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+              </svg>
+            </span>
+            <div>
+              <strong>Ажлын цаг</strong>
+              <span>Да–Ба: 09:00–18:00, Бя: 10:00–15:00</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="contact-socials">
+          <a href="#" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm7 4a2 2 0 1 0 4 0 2 2 0 0 0-4 0Zm3.5-3.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="1.8"
+                d="M12 20H8.5C6 20 5 19 5 16.5v-9C5 5 6 4 8.5 4h7C18 4 19 5 19 7.5V12h-4v8Zm4-8H19"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Twitter / X">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                d="m4 4 16 16M4 20 20 4"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="handleContactSubmit(event)">
+        <h3>Мессеж илгээх</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Нэр</label>
+            <input type="text" placeholder="Таны нэр" required />
+          </div>
+          <div class="form-group">
+            <label>И-мэйл</label>
+            <input type="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Сэдэв</label>
+          <input type="text" placeholder="Юуны тухай асуух вэ?" />
+        </div>
+        <div class="form-group">
+          <label>Мессеж</label>
+          <textarea placeholder="Таны асуулт эсвэл санал..." rows="5" required></textarea>
+        </div>
+        <button type="submit" class="contact-submit">Илгээх</button>
+        <p class="contact-success" id="contactSuccess">Мессеж амжилттай илгээгдлээ!</p>
+      </form>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="footer-grid">
       <section>
@@ -425,7 +535,7 @@
 
       <section>
         <h4>ТУСЛАМЖ</h4>
-        <p>Холбоо барих</p>
+        <p><a href="#" onclick="openContact();return false;" style="color:inherit;text-decoration:none;">Холбоо барих</a></p>
         <p>Хүргэлт</p>
         <p>Буцаалт</p>
         <p>FAQ</p>

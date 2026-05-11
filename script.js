@@ -424,3 +424,28 @@ function scrollToTop() {
     behavior: "smooth"
   });
 }
+
+function openContact() {
+  document.getElementById("contact").classList.add("active");
+  document.getElementById("contactOverlay").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeContact() {
+  document.getElementById("contact").classList.remove("active");
+  document.getElementById("contactOverlay").classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeContact();
+});
+
+function handleContactSubmit(e) {
+  e.preventDefault();
+  const success = document.getElementById("contactSuccess");
+  if (!success) return;
+  success.classList.add("show");
+  e.target.reset();
+  setTimeout(() => success.classList.remove("show"), 4000);
+}

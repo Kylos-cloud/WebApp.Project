@@ -17,6 +17,19 @@ async function init() {
   const data = await loadData();
   if (!data) return;
 
+  // Merge admin-panel products (saved via localStorage) into the product list
+  try {
+    const adminRaw = localStorage.getItem("adminProducts");
+    if (adminRaw) {
+      const adminProducts = JSON.parse(adminRaw);
+      if (Array.isArray(adminProducts) && adminProducts.length) {
+        const existingIds = new Set(data.products.map(p => p.id));
+        const newOnes = adminProducts.filter(p => !existingIds.has(p.id));
+        data.products = [...newOnes, ...data.products];
+      }
+    }
+  } catch (e) { /* ignore corrupt localStorage */ }
+
   const store = new ProductStore(data);
   window._store = store;
   window._data = data;
@@ -37,6 +50,33 @@ async function init() {
     saleRenderer.renderProducts(store.getSaleProducts());
   }
 
+  // ── category menu navigation (3-level nav) ───────────────
+  window.addEventListener("categoryNavigation", (e) => {
+    const { categoryKey, subName, itemName } = e.detail;
+
+    let filtered = categoryKey
+      ? store.allProducts.filter(p => p.category === categoryKey)
+      : store.allProducts;
+
+    mainRenderer.renderProducts(filtered);
+
+    document.querySelectorAll(".filter-btn[data-filter]").forEach(b => {
+      b.classList.toggle("active-filter", b.dataset.filter === (categoryKey || "all"));
+    });
+
+    const header = document.querySelector("#sales .section-header h2");
+    if (header) {
+      const catLabel = data.categories?.find(c => c.id === categoryKey)?.name ?? categoryKey;
+      if (itemName) {
+        header.textContent = `${catLabel} › ${itemName} — ${filtered.length} бараа`;
+      } else if (catLabel) {
+        header.textContent = `${catLabel} — ${filtered.length} бараа`;
+      }
+    }
+
+    if (searchInput) searchInput.value = "";
+  });
+
   // ── filter товч ──────────────────────────────────────────
   document.addEventListener("click", e => {
     const btn = e.target.closest(".filter-btn[data-filter]");
@@ -46,6 +86,7 @@ async function init() {
     const cat      = btn.dataset.filter;
     const filtered = cat === "all" ? store.allProducts : store.getByCategory(cat);
     mainRenderer.renderProducts(filtered);
+    if (searchInput) searchInput.value = "";
 
     document.querySelectorAll(".filter-btn[data-filter]")
       .forEach(b => b.classList.toggle("active-filter", b.dataset.filter === cat));
@@ -70,42 +111,14 @@ async function init() {
         : store.allProducts;
       mainRenderer.renderProducts(results);
 
+      document.querySelectorAll(".filter-btn[data-filter]").forEach(b => {
+        b.classList.toggle("active-filter", !q && b.dataset.filter === "all");
+      });
+
       const header = document.querySelector("#sales .section-header h2");
       if (header) header.textContent = q ? `"${q}" хайлтын үр дүн` : "Бүх бараа";
     });
   }
 }
 
-// Listen for category menu navigation events from script.js
-window.addEventListener("categoryNavigation", (e) => {
-  const { categoryKey, subName, itemName } = e.detail;
-  const store = window._store;
-  const data = window._data;
-  if (!store) return;
-
-  // Filter products by category
-  let filtered = categoryKey
-    ? store.allProducts.filter(p => p.category === categoryKey)
-    : store.allProducts;
-
-  mainRenderer.renderProducts(filtered);
-
-  // Update filter buttons active state
-  document.querySelectorAll(".filter-btn[data-filter]").forEach(b => {
-    b.classList.toggle("active-filter", b.dataset.filter === categoryKey);
-  });
-
-  // Update section header
-  const header = document.querySelector("#sales .section-header h2");
-  if (header) {
-    const catLabel = data.categories?.find(c => c.id === categoryKey)?.name ?? categoryKey;
-    if (itemName) {
-      header.textContent = `${catLabel} › ${itemName} — ${filtered.length} бараа`;
-    } else if (catLabel) {
-      header.textContent = `${catLabel} — ${filtered.length} бараа`;
-    }
-  }
-});
-
 document.addEventListener("DOMContentLoaded", init);
-// ── Category menu navigation (from script.js) ────────────
