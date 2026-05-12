@@ -246,6 +246,7 @@ const categoryData = {
     ]
   }
 };
+window.categoryData = categoryData;
 
 // RENDER MENU RIGHT
 const menuRight = document.getElementById("menuRight");

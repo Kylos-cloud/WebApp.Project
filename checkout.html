@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHOP — Захиалга</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 32px 24px 100px;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    /* Steps */
+    .checkout-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 32px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: hsl(0, 0%, 55%);
+    }
+
+    .step-item.active {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    .step-item.done {
+      color: hsl(140, 50%, 40%);
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--color-bg1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .step-item.active .step-num {
+      background: var(--color-text);
+      color: white;
+    }
+
+    .step-item.done .step-num {
+      background: hsl(140, 50%, 40%);
+      color: white;
+    }
+
+    .step-sep {
+      width: 40px;
+      height: 2px;
+      background: var(--color-border);
+      margin: 0 8px;
+    }
+
+    /* Layout */
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Cards */
+    .form-card {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 16px;
+    }
+
+    .form-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-card h3 svg {
+      flex-shrink: 0;
+    }
+
+    /* Form fields */
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 600;
+      color: hsl(0, 0%, 40%);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      padding: 10px 14px;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      background: var(--color-input);
+      color: var(--color-text);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--color-text);
+      background: var(--color-white);
+    }
+
+    .field textarea {
+      resize: none;
+      height: 72px;
+    }
+
+    /* Payment options */
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pay-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+
+    .pay-option:hover {
+      border-color: hsl(0, 0%, 70%);
+    }
+
+    .pay-option.selected {
+      border-color: var(--color-text);
+      background: hsl(0, 0%, 98%);
+    }
+
+    .pay-option input[type="radio"] {
+      accent-color: var(--color-text);
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .pay-icon {
+      font-size: 22px;
+    }
+
+    .pay-label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .pay-sub {
+      font-size: 12px;
+      color: hsl(0, 0%, 55%);
+      margin-top: 2px;
+    }
+
+    .pay-extra {
+      display: none;
+      margin-top: 16px;
+      animation: fadeSlideUp 0.25s ease;
+    }
+
+    .pay-extra.show {
+      display: block;
+    }
+
+    /* Card form */
+    .card-form {
+      background: hsl(0, 0%, 97%);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+    }
+
+    .card-preview {
+      background: linear-gradient(135deg, hsl(220, 20%, 25%), hsl(220, 30%, 40%));
+      color: white;
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-bottom: 16px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .card-preview .card-logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .card-preview .card-number-display {
+      font-size: 18px;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+
+    .card-preview .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    /* QPay QR */
+    .qpay-box {
+      text-align: center;
+      padding: 10px;
+    }
+
+    .qr-img {
+      width: 180px;
+      height: 180px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      background: white;
+      font-size: 13px;
+      color: hsl(0, 0%, 50%);
+      overflow: hidden;
+    }
+
+    .qr-img svg {
+      width: 160px;
+      height: 160px;
+    }
+
+    .qpay-amount {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .qpay-desc {
+      font-size: 13px;
+      color: hsl(0, 0%, 50%);
+    }
+
+    .qpay-banks {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .bank-chip {
+      padding: 4px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* Order summary */
+    .summary-card {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      position: sticky;
+      top: 76px;
+    }
+
+    .summary-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .summary-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .summary-item {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .summary-item img {
+      width: 48px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      background: var(--color-bg1);
+      flex-shrink: 0;
+    }
+
+    .summary-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .summary-item-name {
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .summary-item-qty {
+      font-size: 12px;
+      color: hsl(0, 0%, 55%);
+    }
+
+    .summary-item-price {
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .summary-divider {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 14px 0;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: hsl(0, 0%, 45%);
+      margin-bottom: 8px;
+    }
+
+    .summary-row.total {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-top: 4px;
+    }
+
+    .place-order-btn {
+      width: 100%;
+      padding: 15px;
+      background: var(--color-text);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: opacity 0.2s, transform 0.1s;
+      letter-spacing: 0.3px;
+    }
+
+    .place-order-btn:hover {
+      opacity: 0.85;
+    }
+
+    .place-order-btn:active {
+      transform: scale(0.98);
+    }
+
+    .secure-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      color: hsl(0, 0%, 55%);
+      margin-top: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-card {
+        position: static;
+        order: -1;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="top-bar">
+      <h1 class="logo"><a href="index.html">SHOP</a></h1>
+      <search class="search"><input type="text" placeholder="Бараа хайх..."></search>
+      <nav class="icons">
+        <a href="login.html" class="icon-profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-width="2"
+              d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+        </a>
+        <a href="basket.html" class="icon-cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+          </svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <h2 class="page-title">Захиалга өгөх</h2>
+
+    <div class="checkout-steps">
+      <div class="step-item done">
+        <div class="step-num">✓</div>
+        <span>Сагс</span>
+      </div>
+      <div class="step-sep"></div>
+      <div class="step-item active">
+        <div class="step-num">2</div>
+        <span>Захиалга</span>
+      </div>
+      <div class="step-sep"></div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <span>Хүргэлт</span>
+      </div>
+    </div>
+
+    <div class="checkout-layout">
+      <!-- LEFT: Forms -->
+      <div>
+        <!-- Delivery info -->
+        <div class="form-card">
+          <h3>
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm0 0c0 3-4 6-4 6h8s-4-3-4-6Z" />
+            </svg>
+            Хүргэлтийн мэдээлэл
+          </h3>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Хүлээн авагчийн нэр</label>
+              <input type="text" id="recipientName" placeholder="Жишээ: Болд Дорж">
+            </div>
+            <div class="field">
+              <label>Утасны дугаар</label>
+              <input type="tel" id="recipientPhone" placeholder="9900-0000" maxlength="9">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Дүүрэг / Сум</label>
+              <select id="district">
+                <option value="">Сонгох...</option>
+                <option>Баянзүрх</option>
+                <option>Сүхбаатар</option>
+                <option>Хан-Уул</option>
+                <option>Чингэлтэй</option>
+                <option>Баянгол</option>
+                <option>Налайх</option>
+                <option>Багануур</option>
+                <option>Багахангай</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Хороо / Баг</label>
+              <input type="text" id="khoroo" placeholder="Жишээ: 5-р хороо">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Дэлгэрэнгүй хаяг</label>
+            <input type="text" id="address" placeholder="Байр, тоот, хаалга...">
+          </div>
+
+          <div class="field">
+            <label>Жолоочид зориулсан тэмдэглэл (заавал биш)</label>
+            <textarea id="note" placeholder="Жишээ: Хаалганы ард орхино уу..."></textarea>
+          </div>
+        </div>
+
+        <!-- Payment method -->
+        <div class="form-card">
+          <h3>
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                d="M3 10h18M7 15h1m4 0h1M3 7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7Z" />
+            </svg>
+            Төлбөрийн хэлбэр
+          </h3>
+
+          <div class="payment-options">
+            <!-- Card -->
+            <label class="pay-option selected" id="opt-card" onclick="selectPay('card')">
+              <input type="radio" name="payment" value="card" checked>
+              <span class="pay-icon">💳</span>
+              <div>
+                <div class="pay-label">Банкны карт</div>
+                <div class="pay-sub">Visa, Mastercard, UnionPay</div>
+              </div>
+            </label>
+
+            <div class="pay-extra show" id="extra-card">
+              <div class="card-form">
+                <div class="card-preview" id="cardPreview">
+                  <div class="card-logo">VISA</div>
+                  <div class="card-number-display" id="cardNumDisplay">•••• •••• •••• ••••</div>
+                  <div class="card-meta">
+                    <span id="cardNameDisplay">НЭРИЙН ЭЗЭН</span>
+                    <span id="cardExpDisplay">MM/YY</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Картын дугаар</label>
+                  <input type="text" id="cardNum" placeholder="0000 0000 0000 0000" maxlength="19"
+                    oninput="formatCard(this); updateCardPreview()">
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label>Картын эзний нэр</label>
+                    <input type="text" id="cardName" placeholder="BOLD DORJ" oninput="updateCardPreview()"
+                      style="text-transform:uppercase">
+                  </div>
+                  <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                    <div class="field" style="margin-bottom:0">
+                      <label>Хүчинтэй хугацаа</label>
+                      <input type="text" id="cardExp" placeholder="MM/YY" maxlength="5"
+                        oninput="formatExp(this); updateCardPreview()">
+                    </div>
+                    <div class="field" style="margin-bottom:0">
+                      <label>CVV</label>
+                      <input type="password" id="cardCvv" placeholder="•••" maxlength="3">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- QPay -->
+            <label class="pay-option" id="opt-qpay" onclick="selectPay('qpay')">
+              <input type="radio" name="payment" value="qpay">
+              <span class="pay-icon">📱</span>
+              <div>
+                <div class="pay-label">QPay / QR код</div>
+                <div class="pay-sub">Монголын банкнуудтай нийцтэй</div>
+              </div>
+            </label>
+
+            <div class="pay-extra" id="extra-qpay">
+              <div class="qpay-box">
+                <div class="qr-img">
+                  <!-- Generated QR pattern (decorative SVG) -->
+                  <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="160" height="160" fill="white"/>
+                    <!-- Corner squares -->
+                    <rect x="10" y="10" width="44" height="44" fill="black"/>
+                    <rect x="16" y="16" width="32" height="32" fill="white"/>
+                    <rect x="22" y="22" width="20" height="20" fill="black"/>
+                    <rect x="106" y="10" width="44" height="44" fill="black"/>
+                    <rect x="112" y="16" width="32" height="32" fill="white"/>
+                    <rect x="118" y="22" width="20" height="20" fill="black"/>
+                    <rect x="10" y="106" width="44" height="44" fill="black"/>
+                    <rect x="16" y="112" width="32" height="32" fill="white"/>
+                    <rect x="22" y="118" width="20" height="20" fill="black"/>
+                    <!-- Data dots (decorative) -->
+                    <rect x="62" y="10" width="8" height="8" fill="black"/>
+                    <rect x="74" y="10" width="8" height="8" fill="black"/>
+                    <rect x="86" y="10" width="8" height="8" fill="black"/>
+                    <rect x="62" y="22" width="8" height="8" fill="black"/>
+                    <rect x="86" y="22" width="8" height="8" fill="black"/>
+                    <rect x="74" y="34" width="8" height="8" fill="black"/>
+                    <rect x="10" y="62" width="8" height="8" fill="black"/>
+                    <rect x="22" y="62" width="8" height="8" fill="black"/>
+                    <rect x="34" y="74" width="8" height="8" fill="black"/>
+                    <rect x="10" y="86" width="8" height="8" fill="black"/>
+                    <rect x="34" y="86" width="8" height="8" fill="black"/>
+                    <rect x="62" y="62" width="8" height="8" fill="black"/>
+                    <rect x="74" y="62" width="8" height="8" fill="black"/>
+                    <rect x="86" y="62" width="8" height="8" fill="black"/>
+                    <rect x="98" y="62" width="8" height="8" fill="black"/>
+                    <rect x="62" y="74" width="8" height="8" fill="black"/>
+                    <rect x="86" y="74" width="8" height="8" fill="black"/>
+                    <rect x="110" y="74" width="8" height="8" fill="black"/>
+                    <rect x="62" y="86" width="8" height="8" fill="black"/>
+                    <rect x="74" y="86" width="8" height="8" fill="black"/>
+                    <rect x="98" y="86" width="8" height="8" fill="black"/>
+                    <rect x="62" y="98" width="8" height="8" fill="black"/>
+                    <rect x="86" y="98" width="8" height="8" fill="black"/>
+                    <rect x="110" y="98" width="8" height="8" fill="black"/>
+                    <rect x="106" y="62" width="8" height="8" fill="black"/>
+                    <rect x="118" y="62" width="8" height="8" fill="black"/>
+                    <rect x="130" y="62" width="8" height="8" fill="black"/>
+                    <rect x="142" y="62" width="8" height="8" fill="black"/>
+                    <rect x="106" y="74" width="8" height="8" fill="black"/>
+                    <rect x="130" y="74" width="8" height="8" fill="black"/>
+                    <rect x="142" y="74" width="8" height="8" fill="black"/>
+                    <rect x="118" y="86" width="8" height="8" fill="black"/>
+                    <rect x="142" y="86" width="8" height="8" fill="black"/>
+                    <rect x="106" y="98" width="8" height="8" fill="black"/>
+                    <rect x="130" y="98" width="8" height="8" fill="black"/>
+                    <rect x="62" y="110" width="8" height="8" fill="black"/>
+                    <rect x="74" y="110" width="8" height="8" fill="black"/>
+                    <rect x="98" y="110" width="8" height="8" fill="black"/>
+                    <rect x="62" y="122" width="8" height="8" fill="black"/>
+                    <rect x="86" y="122" width="8" height="8" fill="black"/>
+                    <rect x="110" y="122" width="8" height="8" fill="black"/>
+                    <rect x="62" y="134" width="8" height="8" fill="black"/>
+                    <rect x="74" y="134" width="8" height="8" fill="black"/>
+                    <rect x="86" y="134" width="8" height="8" fill="black"/>
+                    <rect x="110" y="134" width="8" height="8" fill="black"/>
+                    <rect x="122" y="110" width="8" height="8" fill="black"/>
+                    <rect x="134" y="110" width="8" height="8" fill="black"/>
+                    <rect x="146" y="110" width="8" height="8" fill="black"/>
+                    <rect x="122" y="122" width="8" height="8" fill="black"/>
+                    <rect x="146" y="122" width="8" height="8" fill="black"/>
+                    <rect x="134" y="134" width="8" height="8" fill="black"/>
+                    <rect x="146" y="134" width="8" height="8" fill="black"/>
+                    <rect x="122" y="146" width="8" height="8" fill="black"/>
+                    <rect x="134" y="146" width="8" height="8" fill="black"/>
+                    <!-- QPay logo area -->
+                    <rect x="68" y="68" width="24" height="24" rx="4" fill="#0068FF"/>
+                    <text x="80" y="84" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Q</text>
+                  </svg>
+                </div>
+                <div class="qpay-amount" id="qpayAmount">0₮</div>
+                <div class="qpay-desc">Аппликейшн нэвтрүүлэн QR код уншуулна уу</div>
+                <div class="qpay-banks">
+                  <span class="bank-chip">Khan Bank</span>
+                  <span class="bank-chip">Golomt</span>
+                  <span class="bank-chip">TDB</span>
+                  <span class="bank-chip">Xac Bank</span>
+                  <span class="bank-chip">State Bank</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cash -->
+            <label class="pay-option" id="opt-cash" onclick="selectPay('cash')">
+              <input type="radio" name="payment" value="cash">
+              <span class="pay-icon">💵</span>
+              <div>
+                <div class="pay-label">Бэлэн мөнгө</div>
+                <div class="pay-sub">Хүргэлтийн үед жолоочид өгнө</div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Order summary -->
+      <aside class="summary-card">
+        <h3>Захиалгын дүн</h3>
+        <div class="summary-items" id="summaryItems"></div>
+        <hr class="summary-divider">
+        <div class="summary-row"><span>Барааны үнэ</span><span id="summarySubtotal">0₮</span></div>
+        <div class="summary-row"><span>Хүргэлт</span><span>5,000₮</span></div>
+        <div class="summary-row total"><span>Нийт дүн</span><span id="summaryTotal">5,000₮</span></div>
+        <button class="place-order-btn" onclick="placeOrder()">Захиалга баталгаажуулах</button>
+        <div class="secure-note">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <path stroke="currentColor" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+          </svg>
+          Аюулгүй шифрлэлтээр хамгаалагдсан
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script type="module">
+    import { getMe, getCart, formatPrice } from "./store.js";
+
+    const me = getMe();
+    if (!me) {
+      location.href = "login.html";
+    }
+
+    const cart = getCart();
+    if (!cart.length) {
+      location.href = "basket.html";
+    }
+
+    // Render summary items
+    const summaryItems = document.getElementById("summaryItems");
+    summaryItems.innerHTML = cart.map(p => `
+      <div class="summary-item">
+        <img src="${p.image}" alt="${p.name}" onerror="this.style.background='#eee'">
+        <div class="summary-item-info">
+          <div class="summary-item-name">${p.name}</div>
+          <div class="summary-item-qty">x${p.qty || 1}</div>
+        </div>
+        <div class="summary-item-price">${formatPrice(p.newPrice * (p.qty || 1))}</div>
+      </div>
+    `).join("");
+
+    const subtotal = cart.reduce((s, p) => s + p.newPrice * (p.qty || 1), 0);
+    document.getElementById("summarySubtotal").textContent = formatPrice(subtotal);
+    document.getElementById("summaryTotal").textContent = formatPrice(subtotal + 5000);
+    document.getElementById("qpayAmount").textContent = formatPrice(subtotal + 5000);
+
+    // Pre-fill name from user
+    if (me.name) {
+      document.getElementById("recipientName").value = me.name;
+    }
+
+    window.placeOrder = function () {
+      const name = document.getElementById("recipientName").value.trim();
+      const phone = document.getElementById("recipientPhone").value.trim();
+      const district = document.getElementById("district").value;
+      const khoroo = document.getElementById("khoroo").value.trim();
+      const address = document.getElementById("address").value.trim();
+
+      if (!name || !phone || !district || !address) {
+        alert("Хүргэлтийн мэдээлэлээ бүрэн бөглөнө үү.");
+        return;
+      }
+
+      const paymentEl = document.querySelector('input[name="payment"]:checked');
+      const payment = paymentEl ? paymentEl.value : "cash";
+
+      if (payment === "card") {
+        const cardNum = document.getElementById("cardNum").value.replace(/\s/g, "");
+        const cardName = document.getElementById("cardName").value.trim();
+        const cardExp = document.getElementById("cardExp").value.trim();
+        const cardCvv = document.getElementById("cardCvv").value.trim();
+        if (cardNum.length < 16 || !cardName || cardExp.length < 5 || cardCvv.length < 3) {
+          alert("Картын мэдээлэлийг бүрэн оруулна уу.");
+          return;
+        }
+      }
+
+      const order = {
+        id: "ORD" + Date.now(),
+        items: cart,
+        delivery: { name, phone, district, khoroo, address, note: document.getElementById("note").value },
+        payment,
+        subtotal,
+        total: subtotal + 5000,
+        status: "confirmed",
+        timestamp: new Date().toISOString()
+      };
+
+      localStorage.setItem("current_order", JSON.stringify(order));
+
+      // Clear cart
+      const users = JSON.parse(localStorage.getItem("shop_users") || "[]");
+      const idx = users.findIndex(u => u.id === me.id);
+      if (idx !== -1) {
+        users[idx].cart = [];
+        localStorage.setItem("shop_users", JSON.stringify(users));
+      }
+
+      location.href = "tracking.html";
+    };
+  </script>
+
+  <script>
+    let currentPay = "card";
+
+    function selectPay(type) {
+      currentPay = type;
+      ["card", "qpay", "cash"].forEach(t => {
+        document.getElementById("opt-" + t).classList.toggle("selected", t === type);
+        const extra = document.getElementById("extra-" + t);
+        if (extra) extra.classList.toggle("show", t === type);
+      });
+    }
+
+    function formatCard(input) {
+      let v = input.value.replace(/\D/g, "").slice(0, 16);
+      input.value = v.match(/.{1,4}/g)?.join(" ") || v;
+    }
+
+    function formatExp(input) {
+      let v = input.value.replace(/\D/g, "").slice(0, 4);
+      if (v.length >= 3) v = v.slice(0, 2) + "/" + v.slice(2);
+      input.value = v;
+    }
+
+    function updateCardPreview() {
+      const num = document.getElementById("cardNum").value || "";
+      const name = document.getElementById("cardName").value || "НЭРИЙН ЭЗЭН";
+      const exp = document.getElementById("cardExp").value || "MM/YY";
+
+      const padded = num.padEnd(19, "•").replace(/ /g, "").replace(/(.{4})/g, "$1 ").trim();
+      document.getElementById("cardNumDisplay").textContent = padded || "•••• •••• •••• ••••";
+      document.getElementById("cardNameDisplay").textContent = name.toUpperCase() || "НЭРИЙН ЭЗЭН";
+      document.getElementById("cardExpDisplay").textContent = exp || "MM/YY";
+    }
+  </script>
+</body>
+
+</html>
