@@ -204,7 +204,7 @@
         </div>
         <nav class="menu">
             <ul>
-                <li>☰ БҮХ АНГИЛАЛ</li>
+                <li onclick="openMenu()">☰ БҮХ АНГИЛАЛ</li>
                 <li><a href="index.html#brand">BRANDS</a></li>
                 <li><a href="index.html#sales">SALES</a></li>
             </ul>
@@ -251,7 +251,9 @@
             </svg><span>Профайл</span></a>
     </nav>
 
+    <script src="categoryMenu.js"></script>
     <script src="script.js"></script>
+    <script type="module" src="searchAll.js"></script>
     <script type="module">
         import { getMe, getSaved, removeFromSaved, addToCart, isInCart, formatPrice } from "./store.js";
 

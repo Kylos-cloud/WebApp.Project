@@ -51,6 +51,43 @@ async function init() {
     saleRenderer.renderProducts(store.getSaleProducts());
   }
 
+  // ── handle category navigation from other pages (URL params) ─────────
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlCatKey = urlParams.get("category");
+  if (urlCatKey) {
+    const urlSubIdx  = urlParams.get("sub");
+    const urlItemIdx = urlParams.get("item");
+    const filtered = store.allProducts.filter(p => p.category === urlCatKey);
+    mainRenderer.renderProducts(filtered);
+
+    const header = document.querySelector("#sales .section-header h2");
+    if (header) {
+      const catLabel = data.categories?.find(c => c.id === urlCatKey)?.name
+        ?? window.categoryData?.[urlCatKey]?.label
+        ?? urlCatKey;
+      if (urlSubIdx !== null && urlItemIdx !== null) {
+        const catData = window.categoryData?.[urlCatKey];
+        const itemName = catData?.subcategories?.[parseInt(urlSubIdx)]?.items?.[parseInt(urlItemIdx)];
+        header.textContent = itemName
+          ? `${catLabel} › ${itemName} — ${filtered.length} бараа`
+          : `${catLabel} — ${filtered.length} бараа`;
+      } else {
+        header.textContent = `${catLabel} — ${filtered.length} бараа`;
+      }
+    }
+
+    document.querySelectorAll(".filter-btn[data-filter]").forEach(b => {
+      b.classList.toggle("active-filter", b.dataset.filter === urlCatKey);
+    });
+
+    history.replaceState(null, "", window.location.pathname);
+
+    setTimeout(() => {
+      const salesSection = document.getElementById("sales");
+      if (salesSection) salesSection.scrollIntoView({ behavior: "smooth" });
+    }, 300);
+  }
+
   // ── category menu navigation (3-level nav) ───────────────
   window.addEventListener("categoryNavigation", (e) => {
     const { categoryKey, subName, itemName } = e.detail;

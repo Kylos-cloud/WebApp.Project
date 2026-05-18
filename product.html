@@ -480,7 +480,7 @@
     </div>
     <nav class="menu">
       <ul>
-        <li><a href="index.html">← Нүүр хуудас</a></li>
+        <li onclick="openMenu()">☰ БҮХ АНГИЛАЛ</li>
         <li><a href="index.html#brand">BRANDS</a></li>
         <li><a href="index.html#sales">SALES</a></li>
       </ul>
@@ -502,6 +502,12 @@
           d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
       </svg>
       <span>Нүүр</span>
+    </a>
+    <a href="index.html" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
+      </svg>
+      <span>Ангилал</span>
     </a>
     <a href="hadgalsan.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
@@ -526,7 +532,9 @@
     </a>
   </nav>
 
+  <script src="categoryMenu.js"></script>
   <script src="script.js"></script>
+  <script type="module" src="searchAll.js"></script>
   <script type="module">
     import { getMe, addToCart as storeAddToCart, isInCart, addToSaved, removeFromSaved, isInSaved } from "./store.js";
 
