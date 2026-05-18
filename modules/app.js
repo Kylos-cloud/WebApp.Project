@@ -1,11 +1,12 @@
 import { ProductStore }    from "./ProductStore.js";
 import { ProductRenderer } from "./ProductRenderer.js";
 
-const productsEl  = document.getElementById("productsGrid");
-const saleEl      = document.getElementById("saleGrid");
-const brandsEl    = document.getElementById("brandsContainer");
-const statsEl     = document.getElementById("statsBar");
-const searchInput = document.querySelector(".search input");
+const productsEl    = document.getElementById("productsGrid");
+const saleEl        = document.getElementById("saleGrid");
+const brandsEl      = document.getElementById("brandsContainer");
+const statsEl       = document.getElementById("statsBar");
+const searchInput   = document.getElementById("mainSearchInput");
+const searchDropdown = document.getElementById("searchDropdown");
 
 async function loadData() {
   const res  = await fetch("products.json");
@@ -66,7 +67,9 @@ async function init() {
 
     const header = document.querySelector("#sales .section-header h2");
     if (header) {
-      const catLabel = data.categories?.find(c => c.id === categoryKey)?.name ?? categoryKey;
+      const catLabel = data.categories?.find(c => c.id === categoryKey)?.name
+        ?? window.categoryData?.[categoryKey]?.label
+        ?? categoryKey;
       if (itemName) {
         header.textContent = `${catLabel} › ${itemName} — ${filtered.length} бараа`;
       } else if (catLabel) {
@@ -75,6 +78,7 @@ async function init() {
     }
 
     if (searchInput) searchInput.value = "";
+    hideDropdown();
   });
 
   // ── filter товч ──────────────────────────────────────────
@@ -87,6 +91,7 @@ async function init() {
     const filtered = cat === "all" ? store.allProducts : store.getByCategory(cat);
     mainRenderer.renderProducts(filtered);
     if (searchInput) searchInput.value = "";
+    hideDropdown();
 
     document.querySelectorAll(".filter-btn[data-filter]")
       .forEach(b => b.classList.toggle("active-filter", b.dataset.filter === cat));
@@ -99,24 +104,55 @@ async function init() {
     }
   });
 
-  // ── хайлт ────────────────────────────────────────────────
+  // ── хайлт + dropdown ─────────────────────────────────────
+  function formatPrice(n) {
+    return n?.toLocaleString("mn-MN") + "₮";
+  }
+
+  function showDropdown(matches) {
+    if (!searchDropdown) return;
+    if (!matches.length) {
+      searchDropdown.innerHTML = `<p class="search-dropdown-empty">Бараа олдсонгүй</p>`;
+    } else {
+      searchDropdown.innerHTML = matches.slice(0, 8).map(p => `
+        <a class="search-dropdown-item" href="product.html?id=${p.id}">
+          <img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
+          <div class="search-dropdown-info">
+            <div class="search-dropdown-name">${p.name}</div>
+            <div class="search-dropdown-price">${formatPrice(p.newPrice)}</div>
+          </div>
+        </a>`).join("");
+    }
+    searchDropdown.classList.add("active");
+  }
+
+  function hideDropdown() {
+    if (searchDropdown) searchDropdown.classList.remove("active");
+  }
+
   if (searchInput) {
     searchInput.addEventListener("input", function () {
       const q = this.value.toLowerCase().trim();
-      const results = q
-        ? store.allProducts.filter(p =>
-            p.name.toLowerCase().includes(q) ||
-            p.brand.toLowerCase().includes(q) ||
-            p.category.toLowerCase().includes(q))
-        : store.allProducts;
-      mainRenderer.renderProducts(results);
+      if (q) {
+        const results = store.allProducts.filter(p =>
+          p.name.toLowerCase().includes(q) ||
+          p.brand.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q));
+        showDropdown(results);
+      } else {
+        hideDropdown();
+      }
+    });
 
-      document.querySelectorAll(".filter-btn[data-filter]").forEach(b => {
-        b.classList.toggle("active-filter", !q && b.dataset.filter === "all");
-      });
+    searchInput.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        hideDropdown();
+        this.blur();
+      }
+    });
 
-      const header = document.querySelector("#sales .section-header h2");
-      if (header) header.textContent = q ? `"${q}" хайлтын үр дүн` : "Бүх бараа";
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".search")) hideDropdown();
     });
   }
 }

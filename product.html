@@ -803,6 +803,27 @@
         grid-column: 1 / -1;
       }
     }
+
+    @media (max-width: 768px) {
+      .related-section .products {
+        display: flex !important;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 12px;
+        padding-bottom: 12px;
+      }
+
+      .related-section .products::-webkit-scrollbar {
+        display: none;
+      }
+
+      .related-section .products article {
+        flex: 0 0 160px;
+        min-width: 160px;
+      }
+    }
   </style>
 </head>
 
@@ -1358,6 +1379,7 @@
           <a href="index.html">Дэлгүүр рүү буцах</a>
         </div>`;
     }
+
 
     init();
   </script>
