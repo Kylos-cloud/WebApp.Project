@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SHOP — Профайл</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
     body { background: #f5f5f5; }
 
@@ -679,10 +679,10 @@
     </a>
   </nav>
 
-  <script type="module" src="badges.js"></script>
+  <script type="module" src="js/badges.js"></script>
 
   <script type="module">
-    import { getMe, formatPrice } from "./store.js";
+    import { getMe, formatPrice } from "./js/store.js";
 
     const me = getMe();
     if (!me) { location.href = "login.html"; }

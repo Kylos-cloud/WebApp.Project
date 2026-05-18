@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SHOP — Бараа</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <style>
     .product-page {
       max-width: 1100px;
@@ -541,12 +541,12 @@
     </a>
   </nav>
 
-  <script src="categoryMenu.js"></script>
-  <script src="script.js"></script>
-  <script type="module" src="searchAll.js"></script>
-  <script type="module" src="badges.js"></script>
+  <script src="js/categoryMenu.js"></script>
+  <script src="js/script.js"></script>
+  <script type="module" src="js/searchAll.js"></script>
+  <script type="module" src="js/badges.js"></script>
   <script type="module">
-    import { getMe, addToCart as storeAddToCart, isInCart, addToSaved, removeFromSaved, isInSaved } from "./store.js";
+    import { getMe, addToCart as storeAddToCart, isInCart, addToSaved, removeFromSaved, isInSaved } from "./js/store.js";
 
     const params = new URLSearchParams(window.location.search);
     const productId = parseInt(params.get("id"));

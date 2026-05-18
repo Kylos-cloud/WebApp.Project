@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SHOP — Захиалга баталгаажсан</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
     body { background: #f0f0f0; }
 
@@ -415,9 +415,9 @@
     </a>
   </nav>
 
-  <script type="module" src="badges.js"></script>
+  <script type="module" src="js/badges.js"></script>
   <script type="module">
-    import { formatPrice } from "./store.js";
+    import { formatPrice } from "./js/store.js";
 
     const order = JSON.parse(localStorage.getItem("current_order") || "null");
     if (!order) { location.href = "basket.html"; }
