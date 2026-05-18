@@ -4,498 +4,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SHOP — Захиалга хянах</title>
+  <title>SHOP — Захиалга баталгаажсан</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    body {
-      background: var(--color-bg);
-    }
+    body { background: #f0f0f0; }
 
-    .page-content {
-      max-width: 900px;
+    .page-wrap {
+      max-width: 680px;
       margin: 0 auto;
-      padding: 28px 20px 100px;
+      padding: 24px 18px 100px;
     }
 
-    /* Order confirmed banner */
-    .order-banner {
-      background: linear-gradient(135deg, hsl(140, 45%, 35%), hsl(160, 45%, 30%));
+    /* ── BANNER ── */
+    .banner {
+      background: linear-gradient(135deg, hsl(140,45%,34%), hsl(160,42%,28%));
       color: white;
-      border-radius: var(--radius-lg);
-      padding: 24px 28px;
+      border-radius: 14px;
+      padding: 22px 24px;
       display: flex;
       align-items: center;
-      gap: 18px;
-      margin-bottom: 24px;
-      box-shadow: 0 8px 24px hsl(140 50% 30% / 0.25);
+      gap: 16px;
+      margin-bottom: 18px;
     }
-
-    .banner-icon {
-      font-size: 40px;
-      flex-shrink: 0;
-    }
-
-    .banner-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .banner-sub {
-      font-size: 13px;
-      opacity: 0.85;
-    }
-
-    .order-id-badge {
+    .banner-emoji { font-size: 40px; flex-shrink: 0; }
+    .banner-title { font-size: 19px; font-weight: 800; margin-bottom: 3px; }
+    .banner-sub   { font-size: 13px; opacity: 0.85; }
+    .order-badge {
       margin-left: auto;
-      background: rgba(255,255,255,0.2);
-      border-radius: 8px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 10px;
       padding: 8px 14px;
       text-align: center;
       flex-shrink: 0;
     }
+    .ob-label { font-size: 10px; opacity: 0.75; text-transform: uppercase; letter-spacing: 1px; }
+    .ob-val   { font-size: 13px; font-weight: 800; letter-spacing: 1px; }
 
-    .order-id-badge .label {
-      font-size: 10px;
-      opacity: 0.8;
+    /* ── CARD ── */
+    .t-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .t-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #aaa;
       text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .order-id-badge .value {
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
-
-    /* Layout */
-    .tracking-layout {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 20px;
-      align-items: start;
-    }
-
-    /* Cards */
-    .track-card {
-      background: var(--color-white);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      box-shadow: var(--shadow-card);
+      letter-spacing: 0.7px;
       margin-bottom: 16px;
     }
 
-    .track-card h3 {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 18px;
-      color: hsl(0,0%,40%);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    /* ── DELIVERY ESTIMATE ── */
+    .eta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
+    .eta-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: hsl(140,45%,92%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+    .eta-label { font-size: 12px; color: #aaa; margin-bottom: 4px; }
+    .eta-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: hsl(140,45%,32%);
+      margin-bottom: 2px;
+    }
+    .eta-note { font-size: 12px; color: #aaa; }
 
-    /* Status timeline */
-    .status-timeline {
+    .eta-divider { border: none; border-top: 1px solid #f0f0f0; margin: 14px 0; }
+
+    .eta-detail-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+    .eta-detail-row:last-child { margin-bottom: 0; }
+    .eta-detail-row .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-green { background: hsl(140,50%,40%); }
+    .dot-blue  { background: hsl(210,75%,52%); }
+    .dot-gray  { background: #ccc; }
+
+    /* ── DRIVER CARD ── */
+    .driver-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .driver-av {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, hsl(220,30%,24%), hsl(220,30%,42%));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; flex-shrink: 0;
+    }
+    .driver-name   { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+    .driver-car    { font-size: 13px; color: #999; margin-bottom: 4px; }
+    .driver-stars  { color: hsl(40,90%,45%); font-size: 13px; font-weight: 600; }
+    .driver-btns   { display: flex; gap: 10px; }
+    .d-btn {
+      flex: 1; padding: 11px;
+      border-radius: 30px; font-size: 13px; font-weight: 600;
+      cursor: pointer; border: none; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      transition: opacity 0.2s;
+    }
+    .d-btn:hover { opacity: 0.8; }
+    .d-btn-call { background: hsl(140,50%,38%); color: white; }
+    .d-btn-msg  { background: #f0f0f0; color: hsl(0,0%,20%); }
+
+    /* ── STATUS STEPS ── */
+    .steps-grid {
       display: flex;
       flex-direction: column;
       gap: 0;
     }
-
-    .status-step {
+    .step-row {
       display: flex;
-      gap: 14px;
       align-items: flex-start;
+      gap: 12px;
     }
-
-    .status-step-left {
+    .step-left {
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    .status-dot {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--color-bg1);
-      border: 2px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
       flex-shrink: 0;
-      transition: background 0.4s, border-color 0.4s;
     }
-
-    .status-step.done .status-dot {
-      background: hsl(140, 50%, 40%);
-      border-color: hsl(140, 50%, 40%);
-      color: white;
-    }
-
-    .status-step.active .status-dot {
-      background: var(--color-text);
-      border-color: var(--color-text);
-      color: white;
-      animation: pulse-dot 1.4s infinite;
-    }
-
-    @keyframes pulse-dot {
-      0%, 100% { box-shadow: 0 0 0 0 hsla(0,0%,15%,0.4); }
-      50% { box-shadow: 0 0 0 8px hsla(0,0%,15%,0); }
-    }
-
-    .status-line {
-      width: 2px;
-      flex: 1;
-      min-height: 28px;
-      background: var(--color-border);
-      margin: 4px 0;
-      transition: background 0.4s;
-    }
-
-    .status-step.done + .status-step .status-line,
-    .status-step.done .status-line {
-      background: hsl(140, 50%, 40%);
-    }
-
-    .status-step-right {
-      padding-bottom: 24px;
-    }
-
-    .status-step-right:last-child {
-      padding-bottom: 0;
-    }
-
-    .status-label {
+    .step-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
       font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 2px;
-      transition: color 0.4s;
+    }
+    .step-dot.done   { background: hsl(140,50%,38%); color: white; }
+    .step-dot.active { background: hsl(0,0%,14%); color: white; }
+    .step-dot.pending{ background: #eee; color: #bbb; font-size: 12px; }
+    .step-line { width: 2px; min-height: 28px; flex: 1; margin: 3px 0; }
+    .step-line.done   { background: hsl(140,50%,38%); }
+    .step-line.pending{ background: #e8e8e8; }
+    .step-right { padding-bottom: 20px; }
+    .step-row:last-child .step-right { padding-bottom: 0; }
+    .step-label { font-size: 14px; font-weight: 600; }
+    .step-label.done    { color: hsl(140,42%,32%); }
+    .step-label.active  { color: hsl(0,0%,14%); }
+    .step-label.pending { color: #ccc; }
+    .step-sub { font-size: 12px; color: #bbb; margin-top: 2px; }
+
+    /* ── ORDER ITEMS ── */
+    .items-list { display: flex; flex-direction: column; gap: 10px; }
+    .item-row { display: flex; gap: 12px; align-items: center; }
+    .item-row img {
+      width: 46px; height: 50px; object-fit: cover;
+      border-radius: 8px; background: #eee; flex-shrink: 0;
+    }
+    .item-row-name { font-size: 13px; font-weight: 600; }
+    .item-row-sub  { font-size: 12px; color: #aaa; }
+    .item-row-price{ font-size: 13px; font-weight: 700; margin-left: auto; flex-shrink: 0; }
+    .items-total {
+      display: flex; justify-content: space-between;
+      font-size: 15px; font-weight: 800;
+      padding-top: 12px;
+      border-top: 1px solid #eee;
+      margin-top: 6px;
     }
 
-    .status-step.active .status-label {
-      color: var(--color-text);
+    /* ── DELIVERY INFO ── */
+    .info-row {
+      display: flex; gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f5f5;
+      font-size: 13px;
     }
+    .info-row:last-child { border-bottom: none; }
+    .info-icon  { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .info-label { font-size: 11px; color: #bbb; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.3px; }
+    .info-val   { font-weight: 600; font-size: 13px; color: hsl(0,0%,18%); }
 
-    .status-step.done .status-label {
-      color: hsl(140, 50%, 35%);
-    }
-
-    .status-step:not(.done):not(.active) .status-label {
-      color: hsl(0,0%,60%);
-    }
-
-    .status-time {
-      font-size: 12px;
-      color: hsl(0,0%,55%);
-    }
-
-    /* Driver card */
-    .driver-card {
-      background: var(--color-white);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      box-shadow: var(--shadow-card);
-      margin-bottom: 16px;
-      display: none;
-      animation: fadeSlideUp 0.4s ease;
-    }
-
-    .driver-card.show {
+    /* ── BACK BUTTON ── */
+    .back-to-shop {
       display: block;
-    }
-
-    .driver-card h3 {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: hsl(0,0%,40%);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .driver-info {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .driver-avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, hsl(220,30%,25%), hsl(220,30%,40%));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      flex-shrink: 0;
-    }
-
-    .driver-name {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .driver-car {
-      font-size: 13px;
-      color: hsl(0,0%,50%);
-      margin-bottom: 4px;
-    }
-
-    .driver-rating {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 13px;
-      color: hsl(40, 90%, 45%);
-      font-weight: 600;
-    }
-
-    .driver-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .driver-btn {
-      flex: 1;
-      padding: 10px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: opacity 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      text-decoration: none;
-    }
-
-    .driver-btn:hover {
-      opacity: 0.8;
-    }
-
-    .btn-call {
-      background: hsl(140, 50%, 40%);
+      text-align: center;
+      margin-top: 8px;
+      padding: 13px;
+      background: hsl(0,0%,14%);
       color: white;
-    }
-
-    .btn-msg {
-      background: var(--color-bg1);
-      color: var(--color-text);
-    }
-
-    /* ETA */
-    .eta-bar {
-      background: var(--color-white);
-      border-radius: var(--radius-md);
-      padding: 16px 20px;
-      box-shadow: var(--shadow-card);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .eta-label {
-      font-size: 13px;
-      color: hsl(0,0%,50%);
-      margin-bottom: 2px;
-    }
-
-    .eta-value {
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--color-text);
-    }
-
-    .eta-progress-wrap {
-      flex: 1;
-      margin: 0 20px;
-    }
-
-    .eta-progress-track {
-      height: 6px;
-      background: var(--color-bg1);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-
-    .eta-progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, hsl(140,50%,40%), hsl(160,50%,45%));
-      border-radius: 3px;
-      width: 0%;
-      transition: width 3s ease;
-    }
-
-    /* Map */
-    .map-card {
-      background: var(--color-white);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-    }
-
-    .map-header {
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .map-header span {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .map-live-badge {
-      margin-left: auto;
-      background: hsl(0, 80%, 50%);
-      color: white;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 8px;
       border-radius: 10px;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .map-live-badge::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      background: white;
-      border-radius: 50%;
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
-    }
-
-    #deliveryMap {
-      height: 400px;
-      width: 100%;
-    }
-
-    /* Leaflet custom icons */
-    .store-icon {
-      background: hsl(220, 80%, 50%);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      border: 3px solid white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-
-    .driver-map-icon {
-      width: 40px;
-      height: 40px;
-      background: hsl(0, 0%, 15%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      border: 3px solid white;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.35);
-    }
-
-    .dest-icon {
-      background: hsl(0, 70%, 50%);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      border: 3px solid white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-
-    /* Order items summary */
-    .order-items-mini {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .order-item-mini {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .order-item-mini img {
-      width: 44px;
-      height: 48px;
-      object-fit: cover;
-      border-radius: var(--radius-sm);
-      background: var(--color-bg1);
-      flex-shrink: 0;
-    }
-
-    .order-item-mini-info {
-      flex: 1;
-    }
-
-    .order-item-mini-name {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .order-item-mini-meta {
-      font-size: 12px;
-      color: hsl(0,0%,55%);
-    }
-
-    .order-item-mini-price {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
     }
+    .back-to-shop:hover { opacity: 0.85; }
 
-    .order-total-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 15px;
-      font-weight: 700;
-      padding-top: 14px;
-      border-top: 1px solid var(--color-border);
-      margin-top: 4px;
-    }
-
-    @media (max-width: 768px) {
-      .tracking-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .order-banner {
-        flex-wrap: wrap;
-      }
-
-      .order-id-badge {
-        margin-left: 0;
-      }
-
-      #deliveryMap {
-        height: 300px;
-      }
+    @media (max-width: 500px) {
+      .banner { flex-wrap: wrap; }
+      .order-badge { margin-left: 0; }
     }
   </style>
 </head>
@@ -508,377 +231,274 @@
       <nav class="icons">
         <a href="login.html" class="icon-profile">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-width="2"
-              d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
           </svg>
         </a>
         <a href="index.html" class="icon-cart">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
           </svg>
         </a>
       </nav>
     </div>
   </header>
 
-  <main class="page-content">
-    <!-- Confirmed banner -->
-    <div class="order-banner">
-      <div class="banner-icon">🎉</div>
+  <div class="page-wrap">
+
+    <!-- Banner -->
+    <div class="banner">
+      <div class="banner-emoji">🎉</div>
       <div>
         <div class="banner-title">Захиалга баталгаажлаа!</div>
-        <div class="banner-sub" id="bannerSub">Таны захиалгыг хүлээн авлаа. Бэлтгэж байна...</div>
+        <div class="banner-sub" id="bannerSub">Таны захиалгыг хүлээн авлаа.</div>
       </div>
-      <div class="order-id-badge">
-        <div class="label">Захиалгын №</div>
-        <div class="value" id="orderIdDisplay">—</div>
+      <div class="order-badge">
+        <div class="ob-label">Захиалгын №</div>
+        <div class="ob-val" id="orderNum">—</div>
+      </div>
+    </div>
+
+    <!-- Delivery estimate -->
+    <div class="t-card">
+      <div class="t-card-title">Хүргэлтийн хугацаа</div>
+      <div class="eta-row">
+        <div class="eta-icon-box">🚚</div>
+        <div>
+          <div class="eta-label">Таны захиалга хүрэх хугацаа</div>
+          <div class="eta-value" id="etaDays">—</div>
+          <div class="eta-note" id="etaNote">ажлын өдрийн дотор</div>
+        </div>
+      </div>
+      <hr class="eta-divider">
+      <div class="eta-detail-row">
+        <span class="dot dot-green"></span>
+        <span>Улаанбаатар хот — <strong>1–3 ажлын өдөр</strong></span>
+      </div>
+      <div class="eta-detail-row">
+        <span class="dot dot-blue"></span>
+        <span>Налайх, Багануур дүүрэг — <strong>3–5 ажлын өдөр</strong></span>
+      </div>
+      <div class="eta-detail-row">
+        <span class="dot dot-gray"></span>
+        <span>Хөдөө орон нутаг — <strong>5–7 ажлын өдөр</strong></span>
       </div>
     </div>
 
-    <div class="tracking-layout">
-      <!-- LEFT column -->
-      <div>
-        <!-- Status timeline -->
-        <div class="track-card">
-          <h3>Захиалгын явц</h3>
-          <div class="status-timeline" id="statusTimeline">
-            <div class="status-step active" id="step-0">
-              <div class="status-step-left">
-                <div class="status-dot">📋</div>
-                <div class="status-line"></div>
-              </div>
-              <div class="status-step-right">
-                <div class="status-label">Захиалга баталгаажсан</div>
-                <div class="status-time" id="time-0"></div>
-              </div>
-            </div>
-            <div class="status-step" id="step-1">
-              <div class="status-step-left">
-                <div class="status-dot">📦</div>
-                <div class="status-line"></div>
-              </div>
-              <div class="status-step-right">
-                <div class="status-label">Бэлтгэж байна</div>
-                <div class="status-time" id="time-1"></div>
-              </div>
-            </div>
-            <div class="status-step" id="step-2">
-              <div class="status-step-left">
-                <div class="status-dot">👤</div>
-                <div class="status-line"></div>
-              </div>
-              <div class="status-step-right">
-                <div class="status-label">Жолооч томилогдсон</div>
-                <div class="status-time" id="time-2"></div>
-              </div>
-            </div>
-            <div class="status-step" id="step-3">
-              <div class="status-step-left">
-                <div class="status-dot">🚗</div>
-                <div class="status-line"></div>
-              </div>
-              <div class="status-step-right">
-                <div class="status-label">Замд яваа</div>
-                <div class="status-time" id="time-3"></div>
-              </div>
-            </div>
-            <div class="status-step" id="step-4">
-              <div class="status-step-left">
-                <div class="status-dot">✅</div>
-              </div>
-              <div class="status-step-right">
-                <div class="status-label">Хүргэгдсэн</div>
-                <div class="status-time" id="time-4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Driver card (hidden until assigned) -->
-        <div class="driver-card" id="driverCard">
-          <h3>Жолоочийн мэдээлэл</h3>
-          <div class="driver-info">
-            <div class="driver-avatar" id="driverAvatar">🧑</div>
-            <div>
-              <div class="driver-name" id="driverName">—</div>
-              <div class="driver-car" id="driverCar">—</div>
-              <div class="driver-rating">
-                ★ <span id="driverRating">—</span>
-              </div>
-            </div>
-          </div>
-          <div class="driver-actions">
-            <a class="driver-btn btn-call" id="driverCallBtn" href="#">
-              📞 Залгах
-            </a>
-            <button class="driver-btn btn-msg">
-              💬 Мессеж
-            </button>
-          </div>
-        </div>
-
-        <!-- Order items -->
-        <div class="track-card">
-          <h3>Захиалсан бараа</h3>
-          <div class="order-items-mini" id="orderItemsMini"></div>
-          <div class="order-total-row">
-            <span>Нийт</span>
-            <span id="orderTotalDisplay">0₮</span>
-          </div>
+    <!-- Driver -->
+    <div class="t-card">
+      <div class="t-card-title">Хүргэлтийн ажилтан</div>
+      <div class="driver-info">
+        <div class="driver-av" id="driverAv">🧑</div>
+        <div>
+          <div class="driver-name" id="driverName">—</div>
+          <div class="driver-car"  id="driverCar">—</div>
+          <div class="driver-stars">★ <span id="driverRating">—</span></div>
         </div>
       </div>
+      <div class="driver-btns">
+        <a class="d-btn d-btn-call" id="driverCall" href="#">📞 Залгах</a>
+        <button class="d-btn d-btn-msg">💬 Мессеж</button>
+      </div>
+    </div>
 
-      <!-- RIGHT column -->
-      <div>
-        <!-- ETA bar -->
-        <div class="eta-bar" id="etaBar">
-          <div>
-            <div class="eta-label">Хүргэгдэх хугацаа</div>
-            <div class="eta-value" id="etaValue">—</div>
+    <!-- Order status steps -->
+    <div class="t-card">
+      <div class="t-card-title">Захиалгын явц</div>
+      <div class="steps-grid">
+        <div class="step-row">
+          <div class="step-left">
+            <div class="step-dot done">✓</div>
+            <div class="step-line done"></div>
           </div>
-          <div class="eta-progress-wrap">
-            <div class="eta-progress-track">
-              <div class="eta-progress-fill" id="etaFill"></div>
-            </div>
+          <div class="step-right">
+            <div class="step-label done">Захиалга хүлээн авагдсан</div>
+            <div class="step-sub" id="stepTime0">—</div>
           </div>
-          <div style="font-size:28px">🕐</div>
         </div>
-
-        <!-- Map -->
-        <div class="map-card">
-          <div class="map-header">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-width="2" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5Z"/>
-            </svg>
-            <span>Хүргэлтийн байршил</span>
-            <div class="map-live-badge">LIVE</div>
+        <div class="step-row">
+          <div class="step-left">
+            <div class="step-dot active">📦</div>
+            <div class="step-line pending"></div>
           </div>
-          <div id="deliveryMap"></div>
+          <div class="step-right">
+            <div class="step-label active">Бэлтгэл хийгдэж байна</div>
+            <div class="step-sub">Агуулахаас бэлтгэж байна</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-left">
+            <div class="step-dot pending">🚚</div>
+            <div class="step-line pending"></div>
+          </div>
+          <div class="step-right">
+            <div class="step-label pending">Хүргэлтийн ажилтанд шилжсэн</div>
+            <div class="step-sub">—</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-left">
+            <div class="step-dot pending">🏠</div>
+          </div>
+          <div class="step-right">
+            <div class="step-label pending">Хүргэгдсэн</div>
+            <div class="step-sub">—</div>
+          </div>
         </div>
       </div>
     </div>
-  </main>
+
+    <!-- Delivery address -->
+    <div class="t-card">
+      <div class="t-card-title">Хүргэлтийн дэлгэрэнгүй</div>
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div>
+          <div class="info-label">Хаяг</div>
+          <div class="info-val" id="infoAddress">—</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">👤</span>
+        <div>
+          <div class="info-label">Хүлээн авагч</div>
+          <div class="info-val" id="infoName">—</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📞</span>
+        <div>
+          <div class="info-label">Утас</div>
+          <div class="info-val" id="infoPhone">—</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💳</span>
+        <div>
+          <div class="info-label">Төлбөрийн хэлбэр</div>
+          <div class="info-val" id="infoPayment">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order items -->
+    <div class="t-card">
+      <div class="t-card-title">Захиалсан бараа</div>
+      <div class="items-list" id="itemsList"></div>
+      <div class="items-total">
+        <span>Нийт</span>
+        <span id="orderTotal">—</span>
+      </div>
+    </div>
+
+    <a href="index.html" class="back-to-shop">Дэлгүүр үзэх →</a>
+  </div>
 
   <nav class="bottom-nav">
     <a href="index.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"/>
       </svg>
       <span>Нүүр</span>
     </a>
     <a href="basket.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
       </svg>
       <span>Сагс</span>
     </a>
     <a href="login.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-width="2"
-          d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
       </svg>
       <span>Профайл</span>
     </a>
   </nav>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="module">
     import { formatPrice } from "./store.js";
 
     const order = JSON.parse(localStorage.getItem("current_order") || "null");
-    if (!order) {
-      location.href = "basket.html";
+    if (!order) { location.href = "basket.html"; }
+
+    // Order number
+    document.getElementById("orderNum").textContent = order.id.slice(-8);
+
+    // Timestamp
+    const orderDate = new Date(order.timestamp);
+    document.getElementById("stepTime0").textContent =
+      orderDate.toLocaleString("mn-MN", { month:"long", day:"numeric", hour:"2-digit", minute:"2-digit" });
+
+    // ── DELIVERY ESTIMATE by district ──
+    const cityDistricts = ["Баянзүрх","Сүхбаатар","Хан-Уул","Чингэлтэй","Баянгол","Сонгинохайрхан","Багахангай"];
+    const nearDistricts = ["Налайх","Багануур"];
+    const district  = order.delivery?.district || "";
+    const isProvince = order.delivery?.locType === "province";
+
+    let etaDays, etaNote;
+    if (isProvince) {
+      etaDays = "5–7 ажлын өдөр";
+      etaNote = `${district} аймаг · Орон нутгийн хүргэлт`;
+    } else if (cityDistricts.includes(district)) {
+      etaDays = "1–3 ажлын өдөр";
+      etaNote = `${district} дүүрэг · Хот доторх хүргэлт`;
+    } else if (nearDistricts.includes(district)) {
+      etaDays = "3–5 ажлын өдөр";
+      etaNote = `${district} дүүрэг · Дагуул хот`;
+    } else {
+      etaDays = "5–7 ажлын өдөр";
+      etaNote = `${district || "Орон нутаг"} · Хөдөө орон нутгийн хүргэлт`;
     }
+    document.getElementById("etaDays").textContent = etaDays;
+    document.getElementById("etaNote").textContent = etaNote;
 
-    // Display order ID
-    document.getElementById("orderIdDisplay").textContent = order.id.slice(-8);
+    // Banner sub
+    document.getElementById("bannerSub").textContent =
+      `Захиалга ${order.id.slice(-8)} · ${etaDays} дотор хүрнэ`;
 
-    // Render order items
-    const itemsEl = document.getElementById("orderItemsMini");
-    itemsEl.innerHTML = order.items.map(p => `
-      <div class="order-item-mini">
-        <img src="${p.image}" alt="${p.name}" onerror="this.style.background='#eee'">
-        <div class="order-item-mini-info">
-          <div class="order-item-mini-name">${p.name}</div>
-          <div class="order-item-mini-meta">${p.brand} · x${p.qty || 1}</div>
-        </div>
-        <div class="order-item-mini-price">${formatPrice(p.newPrice * (p.qty || 1))}</div>
-      </div>
-    `).join("");
-
-    document.getElementById("orderTotalDisplay").textContent = formatPrice(order.total);
-
-    // ── LEAFLET MAP ──────────────────────────────────────────
-    // Ulaanbaatar coordinates
-    const STORE = [47.9077, 106.8832];   // Store (city center)
-    const DEST  = [47.9240, 106.9180];   // Delivery destination (Bayanzurkh area)
-
-    const map = L.map("deliveryMap", { zoomControl: true }).setView([47.916, 106.900], 13);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap contributors",
-      maxZoom: 18
-    }).addTo(map);
-
-    const makeIcon = (html) => L.divIcon({
-      html,
-      className: "",
-      iconSize: [40, 40],
-      iconAnchor: [20, 20],
-      popupAnchor: [0, -22]
-    });
-
-    const storeIcon = makeIcon('<div class="store-icon">🏪</div>');
-    const destIcon  = makeIcon('<div class="dest-icon">🏠</div>');
-    const driverIcon = makeIcon('<div class="driver-map-icon">🚗</div>');
-
-    L.marker(STORE, { icon: storeIcon }).addTo(map).bindPopup("<b>Дэлгүүр</b><br>Захиалга гарч байна");
-    L.marker(DEST,  { icon: destIcon  }).addTo(map).bindPopup(`<b>Хүргэлтийн хаяг</b><br>${order.delivery.district}, ${order.delivery.address}`);
-
-    // Dashed route line
-    const routeLine = L.polyline([STORE, DEST], {
-      color: "hsl(220,70%,55%)",
-      weight: 3,
-      dashArray: "8, 10",
-      opacity: 0.7
-    }).addTo(map);
-
-    map.fitBounds(routeLine.getBounds(), { padding: [40, 40] });
-
-    // Driver marker (starts at store)
-    let driverPos = [...STORE];
-    const driverMarker = L.marker(driverPos, { icon: driverIcon }).addTo(map)
-      .bindPopup("<b>Жолооч</b><br>Захиалгаа авч яваа");
-
-    // ── DRIVERS DATA ─────────────────────────────────────────
+    // ── DRIVER ──
     const drivers = [
-      { name: "Болд Доржсүрэн", car: "Toyota Prius · УНА-1234", rating: "4.9", avatar: "👨", phone: "99112233" },
-      { name: "Баяр Гантулга",  car: "Hyundai Tucson · УБА-5678", rating: "4.8", avatar: "🧔", phone: "88223344" },
-      { name: "Мөнхбаяр Ч.",    car: "Mitsubishi Outlander · УЦА-9012", rating: "4.7", avatar: "👦", phone: "99334455" }
+      { av:"👨", name:"Болд Доржсүрэн",  car:"Toyota Prius · УНА-1234",         rating:"4.9", phone:"99112233" },
+      { av:"🧔", name:"Баяр Гантулга",   car:"Hyundai Tucson · УБА-5678",        rating:"4.8", phone:"88223344" },
+      { av:"👦", name:"Мөнхбаяр Ч.",     car:"Mitsubishi Outlander · УЦА-9012",  rating:"4.7", phone:"99334455" },
+      { av:"🧑", name:"Эрдэнэбат С.",    car:"Kia Sportage · УДА-3456",          rating:"5.0", phone:"88445566" },
     ];
-    const driver = drivers[Math.floor(Math.random() * drivers.length)];
+    const d = drivers[Math.floor(Math.random() * drivers.length)];
+    document.getElementById("driverAv").textContent     = d.av;
+    document.getElementById("driverName").textContent   = d.name;
+    document.getElementById("driverCar").textContent    = d.car;
+    document.getElementById("driverRating").textContent = d.rating;
+    document.getElementById("driverCall").href          = `tel:${d.phone}`;
 
-    // ── STATUS TIMELINE LOGIC ─────────────────────────────────
-    const steps = [
-      { id: "step-0", label: "Захиалга баталгаажсан",  delay: 0 },
-      { id: "step-1", label: "Бэлтгэж байна",          delay: 5000 },
-      { id: "step-2", label: "Жолооч томилогдсон",     delay: 14000 },
-      { id: "step-3", label: "Замд яваа",               delay: 22000 },
-      { id: "step-4", label: "Хүргэгдсэн",             delay: 70000 }
-    ];
+    // ── DELIVERY INFO ──
+    const del = order.delivery || {};
+    const addrParts = del.locType === "province"
+      ? [del.district && del.district + " аймаг", del.khoroo && del.khoroo + " сум", del.building, del.apartment && del.apartment + " тоот"]
+      : [del.district && del.district + " дүүрэг", del.khoroo, del.building && del.building + " байр", del.apartment && del.apartment + " тоот"];
+    document.getElementById("infoAddress").textContent = addrParts.filter(Boolean).join(", ") || "—";
+    document.getElementById("infoName").textContent  = del.name  || "—";
+    document.getElementById("infoPhone").textContent = del.phone || "—";
 
-    let currentStep = 0;
+    const payLabels = {
+      qpay:"QPay / QR код", mbank:"М банк", storepay:"Storepay",
+      pocket:"Pocket", ardpay:"Ard Pay", simple:"Simple",
+      socialpay:"Social Pay", toki:"Toki", hipay:"Hipay",
+      wechat:"WeChat Pay", happypay:"HappyPay", lenddy:"LendDy",
+      card:"Банкны карт", cash:"Бэлэн мөнгө"
+    };
+    document.getElementById("infoPayment").textContent = payLabels[order.payment] || order.payment || "—";
 
-    function markDone(stepIdx) {
-      const el = document.getElementById(`step-${stepIdx}`);
-      if (!el) return;
-      el.classList.remove("active");
-      el.classList.add("done");
-      el.querySelector(".status-dot").textContent = "✓";
-      document.getElementById(`time-${stepIdx}`).textContent = now();
-    }
+    // ── ITEMS ──
+    document.getElementById("itemsList").innerHTML = order.items.map(p => `
+      <div class="item-row">
+        <img src="${p.image}" alt="${p.name}" onerror="this.style.background='#eee'">
+        <div style="flex:1">
+          <div class="item-row-name">${p.name}</div>
+          <div class="item-row-sub">${p.brand} · x${p.qty||1}</div>
+        </div>
+        <div class="item-row-price">${formatPrice(p.newPrice*(p.qty||1))}</div>
+      </div>`).join("");
 
-    function markActive(stepIdx) {
-      const el = document.getElementById(`step-${stepIdx}`);
-      if (!el) return;
-      el.classList.add("active");
-    }
-
-    function now() {
-      return new Date().toLocaleTimeString("mn-MN", { hour: "2-digit", minute: "2-digit" });
-    }
-
-    // Set time for step 0 immediately
-    document.getElementById("time-0").textContent = now();
-
-    // Advance steps
-    steps.forEach((s, i) => {
-      if (i === 0) return;
-      setTimeout(() => {
-        markDone(i - 1);
-        if (i < steps.length - 1) {
-          markActive(i);
-          currentStep = i;
-          document.getElementById(`time-${i}`).textContent = now();
-        }
-
-        // Show driver card after step 2
-        if (i === 2) {
-          showDriver();
-        }
-
-        // Start driver movement after step 3
-        if (i === 3) {
-          document.getElementById("bannerSub").textContent = "Жолооч таны захиалгыг авч яваа...";
-          startDriverMovement();
-        }
-      }, s.delay);
-    });
-
-    function showDriver() {
-      document.getElementById("driverName").textContent = driver.name;
-      document.getElementById("driverCar").textContent = driver.car;
-      document.getElementById("driverRating").textContent = driver.rating;
-      document.getElementById("driverAvatar").textContent = driver.avatar;
-      document.getElementById("driverCallBtn").href = `tel:${driver.phone}`;
-      document.getElementById("driverCard").classList.add("show");
-    }
-
-    // ── DRIVER MOVEMENT ───────────────────────────────────────
-    const TOTAL_MOVE_STEPS = 48;   // number of position updates
-    const MOVE_INTERVAL = 1000;    // ms between each update (total ~48s)
-    let moveStep = 0;
-    let moveTimer = null;
-
-    const latStep = (DEST[0] - STORE[0]) / TOTAL_MOVE_STEPS;
-    const lngStep = (DEST[1] - STORE[1]) / TOTAL_MOVE_STEPS;
-
-    function startDriverMovement() {
-      // Initial ETA
-      updateETA(TOTAL_MOVE_STEPS);
-      document.getElementById("etaFill").style.width = "5%";
-
-      moveTimer = setInterval(() => {
-        moveStep++;
-        driverPos = [
-          STORE[0] + latStep * moveStep,
-          STORE[1] + lngStep * moveStep
-        ];
-        driverMarker.setLatLng(driverPos);
-        map.panTo(driverPos, { animate: true, duration: 0.8 });
-
-        const pct = Math.round((moveStep / TOTAL_MOVE_STEPS) * 100);
-        document.getElementById("etaFill").style.width = pct + "%";
-
-        const remaining = TOTAL_MOVE_STEPS - moveStep;
-        updateETA(remaining);
-
-        if (moveStep >= TOTAL_MOVE_STEPS) {
-          clearInterval(moveTimer);
-          onDelivered();
-        }
-      }, MOVE_INTERVAL);
-    }
-
-    function updateETA(stepsLeft) {
-      const minutes = Math.max(0, Math.round(stepsLeft * MOVE_INTERVAL / 60000));
-      document.getElementById("etaValue").textContent = minutes <= 0 ? "Хүрлээ!" : `${minutes} мин`;
-    }
-
-    function onDelivered() {
-      markDone(3);
-      markDone(4);
-      const step4 = document.getElementById("step-4");
-      step4.classList.add("done");
-      step4.classList.remove("active");
-      document.getElementById(`time-4`).textContent = now();
-      document.getElementById("bannerSub").textContent = "Таны захиалга амжилттай хүргэгдлээ!";
-      document.querySelector(".order-banner").style.background = "linear-gradient(135deg, hsl(220,60%,35%), hsl(220,60%,25%))";
-      driverMarker.setLatLng(DEST).bindPopup("<b>Хүргэлт дууссан!</b>").openPopup();
-    }
+    document.getElementById("orderTotal").textContent = formatPrice(order.total);
   </script>
 </body>
 
