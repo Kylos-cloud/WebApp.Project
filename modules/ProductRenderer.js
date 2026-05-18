@@ -24,7 +24,7 @@ export class ProductRenderer {
     const tagHTML    = p.tag
       ? `<span class="product-tag product-tag--${p.tag}">${p.tag === "sale" ? "SALE" : "NEW"}</span>`
       : "";
-    const stockClass = p.inStock ? "" : "product--outofstock";
+    const stockClass = p.stock > 0 ? "" : "product--outofstock";
 
     return `
       <article class="product ${stockClass}" data-id="${p.id}" data-category="${p.category}">
@@ -33,7 +33,7 @@ export class ProductRenderer {
             <img src="${p.image}" alt="${p.name}" loading="lazy"
                  onerror="this.style.display='none'">
             ${tagHTML}
-            ${!p.inStock ? `<span class="product-tag product-tag--out">ДУУССАН</span>` : ""}
+            ${p.stock === 0 ? `<span class="product-tag product-tag--out">ДУУССАН</span>` : ""}
           </figure>
           <h3>${p.name}</h3>
           <p class="price">

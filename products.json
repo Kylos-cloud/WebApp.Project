@@ -10,7 +10,7 @@
       "newPrice": 60000,
       "brand": "Loewe",
       "rating": 4.5,
-      "inStock": true
+      "stock": 12
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
       "newPrice": 390000,
       "brand": "Maison Margiela",
       "rating": 4.8,
-      "inStock": true
+      "stock": 5
     },
     {
       "id": 3,
@@ -34,7 +34,7 @@
       "newPrice": 340000,
       "brand": "Byredo",
       "rating": 4.7,
-      "inStock": true
+      "stock": 7
     },
     {
       "id": 4,
@@ -46,7 +46,7 @@
       "newPrice": 10,
       "brand": "Acne Studios",
       "rating": 4.6,
-      "inStock": true
+      "stock": 8
     },
     {
       "id": 5,
@@ -58,7 +58,7 @@
       "newPrice": 740000,
       "brand": "Generic",
       "rating": 4.2,
-      "inStock": true
+      "stock": 15
     },
     {
       "id": 6,
@@ -70,7 +70,7 @@
       "newPrice": 97000,
       "brand": "Wellness",
       "rating": 4.0,
-      "inStock": false
+      "stock": 0
     },
     {
       "id": 7,
@@ -82,7 +82,7 @@
       "newPrice": 6100000,
       "brand": "Apple",
       "rating": 5.0,
-      "inStock": true
+      "stock": 4
     },
     {
       "id": 8,
@@ -94,7 +94,7 @@
       "newPrice": 300000,
       "brand": "Generic",
       "rating": 3.9,
-      "inStock": true
+      "stock": 25
     },
     {
       "id": 9,
@@ -106,7 +106,7 @@
       "newPrice": 300000,
       "brand": "Sony",
       "rating": 4.3,
-      "inStock": true
+      "stock": 18
     },
     {
       "id": 10,
@@ -118,7 +118,7 @@
       "newPrice": 300000,
       "brand": "Generic",
       "rating": 4.1,
-      "inStock": true
+      "stock": 20
     },
     {
       "id": 11,
@@ -130,7 +130,7 @@
       "newPrice": 5500000,
       "brand": "Samsung",
       "rating": 4.8,
-      "inStock": true
+      "stock": 6
     },
     {
       "id": 12,
@@ -142,7 +142,7 @@
       "newPrice": 7900000,
       "brand": "Apple",
       "rating": 4.9,
-      "inStock": true
+      "stock": 9
     },
     {
       "id": 13,
@@ -154,7 +154,7 @@
       "newPrice": 890000,
       "brand": "Sony",
       "rating": 4.7,
-      "inStock": true
+      "stock": 11
     },
     {
       "id": 14,
@@ -166,7 +166,7 @@
       "newPrice": 3950000,
       "brand": "Apple",
       "rating": 4.8,
-      "inStock": true
+      "stock": 7
     },
     {
       "id": 15,
@@ -178,7 +178,7 @@
       "newPrice": 2600000,
       "brand": "DJI",
       "rating": 4.6,
-      "inStock": true
+      "stock": 5
     },
     {
       "id": 16,
@@ -190,7 +190,7 @@
       "newPrice": 1450000,
       "brand": "LG",
       "rating": 4.4,
-      "inStock": true
+      "stock": 13
     },
     {
       "id": 17,
@@ -202,7 +202,7 @@
       "newPrice": 390000,
       "brand": "Keychron",
       "rating": 4.5,
-      "inStock": true
+      "stock": 16
     },
     {
       "id": 18,
@@ -214,7 +214,7 @@
       "newPrice": 1650000,
       "brand": "GoPro",
       "rating": 4.6,
-      "inStock": true
+      "stock": 8
     },
     {
       "id": 19,
@@ -226,7 +226,7 @@
       "newPrice": 320000,
       "brand": "Nike",
       "rating": 4.7,
-      "inStock": true
+      "stock": 22
     },
     {
       "id": 20,
@@ -238,7 +238,7 @@
       "newPrice": 460000,
       "brand": "Adidas",
       "rating": 4.5,
-      "inStock": true
+      "stock": 19
     },
     {
       "id": 21,
@@ -250,7 +250,7 @@
       "newPrice": 210000,
       "brand": "Levi's",
       "rating": 4.3,
-      "inStock": true
+      "stock": 30
     },
     {
       "id": 22,
@@ -262,7 +262,7 @@
       "newPrice": 490000,
       "brand": "Zara",
       "rating": 4.2,
-      "inStock": true
+      "stock": 14
     },
     {
       "id": 23,
@@ -274,7 +274,7 @@
       "newPrice": 65000,
       "brand": "H&M",
       "rating": 3.8,
-      "inStock": true
+      "stock": 35
     },
     {
       "id": 24,
@@ -286,7 +286,7 @@
       "newPrice": 240000,
       "brand": "Converse",
       "rating": 4.4,
-      "inStock": true
+      "stock": 28
     },
     {
       "id": 25,
@@ -298,7 +298,7 @@
       "newPrice": 590000,
       "brand": "UGG",
       "rating": 4.6,
-      "inStock": true
+      "stock": 10
     },
     {
       "id": 26,
@@ -310,7 +310,7 @@
       "newPrice": 310000,
       "brand": "ALO",
       "rating": 4.8,
-      "inStock": true
+      "stock": 17
     },
     {
       "id": 27,
@@ -322,7 +322,7 @@
       "newPrice": 1850000,
       "brand": "Dyson",
       "rating": 4.9,
-      "inStock": true
+      "stock": 6
     },
     {
       "id": 28,
@@ -334,7 +334,7 @@
       "newPrice": 140000,
       "brand": "Mixsoon",
       "rating": 4.6,
-      "inStock": true
+      "stock": 23
     },
     {
       "id": 29,
@@ -346,7 +346,7 @@
       "newPrice": 750000,
       "brand": "La Mer",
       "rating": 4.7,
-      "inStock": true
+      "stock": 9
     },
     {
       "id": 30,
@@ -358,7 +358,7 @@
       "newPrice": 180000,
       "brand": "Tatcha",
       "rating": 4.5,
-      "inStock": true
+      "stock": 14
     },
     {
       "id": 31,
@@ -370,7 +370,7 @@
       "newPrice": 115000,
       "brand": "Charlotte Tilbury",
       "rating": 4.8,
-      "inStock": true
+      "stock": 21
     },
     {
       "id": 32,
@@ -382,7 +382,7 @@
       "newPrice": 290000,
       "brand": "Sulwhasoo",
       "rating": 4.7,
-      "inStock": true
+      "stock": 11
     },
     {
       "id": 33,
@@ -394,7 +394,7 @@
       "newPrice": 2200000,
       "brand": "Dyson",
       "rating": 4.8,
-      "inStock": true
+      "stock": 7
     },
     {
       "id": 34,
@@ -406,7 +406,7 @@
       "newPrice": 130000,
       "brand": "Generic",
       "rating": 4.3,
-      "inStock": true
+      "stock": 18
     },
     {
       "id": 35,
@@ -418,7 +418,7 @@
       "newPrice": 720000,
       "brand": "Le Creuset",
       "rating": 4.9,
-      "inStock": true
+      "stock": 12
     },
     {
       "id": 36,
@@ -430,7 +430,7 @@
       "newPrice": 1050000,
       "brand": "Nespresso",
       "rating": 4.6,
-      "inStock": true
+      "stock": 9
     },
     {
       "id": 37,
@@ -442,7 +442,7 @@
       "newPrice": 220000,
       "brand": "Generic",
       "rating": 4.4,
-      "inStock": true
+      "stock": 20
     },
     {
       "id": 38,
@@ -454,7 +454,7 @@
       "newPrice": 55000,
       "brand": "Generic",
       "rating": 4.1,
-      "inStock": true
+      "stock": 32
     },
     {
       "id": 39,
@@ -466,7 +466,7 @@
       "newPrice": 860000,
       "brand": "Away",
       "rating": 4.7,
-      "inStock": true
+      "stock": 8
     },
     {
       "id": 40,
@@ -478,7 +478,7 @@
       "newPrice": 590000,
       "brand": "Osprey",
       "rating": 4.8,
-      "inStock": true
+      "stock": 13
     },
     {
       "id": 41,
@@ -490,7 +490,7 @@
       "newPrice": 45000,
       "brand": "Generic",
       "rating": 4.0,
-      "inStock": true
+      "stock": 40
     },
     {
       "id": 42,
@@ -502,7 +502,7 @@
       "newPrice": 42000,
       "brand": "Generic",
       "rating": 4.2,
-      "inStock": true
+      "stock": 45
     },
     {
       "id": 43,
@@ -514,7 +514,7 @@
       "newPrice": 430000,
       "brand": "Whoop",
       "rating": 4.5,
-      "inStock": true
+      "stock": 10
     },
     {
       "id": 44,
@@ -526,7 +526,7 @@
       "newPrice": 1500000,
       "brand": "Vitamix",
       "rating": 4.8,
-      "inStock": true
+      "stock": 6
     },
     {
       "id": 45,
@@ -538,7 +538,7 @@
       "newPrice": 40000,
       "brand": "Wellness",
       "rating": 4.3,
-      "inStock": true
+      "stock": 50
     },
     {
       "id": 46,
@@ -550,7 +550,7 @@
       "newPrice": 920000,
       "brand": "Theragun",
       "rating": 4.7,
-      "inStock": true
+      "stock": 8
     },
     {
       "id": 47,
@@ -562,7 +562,7 @@
       "newPrice": 365000,
       "brand": "Manduka",
       "rating": 4.6,
-      "inStock": true
+      "stock": 15
     },
     {
       "id": 48,
@@ -574,7 +574,7 @@
       "newPrice": 280000,
       "brand": "Nike",
       "rating": 4.4,
-      "inStock": true
+      "stock": 24
     },
     {
       "id": 49,
@@ -586,7 +586,7 @@
       "newPrice": 430000,
       "brand": "Fjallraven",
       "rating": 4.5,
-      "inStock": true
+      "stock": 16
     },
     {
       "id": 50,
@@ -598,7 +598,7 @@
       "newPrice": 450000,
       "brand": "Amazon",
       "rating": 4.6,
-      "inStock": true
+      "stock": 19
     },
     {
       "id": 51,
@@ -610,7 +610,7 @@
       "newPrice": 680000,
       "brand": "Patagonia",
       "rating": 4.8,
-      "inStock": true
+      "stock": 11
     },
     {
       "id": 52,
@@ -622,7 +622,7 @@
       "newPrice": 88000,
       "brand": "Hydro Flask",
       "rating": 4.7,
-      "inStock": true
+      "stock": 27
     },
     {
       "id": 53,
@@ -634,7 +634,7 @@
       "newPrice": 62000,
       "brand": "Anker",
       "rating": 4.5,
-      "inStock": true
+      "stock": 38
     },
     {
       "id": 54,
@@ -646,7 +646,7 @@
       "newPrice": 625000,
       "brand": "Casio",
       "rating": 4.6,
-      "inStock": true
+      "stock": 13
     },
     {
       "id": 55,
@@ -658,7 +658,7 @@
       "newPrice": 390000,
       "brand": "Ray-Ban",
       "rating": 4.5,
-      "inStock": true
+      "stock": 17
     },
     {
       "id": 56,
@@ -670,7 +670,7 @@
       "newPrice": 165000,
       "brand": "Fenty Beauty",
       "rating": 4.7,
-      "inStock": true
+      "stock": 22
     },
     {
       "id": 57,
@@ -682,7 +682,7 @@
       "newPrice": 145000,
       "brand": "Kiehl's",
       "rating": 4.6,
-      "inStock": true
+      "stock": 20
     },
     {
       "id": 58,
@@ -694,7 +694,7 @@
       "newPrice": 25000,
       "brand": "Generic",
       "rating": 4.1,
-      "inStock": true
+      "stock": 35
     },
     {
       "id": 59,
@@ -706,7 +706,7 @@
       "newPrice": 510000,
       "brand": "Coleman",
       "rating": 4.3,
-      "inStock": true
+      "stock": 9
     },
     {
       "id": 60,
@@ -718,7 +718,7 @@
       "newPrice": 340000,
       "brand": "Instant Pot",
       "rating": 4.7,
-      "inStock": true
+      "stock": 14
     },
     {
       "id": 61,
@@ -730,7 +730,7 @@
       "newPrice": 43000,
       "brand": "Moleskine",
       "rating": 4.5,
-      "inStock": true
+      "stock": 28
     },
     {
       "id": 62,
@@ -742,7 +742,7 @@
       "newPrice": 105000,
       "brand": "Lamy",
       "rating": 4.7,
-      "inStock": true
+      "stock": 16
     },
     {
       "id": 63,
@@ -754,7 +754,7 @@
       "newPrice": 115000,
       "brand": "Catan Studio",
       "rating": 4.8,
-      "inStock": true
+      "stock": 21
     },
     {
       "id": 64,
@@ -766,7 +766,7 @@
       "newPrice": 220000,
       "brand": "Sony",
       "rating": 4.7,
-      "inStock": true
+      "stock": 18
     },
     {
       "id": 65,
@@ -778,7 +778,7 @@
       "newPrice": 290000,
       "brand": "LEGO",
       "rating": 4.9,
-      "inStock": true
+      "stock": 12
     },
     {
       "id": 66,
@@ -790,7 +790,7 @@
       "newPrice": 95000,
       "brand": "Purina",
       "rating": 4.5,
-      "inStock": true
+      "stock": 30
     },
     {
       "id": 67,
@@ -802,7 +802,7 @@
       "newPrice": 175000,
       "brand": "Generic",
       "rating": 4.3,
-      "inStock": true
+      "stock": 14
     },
     {
       "id": 68,
@@ -814,7 +814,7 @@
       "newPrice": 110000,
       "brand": "Wellness",
       "rating": 4.2,
-      "inStock": true
+      "stock": 25
     },
     {
       "id": 69,
@@ -826,7 +826,7 @@
       "newPrice": 1150000,
       "brand": "Nintendo",
       "rating": 4.8,
-      "inStock": true
+      "stock": 7
     },
     {
       "id": 70,
@@ -838,7 +838,7 @@
       "newPrice": 20000,
       "brand": "Mixsoon",
       "rating": 4.4,
-      "inStock": true
+      "stock": 33
     },
     {
       "id": 71,
@@ -850,7 +850,7 @@
       "newPrice": 70000,
       "brand": "Generic",
       "rating": 4.3,
-      "inStock": true
+      "stock": 22
     },
     {
       "id": 72,
@@ -862,7 +862,7 @@
       "newPrice": 365000,
       "brand": "Polaroid",
       "rating": 4.4,
-      "inStock": true
+      "stock": 10
     },
     {
       "id": 73,
@@ -874,7 +874,7 @@
       "newPrice": 62000,
       "brand": "Bodum",
       "rating": 4.5,
-      "inStock": true
+      "stock": 19
     },
     {
       "id": 74,
@@ -886,7 +886,7 @@
       "newPrice": 92000,
       "brand": "Glossier",
       "rating": 4.6,
-      "inStock": true
+      "stock": 24
     },
     {
       "id": 75,
@@ -898,7 +898,7 @@
       "newPrice": 820000,
       "brand": "Beats",
       "rating": 4.5,
-      "inStock": true
+      "stock": 8
     },
     {
       "id": 76,
@@ -910,7 +910,7 @@
       "newPrice": 270000,
       "brand": "Acne Studios",
       "rating": 4.3,
-      "inStock": true
+      "stock": 15
     },
     {
       "id": 77,
@@ -922,7 +922,7 @@
       "newPrice": 32000,
       "brand": "Spigen",
       "rating": 4.4,
-      "inStock": true
+      "stock": 42
     },
     {
       "id": 78,
@@ -934,7 +934,7 @@
       "newPrice": 38000,
       "brand": "Generic",
       "rating": 4.2,
-      "inStock": true
+      "stock": 36
     },
     {
       "id": 79,
@@ -946,7 +946,7 @@
       "newPrice": 92000,
       "brand": "Aesop",
       "rating": 4.7,
-      "inStock": true
+      "stock": 18
     },
     {
       "id": 80,
@@ -958,7 +958,7 @@
       "newPrice": 210000,
       "brand": "IKEA",
       "rating": 4.4,
-      "inStock": true
+      "stock": 11
     }
   ],
   "brands": [

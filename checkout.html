@@ -536,7 +536,7 @@
       <h1 class="logo"><a href="index.html">SHOP</a></h1>
       <search class="search"><input type="text" placeholder="Бараа хайх..."></search>
       <nav class="icons">
-        <a href="login.html" class="icon-profile">
+        <a href="profile.html" class="icon-profile">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
           </svg>
@@ -1057,6 +1057,7 @@
     </div>
   </div>
 
+  <script type="module" src="badges.js"></script>
   <script type="module">
     import { getMe, getCart, formatPrice } from "./store.js";
 
@@ -1145,14 +1146,20 @@
         },
         payment: payMethod,
         subtotal, delFee, ecoFee, total,
+        status: "confirmed",
         timestamp: new Date().toISOString()
       };
       localStorage.setItem("current_order", JSON.stringify(order));
 
-      // Clear cart
+      // Save order to user's history & clear cart
       const users = JSON.parse(localStorage.getItem("shop_users") || "[]");
       const idx = users.findIndex(u => u.id === me.id);
-      if (idx !== -1) { users[idx].cart = []; localStorage.setItem("shop_users", JSON.stringify(users)); }
+      if (idx !== -1) {
+        users[idx].cart = [];
+        if (!Array.isArray(users[idx].orders)) users[idx].orders = [];
+        users[idx].orders.unshift(order);
+        localStorage.setItem("shop_users", JSON.stringify(users));
+      }
 
       location.href = "tracking.html";
     };

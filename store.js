@@ -33,6 +33,7 @@ function patchUser(fn) {
   if (idx === -1) return;
   fn(users[idx]);
   saveAllUsers(users);
+  window.dispatchEvent(new Event("shopStoreUpdated"));
 }
 
 // ── SAVED (wishlist) ─────────────────────────────────────
@@ -95,6 +96,26 @@ export function isInCart(productId) {
 
 export function getCartTotal() {
   return getCart().reduce((sum, p) => sum + p.newPrice * (p.qty || 1), 0);
+}
+
+// ── ORDERS ──────────────────────────────────────────────
+export function getOrders() {
+  const data = getUserData();
+  if (!data) return [];
+  const orders = data.orders;
+  if (!Array.isArray(orders)) return [];
+  return orders;
+}
+
+export function addOrder(order) {
+  patchUser(user => {
+    if (!Array.isArray(user.orders)) user.orders = [];
+    user.orders.unshift(order);
+  });
+}
+
+export function getOrderById(orderId) {
+  return getOrders().find(o => o.id === orderId) || null;
 }
 
 export function formatPrice(n) {
