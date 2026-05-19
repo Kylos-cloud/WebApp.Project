@@ -6,748 +6,1159 @@
     <title>SHOP — Admin Panel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
         :root {
-            --color-bg: hsl(0, 0%, 95%);
-            --color-bg1: hsl(0, 0%, 90%);
-            --color-surface: hsl(0, 0%, 100%);
-            --color-border: hsl(0, 0%, 88%);
-            --color-input: hsl(0, 0%, 96%);
-            --color-text: hsl(0, 0%, 15%);
-            --color-muted: hsl(0, 0%, 55%);
-            --color-accent: hsl(0, 0%, 15%);
-            --color-white: hsl(0, 0%, 100%);
-            --color-green: hsl(140, 50%, 40%);
-            --color-red: hsl(0, 60%, 50%);
-            --color-yellow: hsl(40, 80%, 50%);
-            --shadow-card: 0 2px 12px hsl(0 0% 0% / 0.06);
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 16px;
-            --sidebar-w: 240px;
+            --color-bg: hsl(0,0%,95%);
+            --color-bg1: hsl(0,0%,90%);
+            --color-surface: hsl(0,0%,100%);
+            --color-border: hsl(0,0%,88%);
+            --color-input: hsl(0,0%,96%);
+            --color-text: hsl(0,0%,15%);
+            --color-muted: hsl(0,0%,55%);
+            --color-white: hsl(0,0%,100%);
+            --color-green: hsl(140,50%,40%);
+            --color-red: hsl(0,60%,50%);
+            --color-yellow: hsl(40,80%,50%);
+            --shadow-card: 0 2px 12px hsl(0 0% 0%/.06);
+            --shadow-lg: 0 8px 32px hsl(0 0% 0%/.12);
+            --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px;
+            --sidebar-w: 240px; --topbar-h: 65px;
         }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        h1,h2,h3,h4,h5,h6 { font-weight:600; margin:0; }
+        menu,ul { list-style:none; padding:0; }
+        search { display:flex; }
+        figure { margin:0; display:flex; align-items:center; gap:12px; }
+        body { font-family:'DM Sans',sans-serif; background:var(--color-bg); color:var(--color-text); display:flex; min-height:100vh; font-size:14px; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* Таагуудын шинэчлэгдсэн reset */
-        h1, h2, h3, h4, h5, h6 { font-weight: 600; margin: 0; }
-        menu, ul { list-style: none; padding: 0; }
-        search { display: flex; }
-        figure { margin: 0; display: flex; align-items: center; gap: 12px;}
+        /* ── SIDEBAR ── */
+        .sidebar { width:var(--sidebar-w); background:var(--color-surface); border-right:1px solid var(--color-border); display:flex; flex-direction:column; position:fixed; top:0; left:0; height:100vh; z-index:100; transition:transform .28s ease,box-shadow .28s ease; }
+        .sidebar-logo { font-family:'DM Serif Display',serif; font-size:22px; letter-spacing:3px; padding:28px 24px 20px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; justify-content:space-between; }
+        .admin-badge { font-family:'DM Sans',sans-serif; font-size:10px; background:var(--color-text); color:var(--color-white); padding:2px 7px; border-radius:20px; letter-spacing:1px; }
+        .sidebar-nav { flex:1; padding:16px 12px; display:flex; flex-direction:column; gap:2px; overflow-y:auto; }
+        .nav-section-label { font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--color-muted); padding:14px 12px 6px; }
+        .nav-item { display:flex; align-items:center; gap:10px; padding:9px 12px; border-radius:var(--radius-sm); cursor:pointer; color:var(--color-muted); font-weight:500; transition:all .18s; text-decoration:none; }
+        .nav-item:hover { background:var(--color-bg); color:var(--color-text); }
+        .nav-item.active { background:var(--color-text); color:var(--color-white); }
+        .nav-item svg { width:16px; height:16px; flex-shrink:0; }
+        .nav-badge { margin-left:auto; background:var(--color-red); color:white; font-size:10px; font-weight:700; padding:1px 6px; border-radius:20px; }
+        .nav-item.active .nav-badge { background:hsl(0,60%,70%); }
+        .sidebar-footer { padding:16px 12px; border-top:1px solid var(--color-border); }
+        .sidebar-user { display:flex; align-items:center; gap:10px; padding:8px 12px; border-radius:var(--radius-sm); }
+        .user-avatar { width:32px; height:32px; border-radius:50%; background:var(--color-text); color:white; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; }
+        .user-info { flex:1; min-width:0; }
+        .user-name { font-size:13px; font-weight:600; }
+        .user-role { font-size:11px; color:var(--color-muted); }
+        .logout-btn { display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:var(--radius-sm); cursor:pointer; color:var(--color-muted); font-size:13px; font-weight:500; transition:all .18s; margin-top:4px; text-decoration:none; }
+        .logout-btn:hover { background:hsl(0,40%,96%); color:var(--color-red); }
+        .logout-btn svg { width:15px; height:15px; }
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--color-bg);
-            color: var(--color-text);
-            display: flex;
-            min-height: 100vh;
-            font-size: 14px;
+        /* ── SIDEBAR OVERLAY ── */
+        .sidebar-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:99; opacity:0; transition:opacity .28s ease; }
+        .sidebar-overlay.open { opacity:1; }
+
+        /* ── MAIN ── */
+        .main { margin-left:var(--sidebar-w); flex:1; display:flex; flex-direction:column; min-height:100vh; min-width:0; }
+        .topbar { background:var(--color-surface); border-bottom:1px solid var(--color-border); padding:0 28px; height:var(--topbar-h); display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:50; gap:16px; }
+        .topbar-left { display:flex; align-items:center; gap:14px; min-width:0; }
+        .menu-toggle { display:none; width:36px; height:36px; border-radius:var(--radius-sm); border:1px solid var(--color-border); background:transparent; cursor:pointer; align-items:center; justify-content:center; color:var(--color-text); flex-shrink:0; transition:background .15s; }
+        .menu-toggle:hover { background:var(--color-bg); }
+        .menu-toggle svg { width:18px; height:18px; }
+        .topbar-titles { min-width:0; }
+        .topbar-title { font-size:18px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .topbar-sub { font-size:12px; color:var(--color-muted); margin-top:1px; }
+        .topbar-actions { display:flex; gap:8px; align-items:center; flex-shrink:0; }
+
+        /* ── NOTIFICATION BELL ── */
+        .notif-wrap { position:relative; }
+        .notif-btn { width:36px; height:36px; border-radius:var(--radius-sm); border:1px solid var(--color-border); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--color-muted); position:relative; transition:all .15s; }
+        .notif-btn:hover { background:var(--color-bg); color:var(--color-text); }
+        .notif-btn svg { width:17px; height:17px; }
+        .notif-dot { position:absolute; top:7px; right:7px; width:7px; height:7px; border-radius:50%; background:var(--color-red); border:2px solid var(--color-surface); }
+        .notif-panel { position:absolute; top:calc(100% + 8px); right:0; width:300px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); box-shadow:var(--shadow-lg); z-index:300; display:none; overflow:hidden; }
+        .notif-panel.open { display:block; animation:fadeUp .18s ease; }
+        .notif-ph { padding:13px 18px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; justify-content:space-between; }
+        .notif-ph h4 { font-size:14px; }
+        .notif-clear { font-size:12px; color:var(--color-muted); background:none; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; }
+        .notif-clear:hover { color:var(--color-text); }
+        .notif-item { padding:12px 18px; border-bottom:1px solid var(--color-border); display:flex; gap:10px; cursor:pointer; transition:background .15s; }
+        .notif-item:last-child { border-bottom:none; }
+        .notif-item:hover { background:var(--color-bg); }
+        .notif-item.unread { background:hsl(210,60%,99%); }
+        .notif-ico { width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:13px; }
+        .notif-ico.g { background:hsl(140,40%,92%); }
+        .notif-ico.r { background:hsl(0,40%,92%); }
+        .notif-ico.b { background:hsl(210,40%,92%); }
+        .notif-info { flex:1; }
+        .notif-info p { font-size:13px; font-weight:500; }
+        .notif-info span { font-size:11px; color:var(--color-muted); }
+
+        /* ── BUTTONS ── */
+        .btn { padding:8px 16px; border-radius:var(--radius-sm); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; cursor:pointer; border:none; transition:all .18s; white-space:nowrap; }
+        .btn-dark { background:var(--color-text); color:white; }
+        .btn-dark:hover { opacity:.82; }
+        .btn-outline { background:transparent; color:var(--color-text); border:1px solid var(--color-border); }
+        .btn-outline:hover { background:var(--color-bg); }
+        .btn-danger { background:var(--color-red); color:white; }
+        .btn-danger:hover { opacity:.82; }
+        .btn-sm { padding:6px 12px; font-size:12px; }
+
+        .content { padding:28px 32px; flex:1; }
+        .section { display:none; animation:fadeIn .25s ease; }
+        .section.active { display:block; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+        /* ── DASHBOARD ── */
+        .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
+        .stat-card { background:var(--color-surface); border-radius:var(--radius-md); padding:22px 24px; box-shadow:var(--shadow-card); border:1px solid var(--color-border); transition:box-shadow .2s,transform .2s; }
+        .stat-card:hover { box-shadow:0 6px 24px hsl(0 0% 0%/.1); transform:translateY(-1px); }
+        .stat-label { font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--color-muted); margin-bottom:8px; }
+        .stat-value { font-size:28px; font-family:'DM Serif Display',serif; margin-bottom:4px; }
+        .stat-change { font-size:12px; display:flex; align-items:center; gap:4px; }
+        .stat-change.up { color:var(--color-green); }
+        .stat-change.down { color:var(--color-red); }
+        .dashboard-grid { display:grid; grid-template-columns:1fr 1fr 320px; gap:16px; }
+
+        /* ── CHART ── */
+        .chart-wrap { padding:20px 20px 0; }
+        .chart-bars { display:flex; align-items:flex-end; gap:6px; height:110px; }
+        .bar-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:0; cursor:default; }
+        .bar-fill-track { width:100%; flex:1; display:flex; align-items:flex-end; }
+        .bar-fill { width:100%; border-radius:4px 4px 0 0; background:var(--color-bg1); transform-origin:bottom; transform:scaleY(0); animation:growBar .65s cubic-bezier(.16,1,.3,1) forwards; position:relative; }
+        .bar-fill.peak { background:var(--color-text); }
+        .bar-fill:not(.peak):hover { background:hsl(0,0%,78%); }
+        .bar-fill.peak:hover { opacity:.85; }
+        .bar-fill::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:var(--color-text); color:white; font-size:10px; padding:3px 8px; border-radius:4px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .15s; }
+        .bar-fill:hover::after { opacity:1; }
+        .bar-lbl { font-size:10px; color:var(--color-muted); padding:6px 0 4px; }
+        @keyframes growBar { to { transform:scaleY(1); } }
+        .bar-item:nth-child(1) .bar-fill { animation-delay:.04s; }
+        .bar-item:nth-child(2) .bar-fill { animation-delay:.1s; }
+        .bar-item:nth-child(3) .bar-fill { animation-delay:.16s; }
+        .bar-item:nth-child(4) .bar-fill { animation-delay:.22s; }
+        .bar-item:nth-child(5) .bar-fill { animation-delay:.28s; }
+        .bar-item:nth-child(6) .bar-fill { animation-delay:.34s; }
+        .bar-item:nth-child(7) .bar-fill { animation-delay:.40s; }
+
+        /* ── CARD ── */
+        .card { background:var(--color-surface); border-radius:var(--radius-md); border:1px solid var(--color-border); box-shadow:var(--shadow-card); overflow:hidden; }
+        .card-header { padding:18px 24px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; justify-content:space-between; }
+        .card-title { font-weight:600; font-size:15px; margin:0; }
+        .card-body { padding:0; }
+
+        /* ── TABLE ── */
+        .table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+        table { width:100%; border-collapse:collapse; min-width:620px; }
+        thead th { text-align:left; padding:11px 18px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--color-muted); background:var(--color-bg); border-bottom:1px solid var(--color-border); white-space:nowrap; }
+        thead th.sortable { cursor:pointer; user-select:none; transition:color .15s; }
+        thead th.sortable:hover { color:var(--color-text); }
+        thead th.sorted { color:var(--color-text); }
+        .sort-icon { font-size:10px; margin-left:3px; opacity:.35; }
+        th.sorted .sort-icon { opacity:1; }
+        tbody td { padding:12px 18px; border-bottom:1px solid var(--color-border); vertical-align:middle; }
+        tbody tr:last-child td { border-bottom:none; }
+        tbody tr:hover { background:hsl(0,0%,98.5%); }
+        tbody tr.row-selected { background:hsl(210,60%,98%); }
+
+        .product-thumb { width:42px; height:42px; border-radius:var(--radius-sm); background:var(--color-bg1); object-fit:cover; flex-shrink:0; }
+        .product-name { font-weight:500; font-size:13px; }
+        .product-sku { font-size:11px; color:var(--color-muted); }
+
+        /* ── BADGES ── */
+        .badge { display:inline-flex; align-items:center; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; }
+        .badge-green { background:hsl(140,40%,92%); color:hsl(140,50%,30%); }
+        .badge-yellow { background:hsl(40,80%,92%); color:hsl(40,70%,30%); }
+        .badge-red { background:hsl(0,40%,92%); color:hsl(0,50%,40%); }
+        .badge-gray { background:var(--color-bg1); color:var(--color-muted); }
+
+        /* ── ORDER STATUS DROPDOWN ── */
+        .status-wrap { position:relative; display:inline-block; }
+        .status-wrap .badge { cursor:pointer; }
+        .status-wrap .badge:hover { opacity:.82; }
+        .status-menu { position:absolute; top:calc(100% + 4px); left:0; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-sm); box-shadow:var(--shadow-lg); min-width:170px; z-index:200; display:none; overflow:hidden; animation:fadeUp .15s ease; }
+        .status-menu.open { display:block; }
+        .status-menu button { display:block; width:100%; text-align:left; padding:9px 14px; background:none; border:none; font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; color:var(--color-text); transition:background .12s; }
+        .status-menu button:hover { background:var(--color-bg); }
+
+        /* ── ACTION BTNS ── */
+        .action-btns { display:flex; gap:5px; }
+        .btn-icon { width:28px; height:28px; border-radius:var(--radius-sm); border:1px solid var(--color-border); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .15s; color:var(--color-muted); }
+        .btn-icon:hover { background:var(--color-bg1); color:var(--color-text); }
+        .btn-icon.del:hover { background:hsl(0,40%,92%); color:var(--color-red); border-color:hsl(0,40%,85%); }
+        .btn-icon svg { width:13px; height:13px; }
+
+        /* ── TOOLBAR ── */
+        .toolbar { display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+        .search-box { display:flex; align-items:center; gap:8px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-sm); padding:8px 14px; flex:1; min-width:180px; max-width:300px; }
+        .search-box svg { width:15px; height:15px; color:var(--color-muted); flex-shrink:0; }
+        .search-box input { border:none; outline:none; background:transparent; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--color-text); width:100%; }
+        .filter-select { padding:8px 12px; border-radius:var(--radius-sm); border:1px solid var(--color-border); background:var(--color-surface); font-family:'DM Sans',sans-serif; font-size:13px; color:var(--color-text); outline:none; cursor:pointer; }
+        .toolbar-spacer { flex:1; min-width:8px; }
+
+        /* ── STATS BAR ── */
+        .stats-bar { display:flex; gap:20px; padding:10px 18px; background:var(--color-bg); border-bottom:1px solid var(--color-border); font-size:12px; color:var(--color-muted); flex-wrap:wrap; }
+        .stats-bar strong { color:var(--color-text); }
+
+        /* ── INLINE STOCK EDIT ── */
+        .stock-cell { cursor:pointer; border-bottom:1px dashed var(--color-border); padding-bottom:1px; transition:border-color .15s; display:inline-block; min-width:24px; }
+        .stock-cell:hover { border-color:var(--color-text); }
+        .stock-input { width:60px; padding:3px 7px; border:1px solid var(--color-text); border-radius:4px; font-family:'DM Sans',sans-serif; font-size:13px; background:var(--color-surface); outline:none; }
+
+        /* ── CHECKBOX ── */
+        .cb-wrap { display:flex; align-items:center; justify-content:center; }
+        input[type=checkbox] { width:15px; height:15px; cursor:pointer; accent-color:var(--color-text); }
+
+        /* ── BULK ACTION BAR ── */
+        .bulk-bar { position:fixed; bottom:28px; left:50%; transform:translateX(-50%); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:12px 20px; display:flex; align-items:center; gap:12px; box-shadow:0 8px 40px hsl(0 0% 0%/.15); z-index:400; animation:slideUp .25s ease; white-space:nowrap; }
+        .bulk-bar span { font-size:13px; font-weight:500; }
+
+        /* ── HIGHLIGHT ── */
+        mark { background:hsl(50,90%,72%); border-radius:2px; padding:0 1px; color:inherit; }
+
+        /* ── ORDER MINI ── */
+        .order-mini { padding:13px 20px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+        .order-mini:last-child { border-bottom:none; }
+        .order-id { font-weight:600; font-size:13px; margin:0; }
+        .order-customer { font-size:12px; color:var(--color-muted); margin:0; }
+        .order-amount { font-weight:600; font-size:13px; margin:0; flex-shrink:0; }
+
+        /* ── MODAL ── */
+        .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:500; display:flex; align-items:center; justify-content:center; padding:20px; animation:fadeIn .2s ease; }
+        .modal { background:var(--color-surface); border-radius:var(--radius-lg); width:100%; max-width:540px; max-height:90vh; overflow-y:auto; box-shadow:0 24px 60px hsl(0 0% 0%/.25); animation:fadeUp .25s ease; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+        .modal-header { padding:20px 28px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:var(--color-surface); z-index:1; }
+        .modal-title { font-weight:600; font-size:16px; margin:0; }
+        .modal-close { width:28px; height:28px; border-radius:50%; border:none; background:var(--color-bg1); cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; transition:background .15s; flex-shrink:0; }
+        .modal-close:hover { background:var(--color-bg); }
+        .modal-body { padding:24px 28px; }
+        .form-field { margin-bottom:16px; }
+        .form-label { display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--color-muted); margin-bottom:6px; }
+        .form-input { width:100%; padding:10px 13px; border-radius:var(--radius-sm); border:1px solid var(--color-border); background:var(--color-input); font-family:'DM Sans',sans-serif; font-size:13px; color:var(--color-text); outline:none; transition:border-color .2s; }
+        .form-input:focus { border-color:var(--color-text); background:var(--color-surface); }
+        .form-textarea { resize:vertical; min-height:80px; }
+        .form-row { display:flex; gap:12px; }
+        .form-row .form-field { flex:1; }
+        .modal-footer { padding:18px 28px; border-top:1px solid var(--color-border); display:flex; gap:10px; justify-content:flex-end; position:sticky; bottom:0; background:var(--color-surface); }
+        .img-preview { width:100%; height:140px; border-radius:var(--radius-md); background:var(--color-bg1); margin-bottom:18px; overflow:hidden; display:flex; align-items:center; justify-content:center; border:1px dashed var(--color-border); }
+        .img-preview img { width:100%; height:100%; object-fit:cover; }
+        .img-preview-placeholder { color:var(--color-muted); font-size:13px; display:flex; flex-direction:column; align-items:center; gap:6px; }
+        .img-preview-placeholder svg { width:26px; height:26px; opacity:.4; }
+
+        /* ── PAGINATION ── */
+        .pagination { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-top:1px solid var(--color-border); font-size:12px; color:var(--color-muted); gap:12px; flex-wrap:wrap; }
+        .page-btns { display:flex; gap:4px; }
+        .page-btn { min-width:30px; height:30px; padding:0 6px; border-radius:var(--radius-sm); border:1px solid var(--color-border); background:transparent; cursor:pointer; font-size:12px; font-family:'DM Sans',sans-serif; transition:all .15s; }
+        .page-btn:hover,.page-btn.active { background:var(--color-text); color:white; border-color:var(--color-text); }
+        .page-btn:disabled { opacity:.35; cursor:not-allowed; }
+
+        /* ── TOAST ── */
+        .toast { position:fixed; bottom:28px; right:28px; background:hsl(140,50%,30%); color:white; padding:12px 20px; border-radius:var(--radius-md); font-size:13px; font-weight:500; box-shadow:var(--shadow-lg); z-index:600; animation:slideUp .3s ease; pointer-events:none; }
+        .toast.del { background:hsl(0,50%,40%); }
+        @keyframes slideUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+        /* ── EMPTY STATE ── */
+        .empty-state { text-align:center; padding:56px 20px; color:var(--color-muted); }
+        .empty-state svg { width:36px; height:36px; margin:0 auto 12px; opacity:.35; display:block; }
+        .empty-state p { font-size:14px; }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:1200px) { .stats-grid { grid-template-columns:repeat(2,1fr); } .dashboard-grid { grid-template-columns:1fr 320px; } }
+        @media(max-width:1000px) { .dashboard-grid { grid-template-columns:1fr; } .topbar-sub { display:none; } }
+        @media(max-width:768px) {
+            .sidebar { transform:translateX(calc(-1 * var(--sidebar-w))); }
+            .sidebar.open { transform:translateX(0); box-shadow:4px 0 24px hsl(0 0% 0%/.15); }
+            .sidebar-overlay { display:block; pointer-events:none; }
+            .sidebar-overlay.open { pointer-events:auto; }
+            .main { margin-left:0; }
+            .menu-toggle { display:flex; }
+            .topbar { padding:0 16px; }
+            .content { padding:16px; }
+            .stat-card { padding:16px 18px; }
+            .stat-value { font-size:22px; }
         }
-
-        /* ===================== SIDEBAR ===================== */
-        .sidebar {
-            width: var(--sidebar-w);
-            background: var(--color-surface);
-            border-right: 1px solid var(--color-border);
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 0; left: 0;
-            height: 100vh;
-            z-index: 100;
-        }
-
-        .sidebar-logo {
-            font-family: 'DM Serif Display', serif;
-            font-size: 22px;
-            letter-spacing: 3px;
-            padding: 28px 24px 20px;
-            border-bottom: 1px solid var(--color-border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .admin-badge {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 10px;
-            background: var(--color-text);
-            color: var(--color-white);
-            padding: 2px 7px;
-            border-radius: 20px;
-            letter-spacing: 1px;
-        }
-
-        .sidebar-nav {
-            flex: 1;
-            padding: 16px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .nav-section-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--color-muted);
-            padding: 14px 12px 6px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 9px 12px;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            color: var(--color-muted);
-            font-weight: 500;
-            transition: all 0.18s;
-            text-decoration: none;
-        }
-
-        .nav-item:hover { background: var(--color-bg); color: var(--color-text); }
-        .nav-item.active { background: var(--color-text); color: var(--color-white); }
-        .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
-
-        .nav-badge {
-            margin-left: auto;
-            background: var(--color-red);
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 1px 6px;
-            border-radius: 20px;
-        }
-
-        .nav-item.active .nav-badge { background: hsl(0, 60%, 70%); }
-
-        .sidebar-footer { padding: 16px 12px; border-top: 1px solid var(--color-border); }
-
-        .sidebar-user {
-            display: flex; align-items: center; gap: 10px;
-            padding: 8px 12px; border-radius: var(--radius-sm);
-        }
-
-        .user-avatar {
-            width: 32px; height: 32px; border-radius: 50%;
-            background: var(--color-text); color: white;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 12px; font-weight: 700; flex-shrink: 0;
-        }
-
-        .user-info { flex: 1; min-width: 0; }
-        .user-name { font-size: 13px; font-weight: 600; }
-        .user-role { font-size: 11px; color: var(--color-muted); }
-
-        .logout-btn {
-            display: flex; align-items: center; gap: 8px;
-            padding: 8px 12px; border-radius: var(--radius-sm);
-            cursor: pointer; color: var(--color-muted);
-            font-size: 13px; font-weight: 500; transition: all 0.18s;
-            margin-top: 4px; text-decoration: none;
-        }
-
-        .logout-btn:hover { background: hsl(0, 40%, 96%); color: var(--color-red); }
-        .logout-btn svg { width: 15px; height: 15px; }
-
-        /* ===================== MAIN ===================== */
-        .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
-
-        .topbar {
-            background: var(--color-surface);
-            border-bottom: 1px solid var(--color-border);
-            padding: 16px 32px; display: flex; align-items: center;
-            justify-content: space-between; position: sticky; top: 0; z-index: 50;
-        }
-
-        .topbar-title { font-size: 18px; font-weight: 600; }
-        .topbar-sub { font-size: 12px; color: var(--color-muted); margin-top: 1px; }
-
-        .topbar-actions { display: flex; gap: 10px; align-items: center; }
-
-        .btn {
-            padding: 8px 16px; border-radius: var(--radius-sm);
-            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
-            cursor: pointer; border: none; transition: all 0.18s;
-        }
-
-        .btn-dark { background: var(--color-text); color: white; }
-        .btn-dark:hover { opacity: 0.82; }
-        .btn-outline { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
-        .btn-outline:hover { background: var(--color-bg); }
-        .btn-danger { background: var(--color-red); color: white; }
-        .btn-danger:hover { opacity: 0.82; }
-
-        .content { padding: 32px; flex: 1; }
-
-        /* SECTIONS */
-        .section { display: none; animation: fadeIn 0.25s ease; }
-        .section.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===================== DASHBOARD ===================== */
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
-
-        .stat-card {
-            background: var(--color-surface); border-radius: var(--radius-md);
-            padding: 22px 24px; box-shadow: var(--shadow-card); border: 1px solid var(--color-border);
-        }
-
-        .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-muted); margin-bottom: 8px; }
-        .stat-value { font-size: 28px; font-family: 'DM Serif Display', serif; margin-bottom: 4px; }
-        .stat-change { font-size: 12px; display: flex; align-items: center; gap: 4px; }
-        .stat-change.up { color: var(--color-green); }
-        .stat-change.down { color: var(--color-red); }
-
-        .dashboard-grid { display: grid; grid-template-columns: 1fr 340px; gap: 16px; }
-
-        .card {
-            background: var(--color-surface); border-radius: var(--radius-md);
-            border: 1px solid var(--color-border); box-shadow: var(--shadow-card); overflow: hidden;
-        }
-
-        .card-header { padding: 18px 24px; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; }
-        .card-title { font-weight: 600; font-size: 15px; margin: 0;}
-        .card-body { padding: 0; }
-
-        /* ===================== TABLE ===================== */
-        .table-wrap { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
-        thead th { text-align: left; padding: 12px 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-muted); background: var(--color-bg); border-bottom: 1px solid var(--color-border); white-space: nowrap; }
-        tbody td { padding: 13px 20px; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
-        tbody tr:last-child td { border-bottom: none; }
-        tbody tr:hover { background: hsl(0,0%,98%); }
-
-        .product-thumb { width: 40px; height: 40px; border-radius: var(--radius-sm); background: var(--color-bg1); object-fit: cover; flex-shrink: 0; }
-        .product-name { font-weight: 500; font-size: 13px; }
-        .product-sku { font-size: 11px; color: var(--color-muted); }
-
-        /* BADGES */
-        .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-        .badge-green  { background: hsl(140,40%,92%); color: hsl(140,50%,30%); }
-        .badge-yellow { background: hsl(40,80%,92%);  color: hsl(40,70%,30%); }
-        .badge-red    { background: hsl(0,40%,92%);   color: hsl(0,50%,40%); }
-        .badge-gray   { background: var(--color-bg1); color: var(--color-muted); }
-
-        /* ACTION BTNS */
-        .action-btns { display: flex; gap: 6px; }
-        .btn-icon { width: 30px; height: 30px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; color: var(--color-muted); }
-        .btn-icon:hover { background: var(--color-bg1); color: var(--color-text); }
-        .btn-icon.del:hover { background: hsl(0,40%,92%); color: var(--color-red); border-color: hsl(0,40%,85%); }
-        .btn-icon svg { width: 14px; height: 14px; }
-
-        /* SEARCH + FILTER BAR */
-        .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-        
-        .search-box {
-            display: flex; align-items: center; gap: 8px; background: var(--color-surface);
-            border: 1px solid var(--color-border); border-radius: var(--radius-sm);
-            padding: 8px 14px; flex: 1; max-width: 320px;
-        }
-        .search-box svg { width: 15px; height: 15px; color: var(--color-muted); flex-shrink: 0; }
-        .search-box input { border: none; outline: none; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--color-text); width: 100%; }
-
-        .filter-select { padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: var(--color-surface); font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--color-text); outline: none; cursor: pointer; }
-
-        /* RECENT ORDERS MINI */
-        .order-mini { padding: 14px 20px; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; }
-        .order-mini:last-child { border-bottom: none; }
-        .order-id { font-weight: 600; font-size: 13px; margin:0; }
-        .order-customer { font-size: 12px; color: var(--color-muted); margin:0; }
-        .order-amount { font-weight: 600; font-size: 13px; margin:0;}
-
-        /* MODAL */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 500; display: none; align-items: center; justify-content: center; animation: fadeIn 0.2s ease; }
-        .modal-overlay.open { display: flex; }
-        .modal { background: var(--color-surface); border-radius: var(--radius-lg); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 60px hsl(0 0% 0% / 0.2); animation: fadeUp 0.25s ease; }
-        
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .modal-header { padding: 22px 28px; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; }
-        .modal-title { font-weight: 600; font-size: 16px; margin:0; }
-        .modal-close { width: 28px; height: 28px; border-radius: 50%; border: none; background: var(--color-bg1); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
-        .modal-close:hover { background: var(--color-bg); }
-        .modal-body { padding: 28px; }
-        .form-field { margin-bottom: 18px; border:none; padding:0;}
-        .form-field label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-muted); margin-bottom: 6px; }
-        .form-field input, .form-field select, .form-field textarea { width: 100%; padding: 10px 13px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: var(--color-input); font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--color-text); outline: none; transition: border-color 0.2s; }
-        .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--color-accent); }
-        .form-field textarea { resize: vertical; min-height: 80px; }
-        .form-row { display: flex; gap: 12px; }
-        .form-row .form-field { flex: 1; }
-        .modal-footer { padding: 20px 28px; border-top: 1px solid var(--color-border); display: flex; gap: 10px; justify-content: flex-end; }
-
-        /* PAGINATION */
-        .pagination { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-top: 1px solid var(--color-border); font-size: 12px; color: var(--color-muted); }
-        .page-btns { display: flex; gap: 4px; }
-        .page-btn { width: 30px; height: 30px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: transparent; cursor: pointer; font-size: 12px; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
-        .page-btn:hover, .page-btn.active { background: var(--color-text); color: white; border-color: var(--color-text); }
+        @media(max-width:560px) { .topbar-actions .btn-outline { display:none; } .form-row { flex-direction:column; gap:0; } }
+        @media(max-width:420px) { .stats-grid { grid-template-columns:1fr; } }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <header class="sidebar-logo">
-            <h1>SHOP</h1>
-            <span class="admin-badge">ADMIN</span>
-        </header>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-        <nav class="sidebar-nav">
-            <h3 class="nav-section-label">Үндсэн</h3>
-            <a href="#" class="nav-item active" onclick="switchSection('dashboard', this)">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-                Хяналтын самбар
-            </a>
-
-            <h3 class="nav-section-label">Дэлгүүр</h3>
-            <a href="#" class="nav-item" onclick="switchSection('products', this)">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>
-                Бараа
-            </a>
-            <a href="#" class="nav-item" onclick="switchSection('orders', this)">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5h6"/></svg>
-                Захиалга
-                <span class="nav-badge">5</span>
-            </a>
-            <a href="#" class="nav-item" onclick="switchSection('users', this)">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                Хэрэглэгч
-            </a>
-        </nav>
-
-        <footer class="sidebar-footer">
-            <div class="sidebar-user">
-                <figure class="user-avatar">А</figure>
-                <div class="user-info">
-                    <h4 class="user-name">Админ</h4>
-                    <p class="user-role">admin@shop.mn</p>
-                </div>
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <header class="sidebar-logo">
+        <h1>SHOP</h1>
+        <span class="admin-badge">ADMIN</span>
+    </header>
+    <nav class="sidebar-nav">
+        <h3 class="nav-section-label">Үндсэн</h3>
+        <a href="javascript:void(0)" class="nav-item active" id="nav-dashboard" onclick="switchSection('dashboard',this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            Хяналтын самбар
+        </a>
+        <h3 class="nav-section-label">Дэлгүүр</h3>
+        <a href="javascript:void(0)" class="nav-item" id="nav-products" onclick="switchSection('products',this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>
+            Бараа
+        </a>
+        <a href="javascript:void(0)" class="nav-item" id="nav-orders" onclick="switchSection('orders',this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5h6"/></svg>
+            Захиалга
+            <span class="nav-badge" id="ordersBadge">5</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" id="nav-users" onclick="switchSection('users',this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Хэрэглэгч
+        </a>
+    </nav>
+    <footer class="sidebar-footer">
+        <div class="sidebar-user">
+            <div class="user-avatar">А</div>
+            <div class="user-info">
+                <h4 class="user-name">Админ</h4>
+                <p class="user-role">admin@shop.mn</p>
             </div>
-            <a href="index.html" class="logout-btn">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-                Гарах
-            </a>
-        </footer>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main">
-
-        <!-- TOPBAR -->
-        <header class="topbar">
-            <div>
-                <h2 class="topbar-title" id="pageTitle">Хяналтын самбар</h2>
-                <p class="topbar-sub" id="pageSubtitle">Өнөөдрийн мэдээлэл — 2026 оны 3-р сар 24</p>
-            </div>
-            <div class="topbar-actions">
-                <button class="btn btn-outline" onclick="alert('Тайлан татаж байна...')">Тайлан татах</button>
-                <button class="btn btn-dark" id="addBtn" onclick="openModal('add')">+ Бараа нэмэх</button>
-            </div>
-        </header>
-
-        <div class="content">
-
-            <!-- ===================== DASHBOARD ===================== -->
-            <section class="section active" id="section-dashboard">
-
-                <div class="stats-grid">
-                    <article class="stat-card">
-                        <h3 class="stat-label">Нийт борлуулалт</h3>
-                        <p class="stat-value">₮48.2M</p>
-                        <p class="stat-change up">↑ 12.4% өнгөрсөн сараас</p>
-                    </article>
-                    <article class="stat-card">
-                        <h3 class="stat-label">Захиалга</h3>
-                        <p class="stat-value">1,284</p>
-                        <p class="stat-change up">↑ 8.1% өнгөрсөн сараас</p>
-                    </article>
-                    <article class="stat-card">
-                        <h3 class="stat-label">Хэрэглэгч</h3>
-                        <p class="stat-value">3,491</p>
-                        <p class="stat-change up">↑ 5.3% өнгөрсөн сараас</p>
-                    </article>
-                    <article class="stat-card">
-                        <h3 class="stat-label">Буцаалт</h3>
-                        <p class="stat-value">23</p>
-                        <p class="stat-change down">↓ 2 өнгөрсөн сараас</p>
-                    </article>
-                </div>
-
-                <div class="dashboard-grid">
-                    <article class="card">
-                        <header class="card-header">
-                            <h3 class="card-title">Сүүлийн захиалгууд</h3>
-                            <button class="btn btn-outline" onclick="switchSection('orders', document.querySelector('[onclick*=orders]'))">Бүгдийг харах</button>
-                        </header>
-                        <div class="card-body">
-                            <article class="order-mini">
-                                <div><h4 class="order-id">#ORD-1049</h4><p class="order-customer">Батболд Дорж</p></div>
-                                <span class="badge badge-green">Хүргэсэн</span>
-                                <p class="order-amount">₮124,000</p>
-                            </article>
-                            <article class="order-mini">
-                                <div><h4 class="order-id">#ORD-1048</h4><p class="order-customer">Оюунцэцэг Н.</p></div>
-                                <span class="badge badge-yellow">Явж байгаа</span>
-                                <p class="order-amount">₮89,500</p>
-                            </article>
-                            <article class="order-mini">
-                                <div><h4 class="order-id">#ORD-1047</h4><p class="order-customer">Мөнхбаяр Г.</p></div>
-                                <span class="badge badge-yellow">Явж байгаа</span>
-                                <p class="order-amount">₮210,000</p>
-                            </article>
-                            <article class="order-mini">
-                                <div><h4 class="order-id">#ORD-1046</h4><p class="order-customer">Энхтуяа Б.</p></div>
-                                <span class="badge badge-gray">Хүлээгдэж байгаа</span>
-                                <p class="order-amount">₮67,000</p>
-                            </article>
-                            <article class="order-mini">
-                                <div><h4 class="order-id">#ORD-1045</h4><p class="order-customer">Дэлгэрмаа С.</p></div>
-                                <span class="badge badge-red">Цуцласан</span>
-                                <p class="order-amount">₮45,000</p>
-                            </article>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <header class="card-header"><h3 class="card-title">Дууссан нөөц</h3></header>
-                        <div class="card-body">
-                            <article class="order-mini">
-                                <div><h4 class="order-id">Nike Air Max</h4><p class="order-customer">Гутал</p></div>
-                                <span class="badge badge-red">0 үлдсэн</span>
-                            </article>
-                            <article class="order-mini">
-                                <div><h4 class="order-id">iPhone 15 Case</h4><p class="order-customer">Электроник</p></div>
-                                <span class="badge badge-yellow">3 үлдсэн</span>
-                            </article>
-                            <article class="order-mini">
-                                <div><h4 class="order-id">Дэр Premium</h4><p class="order-customer">Гэр ахуй</p></div>
-                                <span class="badge badge-red">0 үлдсэн</span>
-                            </article>
-                            <article class="order-mini">
-                                <div><h4 class="order-id">Шампоо Kerastase</h4><p class="order-customer">Гоо сайхан</p></div>
-                                <span class="badge badge-yellow">2 үлдсэн</span>
-                            </article>
-                        </div>
-                    </article>
-                </div>
-
-            </section>
-
-            <!-- ===================== PRODUCTS ===================== -->
-            <section class="section" id="section-products">
-
-                <menu class="toolbar">
-                    <search class="search-box">
-                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                        <input type="text" placeholder="Бараа хайх..." oninput="filterTable(this, 'productsTable')">
-                    </search>
-                    <select class="filter-select">
-                        <option>Бүх ангилал</option>
-                        <option>Цахилгаан бараа</option>
-                        <option>Гэр ахуй</option>
-                        <option>Хувцас, Гутал</option>
-                        <option>Гоо сайхан</option>
-                    </select>
-                    <select class="filter-select">
-                        <option>Бүх статус</option>
-                        <option>Идэвхтэй</option>
-                        <option>Дууссан</option>
-                        <option>Нуусан</option>
-                    </select>
-                </menu>
-
-                <article class="card">
-                    <div class="table-wrap">
-                        <table id="productsTable">
-                            <thead>
-                                <tr>
-                                    <th>Бараа</th>
-                                    <th>Ангилал</th>
-                                    <th>Үнэ</th>
-                                    <th>Нөөц</th>
-                                    <th>Статус</th>
-                                    <th>Үйлдэл</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><figure><img class="product-thumb" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=80&h=80&fit=crop"><figcaption><div class="product-name">Nike Air Max 270</div><div class="product-sku">SKU: NK-270-BLK</div></figcaption></figure></td>
-                                    <td>Гутал</td>
-                                    <td>₮320,000</td>
-                                    <td>0</td>
-                                    <td><span class="badge badge-red">Дууссан</span></td>
-                                    <td><div class="action-btns"><button class="btn-icon" onclick="openModal('edit')" title="Засах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
-                                </tr>
-                                <tr>
-                                    <td><figure><img class="product-thumb" src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=80&h=80&fit=crop"><figcaption><div class="product-name">Kerastase Shampoo</div><div class="product-sku">SKU: KR-SH-200</div></figcaption></figure></td>
-                                    <td>Гоо сайхан</td>
-                                    <td>₮89,000</td>
-                                    <td>2</td>
-                                    <td><span class="badge badge-yellow">Бага үлдсэн</span></td>
-                                    <td><div class="action-btns"><button class="btn-icon" onclick="openModal('edit')" title="Засах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <footer class="pagination">
-                        <span>5 нийт 124 барааны</span>
-                        <div class="page-btns">
-                            <button class="page-btn active">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">→</button>
-                        </div>
-                    </footer>
-                </article>
-            </section>
-
-            <!-- ===================== ORDERS ===================== -->
-            <section class="section" id="section-orders">
-
-                <menu class="toolbar">
-                    <search class="search-box">
-                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                        <input type="text" placeholder="Захиалга хайх..." oninput="filterTable(this, 'ordersTable')">
-                    </search>
-                    <select class="filter-select">
-                        <option>Бүх статус</option>
-                        <option>Хүлээгдэж байгаа</option>
-                        <option>Явж байгаа</option>
-                        <option>Хүргэсэн</option>
-                        <option>Цуцласан</option>
-                    </select>
-                </menu>
-
-                <article class="card">
-                    <div class="table-wrap">
-                        <table id="ordersTable">
-                            <thead>
-                                <tr>
-                                    <th>Захиалгын №</th>
-                                    <th>Хэрэглэгч</th>
-                                    <th>Огноо</th>
-                                    <th>Дүн</th>
-                                    <th>Статус</th>
-                                    <th>Үйлдэл</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>#ORD-1049</strong></td>
-                                    <td>Батболд Дорж</td>
-                                    <td>2026.03.24</td>
-                                    <td>₮124,000</td>
-                                    <td><span class="badge badge-green">Хүргэсэн</span></td>
-                                    <td><div class="action-btns"><button class="btn-icon" onclick="alert('Захиалгын дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>#ORD-1048</strong></td>
-                                    <td>Оюунцэцэг Н.</td>
-                                    <td>2026.03.23</td>
-                                    <td>₮89,500</td>
-                                    <td><span class="badge badge-yellow">Явж байгаа</span></td>
-                                    <td><div class="action-btns"><button class="btn-icon" onclick="alert('Захиалгын дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <footer class="pagination">
-                        <span>5 нийт 1,284 захиалгын</span>
-                        <div class="page-btns">
-                            <button class="page-btn active">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">→</button>
-                        </div>
-                    </footer>
-                </article>
-            </section>
-
-            <!-- ===================== USERS ===================== -->
-            <section class="section" id="section-users">
-
-                <menu class="toolbar">
-                    <search class="search-box">
-                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                        <input type="text" placeholder="Хэрэглэгч хайх..." oninput="filterTable(this, 'usersTable')">
-                    </search>
-                    <select class="filter-select">
-                        <option>Бүх үүрэг</option>
-                        <option>Admin</option>
-                        <option>Хэрэглэгч</option>
-                    </select>
-                </menu>
-
-                <article class="card">
-                    <div class="table-wrap">
-                        <table id="usersTable">
-                            <thead>
-                                <tr>
-                                    <th>Хэрэглэгч</th>
-                                    <th>И-мэйл</th>
-                                    <th>Бүртгүүлсэн</th>
-                                    <th>Захиалга</th>
-                                    <th>Үүрэг</th>
-                                    <th>Үйлдэл</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><figure><div class="user-avatar" style="width:34px;height:34px;font-size:13px">Б</div><figcaption><div class="product-name">Батболд Дорж</div></figcaption></figure></td>
-                                    <td>batbold@example.mn</td>
-                                    <td>2025.11.14</td>
-                                    <td>12</td>
-                                    <td><span class="badge badge-gray">Хэрэглэгч</span></td>
-                                    <td><div class="action-btns"><button class="btn-icon" onclick="alert('Хэрэглэгчийн дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)" title="Устгах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
-                                </tr>
-                                <tr>
-                                    <td><figure><div class="user-avatar" style="width:34px;height:34px;font-size:13px">А</div><figcaption><div class="product-name">Админ</div></figcaption></figure></td>
-                                    <td>admin@shop.mn</td>
-                                    <td>2025.01.01</td>
-                                    <td>—</td>
-                                    <td><span class="badge badge-green">Admin</span></td>
-                                    <td><div class="action-btns"><button class="btn-icon" onclick="alert('Системийн администратор')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <footer class="pagination">
-                        <span>4 нийт 3,491 хэрэглэгчийн</span>
-                        <div class="page-btns">
-                            <button class="page-btn active">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">→</button>
-                        </div>
-                    </footer>
-                </article>
-            </section>
-
         </div>
-    </main>
+        <a href="index.html" class="logout-btn">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+            Гарах
+        </a>
+    </footer>
+</aside>
 
-    <!-- ADD/EDIT PRODUCT MODAL -->
-    <aside class="modal-overlay" id="productModal">
-        <form class="modal" onsubmit="event.preventDefault(); saveProduct();">
-            <header class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Бараа нэмэх</h3>
-                <button type="button" class="modal-close" onclick="closeModal()">✕</button>
-            </header>
-            
-            <fieldset class="modal-body">
-                <div class="form-row">
-                    <div class="form-field">
-                        <label>Барааны нэр</label>
-                        <input type="text" placeholder="Nike Air Max 270" required>
+<!-- MAIN -->
+<main class="main">
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="topbar-titles">
+                <h2 class="topbar-title" id="pageTitle">Хяналтын самбар</h2>
+                <p class="topbar-sub" id="pageSubtitle">Өнөөдрийн мэдээлэл — 2026 оны 5-р сар 11</p>
+            </div>
+        </div>
+        <div class="topbar-actions">
+            <!-- Notification Bell -->
+            <div class="notif-wrap" id="notifWrap">
+                <button class="notif-btn" onclick="toggleNotif(event)">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span class="notif-dot" id="notifDot"></span>
+                </button>
+                <div class="notif-panel" id="notifPanel">
+                    <div class="notif-ph">
+                        <h4>Мэдэгдэл</h4>
+                        <button class="notif-clear" onclick="clearNotifs()">Бүгдийг уншсан</button>
                     </div>
-                    <div class="form-field">
-                        <label>SKU</label>
-                        <input type="text" placeholder="NK-270-BLK" required>
+                    <div class="notif-item unread">
+                        <div class="notif-ico g">📦</div>
+                        <div class="notif-info"><p>Шинэ захиалга #ORD-1050 ирлээ</p><span>5 минутын өмнө</span></div>
+                    </div>
+                    <div class="notif-item unread">
+                        <div class="notif-ico r">⚠️</div>
+                        <div class="notif-info"><p>Nike Air Max 270 нөөц дууссан</p><span>2 цагийн өмнө</span></div>
+                    </div>
+                    <div class="notif-item unread">
+                        <div class="notif-ico b">👤</div>
+                        <div class="notif-info"><p>Шинэ хэрэглэгч бүртгэгдлээ</p><span>Өчигдөр</span></div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-field">
-                        <label>Үнэ (₮)</label>
-                        <input type="number" placeholder="320000" required>
+            </div>
+            <button class="btn btn-outline" onclick="alert('Тайлан татаж байна...')">Тайлан татах</button>
+            <button class="btn btn-dark" id="addBtn" onclick="handleAddBtn()">+ Бараа нэмэх</button>
+        </div>
+    </header>
+
+    <div class="content">
+
+        <!-- ══ DASHBOARD ══ -->
+        <section class="section active" id="section-dashboard">
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <h3 class="stat-label">Нийт борлуулалт</h3>
+                    <p class="stat-value" data-count="48.2" data-prefix="₮" data-suffix="M">₮48.2M</p>
+                    <p class="stat-change up">↑ 12.4% өнгөрсөн сараас</p>
+                </article>
+                <article class="stat-card">
+                    <h3 class="stat-label">Захиалга</h3>
+                    <p class="stat-value" data-count="1284" data-prefix="" data-suffix="">1,284</p>
+                    <p class="stat-change up">↑ 8.1% өнгөрсөн сараас</p>
+                </article>
+                <article class="stat-card">
+                    <h3 class="stat-label">Хэрэглэгч</h3>
+                    <p class="stat-value" data-count="3491" data-prefix="" data-suffix="">3,491</p>
+                    <p class="stat-change up">↑ 5.3% өнгөрсөн сараас</p>
+                </article>
+                <article class="stat-card">
+                    <h3 class="stat-label">Буцаалт</h3>
+                    <p class="stat-value" data-count="23" data-prefix="" data-suffix="">23</p>
+                    <p class="stat-change down">↓ 2 өнгөрсөн сараас</p>
+                </article>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Sales Chart -->
+                <article class="card">
+                    <header class="card-header">
+                        <h3 class="card-title">7 хоногийн борлуулалт</h3>
+                        <span style="font-size:12px;color:var(--color-muted)">Нийт ₮35.7M</span>
+                    </header>
+                    <div class="chart-wrap">
+                        <div class="chart-bars" id="chartBars">
+                            <div class="bar-item"><div class="bar-fill-track"><div class="bar-fill" style="height:44%" data-tip="₮3.2M — Да"></div></div><span class="bar-lbl">Да</span></div>
+                            <div class="bar-item"><div class="bar-fill-track"><div class="bar-fill" style="height:71%" data-tip="₮5.1M — Мя"></div></div><span class="bar-lbl">Мя</span></div>
+                            <div class="bar-item"><div class="bar-fill-track"><div class="bar-fill" style="height:39%" data-tip="₮2.8M — Лх"></div></div><span class="bar-lbl">Лх</span></div>
+                            <div class="bar-item"><div class="bar-fill-track"><div class="bar-fill" style="height:89%" data-tip="₮6.4M — Пү"></div></div><span class="bar-lbl">Пү</span></div>
+                            <div class="bar-item"><div class="bar-fill-track"><div class="bar-fill" style="height:68%" data-tip="₮4.9M — Ба"></div></div><span class="bar-lbl">Ба</span></div>
+                            <div class="bar-item"><div class="bar-fill-track"><div class="bar-fill peak" style="height:100%" data-tip="₮7.2M — Бя ★"></div></div><span class="bar-lbl" style="font-weight:600;color:var(--color-text)">Бя</span></div>
+                            <div class="bar-item"><div class="bar-fill-track"><div class="bar-fill" style="height:76%" data-tip="₮5.5M — Ня"></div></div><span class="bar-lbl">Ня</span></div>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;padding:8px 0 16px;font-size:11px;color:var(--color-muted)">
+                            <span>₮0</span><span>₮3.6M</span><span>₮7.2M</span>
+                        </div>
                     </div>
-                    <div class="form-field">
-                        <label>Нөөц</label>
-                        <input type="number" placeholder="0" required>
+                </article>
+
+                <!-- Recent Orders -->
+                <article class="card">
+                    <header class="card-header">
+                        <h3 class="card-title">Сүүлийн захиалгууд</h3>
+                        <button class="btn btn-outline btn-sm" onclick="switchSection('orders',document.getElementById('nav-orders'))">Бүгд</button>
+                    </header>
+                    <div class="card-body">
+                        <article class="order-mini"><div><h4 class="order-id">#ORD-1050</h4><p class="order-customer">Сайнбаяр Г.</p></div><span class="badge badge-gray">Хүлээгдэж байгаа</span><p class="order-amount">₮156,000</p></article>
+                        <article class="order-mini"><div><h4 class="order-id">#ORD-1049</h4><p class="order-customer">Батболд Дорж</p></div><span class="badge badge-green">Хүргэсэн</span><p class="order-amount">₮124,000</p></article>
+                        <article class="order-mini"><div><h4 class="order-id">#ORD-1048</h4><p class="order-customer">Оюунцэцэг Н.</p></div><span class="badge badge-yellow">Явж байгаа</span><p class="order-amount">₮89,500</p></article>
+                        <article class="order-mini"><div><h4 class="order-id">#ORD-1047</h4><p class="order-customer">Мөнхбаяр Г.</p></div><span class="badge badge-yellow">Явж байгаа</span><p class="order-amount">₮210,000</p></article>
+                        <article class="order-mini"><div><h4 class="order-id">#ORD-1046</h4><p class="order-customer">Энхтуяа Б.</p></div><span class="badge badge-red">Цуцласан</span><p class="order-amount">₮67,000</p></article>
                     </div>
+                </article>
+
+                <!-- Live Low-Stock Widget -->
+                <article class="card">
+                    <header class="card-header"><h3 class="card-title">Дууссан нөөц</h3><span id="lowStockCount" style="font-size:12px;color:var(--color-muted)"></span></header>
+                    <div class="card-body" id="lowStockWidget">
+                        <p style="padding:20px;color:var(--color-muted);font-size:13px;text-align:center">Уншиж байна...</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ══ PRODUCTS (React) ══ -->
+        <section class="section" id="section-products">
+            <div id="product-app-root"></div>
+        </section>
+
+        <!-- ══ ORDERS ══ -->
+        <section class="section" id="section-orders">
+            <div class="toolbar">
+                <div class="search-box">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <input type="text" placeholder="Захиалга хайх..." oninput="filterTable(this,'ordersTable')">
                 </div>
-                <div class="form-field">
-                    <label>Ангилал</label>
-                    <select required>
-                        <option value="">Ангилал сонгох</option>
-                        <option>Цахилгаан бараа</option>
-                        <option>Гэр ахуй</option>
-                        <option>Хувцас, Гутал</option>
-                        <option>Гоо сайхан</option>
-                        <option>Хүнс</option>
-                    </select>
+                <select class="filter-select" onchange="filterByStatus(this,'ordersTable')">
+                    <option value="">Бүх статус</option>
+                    <option>Хүлээгдэж байгаа</option>
+                    <option>Явж байгаа</option>
+                    <option>Хүргэсэн</option>
+                    <option>Цуцласан</option>
+                </select>
+            </div>
+            <article class="card">
+                <div class="table-wrap">
+                    <table id="ordersTable">
+                        <thead>
+                            <tr>
+                                <th>Захиалгын №</th><th>Хэрэглэгч</th><th>Огноо</th><th>Дүн</th><th>Статус</th><th>Үйлдэл</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#ORD-1050</strong></td><td>Сайнбаяр Г.</td><td>2026.05.11</td><td>₮156,000</td>
+                                <td><div class="status-wrap" onclick="toggleStatusMenu(this)"><span class="badge badge-gray">Хүлээгдэж байгаа</span><div class="status-menu"><button onclick="setOrderStatus(this,'Хүлээгдэж байгаа','badge-gray')">⬜ Хүлээгдэж байгаа</button><button onclick="setOrderStatus(this,'Явж байгаа','badge-yellow')">🚚 Явж байгаа</button><button onclick="setOrderStatus(this,'Хүргэсэн','badge-green')">✅ Хүргэсэн</button><button onclick="setOrderStatus(this,'Цуцласан','badge-red')">❌ Цуцласан</button></div></div></td>
+                                <td><div class="action-btns"><button class="btn-icon" onclick="alert('#ORD-1050 дэлгэрэнгүй')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-1049</strong></td><td>Батболд Дорж</td><td>2026.05.10</td><td>₮124,000</td>
+                                <td><div class="status-wrap" onclick="toggleStatusMenu(this)"><span class="badge badge-green">Хүргэсэн</span><div class="status-menu"><button onclick="setOrderStatus(this,'Хүлээгдэж байгаа','badge-gray')">⬜ Хүлээгдэж байгаа</button><button onclick="setOrderStatus(this,'Явж байгаа','badge-yellow')">🚚 Явж байгаа</button><button onclick="setOrderStatus(this,'Хүргэсэн','badge-green')">✅ Хүргэсэн</button><button onclick="setOrderStatus(this,'Цуцласан','badge-red')">❌ Цуцласан</button></div></div></td>
+                                <td><div class="action-btns"><button class="btn-icon" onclick="alert('#ORD-1049')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-1048</strong></td><td>Оюунцэцэг Н.</td><td>2026.05.09</td><td>₮89,500</td>
+                                <td><div class="status-wrap" onclick="toggleStatusMenu(this)"><span class="badge badge-yellow">Явж байгаа</span><div class="status-menu"><button onclick="setOrderStatus(this,'Хүлээгдэж байгаа','badge-gray')">⬜ Хүлээгдэж байгаа</button><button onclick="setOrderStatus(this,'Явж байгаа','badge-yellow')">🚚 Явж байгаа</button><button onclick="setOrderStatus(this,'Хүргэсэн','badge-green')">✅ Хүргэсэн</button><button onclick="setOrderStatus(this,'Цуцласан','badge-red')">❌ Цуцласан</button></div></div></td>
+                                <td><div class="action-btns"><button class="btn-icon" onclick="alert('#ORD-1048')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-1047</strong></td><td>Мөнхбаяр Г.</td><td>2026.05.08</td><td>₮210,000</td>
+                                <td><div class="status-wrap" onclick="toggleStatusMenu(this)"><span class="badge badge-yellow">Явж байгаа</span><div class="status-menu"><button onclick="setOrderStatus(this,'Хүлээгдэж байгаа','badge-gray')">⬜ Хүлээгдэж байгаа</button><button onclick="setOrderStatus(this,'Явж байгаа','badge-yellow')">🚚 Явж байгаа</button><button onclick="setOrderStatus(this,'Хүргэсэн','badge-green')">✅ Хүргэсэн</button><button onclick="setOrderStatus(this,'Цуцласан','badge-red')">❌ Цуцласан</button></div></div></td>
+                                <td><div class="action-btns"><button class="btn-icon" onclick="alert('#ORD-1047')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-1046</strong></td><td>Энхтуяа Б.</td><td>2026.05.07</td><td>₮67,000</td>
+                                <td><div class="status-wrap" onclick="toggleStatusMenu(this)"><span class="badge badge-red">Цуцласан</span><div class="status-menu"><button onclick="setOrderStatus(this,'Хүлээгдэж байгаа','badge-gray')">⬜ Хүлээгдэж байгаа</button><button onclick="setOrderStatus(this,'Явж байгаа','badge-yellow')">🚚 Явж байгаа</button><button onclick="setOrderStatus(this,'Хүргэсэн','badge-green')">✅ Хүргэсэн</button><button onclick="setOrderStatus(this,'Цуцласан','badge-red')">❌ Цуцласан</button></div></div></td>
+                                <td><div class="action-btns"><button class="btn-icon" onclick="alert('#ORD-1046')" title="Харах"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-field">
-                    <label>Тайлбар</label>
-                    <textarea placeholder="Барааны тайлбар..."></textarea>
+                <footer class="pagination">
+                    <span>5 нийт 1,284 захиалгын</span>
+                    <div class="page-btns">
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">→</button>
+                    </div>
+                </footer>
+            </article>
+        </section>
+
+        <!-- ══ USERS ══ -->
+        <section class="section" id="section-users">
+            <div class="toolbar">
+                <div class="search-box">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <input type="text" placeholder="Хэрэглэгч хайх..." oninput="filterTable(this,'usersTable')">
                 </div>
-                <div class="form-field">
-                    <label>Зураг URL</label>
-                    <input type="url" placeholder="https://...">
+                <select class="filter-select"><option>Бүх үүрэг</option><option>Admin</option><option>Хэрэглэгч</option></select>
+            </div>
+            <article class="card">
+                <div class="table-wrap">
+                    <table id="usersTable">
+                        <thead><tr><th>Хэрэглэгч</th><th>И-мэйл</th><th>Бүртгүүлсэн</th><th>Захиалга</th><th>Үүрэг</th><th>Үйлдэл</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><figure><div class="user-avatar" style="width:34px;height:34px;font-size:13px">Б</div><figcaption><div class="product-name">Батболд Дорж</div></figcaption></figure></td>
+                                <td>batbold@example.mn</td><td>2025.11.14</td><td>12</td>
+                                <td><span class="badge badge-gray">Хэрэглэгч</span></td>
+                                <td><div class="action-btns"><button class="btn-icon" onclick="alert('Дэлгэрэнгүй')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
+                            </tr>
+                            <tr>
+                                <td><figure><div class="user-avatar" style="width:34px;height:34px;font-size:13px">А</div><figcaption><div class="product-name">Админ</div></figcaption></figure></td>
+                                <td>admin@shop.mn</td><td>2025.01.01</td><td>—</td>
+                                <td><span class="badge badge-green">Admin</span></td>
+                                <td><div class="action-btns"><button class="btn-icon" onclick="alert('Системийн администратор')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </fieldset>
-            
-            <footer class="modal-footer">
-                <button type="button" class="btn btn-outline" onclick="closeModal()">Цуцлах</button>
-                <button type="submit" class="btn btn-dark">Хадгалах</button>
-            </footer>
-        </form>
-    </aside>
+                <footer class="pagination">
+                    <span>2 нийт 3,491 хэрэглэгчийн</span>
+                    <div class="page-btns"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">→</button></div>
+                </footer>
+            </article>
+        </section>
 
-    <script>
-        const titles = {
-            dashboard: ['Хяналтын самбар', 'Өнөөдрийн мэдээлэл — 2026 оны 3-р сар 24'],
-            products:  ['Бараа удирдлага', 'Нийт 124 бараа'],
-            orders:    ['Захиалга удирдлага', 'Нийт 1,284 захиалга'],
-            users:     ['Хэрэглэгч удирдлага', 'Нийт 3,491 хэрэглэгч'],
-        };
+    </div>
+</main>
 
-        const addBtnLabels = {
-            dashboard: '+ Бараа нэмэх',
-            products:  '+ Бараа нэмэх',
-            orders:    '+ Захиалга',
-            users:     '+ Хэрэглэгч нэмэх',
-        };
+<!-- ══════════════ PLAIN JS ══════════════ -->
+<script>
+    /* ── Shared product store (React → Dashboard) ── */
+    window.productStore = {
+        _subs: [],
+        subscribe(fn) { this._subs.push(fn); },
+        emit(data) { this._subs.forEach(fn => fn(data)); }
+    };
 
-        function switchSection(id, el) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById('section-' + id).classList.add('active');
-            if (el) el.classList.add('active');
-            document.getElementById('pageTitle').textContent = titles[id][0];
-            document.getElementById('pageSubtitle').textContent = titles[id][1];
-            document.getElementById('addBtn').textContent = addBtnLabels[id];
+    window.productStore.subscribe(({ products }) => {
+        const low = products.filter(p => p.stock <= 5).sort((a, b) => a.stock - b.stock);
+        const widget = document.getElementById('lowStockWidget');
+        const countEl = document.getElementById('lowStockCount');
+        if (!widget) return;
+        if (countEl) countEl.textContent = low.length ? `${low.length} бараа` : '';
+        widget.innerHTML = low.length
+            ? low.slice(0, 6).map(p => `
+                <article class="order-mini">
+                    <div><h4 class="order-id">${esc(p.name)}</h4><p class="order-customer">${esc(p.category)}</p></div>
+                    <span class="badge ${p.stock === 0 ? 'badge-red' : 'badge-yellow'}">${p.stock === 0 ? '0 үлдсэн' : p.stock + ' үлдсэн'}</span>
+                </article>`).join('')
+            : '<p style="padding:24px;color:var(--color-muted);font-size:13px;text-align:center">Дууссан нөөц байхгүй ✓</p>';
+    });
+
+    function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    /* ── Section navigation ── */
+    const titles = {
+        dashboard: ['Хяналтын самбар','Өнөөдрийн мэдээлэл — 2026 оны 5-р сар 11'],
+        products:  ['Бараа удирдлага','Барааны жагсаалт'],
+        orders:    ['Захиалга удирдлага','Нийт 1,284 захиалга'],
+        users:     ['Хэрэглэгч удирдлага','Нийт 3,491 хэрэглэгч'],
+    };
+    const addLabels = { dashboard:'+ Бараа нэмэх', products:'+ Бараа нэмэх', orders:'+ Захиалга', users:'+ Хэрэглэгч нэмэх' };
+    let currentSection = 'dashboard';
+    let countersPlayed = false;
+
+    function switchSection(id, el) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        document.getElementById('section-' + id).classList.add('active');
+        if (el) el.classList.add('active');
+        document.getElementById('pageTitle').textContent = titles[id][0];
+        document.getElementById('pageSubtitle').textContent = titles[id][1];
+        document.getElementById('addBtn').textContent = addLabels[id];
+        currentSection = id;
+        closeSidebar();
+        closeAllMenus();
+        if (id === 'dashboard') {
+            resetChartAnimation();
+            animateCounters();
         }
+    }
 
-        function openModal(mode) {
-            document.getElementById('modalTitle').textContent = mode === 'add' ? 'Бараа нэмэх' : 'Бараа засах';
-            document.getElementById('productModal').classList.add('open');
+    function handleAddBtn() {
+        if (currentSection === 'products' && window.openProductModal) {
+            window.openProductModal();
+        } else if (currentSection === 'orders') {
+            alert('Захиалга нэмэх...');
+        } else if (currentSection === 'users') {
+            alert('Хэрэглэгч нэмэх...');
+        } else {
+            switchSection('products', document.getElementById('nav-products'));
+            setTimeout(() => window.openProductModal?.(), 350);
         }
+    }
 
-        function closeModal() {
-            document.getElementById('productModal').classList.remove('open');
-        }
+    /* ── Sidebar ── */
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('open'); }
+    function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('open'); }
 
-        function saveProduct() {
-            closeModal();
-            alert('Амжилттай хадгалагдлаа!');
-        }
+    /* ── Notification bell ── */
+    function toggleNotif(e) {
+        e.stopPropagation();
+        const panel = document.getElementById('notifPanel');
+        const isOpen = panel.classList.contains('open');
+        closeAllMenus();
+        if (!isOpen) panel.classList.add('open');
+    }
+    function clearNotifs() {
+        document.querySelectorAll('.notif-item.unread').forEach(i => i.classList.remove('unread'));
+        document.getElementById('notifDot').style.display = 'none';
+        document.getElementById('notifPanel').classList.remove('open');
+    }
 
-        function deleteRow(btn) {
-            if (confirm('Устгахдаа итгэлтэй байна уу?')) {
-                btn.closest('tr').style.opacity = '0';
-                btn.closest('tr').style.transition = 'opacity 0.3s';
-                setTimeout(() => btn.closest('tr').remove(), 300);
+    /* ── Order status dropdown ── */
+    function toggleStatusMenu(wrap) {
+        const menu = wrap.querySelector('.status-menu');
+        const isOpen = menu.classList.contains('open');
+        closeAllMenus();
+        if (!isOpen) menu.classList.add('open');
+    }
+    function setOrderStatus(btn, label, cls) {
+        const wrap = btn.closest('.status-wrap');
+        const badge = wrap.querySelector('.badge');
+        badge.className = `badge ${cls}`;
+        badge.textContent = label;
+        wrap.querySelector('.status-menu').classList.remove('open');
+    }
+
+    function closeAllMenus() {
+        document.querySelectorAll('.status-menu.open').forEach(m => m.classList.remove('open'));
+        document.getElementById('notifPanel')?.classList.remove('open');
+    }
+    document.addEventListener('click', closeAllMenus);
+
+    /* ── Table utilities ── */
+    function deleteRow(btn) {
+        if (!confirm('Устгахдаа итгэлтэй байна уу?')) return;
+        const row = btn.closest('tr');
+        row.style.transition = 'opacity .3s';
+        row.style.opacity = '0';
+        setTimeout(() => row.remove(), 300);
+    }
+    function filterTable(input, tableId) {
+        const val = input.value.toLowerCase();
+        document.querySelectorAll('#' + tableId + ' tbody tr').forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(val) ? '' : 'none';
+        });
+    }
+    function filterByStatus(sel, tableId) {
+        const val = sel.value.toLowerCase();
+        document.querySelectorAll('#' + tableId + ' tbody tr').forEach(row => {
+            row.style.display = !val || row.textContent.toLowerCase().includes(val) ? '' : 'none';
+        });
+    }
+
+    /* ── Dashboard: animated counters ── */
+    function animateCounters() {
+        document.querySelectorAll('#section-dashboard .stat-value[data-count]').forEach(el => {
+            const target = parseFloat(el.dataset.count);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            const decimals = String(target).includes('.') ? 1 : 0;
+            const isLarge = target > 100;
+            let start = null;
+            const dur = isLarge ? 1600 : 1000;
+            function tick(ts) {
+                if (!start) start = ts;
+                const prog = Math.min((ts - start) / dur, 1);
+                const ease = 1 - Math.pow(1 - prog, 3);
+                const val = target * ease;
+                el.textContent = prefix + (decimals ? val.toFixed(1) : Math.round(val).toLocaleString()) + suffix;
+                if (prog < 1) requestAnimationFrame(tick);
             }
+            requestAnimationFrame(tick);
+        });
+    }
+
+    /* ── Dashboard: chart re-animate ── */
+    function resetChartAnimation() {
+        document.querySelectorAll('.bar-fill').forEach(bar => {
+            bar.style.animation = 'none';
+            bar.offsetHeight;
+            bar.style.animation = '';
+        });
+    }
+
+    /* ── Boot ── */
+    animateCounters();
+</script>
+
+<!-- ══════════════ REACT PRODUCT MANAGER ══════════════ -->
+<script type="text/babel">
+    const { useState, useEffect, useRef, useCallback } = React;
+
+    const CATS = ['Цахилгаан бараа','Гэр ахуй','Хувцас, Гутал','Гоо сайхан','Хүнс'];
+
+    // Map admin categories → index.html category IDs
+    const CAT_MAP = {
+        'Цахилгаан бараа': 'tsakhilgaan',
+        'Гэр ахуй':        'ger-ahui',
+        'Хувцас, Гутал':   'huvtsas',
+        'Гоо сайхан':      'goo-saikhan',
+        'Хүнс':            'eruul',
+    };
+
+    function toShopFormat(p) {
+        return {
+            id:       p.id,
+            name:     p.name,
+            category: CAT_MAP[p.category] || 'huvtsas',
+            tag:      p.stock > 0 ? 'new' : null,
+            image:    p.image || '',
+            oldPrice: p.price,
+            newPrice: p.price,
+            brand:    (p.name.split(' ')[0]) || 'Generic',
+            rating:   4.5,
+            inStock:  p.stock > 0,
+        };
+    }
+
+    function loadSavedProducts() {
+        try {
+            const raw = localStorage.getItem('adminProducts_raw');
+            if (raw) return JSON.parse(raw);
+        } catch(e) {}
+        return null;
+    }
+
+    const PRODUCTS0 = [
+        { id:1, name:'Nike Air Max 270', sku:'NK-270-BLK', price:320000, stock:0,  category:'Хувцас, Гутал', description:'Тайтай, хөнгөн гутал', image:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=160&h=160&fit=crop' },
+        { id:2, name:'Kerastase Shampoo', sku:'KR-SH-200', price:89000,  stock:2,  category:'Гоо сайхан',    description:'Үсний шампоо 200ml',    image:'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=160&h=160&fit=crop' },
+        { id:3, name:'iPhone 15 Case',    sku:'IP15-CS-CLR',price:45000,  stock:3,  category:'Цахилгаан бараа',description:'Тунгалаг силикон бүрхэвч',image:'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=160&h=160&fit=crop' },
+        { id:4, name:'Дэр Premium',       sku:'PIL-PRM-WH', price:65000,  stock:0,  category:'Гэр ахуй',      description:'Унтлагын дэр',           image:'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=160&h=160&fit=crop' },
+        { id:5, name:'Samsung 65" TV',    sku:'SAM-65-4K',  price:2890000,stock:8,  category:'Цахилгаан бараа',description:'4K QLED телевиз',       image:'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=160&h=160&fit=crop' },
+        { id:6, name:'Adidas Hoodie',     sku:'ADI-HD-GRY', price:180000, stock:24, category:'Хувцас, Гутал', description:'Adidas хүрэм, саарал',   image:'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=160&h=160&fit=crop' },
+        { id:7, name:'Ceramic Mug Set',   sku:'MUG-CER-4P', price:56000,  stock:15, category:'Гэр ахуй',      description:'4 аяганы иж бүрдэл',    image:'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=160&h=160&fit=crop' },
+        { id:8, name:'Vitamin C Serum',   sku:'VIT-C-30ML', price:72000,  stock:11, category:'Гоо сайхан',    description:'Арьс тэжээгч сывороо',  image:'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=160&h=160&fit=crop' },
+        { id:9, name:'Wireless Earbuds',  sku:'EAR-WL-BLK', price:145000, stock:5,  category:'Цахилгаан бараа',description:'Bluetooth чихэвч',      image:'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=160&h=160&fit=crop' },
+    ];
+
+    const PAGE_SIZE = 7;
+
+    function stockSt(stock) {
+        if (stock === 0) return { label:'Дууссан',    cls:'badge-red' };
+        if (stock <= 5)  return { label:'Бага үлдсэн',cls:'badge-yellow' };
+        return                  { label:'Идэвхтэй',  cls:'badge-green' };
+    }
+    function fmt(n) { return '₮' + Number(n).toLocaleString(); }
+
+    /* ── Highlight match ── */
+    function Hl({ text, q }) {
+        if (!q) return <>{text}</>;
+        const i = String(text).toLowerCase().indexOf(q.toLowerCase());
+        if (i === -1) return <>{text}</>;
+        return <>{text.slice(0,i)}<mark>{text.slice(i,i+q.length)}</mark>{text.slice(i+q.length)}</>;
+    }
+
+    /* ── SortTh ── */
+    function SortTh({ field, label, sortBy, onSort }) {
+        const active = sortBy?.field === field;
+        const arrow = !active ? '⇅' : sortBy.dir === 'asc' ? '↑' : '↓';
+        return (
+            <th className={`sortable${active ? ' sorted' : ''}`} onClick={() => onSort(field)}>
+                {label}<span className="sort-icon">{arrow}</span>
+            </th>
+        );
+    }
+
+    /* ── Modal ── */
+    function ProductModal({ mode, product, onSave, onClose }) {
+        const blank = { name:'',sku:'',price:'',stock:'',category:'',description:'',image:'' };
+        const [form, setForm] = useState(product
+            ? { name:product.name,sku:product.sku,price:product.price,stock:product.stock,category:product.category,description:product.description||'',image:product.image||'' }
+            : blank);
+        const [imgErr, setImgErr] = useState(false);
+        useEffect(() => { setImgErr(false); }, [form.image]);
+
+        const set = f => e => setForm(p => ({ ...p, [f]: e.target.value }));
+        const submit = e => { e.preventDefault(); onSave({ ...form, price:Number(form.price), stock:Number(form.stock) }); };
+        const hasPreview = form.image && !imgErr;
+
+        return (
+            <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
+                <form className="modal" onSubmit={submit} onClick={e => e.stopPropagation()}>
+                    <div className="modal-header">
+                        <h3 className="modal-title">{mode === 'add' ? 'Бараа нэмэх' : 'Бараа засах'}</h3>
+                        <button type="button" className="modal-close" onClick={onClose}>✕</button>
+                    </div>
+                    <div className="modal-body">
+                        <div className="img-preview">
+                            {hasPreview
+                                ? <img src={form.image} alt="preview" onError={() => setImgErr(true)} />
+                                : <div className="img-preview-placeholder">
+                                    <svg fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                                    <span>Зургийн URL оруулна уу</span>
+                                </div>
+                            }
+                        </div>
+                        <div className="form-row">
+                            <div className="form-field">
+                                <label className="form-label">Барааны нэр</label>
+                                <input className="form-input" value={form.name} onChange={set('name')} placeholder="Nike Air Max 270" required />
+                            </div>
+                            <div className="form-field">
+                                <label className="form-label">SKU</label>
+                                <input className="form-input" value={form.sku} onChange={set('sku')} placeholder="NK-270-BLK" required />
+                            </div>
+                        </div>
+                        <div className="form-row">
+                            <div className="form-field">
+                                <label className="form-label">Үнэ (₮)</label>
+                                <input className="form-input" type="number" min="0" value={form.price} onChange={set('price')} placeholder="320000" required />
+                            </div>
+                            <div className="form-field">
+                                <label className="form-label">Нөөц</label>
+                                <input className="form-input" type="number" min="0" value={form.stock} onChange={set('stock')} placeholder="0" required />
+                            </div>
+                        </div>
+                        <div className="form-field">
+                            <label className="form-label">Ангилал</label>
+                            <select className="form-input" value={form.category} onChange={set('category')} required>
+                                <option value="">Ангилал сонгох</option>
+                                {CATS.map(c => <option key={c}>{c}</option>)}
+                            </select>
+                        </div>
+                        <div className="form-field">
+                            <label className="form-label">Тайлбар</label>
+                            <textarea className="form-input form-textarea" value={form.description} onChange={set('description')} placeholder="Барааны тайлбар..." />
+                        </div>
+                        <div className="form-field" style={{marginBottom:0}}>
+                            <label className="form-label">Зураг URL</label>
+                            <input className="form-input" type="url" value={form.image} onChange={set('image')} placeholder="https://..." />
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-outline" onClick={onClose}>Цуцлах</button>
+                        <button type="submit" className="btn btn-dark">Хадгалах</button>
+                    </div>
+                </form>
+            </div>
+        );
+    }
+
+    /* ── Main App ── */
+    function ProductApp() {
+        const [products, setProducts] = useState(() => loadSavedProducts() || PRODUCTS0);
+        const [modal,  setModal]  = useState({ open:false, mode:'add', product:null });
+        const [search, setSearch] = useState('');
+        const [catF,   setCatF]   = useState('');
+        const [statF,  setStatF]  = useState('');
+        const [page,   setPage]   = useState(1);
+        const [sortBy, setSortBy] = useState(null);
+        const [editingStock, setEditingStock] = useState(null);
+        const [stockDraft,   setStockDraft]   = useState('');
+        const [selected, setSelected] = useState(new Set());
+        const [toast, setToast] = useState(null);
+
+        /* sync to dashboard + persist to localStorage so index.html picks up changes */
+        useEffect(() => {
+            window.productStore.emit({ products });
+            try {
+                localStorage.setItem('adminProducts_raw', JSON.stringify(products));
+                localStorage.setItem('adminProducts', JSON.stringify(products.map(toShopFormat)));
+            } catch(e) {}
+        }, [products]);
+
+        /* expose openAdd to topbar */
+        useEffect(() => {
+            window.openProductModal = openAdd;
+            return () => { delete window.openProductModal; };
+        }, []);
+
+        const openAdd  = () => setModal({ open:true, mode:'add', product:null });
+        const openEdit = p  => setModal({ open:true, mode:'edit', product:p });
+        const closeModal = () => setModal(m => ({ ...m, open:false }));
+
+        let toastTimer = useRef(null);
+        function showToast(msg, type='ok') {
+            clearTimeout(toastTimer.current);
+            setToast({ msg, type });
+            toastTimer.current = setTimeout(() => setToast(null), 2800);
         }
 
-        function filterTable(input, tableId) {
-            const val = input.value.toLowerCase();
-            document.querySelectorAll('#' + tableId + ' tbody tr').forEach(row => {
-                row.style.display = row.textContent.toLowerCase().includes(val) ? '' : 'none';
+        function save(data) {
+            if (modal.mode === 'add') {
+                setProducts(p => [{ ...data, id:Date.now() }, ...p]);
+                showToast('Бараа нэмэгдлээ!');
+            } else {
+                setProducts(p => p.map(x => x.id === modal.product.id ? { ...x, ...data } : x));
+                showToast('Өөрчлөлт хадгалагдлаа!');
+            }
+            closeModal();
+        }
+
+        function del(id) {
+            if (!confirm('Устгахдаа итгэлтэй байна уу?')) return;
+            setProducts(p => p.filter(x => x.id !== id));
+            setSelected(s => { const n = new Set(s); n.delete(id); return n; });
+            showToast('Бараа устгагдлаа','del');
+        }
+
+        function dup(p) {
+            const copy = { ...p, id:Date.now(), name:p.name+' (хуулбар)', sku:p.sku+'-2' };
+            setProducts(prev => [copy, ...prev]);
+            showToast('Бараа хуулагдлаа');
+        }
+
+        /* inline stock edit */
+        function startEditStock(p) { setEditingStock(p.id); setStockDraft(String(p.stock)); }
+        function commitStock(id) {
+            const val = Math.max(0, parseInt(stockDraft) || 0);
+            setProducts(p => p.map(x => x.id === id ? { ...x, stock:val } : x));
+            setEditingStock(null);
+            showToast('Нөөц шинэчлэгдлээ');
+        }
+
+        /* sort */
+        function toggleSort(field) {
+            setSortBy(prev => {
+                if (!prev || prev.field !== field) return { field, dir:'asc' };
+                if (prev.dir === 'asc') return { field, dir:'desc' };
+                return null;
+            });
+            setPage(1);
+        }
+        function getSorted(arr) {
+            if (!sortBy) return arr;
+            return [...arr].sort((a, b) => {
+                let va = a[sortBy.field], vb = b[sortBy.field];
+                if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+                const c = va < vb ? -1 : va > vb ? 1 : 0;
+                return sortBy.dir === 'asc' ? c : -c;
             });
         }
 
-        // Close modal on overlay click
-        document.getElementById('productModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-    </script>
+        /* bulk select */
+        function toggleSelect(id) {
+            setSelected(s => { const n = new Set(s); n.has(id) ? n.delete(id) : n.add(id); return n; });
+        }
+        function toggleAll() {
+            const pageIds = rows.map(p => p.id);
+            const allSel = pageIds.every(id => selected.has(id));
+            setSelected(s => {
+                const n = new Set(s);
+                pageIds.forEach(id => allSel ? n.delete(id) : n.add(id));
+                return n;
+            });
+        }
+        function bulkDelete() {
+            const cnt = selected.size;
+            if (!confirm(`${cnt} бараа устгахдаа итгэлтэй байна уу?`)) return;
+            setProducts(p => p.filter(x => !selected.has(x.id)));
+            setSelected(new Set());
+            showToast(`${cnt} бараа устгагдлаа`, 'del');
+        }
+
+        /* filter pipeline */
+        const q = search.toLowerCase();
+        const filtered = getSorted(products.filter(p => {
+            const mQ = !q || p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q);
+            const mC = !catF  || p.category === catF;
+            const mS = !statF || stockSt(p.stock).label === statF;
+            return mQ && mC && mS;
+        }));
+
+        const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+        const safePage   = Math.min(page, totalPages);
+        const rows       = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+
+        const allPageSelected = rows.length > 0 && rows.every(p => selected.has(p.id));
+
+        /* product stats */
+        const alive = products.filter(p => p.stock > 5).length;
+        const lowSt = products.filter(p => p.stock > 0 && p.stock <= 5).length;
+        const outOf = products.filter(p => p.stock === 0).length;
+
+        return (
+            <>
+                {/* Toolbar */}
+                <div className="toolbar">
+                    <div className="search-box">
+                        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        <input value={search} onChange={e => { setSearch(e.target.value); setPage(1); }} placeholder="Бараа хайх..." />
+                    </div>
+                    <select className="filter-select" value={catF} onChange={e => { setCatF(e.target.value); setPage(1); }}>
+                        <option value="">Бүх ангилал</option>
+                        {CATS.map(c => <option key={c} value={c}>{c}</option>)}
+                    </select>
+                    <select className="filter-select" value={statF} onChange={e => { setStatF(e.target.value); setPage(1); }}>
+                        <option value="">Бүх статус</option>
+                        <option>Идэвхтэй</option>
+                        <option>Бага үлдсэн</option>
+                        <option>Дууссан</option>
+                    </select>
+                    <div className="toolbar-spacer" />
+                    <button className="btn btn-dark" onClick={openAdd}>+ Бараа нэмэх</button>
+                </div>
+
+                {/* Product count card */}
+                <div className="card" style={{marginBottom:16}}>
+                    <div className="stats-bar">
+                        <span>Нийт: <strong>{products.length}</strong></span>
+                        <span>Идэвхтэй: <strong style={{color:'hsl(140,50%,35%)'}}>{alive}</strong></span>
+                        <span>Бага нөөц: <strong style={{color:'hsl(40,70%,35%)'}}>{lowSt}</strong></span>
+                        <span>Дууссан: <strong style={{color:'hsl(0,50%,45%)'}}>{outOf}</strong></span>
+                        {filtered.length !== products.length && <span style={{marginLeft:'auto'}}>Шүүлтийн үр дүн: <strong>{filtered.length}</strong></span>}
+                    </div>
+                </div>
+
+                {/* Table */}
+                <div className="card">
+                    <div className="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style={{width:36}}>
+                                        <div className="cb-wrap">
+                                            <input type="checkbox" checked={allPageSelected} onChange={toggleAll} title="Бүгдийг сонгох" />
+                                        </div>
+                                    </th>
+                                    <SortTh field="name"     label="Бараа"   sortBy={sortBy} onSort={toggleSort} />
+                                    <SortTh field="category" label="Ангилал" sortBy={sortBy} onSort={toggleSort} />
+                                    <SortTh field="price"    label="Үнэ"     sortBy={sortBy} onSort={toggleSort} />
+                                    <SortTh field="stock"    label="Нөөц"    sortBy={sortBy} onSort={toggleSort} />
+                                    <th>Статус</th>
+                                    <th>Үйлдэл</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {rows.map(p => {
+                                    const s = stockSt(p.stock);
+                                    const isSel = selected.has(p.id);
+                                    return (
+                                        <tr key={p.id} className={isSel ? 'row-selected' : ''}>
+                                            <td>
+                                                <div className="cb-wrap">
+                                                    <input type="checkbox" checked={isSel} onChange={() => toggleSelect(p.id)} />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <figure>
+                                                    {p.image
+                                                        ? <img className="product-thumb" src={p.image} alt={p.name} onError={e => e.target.style.visibility='hidden'} />
+                                                        : <div className="product-thumb" />
+                                                    }
+                                                    <figcaption>
+                                                        <div className="product-name"><Hl text={p.name} q={search} /></div>
+                                                        <div className="product-sku">SKU: <Hl text={p.sku} q={search} /></div>
+                                                    </figcaption>
+                                                </figure>
+                                            </td>
+                                            <td>{p.category}</td>
+                                            <td style={{fontWeight:500}}>{fmt(p.price)}</td>
+                                            <td onClick={() => { if (editingStock !== p.id) startEditStock(p); }}>
+                                                {editingStock === p.id
+                                                    ? <input
+                                                        autoFocus
+                                                        type="number" min="0"
+                                                        value={stockDraft}
+                                                        className="stock-input"
+                                                        onChange={e => setStockDraft(e.target.value)}
+                                                        onBlur={() => commitStock(p.id)}
+                                                        onKeyDown={e => {
+                                                            if (e.key === 'Enter') e.target.blur();
+                                                            if (e.key === 'Escape') setEditingStock(null);
+                                                        }}
+                                                        onClick={e => e.stopPropagation()}
+                                                      />
+                                                    : <span className="stock-cell" title="Клик хийж засна уу">{p.stock}</span>
+                                                }
+                                            </td>
+                                            <td><span className={`badge ${s.cls}`}>{s.label}</span></td>
+                                            <td>
+                                                <div className="action-btns">
+                                                    <button className="btn-icon" onClick={() => openEdit(p)} title="Засах">
+                                                        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+                                                    </button>
+                                                    <button className="btn-icon" onClick={() => dup(p)} title="Хуулах">
+                                                        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                                    </button>
+                                                    <button className="btn-icon del" onClick={() => del(p.id)} title="Устгах">
+                                                        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                                {rows.length === 0 && (
+                                    <tr><td colSpan="7">
+                                        <div className="empty-state">
+                                            <svg fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>
+                                            <p>Бараа олдсонгүй</p>
+                                        </div>
+                                    </td></tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="pagination">
+                        <span>{filtered.length} / {products.length} бараа</span>
+                        <div className="page-btns">
+                            <button className="page-btn" onClick={() => setPage(p => Math.max(1,p-1))} disabled={safePage===1}>←</button>
+                            {Array.from({length:totalPages},(_,i) => (
+                                <button key={i} className={`page-btn${safePage===i+1?' active':''}`} onClick={() => setPage(i+1)}>{i+1}</button>
+                            ))}
+                            <button className="page-btn" onClick={() => setPage(p => Math.min(totalPages,p+1))} disabled={safePage===totalPages}>→</button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Modal */}
+                {modal.open && <ProductModal mode={modal.mode} product={modal.product} onSave={save} onClose={closeModal} />}
+
+                {/* Bulk action bar */}
+                {selected.size > 0 && (
+                    <div className="bulk-bar">
+                        <span>{selected.size} бараа сонгогдсон</span>
+                        <button className="btn btn-outline btn-sm" onClick={() => setSelected(new Set())}>Цуцлах</button>
+                        <button className="btn btn-danger btn-sm" onClick={bulkDelete}>Устгах</button>
+                    </div>
+                )}
+
+                {/* Toast */}
+                {toast && <div className={`toast${toast.type==='del'?' del':''}`}>{toast.msg}</div>}
+            </>
+        );
+    }
+
+    ReactDOM.createRoot(document.getElementById('product-app-root')).render(<ProductApp />);
+</script>
 
 </body>
 </html>

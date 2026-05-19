@@ -246,6 +246,7 @@ const categoryData = {
     ]
   }
 };
+window.categoryData = categoryData;
 
 // RENDER MENU RIGHT
 const menuRight = document.getElementById("menuRight");
@@ -259,7 +260,20 @@ function renderSubcategories(categoryKey) {
   }
 
   // <section> болон <h3> ашиглаж, item-ийг <button> болголоо.
-  let html = '';
+  const catLabel = data.label;
+  let html = `
+    <button onclick="navigateToCategory('${categoryKey}')" style="
+      display:inline-flex; align-items:center; gap:6px;
+      margin-bottom:16px; padding:8px 16px;
+      background: hsl(0,0%,15%); color:white;
+      border:none; border-radius:30px; font:inherit;
+      font-size:13px; font-weight:600; cursor:pointer;
+      transition:opacity 0.2s;
+    " onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+      ${catLabel} — бүгдийг харах →
+    </button>
+  `;
+
   data.subcategories.forEach((sub, subIndex) => {
     html += `
       <section class="submenu-section">
@@ -267,9 +281,9 @@ function renderSubcategories(categoryKey) {
     `;
     sub.items.forEach((item, itemIndex) => {
       html += `
-        <button class="submenu-item-link" 
+        <button class="submenu-item-link"
           onclick="navigateToItem('${categoryKey}', ${subIndex}, ${itemIndex})"
-          style="width: 100%; text-align: left; background: none; border: none; font: inherit;"
+          style="width:100%; text-align:left; background:none; border:none; font:inherit;"
         >
           ${item}
         </button>
@@ -283,22 +297,31 @@ function renderSubcategories(categoryKey) {
 
 function navigateToItem(categoryKey, subIndex, itemIndex) {
   const data = categoryData[categoryKey];
-  const sub = data.subcategories[subIndex];
+  const sub  = data.subcategories[subIndex];
   const item = sub.items[itemIndex];
 
   closeMenu();
 
-  const sectionId = item.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]/g, '');
-  const target = document.getElementById(sectionId);
-  if (target) {
-    target.scrollIntoView({ behavior: 'smooth' });
-  } else {
-    const productsSection = document.querySelector('.products-section');
-    if (productsSection) {
-      productsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-    console.log(`Navigate → ${data.label} > ${sub.name} > ${item}`);
-  }
+  // Fire custom event so app.js can filter the products grid
+  window.dispatchEvent(new CustomEvent("categoryNavigation", {
+    detail: { categoryKey, subName: sub.name, itemName: item }
+  }));
+
+  setTimeout(() => {
+    const salesSection = document.getElementById("sales");
+    if (salesSection) salesSection.scrollIntoView({ behavior: "smooth" });
+  }, 100);
+}
+
+function navigateToCategory(categoryKey) {
+  closeMenu();
+  window.dispatchEvent(new CustomEvent("categoryNavigation", {
+    detail: { categoryKey, subName: null, itemName: null }
+  }));
+  setTimeout(() => {
+    const salesSection = document.getElementById("sales");
+    if (salesSection) salesSection.scrollIntoView({ behavior: "smooth" });
+  }, 100);
 }
 
 // MOBILE SEARCH TOGGLE
@@ -376,6 +399,11 @@ document.querySelectorAll(".menu-item").forEach(item => {
     this.classList.add("active");
     renderSubcategories(this.dataset.category);
   });
+
+  // Double-click or right side arrow click navigates to category
+  item.addEventListener("dblclick", function () {
+    navigateToCategory(this.dataset.category);
+  });
 });
 
 
@@ -396,4 +424,29 @@ function scrollToTop() {
     top: 0,
     behavior: "smooth"
   });
+}
+
+function openContact() {
+  document.getElementById("contact").classList.add("active");
+  document.getElementById("contactOverlay").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeContact() {
+  document.getElementById("contact").classList.remove("active");
+  document.getElementById("contactOverlay").classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeContact();
+});
+
+function handleContactSubmit(e) {
+  e.preventDefault();
+  const success = document.getElementById("contactSuccess");
+  if (!success) return;
+  success.classList.add("show");
+  e.target.reset();
+  setTimeout(() => success.classList.remove("show"), 4000);
 }
