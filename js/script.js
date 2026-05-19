@@ -304,7 +304,7 @@ function renderSubcategories(categoryKey) {
 
 function navigateToItem(categoryKey, subIndex, itemIndex) {
   const data = categoryData[categoryKey];
-  const sub  = data.subcategories[subIndex];
+  const sub = data.subcategories[subIndex];
   const item = sub.items[itemIndex];
 
   closeMenu();
@@ -468,4 +468,49 @@ function handleContactSubmit(e) {
   success.classList.add("show");
   e.target.reset();
   setTimeout(() => success.classList.remove("show"), 4000);
+}
+
+document.querySelectorAll(".menu-item").forEach(item => {
+  item.addEventListener("click", function () {
+    document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
+    this.classList.add("active");
+
+    // Mobile дээр subcategory харуулахгүй, шууд navigate хийнэ
+    if (window.innerWidth <= 768) {
+      navigateToCategory(this.dataset.category);
+      return;
+    }
+
+    renderSubcategories(this.dataset.category);
+  });
+});
+function openReturns() {
+  document.getElementById("returns").classList.add("active");
+  document.getElementById("returnsOverlay").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeReturns() {
+  document.getElementById("returns").classList.remove("active");
+  document.getElementById("returnsOverlay").classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+function handleReturnsSubmit(e) {
+  e.preventDefault();
+  const success = document.getElementById("returnsSuccess");
+  success.classList.add("show");
+  e.target.reset();
+  setTimeout(() => success.classList.remove("show"), 4000);
+}
+function openFaq() {
+  document.getElementById("faq").classList.add("active");
+  document.getElementById("faqOverlay").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeFaq() {
+  document.getElementById("faq").classList.remove("active");
+  document.getElementById("faqOverlay").classList.remove("active");
+  document.body.style.overflow = "";
 }
