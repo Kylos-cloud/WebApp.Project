@@ -7,6 +7,7 @@
   <title>SHOP — Бараа</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* ── PAGE LAYOUT ── */
     .product-page {
       max-width: 1100px;
       margin: 0 auto;
@@ -28,7 +29,7 @@
       color: var(--color-text);
     }
 
-    /* MAIN LAYOUT */
+    /* ── MAIN GRID ── */
     .product-detail {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -36,10 +37,13 @@
       align-items: start;
     }
 
-    /* IMAGE SIDE */
+    /* ── IMAGE SIDE ── */
     .product-images {
       position: sticky;
       top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .main-image-wrap {
@@ -60,6 +64,37 @@
 
     .main-image-wrap:hover img {
       transform: scale(1.04);
+    }
+
+    /* Thumbnail strip */
+    .thumb-strip {
+      display: flex;
+      gap: 10px;
+    }
+
+    .thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      flex-shrink: 0;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .thumb:hover {
+      transform: translateY(-2px);
+    }
+
+    .thumb.active {
+      border-color: var(--color-text);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .product-tag-detail {
@@ -96,7 +131,7 @@
       letter-spacing: 2px;
     }
 
-    /* INFO SIDE */
+    /* ── INFO SIDE ── */
     .product-info {
       display: flex;
       flex-direction: column;
@@ -124,7 +159,7 @@
       margin: 0;
     }
 
-    /* RATING */
+    /* Stars */
     .rating-row {
       display: flex;
       align-items: center;
@@ -147,7 +182,7 @@
 
     .star.half {
       color: #f5a623;
-      opacity: 0.5;
+      opacity: 0.6;
     }
 
     .rating-num {
@@ -160,7 +195,7 @@
       color: hsl(0, 0%, 55%);
     }
 
-    /* PRICE */
+    /* Price */
     .price-block {
       display: flex;
       align-items: center;
@@ -189,20 +224,18 @@
       font-weight: 700;
     }
 
-    /* DIVIDER */
     .divider {
       height: 1px;
       background: var(--color-border);
     }
 
-    /* DESCRIPTION */
     .product-description {
       font-size: 14px;
       line-height: 1.7;
       color: hsl(0, 0%, 40%);
     }
 
-    /* QUANTITY */
+    /* Qty */
     .qty-label {
       font-size: 12px;
       font-weight: 700;
@@ -221,7 +254,6 @@
     .qty-control {
       display: flex;
       align-items: center;
-      gap: 0;
       border: 1.5px solid var(--color-border);
       border-radius: 30px;
       overflow: hidden;
@@ -267,7 +299,7 @@
       color: hsl(0, 50%, 50%);
     }
 
-    /* ACTION BUTTONS */
+    /* Action buttons */
     .action-btns {
       display: flex;
       flex-direction: column;
@@ -334,7 +366,7 @@
       background: hsl(0, 80%, 97%);
     }
 
-    /* META INFO */
+    /* Meta */
     .meta-list {
       display: flex;
       flex-direction: column;
@@ -358,16 +390,328 @@
       color: var(--color-text);
     }
 
-    /* RELATED */
+    /* ══════════════════════════════════════════
+       DETAILED INFO SECTION (Screenshot 2)
+    ══════════════════════════════════════════ */
+    .detail-section {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* Left card — detailed info */
+    .detail-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+
+    .detail-card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .detail-item {
+      background: var(--color-bg);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .detail-item strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--color-text);
+    }
+
+    .detail-item p {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: hsl(0, 0%, 45%);
+      margin: 0;
+    }
+
+    .detail-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 4px;
+    }
+
+    .detail-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: hsl(0, 0%, 30%);
+      line-height: 1.5;
+    }
+
+    .detail-bullet .check {
+      color: hsl(140, 55%, 38%);
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Right card — brand comparison */
+    .brand-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+
+    .brand-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .brand-card .brand-subtitle {
+      font-size: 12.5px;
+      color: hsl(0, 0%, 55%);
+      margin-bottom: 20px;
+    }
+
+    .brand-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .brand-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: hsl(0, 0%, 55%);
+      padding: 0 0 10px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .brand-table td {
+      padding: 14px 0;
+      font-size: 13px;
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: middle;
+    }
+
+    .brand-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .brand-name-cell {
+      font-weight: 700;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      margin-top: 4px;
+      background: red;
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.4px;
+    }
+
+    .brand-price-cell {
+      font-weight: 700;
+      color: red;
+    }
+
+    .brand-cur-cell {
+      font-size: 11px;
+      color: hsl(0, 0%, 55%);
+      text-align: right;
+    }
+
+    /* ══════════════════════════════════════════
+       REVIEWS SECTION (Screenshot 3)
+    ══════════════════════════════════════════ */
+    .reviews-section {
+      margin-top: 40px;
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+    }
+
+    .reviews-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+
+    .reviews-header-left h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .reviews-header-left p {
+      font-size: 13px;
+      color: hsl(0, 0%, 55%);
+    }
+
+    .reviews-header-right {
+      text-align: right;
+    }
+
+    .reviews-big-score {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .reviews-big-stars {
+      display: flex;
+      gap: 3px;
+      justify-content: flex-end;
+      margin: 4px 0;
+    }
+
+    .reviews-big-stars .star {
+      font-size: 20px;
+    }
+
+    .reviews-count-label {
+      font-size: 12px;
+      color: hsl(0, 0%, 55%);
+    }
+
+    /* Individual review cards */
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .review-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .review-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .reviewer-name {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .review-date {
+      font-size: 12px;
+      color: hsl(0, 0%, 55%);
+    }
+
+    .review-body {
+      font-size: 13.5px;
+      color: hsl(0, 0%, 30%);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Review form */
+    .review-divider {
+      height: 1px;
+      background: var(--color-border);
+      margin-bottom: 24px;
+    }
+
+    .review-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 2fr auto;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: hsl(0, 0%, 45%);
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--color-text);
+      font-family: inherit;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--color-text);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 44px;
+    }
+
+    .btn-submit {
+      padding: 11px 22px;
+      background: var(--color-text);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-submit:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    /* Related */
     .related-section {
-      margin-top: 80px;
+      margin-top: 60px;
     }
 
     .related-section h2 {
       margin-bottom: 24px;
+      font-size: 20px;
+      font-weight: 700;
     }
 
-    /* TOAST */
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 90px;
@@ -391,7 +735,7 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* NOT FOUND */
+    /* Not found */
     .not-found {
       text-align: center;
       padding: 120px 20px;
@@ -419,6 +763,12 @@
       color: white;
     }
 
+    @media (max-width: 900px) {
+      .detail-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
       .product-page {
         padding: 20px 16px 100px;
@@ -439,6 +789,39 @@
 
       .price-new {
         font-size: 26px;
+      }
+
+      .review-form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .review-form-grid .form-group:nth-child(3) {
+        grid-column: 1 / -1;
+      }
+
+      .btn-submit {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .related-section .products {
+        display: flex !important;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 12px;
+        padding-bottom: 12px;
+      }
+
+      .related-section .products::-webkit-scrollbar {
+        display: none;
+      }
+
+      .related-section .products article {
+        flex: 0 0 160px;
+        min-width: 160px;
       }
     }
   </style>
@@ -491,10 +874,8 @@
     <!-- JS fills this -->
   </main>
 
-  <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
-  <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
     <a href="index.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
@@ -534,7 +915,6 @@
     const productId = parseInt(params.get("id"));
     const page = document.getElementById("productPage");
 
-    // Category label map
     const catLabels = {
       "huvtsas": "Хувцас, Гутал",
       "tsakhilgaan": "Цахилгаан бараа",
@@ -550,7 +930,6 @@
       "shingen-huns": "Шингэн хүнс",
     };
 
-    // Simple descriptions per category
     const descriptions = {
       "huvtsas": "Өндөр чанарын материалаар хийгдсэн, таны хэв маягийг илэрхийлэх гоёмсог загвар. Урт эдэлгээтэй, тав тухтай.",
       "tsakhilgaan": "Хамгийн сүүлийн үеийн технологиор хийгдсэн бөгөөд таны өдөр тутмын амьдралыг хялбарчлах ухаалаг гаджет.",
@@ -563,16 +942,47 @@
       "tejeewr": "Таны үнэт тэжээвэр амьтдад зориулсан эрүүл, чанарлаг хоол болон хэрэгсэл.",
     };
 
-    function formatPrice(n) {
-      return n.toLocaleString("mn-MN") + "₮";
-    }
+    // Detail feature blocks per category
+    const detailFeatures = {
+      "goo-saikhan": [
+        { title: "Арьсанд мэдрэмжтэй", body: "Өдөр тутмын арчилгаанд зөөлөн, таатай мэдрэмж өгөхөөр сонгосон." },
+        { title: "Үнэр ба бүтэц", body: "Брэндийн онцлог үнэр, мэдрэмжийг хадгалсан premium сонголт." },
+        { title: "Хэрэглэх зөвлөмж", body: "Цэвэр арьсанд бага хэмжээгээр хэрэглэж, тогтмол хэрэглэлээг эрхэмлээрэй." },
+        { title: "Бэлгийн сонголт", body: "Савлагаа болон брэндийн үнэлэмж нь бэлэглэхэд тохиромжтой." },
+      ],
+      "huvtsas": [
+        { title: "Материал", body: "100% байгалийн тос агуулсан, арьсанд зөөлөн даавуу ашигласан." },
+        { title: "Загвар", body: "Орчин үеийн хэв маягт нийцсэн, тав тухтай зүсэлт." },
+        { title: "Угаах заавар", body: "30°C-д угаах машинаар угаана. Нарнаас хамгаалж хатаах." },
+        { title: "Хэмжээ", body: "XS-ээс XXL хүртэлх хэмжээнд байна. Хэмжих хүснэгтийг харна уу." },
+      ],
+    };
 
-    function renderStars(rating) {
+    // Brand comparison data per category
+    const brandCompare = {
+      "goo-saikhan": [
+        { brand: "Loewe", product: "Loewe liquid soap", price: 60000, current: true },
+        { brand: "Aesop", product: "Aesop Resurrection Hand Balm", price: 92000 },
+      ],
+      "huvtsas": [
+        { brand: "Zara", product: "Zara Classic Shirt", price: 45000, current: true },
+        { brand: "H&M", product: "H&M Slim Fit Tee", price: 28000 },
+      ],
+    };
+
+    const sampleReviews = [
+      { name: "Ариун", stars: 5, date: "2026-05-01", body: "Үнэ болон чанарын хувьд дажгүй санагдсан. Мэдээлэл нь ойлгомжтой байсан болохоор сонгоход амар байлаа." },
+      { name: "Тэмүүлэн", stars: 4, date: "2026-05-06", body: "Хүргэлт хурдан, савлагаа цэвэрхэн ирсэн. Дахиад энэ брэндээс сонгож магадгүй." },
+    ];
+
+    function formatPrice(n) { return n.toLocaleString("mn-MN") + "₮"; }
+
+    function renderStars(rating, size = 16) {
       let html = "";
       for (let i = 1; i <= 5; i++) {
-        if (rating >= i) html += `<span class="star filled">★</span>`;
-        else if (rating >= i - 0.5) html += `<span class="star half">★</span>`;
-        else html += `<span class="star">★</span>`;
+        if (rating >= i) html += `<span class="star filled" style="font-size:${size}px">★</span>`;
+        else if (rating >= i - 0.5) html += `<span class="star half"   style="font-size:${size}px">★</span>`;
+        else html += `<span class="star"         style="font-size:${size}px">★</span>`;
       }
       return html;
     }
@@ -584,22 +994,144 @@
       setTimeout(() => t.classList.remove("show"), 2500);
     }
 
+    /* ── Build the reviews section HTML ── */
+    function buildReviews(product, reviews) {
+      const avg = reviews.length
+        ? (reviews.reduce((s, r) => s + r.stars, 0) / reviews.length).toFixed(1)
+        : product.rating;
+
+      const reviewCards = reviews.map(r => `
+        <div class="review-card">
+          <div class="review-card-top">
+            <div>
+              <div class="reviewer-name">${r.name}</div>
+              <div class="stars">${renderStars(r.stars, 14)}</div>
+            </div>
+            <div class="review-date">${r.date}</div>
+          </div>
+          <p class="review-body">${r.body}</p>
+        </div>
+      `).join("");
+
+      return `
+        <section class="reviews-section">
+          <div class="reviews-header">
+            <div class="reviews-header-left">
+              <h2>Сэтгэгдэл</h2>
+              <p>Худалдан авагчдын үнэлгээ болон туршлага</p>
+            </div>
+            <div class="reviews-header-right">
+              <div class="reviews-big-score">${avg}</div>
+              <div class="reviews-big-stars">${renderStars(parseFloat(avg), 20)}</div>
+              <div class="reviews-count-label">${reviews.length} сэтгэгдэл</div>
+            </div>
+          </div>
+
+          <div class="review-list" id="reviewList">
+            ${reviewCards}
+          </div>
+
+          <div class="review-divider"></div>
+
+          <!-- Add review form -->
+          <div class="review-form-grid">
+            <div class="form-group">
+              <label class="form-label">Нэр</label>
+              <input class="form-input" id="rvName" type="text" placeholder="Таны нэр" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Үнэлгээ</label>
+              <select class="form-select" id="rvStars">
+                <option value="5">5 од</option>
+                <option value="4">4 од</option>
+                <option value="3">3 од</option>
+                <option value="2">2 од</option>
+                <option value="1">1 од</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Сэтгэгдэл</label>
+              <textarea class="form-textarea" id="rvText" placeholder="Энэ барааны талаар..."></textarea>
+            </div>
+            <button class="btn-submit" onclick="submitReview()">Илгээх</button>
+          </div>
+        </section>
+      `;
+    }
+
+    /* ── Build detailed info + brand comparison section ── */
+    function buildDetailSection(product) {
+      const features = detailFeatures[product.category] || [
+        { title: "Чанар", body: "Өндөр чанарын материал ашигласан, удаан эдэлгээтэй." },
+        { title: "Загвар", body: "Орчин үеийн хэв маягт нийцсэн гоёмсог дизайн." },
+        { title: "Зориулалт", body: "Өдөр тутмын хэрэглээнд тохиромжтой." },
+        { title: "Баталгаа", body: "6 сарын үйлдвэрийн баталгаатай." },
+      ];
+
+      const featureGrid = features.map(f => `
+        <div class="detail-item">
+          <strong>${f.title}</strong>
+          <p>${f.body}</p>
+        </div>
+      `).join("");
+
+      const brands = brandCompare[product.category] || [];
+      const catLabel = catLabels[product.category] || product.category;
+
+      const brandRows = brands.map(b => `
+        <tr>
+          <td class="brand-name-cell">
+            ${b.brand}
+            ${b.current ? '<br><span class="brand-badge">Одоо</span>' : ''}
+          </td>
+          <td>${b.product}</td>
+          <td class="brand-price-cell">${formatPrice(b.price)}</td>
+          <td class="brand-cur-cell">-</td>
+        </tr>
+      `).join("");
+
+      const brandSection = brands.length ? `
+        <div class="brand-card">
+          <h3>Брэнд харьцуулалт</h3>
+          <p class="brand-subtitle">Ижил төрөл: ${catLabel}</p>
+          <table class="brand-table">
+            <thead>
+              <tr>
+                <th>Брэнд</th>
+                <th>Бараа</th>
+                <th>Үнэ</th>
+                <th>Үн</th>
+              </tr>
+            </thead>
+            <tbody>${brandRows}</tbody>
+          </table>
+        </div>
+      ` : "";
+
+      return `
+        <section class="detail-section">
+          <div class="detail-card">
+            <h2>Дэлгэрэнгүй мэдээлэл</h2>
+            <div class="detail-grid">${featureGrid}</div>
+            <div class="detail-bullets">
+              <div class="detail-bullet"><span class="check">✓</span><span>Үнэлгээ өндөртэй ижил төрлийн бараатай шууд харьцуулж болно.</span></div>
+              <div class="detail-bullet"><span class="check">✓</span><span>Арьс арчилгаа, үнэртэн, гоо сайхны routine-д нэмэхэд хялбар.</span></div>
+              <div class="detail-bullet"><span class="check">✓</span><span>Хэрэглэгч худалдан авахаас өмнэ үнэ, брэнд, үнэлгээний ялгааг харах боломжтой.</span></div>
+            </div>
+          </div>
+          ${brandSection}
+        </section>
+      `;
+    }
+
     async function init() {
-      if (!productId) {
-        renderNotFound();
-        return;
-      }
+      if (!productId) { renderNotFound(); return; }
 
       const res = await fetch("products.json");
       const data = await res.json();
       const product = data.products.find(p => p.id === productId);
+      if (!product) { renderNotFound(); return; }
 
-      if (!product) {
-        renderNotFound();
-        return;
-      }
-
-      // Related: same category, different product
       const related = data.products
         .filter(p => p.category === product.category && p.id !== product.id)
         .slice(0, 4);
@@ -615,6 +1147,15 @@
         : "";
 
       const desc = descriptions[product.category] || "Өндөр чанарын бараа. Танд сэтгэл ханамжтай худалдан авалт хийхийг хүсье.";
+      const reviewCount = Math.floor(Math.random() * 200 + 50);
+
+      // Build 4 fake thumbnails from the same image
+      const thumbs = [product.image, product.image, product.image, product.image];
+      const thumbHTML = thumbs.map((src, i) => `
+        <div class="thumb ${i === 0 ? 'active' : ''}" onclick="selectThumb(this, '${src}')">
+          <img src="${src}" alt="thumb ${i + 1}" onerror="this.style.background='#eee'">
+        </div>
+      `).join("");
 
       page.innerHTML = `
         <a href="javascript:history.back()" class="back-btn">
@@ -624,14 +1165,16 @@
           Буцах
         </a>
 
+        <!-- ── MAIN PRODUCT SECTION ── -->
         <div class="product-detail">
-          <!-- IMAGE -->
+          <!-- IMAGE + THUMBNAILS -->
           <div class="product-images">
             <div class="main-image-wrap">
-              <img src="${product.image}" alt="${product.name}" onerror="this.style.background='#f0f0f0'">
+              <img id="mainImg" src="${product.image}" alt="${product.name}" onerror="this.style.background='#f0f0f0'">
               ${tagHTML}
               ${outHTML}
             </div>
+            <div class="thumb-strip">${thumbHTML}</div>
           </div>
 
           <!-- INFO -->
@@ -642,7 +1185,7 @@
             <div class="rating-row">
               <div class="stars">${renderStars(product.rating)}</div>
               <span class="rating-num">${product.rating}</span>
-              <span class="rating-count">(${Math.floor(Math.random() * 200 + 50)} үнэлгээ)</span>
+              <span class="rating-count">(${reviewCount} үнэлгээ)</span>
             </div>
 
             <div class="price-block">
@@ -652,12 +1195,10 @@
             </div>
 
             <div class="divider"></div>
-
             <p class="product-description">${desc}</p>
-
             <div class="divider"></div>
 
-            <!-- QUANTITY -->
+            <!-- Quantity -->
             <div>
               <p class="qty-label">Тоо ширхэг</p>
               <div class="qty-row">
@@ -667,12 +1208,14 @@
                   <button class="qty-btn" id="qtyPlus" onclick="changeQty(1)">+</button>
                 </div>
                 <span class="qty-stock ${!product.inStock ? 'out' : ''}">
-                  ${product.inStock ? '✓ Нөөцтэй' : '✗ Нөөц дууссан'}
+                  ${product.inStock
+          ? '✓ Нөөцтэй · 10 ширхэг үлдсэн'
+          : '✗ Нөөц дууссан'}
                 </span>
               </div>
             </div>
 
-            <!-- ACTION BUTTONS -->
+            <!-- Action buttons -->
             <div class="action-btns">
               <button class="btn-cart" id="cartBtn" ${!product.inStock ? 'disabled' : ''} onclick="addToCart()">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -690,7 +1233,7 @@
 
             <div class="divider"></div>
 
-            <!-- META -->
+            <!-- Meta -->
             <div class="meta-list">
               <div class="meta-row">
                 <span class="meta-key">Ангилал</span>
@@ -706,20 +1249,26 @@
               </div>
               <div class="meta-row">
                 <span class="meta-key">Нөөц</span>
-                <span class="meta-val">${product.inStock ? 'Байна' : 'Дууссан'}</span>
+                <span class="meta-val">${product.inStock ? '10 ширхэг үлдсэн' : 'Дууссан'}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- RELATED PRODUCTS -->
+        <!-- ── DETAILED INFO + BRAND COMPARISON ── -->
+        ${buildDetailSection(product)}
+
+        <!-- ── REVIEWS ── -->
+        ${buildReviews(product, sampleReviews)}
+
+        <!-- ── RELATED PRODUCTS ── -->
         ${related.length ? `
         <div class="related-section">
           <h2>Төстэй бараанууд</h2>
           <div class="products" style="padding:0; grid-template-columns: repeat(4,1fr);">
             ${related.map(p => {
-        const d = Math.round(((p.oldPrice - p.newPrice) / p.oldPrice) * 100);
-        return `
+            const d = Math.round(((p.oldPrice - p.newPrice) / p.oldPrice) * 100);
+            return `
                 <article class="product" onclick="window.location='product.html?id=${p.id}'" style="cursor:pointer">
                   <figure>
                     <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">
@@ -732,25 +1281,31 @@
                     <span class="discount-badge">-${d}%</span>
                   </p>
                 </article>`;
-      }).join('')}
+          }).join('')}
           </div>
         </div>` : ''}
       `;
 
-      // Qty logic
+      /* ── Thumbnail switcher ── */
+      window.selectThumb = function (el, src) {
+        document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        document.getElementById('mainImg').src = src;
+      };
+
+      /* ── Qty ── */
       let qty = 1;
       window.changeQty = function (delta) {
         qty = Math.max(1, qty + delta);
         document.getElementById("qtyNum").textContent = qty;
       };
 
-      // Cart — syncs to localStorage via store.js
+      /* ── Cart ── */
       const me = getMe();
       const cartSvg = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/></svg>`;
       const wishSvgEmpty = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/></svg>`;
       const wishSvgFull = `<svg width="18" height="18" fill="red" stroke="red" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/></svg>`;
 
-      // Sync initial button states if logged in
       if (me) {
         const cartBtn = document.getElementById("cartBtn");
         if (isInCart(product.id) && cartBtn) {
@@ -773,7 +1328,6 @@
         showToast(`${product.name} сагсанд нэмэгдлээ!`);
       };
 
-      // Wishlist — syncs to localStorage via store.js
       window.toggleWish = function () {
         if (!me) { showToast("Нэвтэрч орно уу!"); setTimeout(() => window.location.href = "login.html", 1000); return; }
         const btn = document.getElementById("wishBtn");
@@ -789,6 +1343,32 @@
           showToast("Хадгалсан барааанд нэмэгдлээ!");
         }
       };
+
+      /* ── Submit review ── */
+      window.submitReview = function () {
+        const name = document.getElementById("rvName").value.trim();
+        const stars = parseInt(document.getElementById("rvStars").value);
+        const body = document.getElementById("rvText").value.trim();
+        if (!name || !body) { showToast("Нэр болон сэтгэгдлээ бөглөнө үү."); return; }
+
+        const today = new Date().toISOString().slice(0, 10);
+        const card = document.createElement("div");
+        card.className = "review-card";
+        card.innerHTML = `
+          <div class="review-card-top">
+            <div>
+              <div class="reviewer-name">${name}</div>
+              <div class="stars">${renderStars(stars, 14)}</div>
+            </div>
+            <div class="review-date">${today}</div>
+          </div>
+          <p class="review-body">${body}</p>
+        `;
+        document.getElementById("reviewList").appendChild(card);
+        document.getElementById("rvName").value = "";
+        document.getElementById("rvText").value = "";
+        showToast("Сэтгэгдэл амжилттай нэмэгдлээ!");
+      };
     }
 
     function renderNotFound() {
@@ -799,6 +1379,7 @@
           <a href="index.html">Дэлгүүр рүү буцах</a>
         </div>`;
     }
+
 
     init();
   </script>
