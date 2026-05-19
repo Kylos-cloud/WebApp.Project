@@ -58,21 +58,23 @@ document.querySelectorAll(".categories-wrapper").forEach(wrapper => {
     });
   }
 
-  // Auto-scroll on desktop only
+  // Auto-scroll on desktop and mobile
   let autoTimer;
   function startAuto() {
+    stopAuto();
+    const step = window.innerWidth <= 768 ? 160 : SCROLL_AMOUNT;
     autoTimer = setInterval(() => {
-      if (window.innerWidth > 768) {
-        slider.scrollBy({ left: SCROLL_AMOUNT, behavior: "smooth" });
-      }
-    }, 3000);
+      slider.scrollBy({ left: step, behavior: "smooth" });
+    }, window.innerWidth <= 768 ? 2500 : 3000);
   }
-  function stopAuto() { clearInterval(autoTimer); }
+  function stopAuto() { if (autoTimer) clearInterval(autoTimer); }
 
   startAuto();
   slider.addEventListener("mouseenter", stopAuto);
   slider.addEventListener("mouseleave", startAuto);
+  // Pause briefly on touch, then resume so it keeps animating
   slider.addEventListener("touchstart", stopAuto, { passive: true });
+  slider.addEventListener("touchend", () => setTimeout(startAuto, 1500), { passive: true });
 });
 
 // =====================
@@ -88,7 +90,7 @@ function openMenu() {
 function closeMenu() {
   const menu = document.getElementById("categoryMenu");
   const overlay = document.getElementById("overlay");
-  if (menu) menu.classList.remove("active");
+  if (menu) menu.classList.remove("active", "level-2");
   if (overlay) overlay.classList.remove("active");
 }
 
@@ -269,6 +271,9 @@ function renderSubcategories(categoryKey) {
   // <section> болон <h3> ашиглаж, item-ийг <button> болголоо.
   const catLabel = data.label;
   let html = `
+    <button class="submenu-back-mobile" onclick="closeSubPanel()" aria-label="Буцах">
+      ← Буцах
+    </button>
     <button onclick="navigateToCategory('${categoryKey}')" style="
       display:inline-flex; align-items:center; gap:6px;
       margin-bottom:16px; padding:8px 16px;
@@ -406,15 +411,8 @@ document.querySelectorAll(".bottom-nav-item").forEach(item => {
   });
 });
 
-// MENU ITEM CLICK
+// Double-click navigates straight to category (desktop convenience)
 document.querySelectorAll(".menu-item").forEach(item => {
-  item.addEventListener("click", function () {
-    document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
-    this.classList.add("active");
-    renderSubcategories(this.dataset.category);
-  });
-
-  // Double-click or right side arrow click navigates to category
   item.addEventListener("dblclick", function () {
     navigateToCategory(this.dataset.category);
   });
@@ -475,18 +473,26 @@ document.querySelectorAll(".menu-item").forEach(item => {
     document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
     this.classList.add("active");
 
-    // Mobile дээр subcategory харуулахгүй, шууд navigate хийнэ
-    if (window.innerWidth <= 768) {
-      navigateToCategory(this.dataset.category);
-      return;
-    }
-
     renderSubcategories(this.dataset.category);
+
+    // On mobile, swap to level-2 view (subcategories)
+    if (window.innerWidth <= 768) {
+      const aside = document.getElementById("categoryMenu");
+      if (aside) aside.classList.add("level-2");
+    }
   });
 });
+
+// Mobile-only: back from level 2 → level 1
+window.closeSubPanel = function () {
+  const aside = document.getElementById("categoryMenu");
+  if (aside) aside.classList.remove("level-2");
+};
 function openReturns() {
-  document.getElementById("returns").classList.add("active");
-  document.getElementById("returnsOverlay").classList.add("active");
+  const el = document.getElementById("returns");
+  const overlay = document.getElementById("returnsOverlay");
+  if (el) el.classList.add("active");
+  if (overlay) overlay.classList.add("active");
   document.body.style.overflow = "hidden";
 }
 
@@ -504,8 +510,10 @@ function handleReturnsSubmit(e) {
   setTimeout(() => success.classList.remove("show"), 4000);
 }
 function openFaq() {
-  document.getElementById("faq").classList.add("active");
-  document.getElementById("faqOverlay").classList.add("active");
+  const el = document.getElementById("faq");
+  const overlay = document.getElementById("faqOverlay");
+  if (el) el.classList.add("active");
+  if (overlay) overlay.classList.add("active");
   document.body.style.overflow = "hidden";
 }
 

@@ -10,10 +10,14 @@ function updateBadges() {
   setBadge('a[href="basket.html"]',    cartCount);
   setBadge('a[href="hadgalsan.html"]', savedCount);
 
-  // Profile icon: show a green dot when logged in
-  document.querySelectorAll(".icon-profile, .bottom-nav-item[href='login.html']").forEach(el => {
+  // Profile icon: show a green dot when logged in, and skip the login.html
+  // bounce by linking straight to profile.html.
+  document.querySelectorAll(".icon-profile, .bottom-nav-item[href='login.html'], .bottom-nav-item[href='profile.html']").forEach(el => {
     el.classList.toggle("user-logged-in", !!me);
     el.title = me ? (me.name || me.email || "") : "";
+    if (el.tagName === "A") {
+      el.setAttribute("href", me ? "profile.html" : "login.html");
+    }
   });
 }
 
