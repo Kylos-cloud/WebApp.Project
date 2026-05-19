@@ -510,7 +510,7 @@ nav a {
 
 .hero {
   height: 520px;
-  background: url("image/hero.webp") center/cover no-repeat;
+  background: url("../image/hero.webp") center/cover no-repeat;
   display: flex;
   align-items: center;
   padding-left: 120px;
