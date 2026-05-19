@@ -447,6 +447,15 @@ function openContact() {
   document.body.style.overflow = "hidden";
 }
 
+// If we arrived with #contact in the URL (icon from another page),
+// auto-open the contact modal once the DOM is ready.
+window.addEventListener("DOMContentLoaded", () => {
+  if (window.location.hash === "#contact" && document.getElementById("contact")) {
+    openContact();
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  }
+});
+
 function closeContact() {
   const el = document.getElementById("contact");
   const overlay = document.getElementById("contactOverlay");
