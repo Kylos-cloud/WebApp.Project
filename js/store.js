@@ -1,7 +1,7 @@
 // store.js — shared store: backend auth/orders + localStorage cart/saved
 
 //API base URL
-const PRODUCTION_API = "https://webapp-api-abcd.onrender.com/api";
+const PRODUCTION_API = "https://webapp-project-nme2.onrender.com/api";
 const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
 export const API_BASE = isLocal ? "http://localhost:3000/api" : PRODUCTION_API;
 
