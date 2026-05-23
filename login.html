@@ -767,20 +767,14 @@
         </article>
     </main>
 
+    <script type="module">
+        import { apiLogin, apiRegister, apiLogout, getMe } from "./js/store.js";
+        window._apiLogin = apiLogin;
+        window._apiRegister = apiRegister;
+        window._apiLogout = apiLogout;
+        window._getMe = getMe;
+    </script>
     <script>
-        // ── Storage helpers ──────────────────────────────────────
-        const USERS_KEY = "shop_users";
-        const AUTH_KEY = "shop_current_user";
-
-        function getUsers() { return JSON.parse(localStorage.getItem(USERS_KEY) || "[]"); }
-        function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
-        function getMe() { return JSON.parse(localStorage.getItem(AUTH_KEY) || "null"); }
-        function setMe(u) { localStorage.setItem(AUTH_KEY, JSON.stringify(u)); }
-        function clearMe() { localStorage.removeItem(AUTH_KEY); }
-
-        function getUserData(id) {
-            return getUsers().find(u => u.id === id) || null;
-        }
 
         // ── UI helpers ───────────────────────────────────────────
         function showAlert(msg, type = "error") {
@@ -849,7 +843,7 @@
         }
 
         // ── LOGIN ────────────────────────────────────────────────
-        function handleLogin(e) {
+        async function handleLogin(e) {
             e.preventDefault();
             clearAlert();
             const email = document.getElementById("loginEmail").value.trim();
@@ -857,27 +851,23 @@
 
             if (!email || !pass) { showAlert("И-мэйл болон нууц үгээ оруулна уу."); return; }
 
-            // Admin shortcut
-            if (email === "admin@shop.mn" && pass === "admin123") {
-                window.location.href = "admin.html"; return;
-            }
-
             setLoading("loginBtn", "loginSpinner", true);
-            setTimeout(() => {
-                const users = getUsers();
-                const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === pass);
-                setLoading("loginBtn", "loginSpinner", false);
-
-                if (!user) { showAlert("И-мэйл эсвэл нууц үг буруу байна."); return; }
-
-                setMe({ id: user.id, name: user.name, email: user.email });
+            try {
+                const user = await window._apiLogin({ email, password: pass });
+                if (user.is_admin) {
+                    window.location.href = "admin.html"; return;
+                }
                 showAlert("Амжилттай нэвтэрлээ! Дэлгүүр рүү шилжиж байна...", "success");
                 setTimeout(() => window.location.href = "index.html", 1000);
-            }, 700);
+            } catch (err) {
+                showAlert(err.message || "Нэвтрэх амжилтгүй боллоо.");
+            } finally {
+                setLoading("loginBtn", "loginSpinner", false);
+            }
         }
 
         // ── REGISTER ────────────────────────────────────────────
-        function handleRegister(e) {
+        async function handleRegister(e) {
             e.preventDefault();
             clearAlert();
 
@@ -893,28 +883,17 @@
             if (pass.length < 6) { showAlert("Нууц үг хамгийн багадаа 6 тэмдэгт байх ёстой."); return; }
             if (pass !== pass2) { showAlert("Нууц үг таарахгүй байна."); return; }
 
+            const name = firstName + (lastName ? " " + lastName : "");
             setLoading("regBtn", "regSpinner", true);
-            setTimeout(() => {
-                const users = getUsers();
-                if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
-                    setLoading("regBtn", "regSpinner", false);
-                    showAlert("Энэ и-мэйл хаяг бүртгэлтэй байна.");
-                    return;
-                }
-                const name = firstName + (lastName ? " " + lastName : "");
-                const newUser = {
-                    id: Date.now(),
-                    name, email, password: pass,
-                    joinedAt: new Date().toISOString(),
-                    orders: 0, saved: [], cart: []
-                };
-                users.push(newUser);
-                saveUsers(users);
-                setMe({ id: newUser.id, name: newUser.name, email: newUser.email });
-                setLoading("regBtn", "regSpinner", false);
+            try {
+                await window._apiRegister({ name, email, password: pass });
                 showAlert("Амжилттай бүртгүүллээ! Дэлгүүр рүү шилжиж байна...", "success");
                 setTimeout(() => window.location.href = "index.html", 1000);
-            }, 800);
+            } catch (err) {
+                showAlert(err.message || "Бүртгэл амжилтгүй боллоо.");
+            } finally {
+                setLoading("regBtn", "regSpinner", false);
+            }
         }
 
         // ── FORGOT PASSWORD ──────────────────────────────────────
@@ -922,50 +901,22 @@
             e.preventDefault();
             const email = document.getElementById("forgotEmail").value.trim();
             if (!email) { showAlert("И-мэйл хаягаа оруулна уу."); return; }
-
-            const users = getUsers();
-            const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
-            if (!user) { showAlert("Тухайн и-мэйл хаягаар бүртгэл олдсонгүй."); return; }
-
-            // Simulate reset — in real app this'd send an email
+            // Not implemented on backend — informational only.
             showAlert(`${email} хаяг руу нууц үг сэргээх зааварчилгаа илгээлээ.`, "success");
         }
 
         // ── LOGOUT ───────────────────────────────────────────────
         function handleLogout() {
-            clearMe();
+            window._apiLogout();
             showAlert("Гарлаа. Баяртай!", "success");
             setTimeout(() => { switchTab("login"); }, 800);
         }
 
-        // ── PROFILE ─────────────────────────────────────────────
-        function loadProfile(me) {
-            document.getElementById("tabs").style.display = "none";
-            document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-            document.getElementById("panel-profile").classList.add("active");
-
-            const initial = me.name.charAt(0).toUpperCase();
-            document.getElementById("profileAvatar").textContent = initial;
-            document.getElementById("profileName").textContent = me.name;
-            document.getElementById("profileEmail").textContent = me.email;
-
-            const fullUser = getUsers().find(u => u.id === me.id);
-            if (fullUser) {
-                document.getElementById("statOrders").textContent = fullUser.orders || 0;
-                document.getElementById("statSaved").textContent = (fullUser.saved || []).length;
-                document.getElementById("statCart").textContent = (fullUser.cart || []).length;
-                const joined = new Date(fullUser.joinedAt);
-                document.getElementById("profileJoined").textContent =
-                    `Бүртгүүлсэн: ${joined.toLocaleDateString("mn-MN")}`;
-            }
-        }
-
         // ── INIT ────────────────────────────────────────────────
-        const me = getMe();
-        if (me) {
-            // Redirect to full profile page
-            window.location.href = "profile.html";
-        }
+        window.addEventListener("load", () => {
+            const me = window._getMe?.();
+            if (me) window.location.href = "profile.html";
+        });
     </script>
 
 </body>

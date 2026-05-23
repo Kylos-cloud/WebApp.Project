@@ -628,6 +628,13 @@
               <div class="od-contact-phone" id="od-contact-phone">—</div>
             </div>
           </div>
+          <div class="od-contact-box" id="od-notes-row" style="display:none; margin-top:10px">
+            <div class="od-contact-icon">📝</div>
+            <div>
+              <div class="od-contact-name">Нэмэлт анхааруулга</div>
+              <div class="od-contact-phone" id="od-notes">—</div>
+            </div>
+          </div>
         </div>
 
         <!-- Purchase card -->
@@ -699,27 +706,17 @@
   <script type="module" src="js/badges.js"></script>
 
   <script type="module">
-    import { getMe, formatPrice } from "./js/store.js";
+    import { getMe, apiFetchOrders, formatPrice } from "./js/store.js";
 
     const me = getMe();
     if (!me) { location.href = "login.html"; }
 
-    const USERS_KEY = "shop_users";
-    const allUsers  = JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
-    const fullUser  = allUsers.find(u => u.id === me.id) || {};
-
     // ── SIDEBAR ──
-    document.getElementById("psAvatar").textContent = me.name.charAt(0).toUpperCase();
-    document.getElementById("psName").textContent   = me.name;
+    document.getElementById("psAvatar").textContent = (me.name || "?").charAt(0).toUpperCase();
+    document.getElementById("psName").textContent   = me.name || me.email;
 
-    if (fullUser.joinedAt) {
-      const d = new Date(fullUser.joinedAt);
-      const pad = n => String(n).padStart(2, "0");
-      document.getElementById("psDate").textContent =
-        `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}-нд бүртгэлтэй`;
-    }
-
-    const orders = Array.isArray(fullUser.orders) ? fullUser.orders : [];
+    const orders = await apiFetchOrders();
+    const shortId = id => String(id).padStart(8, "0").slice(-8).toUpperCase();
 
     // Calculate total earned Shop Points: 1 SP per 100₮ spent
     const totalPoints = orders.reduce((sum, o) => sum + Math.floor((o.total || 0) / 100), 0);
@@ -772,12 +769,12 @@
       const totalQty = (order.items || []).reduce((s, p) => s + (p.qty || 1), 0);
       const first    = order.items?.[0];
       const extra    = (order.items?.length || 0) - 1;
-      const shortId  = order.id.slice(-8).toUpperCase();
+      const sId      = shortId(order.id);
 
       return `
         <div class="order-card" onclick="window._openDetail('${order.id}')">
           <div class="order-card-header">
-            <div class="order-id-badge">🚚 #${shortId}</div>
+            <div class="order-id-badge">🚚 #${sId}</div>
             <div class="order-meta">
               <span>📅 ${fmtDate(order.timestamp)}</span>
               <span>🕐 ${totalQty}ш</span>
@@ -822,12 +819,12 @@
 
     // ── OPEN ORDER DETAIL ──
     window._openDetail = function(orderId) {
-      const order = orders.find(o => o.id === orderId);
+      const order = orders.find(o => String(o.id) === String(orderId));
       if (!order) return;
 
       const status   = computeStatus(order);
       const badge    = statusMeta[status];
-      const shortId  = order.id.slice(-8).toUpperCase();
+      const sId      = shortId(order.id);
       const totalQty = (order.items || []).reduce((s, p) => s + (p.qty || 1), 0);
       const pad = n => String(n).padStart(2, "0");
 
@@ -836,8 +833,8 @@
         return `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
       }
 
-      document.getElementById("od-bc-id").textContent   = "#" + shortId;
-      document.getElementById("od-id-title").textContent = "#" + shortId;
+      document.getElementById("od-bc-id").textContent   = "#" + sId;
+      document.getElementById("od-id-title").textContent = "#" + sId;
 
       const statusEl = document.getElementById("od-status-text");
       statusEl.textContent = badge.text;
@@ -885,6 +882,14 @@
       const del = order.delivery || {};
       document.getElementById("od-contact-name").textContent  = del.name  || "—";
       document.getElementById("od-contact-phone").textContent = del.phone || "—";
+
+      const notes = del.notes || [];
+      if (notes.length) {
+        document.getElementById("od-notes-row").style.display = "";
+        document.getElementById("od-notes").textContent = notes.join(" · ");
+      } else {
+        document.getElementById("od-notes-row").style.display = "none";
+      }
 
       // Purchase meta
       document.getElementById("od-purchase-meta").innerHTML =
@@ -998,6 +1003,7 @@
     }
 
     function handleLogout() {
+      localStorage.removeItem("shop_token");
       localStorage.removeItem("shop_current_user");
       location.href = "login.html";
     }

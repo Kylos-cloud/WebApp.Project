@@ -19,7 +19,7 @@
 
   let products = [];
   try {
-    const res  = await fetch("products.json");
+    const res  = await fetch('http://localhost:3000/api/products/all');
     const data = await res.json();
     products = data.products || [];
 

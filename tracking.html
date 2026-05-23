@@ -383,6 +383,13 @@
           <div class="info-val" id="infoPayment">—</div>
         </div>
       </div>
+      <div class="info-row" id="infoNotesRow" style="display:none">
+        <span class="info-icon">📝</span>
+        <div>
+          <div class="info-label">Нэмэлт анхааруулга</div>
+          <div class="info-val" id="infoNotes">—</div>
+        </div>
+      </div>
     </div>
 
     <!-- Order items -->
@@ -427,8 +434,8 @@
     const order = JSON.parse(localStorage.getItem("current_order") || "null");
     if (!order) { location.href = "basket.html"; }
 
-    // Order number
-    document.getElementById("orderNum").textContent = order.id.slice(-8);
+    const shortId = String(order.id).padStart(8, "0").slice(-8).toUpperCase();
+    document.getElementById("orderNum").textContent = shortId;
 
     // Timestamp
     const orderDate = new Date(order.timestamp);
@@ -460,16 +467,17 @@
 
     // Banner sub
     document.getElementById("bannerSub").textContent =
-      `Захиалга ${order.id.slice(-8)} · ${etaDays} дотор хүрнэ`;
+      `Захиалга ${shortId} · ${etaDays} дотор хүрнэ`;
 
-    // ── DRIVER ──
+    // ── DRIVER ── (deterministic per order so it stays stable on refresh)
     const drivers = [
       { av:"👨", name:"Болд Доржсүрэн",  car:"Toyota Prius · УНА-1234",         rating:"4.9", phone:"99112233" },
       { av:"🧔", name:"Баяр Гантулга",   car:"Hyundai Tucson · УБА-5678",        rating:"4.8", phone:"88223344" },
       { av:"👦", name:"Мөнхбаяр Ч.",     car:"Mitsubishi Outlander · УЦА-9012",  rating:"4.7", phone:"99334455" },
       { av:"🧑", name:"Эрдэнэбат С.",    car:"Kia Sportage · УДА-3456",          rating:"5.0", phone:"88445566" },
     ];
-    const d = drivers[Math.floor(Math.random() * drivers.length)];
+    const idNum = Number(String(order.id).replace(/\D/g, "")) || 0;
+    const d = drivers[idNum % drivers.length];
     document.getElementById("driverAv").textContent     = d.av;
     document.getElementById("driverName").textContent   = d.name;
     document.getElementById("driverCar").textContent    = d.car;
@@ -493,6 +501,12 @@
       card:"Банкны карт", cash:"Бэлэн мөнгө"
     };
     document.getElementById("infoPayment").textContent = payLabels[order.payment] || order.payment || "—";
+
+    const notes = del.notes || [];
+    if (notes.length) {
+      document.getElementById("infoNotesRow").style.display = "";
+      document.getElementById("infoNotes").textContent = notes.join(" · ");
+    }
 
     // ── ITEMS ──
     document.getElementById("itemsList").innerHTML = order.items.map(p => `
