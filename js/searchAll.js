@@ -1,5 +1,7 @@
 // Live-search dropdown for pages other than index.html.
 // index.html handles its own search via modules/app.js.
+import { API_BASE } from "./store.js";
+
 (async function () {
   if (document.getElementById("mainSearchInput")) return;
 
@@ -19,7 +21,7 @@
 
   let products = [];
   try {
-    const res  = await fetch('http://localhost:3000/api/products/all');
+    const res  = await fetch(`${API_BASE}/products/all`);
     const data = await res.json();
     products = data.products || [];
 

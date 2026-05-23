@@ -106,6 +106,7 @@
   <script type="module">
     import { ProductStore } from "./modules/ProductStore.js";
     import { ProductRenderer } from "./modules/ProductRenderer.js";
+    import { API_BASE } from "./js/store.js";
 
     async function init() {
       // URL-аас брэндийн нэр авах
@@ -117,7 +118,7 @@
         return;
       }
 
-      const res = await fetch("http://localhost:3000/api/products/all");
+      const res = await fetch(`${API_BASE}/products/all`);
       const data = await res.json();
       const store = new ProductStore(data);
 

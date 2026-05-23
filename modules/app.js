@@ -1,5 +1,6 @@
 import { ProductStore }    from "./ProductStore.js";
 import { ProductRenderer } from "./ProductRenderer.js";
+import { API_BASE }        from "../js/store.js";
 
 const productsEl    = document.getElementById("productsGrid");
 const saleEl        = document.getElementById("saleGrid");
@@ -9,7 +10,7 @@ const searchInput   = document.getElementById("mainSearchInput");
 const searchDropdown = document.getElementById("searchDropdown");
 
 async function loadData() {
-  const res  = await fetch('http://localhost:3000/api/products/all');
+  const res  = await fetch(`${API_BASE}/products/all`);
   const data = await res.json();
   return data;
 }
