@@ -1137,13 +1137,18 @@ nav a {
   margin-left: auto;
 }
 
-/* FILTER BUTTONS*/
+/* FILTER BUTTONS — always single row, scroll horizontally if too wide */
 .filter-btns {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
   margin-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
 }
+.filter-btns::-webkit-scrollbar { display: none; }
 
 .filter-btn {
   padding: 7px 18px;
@@ -1153,6 +1158,8 @@ nav a {
   font-size: 13px;
   cursor: pointer;
   transition: 0.2s;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .filter-btn:hover,
