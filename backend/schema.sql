@@ -36,7 +36,9 @@ CREATE TABLE products (
   new_price INTEGER NOT NULL,
   brand TEXT,
   rating NUMERIC(2,1),
-  stock INTEGER DEFAULT 0
+  stock INTEGER DEFAULT 0,
+  sku TEXT,
+  description TEXT
 );
 
 CREATE TABLE orders (

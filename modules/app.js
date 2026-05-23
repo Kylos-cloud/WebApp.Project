@@ -19,19 +19,6 @@ async function init() {
   const data = await loadData();
   if (!data) return;
 
-  // Merge admin-panel products (saved via localStorage) into the product list
-  try {
-    const adminRaw = localStorage.getItem("adminProducts");
-    if (adminRaw) {
-      const adminProducts = JSON.parse(adminRaw);
-      if (Array.isArray(adminProducts) && adminProducts.length) {
-        const existingIds = new Set(data.products.map(p => p.id));
-        const newOnes = adminProducts.filter(p => !existingIds.has(p.id));
-        data.products = [...newOnes, ...data.products];
-      }
-    }
-  } catch (e) { /* ignore corrupt localStorage */ }
-
   const store = new ProductStore(data);
   window._store = store;
   window._data = data;

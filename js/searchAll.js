@@ -24,17 +24,6 @@ import { API_BASE } from "./store.js";
     const res  = await fetch(`${API_BASE}/products/all`);
     const data = await res.json();
     products = data.products || [];
-
-    try {
-      const adminRaw = localStorage.getItem("adminProducts");
-      if (adminRaw) {
-        const adminProducts = JSON.parse(adminRaw);
-        if (Array.isArray(adminProducts) && adminProducts.length) {
-          const existingIds = new Set(products.map(p => p.id));
-          products = [...adminProducts.filter(p => !existingIds.has(p.id)), ...products];
-        }
-      }
-    } catch (_) {}
   } catch (_) {
     return;
   }
