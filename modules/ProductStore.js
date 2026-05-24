@@ -30,7 +30,7 @@ export class ProductStore {
   // --- filter + map: нэрсийн жагсаалт гаргах ---
   getProductNames() {
     return this._products
-      .filter(p => p.inStock)
+      .filter(p => p.stock > 0)
       .map(p => p.name);
   }
 

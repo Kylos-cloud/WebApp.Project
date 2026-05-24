@@ -722,9 +722,27 @@
 <script type="text/babel">
     const { useState, useEffect, useRef, useCallback } = React;
 
+    /* ── Auth check ── */
+    const me = JSON.parse(localStorage.getItem("shop_current_user") || "null");
+    const token = localStorage.getItem("shop_token");
+    if (!me || !me.is_admin || !token) {
+        alert("Зөвхөн админ хандах боломжтой. Нэвтрэх хэсэг рүү шилжүүлж байна.");
+        location.href = "login.html";
+    }
+
+    /* ── API base ── */
+    const API_BASE = ["localhost","127.0.0.1"].includes(location.hostname)
+        ? "http://localhost:3000/api"
+        : "https://webapp-project-nme2.onrender.com/api";
+
+    const authHeaders = () => ({
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+    });
+
     const CATS = ['Цахилгаан бараа','Гэр ахуй','Хувцас, Гутал','Гоо сайхан','Хүнс'];
 
-    // Map admin categories → index.html category IDs
+    // Map admin categories → backend category IDs
     const CAT_MAP = {
         'Цахилгаан бараа': 'tsakhilgaan',
         'Гэр ахуй':        'ger-ahui',
@@ -732,41 +750,82 @@
         'Гоо сайхан':      'goo-saikhan',
         'Хүнс':            'eruul',
     };
+    const SLUG_TO_MN = Object.fromEntries(
+        Object.entries(CAT_MAP).map(([mn, slug]) => [slug, mn])
+    );
 
-    function toShopFormat(p) {
+    /* ── Shape transforms ── */
+    function adminToBackend(p) {
+        const stock = Number(p.stock) || 0;
         return {
-            id:       p.id,
-            name:     p.name,
+            name: p.name,
+            sku: p.sku,
+            description: p.description || null,
+            image: p.image || null,
             category: CAT_MAP[p.category] || 'huvtsas',
-            tag:      p.stock > 0 ? 'new' : null,
-            image:    p.image || '',
-            oldPrice: p.price,
-            newPrice: p.price,
-            brand:    (p.name.split(' ')[0]) || 'Generic',
-            rating:   4.5,
-            inStock:  p.stock > 0,
+            oldPrice: Number(p.price),
+            newPrice: Number(p.price),
+            brand: (p.name || '').split(' ')[0] || 'Generic',
+            rating: 4.5,
+            stock,
+            tag: stock > 0 ? 'new' : null,
+        };
+    }
+    function backendToAdmin(p) {
+        return {
+            id: p.id,
+            name: p.name,
+            sku: p.sku || '',
+            description: p.description || '',
+            image: p.image || '',
+            category: SLUG_TO_MN[p.category] || p.category || '',
+            price: p.newPrice,
+            stock: p.stock,
         };
     }
 
-    function loadSavedProducts() {
-        try {
-            const raw = localStorage.getItem('adminProducts_raw');
-            if (raw) return JSON.parse(raw);
-        } catch(e) {}
-        return null;
+    async function apiFetchProducts() {
+        const res = await fetch(`${API_BASE}/products`);
+        if (!res.ok) throw new Error('Бараа татаж чадсангүй');
+        const data = await res.json();
+        return data.map(backendToAdmin);
+    }
+    async function apiCreate(adminData) {
+        const res = await fetch(`${API_BASE}/products`, {
+            method: 'POST',
+            headers: authHeaders(),
+            body: JSON.stringify(adminToBackend(adminData)),
+        });
+        if (!res.ok) throw new Error((await res.json()).error || 'Үүсгэж чадсангүй');
+        return backendToAdmin(await res.json());
+    }
+    async function apiUpdate(id, adminData) {
+        const res = await fetch(`${API_BASE}/products/${id}`, {
+            method: 'PUT',
+            headers: authHeaders(),
+            body: JSON.stringify(adminToBackend(adminData)),
+        });
+        if (!res.ok) throw new Error((await res.json()).error || 'Засаж чадсангүй');
+        return backendToAdmin(await res.json());
+    }
+    async function apiPatch(id, partial) {
+        const res = await fetch(`${API_BASE}/products/${id}`, {
+            method: 'PATCH',
+            headers: authHeaders(),
+            body: JSON.stringify(partial),
+        });
+        if (!res.ok) throw new Error((await res.json()).error || 'Засаж чадсангүй');
+        return backendToAdmin(await res.json());
+    }
+    async function apiDelete(id) {
+        const res = await fetch(`${API_BASE}/products/${id}`, {
+            method: 'DELETE',
+            headers: authHeaders(),
+        });
+        if (!res.ok && res.status !== 204) throw new Error('Устгаж чадсангүй');
     }
 
-    const PRODUCTS0 = [
-        { id:1, name:'Nike Air Max 270', sku:'NK-270-BLK', price:320000, stock:0,  category:'Хувцас, Гутал', description:'Тайтай, хөнгөн гутал', image:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=160&h=160&fit=crop' },
-        { id:2, name:'Kerastase Shampoo', sku:'KR-SH-200', price:89000,  stock:2,  category:'Гоо сайхан',    description:'Үсний шампоо 200ml',    image:'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=160&h=160&fit=crop' },
-        { id:3, name:'iPhone 15 Case',    sku:'IP15-CS-CLR',price:45000,  stock:3,  category:'Цахилгаан бараа',description:'Тунгалаг силикон бүрхэвч',image:'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=160&h=160&fit=crop' },
-        { id:4, name:'Дэр Premium',       sku:'PIL-PRM-WH', price:65000,  stock:0,  category:'Гэр ахуй',      description:'Унтлагын дэр',           image:'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=160&h=160&fit=crop' },
-        { id:5, name:'Samsung 65" TV',    sku:'SAM-65-4K',  price:2890000,stock:8,  category:'Цахилгаан бараа',description:'4K QLED телевиз',       image:'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=160&h=160&fit=crop' },
-        { id:6, name:'Adidas Hoodie',     sku:'ADI-HD-GRY', price:180000, stock:24, category:'Хувцас, Гутал', description:'Adidas хүрэм, саарал',   image:'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=160&h=160&fit=crop' },
-        { id:7, name:'Ceramic Mug Set',   sku:'MUG-CER-4P', price:56000,  stock:15, category:'Гэр ахуй',      description:'4 аяганы иж бүрдэл',    image:'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=160&h=160&fit=crop' },
-        { id:8, name:'Vitamin C Serum',   sku:'VIT-C-30ML', price:72000,  stock:11, category:'Гоо сайхан',    description:'Арьс тэжээгч сывороо',  image:'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=160&h=160&fit=crop' },
-        { id:9, name:'Wireless Earbuds',  sku:'EAR-WL-BLK', price:145000, stock:5,  category:'Цахилгаан бараа',description:'Bluetooth чихэвч',      image:'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=160&h=160&fit=crop' },
-    ];
+    // Products are loaded from the backend on mount (see ProductApp.useEffect).
 
     const PAGE_SIZE = 7;
 
@@ -873,7 +932,8 @@
 
     /* ── Main App ── */
     function ProductApp() {
-        const [products, setProducts] = useState(() => loadSavedProducts() || PRODUCTS0);
+        const [products, setProducts] = useState([]);
+        const [loading, setLoading]   = useState(true);
         const [modal,  setModal]  = useState({ open:false, mode:'add', product:null });
         const [search, setSearch] = useState('');
         const [catF,   setCatF]   = useState('');
@@ -885,13 +945,16 @@
         const [selected, setSelected] = useState(new Set());
         const [toast, setToast] = useState(null);
 
-        /* sync to dashboard + persist to localStorage so index.html picks up changes */
+        /* load products from backend on mount */
         useEffect(() => {
-            window.productStore.emit({ products });
-            try {
-                localStorage.setItem('adminProducts_raw', JSON.stringify(products));
-                localStorage.setItem('adminProducts', JSON.stringify(products.map(toShopFormat)));
-            } catch(e) {}
+            apiFetchProducts()
+                .then(list => { setProducts(list); setLoading(false); })
+                .catch(err => { showToast(err.message, 'del'); setLoading(false); });
+        }, []);
+
+        /* sync dashboard counters whenever products change */
+        useEffect(() => {
+            if (window.productStore) window.productStore.emit({ products });
         }, [products]);
 
         /* expose openAdd to topbar */
@@ -911,37 +974,59 @@
             toastTimer.current = setTimeout(() => setToast(null), 2800);
         }
 
-        function save(data) {
-            if (modal.mode === 'add') {
-                setProducts(p => [{ ...data, id:Date.now() }, ...p]);
-                showToast('Бараа нэмэгдлээ!');
-            } else {
-                setProducts(p => p.map(x => x.id === modal.product.id ? { ...x, ...data } : x));
-                showToast('Өөрчлөлт хадгалагдлаа!');
+        async function save(data) {
+            try {
+                if (modal.mode === 'add') {
+                    const created = await apiCreate(data);
+                    setProducts(p => [created, ...p]);
+                    showToast('Бараа нэмэгдлээ!');
+                } else {
+                    const updated = await apiUpdate(modal.product.id, data);
+                    setProducts(p => p.map(x => x.id === modal.product.id ? updated : x));
+                    showToast('Өөрчлөлт хадгалагдлаа!');
+                }
+                closeModal();
+            } catch (err) {
+                showToast(err.message, 'del');
             }
-            closeModal();
         }
 
-        function del(id) {
+        async function del(id) {
             if (!confirm('Устгахдаа итгэлтэй байна уу?')) return;
-            setProducts(p => p.filter(x => x.id !== id));
-            setSelected(s => { const n = new Set(s); n.delete(id); return n; });
-            showToast('Бараа устгагдлаа','del');
+            try {
+                await apiDelete(id);
+                setProducts(p => p.filter(x => x.id !== id));
+                setSelected(s => { const n = new Set(s); n.delete(id); return n; });
+                showToast('Бараа устгагдлаа','del');
+            } catch (err) {
+                showToast(err.message, 'del');
+            }
         }
 
-        function dup(p) {
-            const copy = { ...p, id:Date.now(), name:p.name+' (хуулбар)', sku:p.sku+'-2' };
-            setProducts(prev => [copy, ...prev]);
-            showToast('Бараа хуулагдлаа');
+        async function dup(p) {
+            try {
+                const copyData = { ...p, name:p.name+' (хуулбар)', sku:p.sku+'-2' };
+                delete copyData.id;
+                const created = await apiCreate(copyData);
+                setProducts(prev => [created, ...prev]);
+                showToast('Бараа хуулагдлаа');
+            } catch (err) {
+                showToast(err.message, 'del');
+            }
         }
 
         /* inline stock edit */
         function startEditStock(p) { setEditingStock(p.id); setStockDraft(String(p.stock)); }
-        function commitStock(id) {
+        async function commitStock(id) {
             const val = Math.max(0, parseInt(stockDraft) || 0);
-            setProducts(p => p.map(x => x.id === id ? { ...x, stock:val } : x));
-            setEditingStock(null);
-            showToast('Нөөц шинэчлэгдлээ');
+            try {
+                const updated = await apiPatch(id, { stock: val, tag: val > 0 ? 'new' : null });
+                setProducts(p => p.map(x => x.id === id ? updated : x));
+                setEditingStock(null);
+                showToast('Нөөц шинэчлэгдлээ');
+            } catch (err) {
+                showToast(err.message, 'del');
+            }
         }
 
         /* sort */
@@ -976,18 +1061,23 @@
                 return n;
             });
         }
-        function bulkDelete() {
+        async function bulkDelete() {
             const cnt = selected.size;
             if (!confirm(`${cnt} бараа устгахдаа итгэлтэй байна уу?`)) return;
-            setProducts(p => p.filter(x => !selected.has(x.id)));
-            setSelected(new Set());
-            showToast(`${cnt} бараа устгагдлаа`, 'del');
+            try {
+                await Promise.all([...selected].map(id => apiDelete(id)));
+                setProducts(p => p.filter(x => !selected.has(x.id)));
+                setSelected(new Set());
+                showToast(`${cnt} бараа устгагдлаа`, 'del');
+            } catch (err) {
+                showToast(err.message, 'del');
+            }
         }
 
         /* filter pipeline */
         const q = search.toLowerCase();
         const filtered = getSorted(products.filter(p => {
-            const mQ = !q || p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q);
+            const mQ = !q || (p.name || '').toLowerCase().includes(q) || (p.sku || '').toLowerCase().includes(q);
             const mC = !catF  || p.category === catF;
             const mS = !statF || stockSt(p.stock).label === statF;
             return mQ && mC && mS;

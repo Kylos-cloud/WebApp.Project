@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SHOP — Захиалга</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
     body { background: #f0f0f0; }
 
@@ -536,9 +536,14 @@
       <h1 class="logo"><a href="index.html">SHOP</a></h1>
       <search class="search"><input type="text" placeholder="Бараа хайх..."></search>
       <nav class="icons">
-        <a href="login.html" class="icon-profile">
+        <a href="profile.html" class="icon-profile">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+          </svg>
+        </a>
+        <a href="index.html#contact" class="icon-contact" aria-label="Холбоо барих">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 9h10M7 13h6m-1 8c4.97 0 9-3.806 9-8.5S16.97 4 12 4s-9 3.806-9 8.5c0 1.41.363 2.738 1.004 3.905L3 21l5.343-1.32c1.099.466 2.354.82 3.657.82Z"/>
           </svg>
         </a>
         <a href="basket.html" class="icon-cart">
@@ -558,7 +563,7 @@
     <span class="sep">›</span>
     <span class="bc-step" data-step="confirm">Баталгаажуулах</span>
     <span class="sep">›</span>
-    <span class="bc-step" data-step="payment">Захиалгын мэдээлэл</span>
+    <span class="bc-step" data-step="payment">Төлбөр</span>
   </nav>
 
   <div class="co-wrap">
@@ -744,6 +749,15 @@
             <div>
               <div class="confirm-label">Холбоо барих</div>
               <div class="confirm-val" id="cnfContact">—</div>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="confirm-row" id="cnfNotesRow" style="display:none">
+            <div class="confirm-row-icon">📝</div>
+            <div>
+              <div class="confirm-label">Нэмэлт анхааруулга</div>
+              <div class="confirm-val" id="cnfNotes">—</div>
             </div>
           </div>
         </div>
@@ -1057,16 +1071,21 @@
     </div>
   </div>
 
+  <script type="module" src="js/badges.js"></script>
   <script type="module">
-    import { getMe, getCart, formatPrice } from "./store.js";
+    import { getMe, getCart, clearCart, apiPlaceOrder, formatPrice } from "./js/store.js";
 
     const me = getMe();
     if (!me) location.href = "login.html";
     const cart = getCart();
     if (!cart.length) location.href = "basket.html";
 
-    // Pre-fill name
-    if (me.name) document.getElementById("fname").value = me.name;
+    // Pre-fill name (split on first space → first / last)
+    if (me.name) {
+      const [first, ...rest] = me.name.trim().split(/\s+/);
+      document.getElementById("fname").value = first || "";
+      document.getElementById("lname").value = rest.join(" ");
+    }
     if (me.email) document.getElementById("email").value = me.email;
 
     const subtotal = cart.reduce((s, p) => s + p.newPrice * (p.qty || 1), 0);
@@ -1120,6 +1139,10 @@
       document.getElementById("cnfAddress").textContent   = addrStr;
       document.getElementById("cnfContact").textContent   = `${ph}  ·  ${em}`;
 
+      const notes = getSelectedNotes();
+      document.getElementById("cnfNotesRow").style.display = notes.length ? "" : "none";
+      document.getElementById("cnfNotes").textContent = notes.join(" · ");
+
       document.getElementById("cnfThumbs").innerHTML = cart.map(p => `
         <div class="confirm-thumb">
           <img src="${p.image}" alt="${p.name}" onerror="this.style.background='#eee'">
@@ -1127,34 +1150,46 @@
         </div>`).join("");
     };
 
-    // Save & go to tracking
-    window._placeOrder = function(payMethod) {
-      const isUB = locType === "ub";
-      const order = {
-        id: "ORD" + Date.now(),
-        items: cart,
-        delivery: {
-          name:     (document.getElementById("fname").value + " " + document.getElementById("lname").value).trim(),
-          phone:    document.getElementById("phone").value,
-          email:    document.getElementById("email").value,
-          district: isUB ? document.getElementById("district").value : document.getElementById("aimag").value,
-          khoroo:   isUB ? document.getElementById("khoroo").value   : document.getElementById("sum").value,
-          building: document.getElementById("building").value,
-          apartment:document.getElementById("apartment").value,
-          locType
-        },
-        payment: payMethod,
-        subtotal, delFee, ecoFee, total,
-        timestamp: new Date().toISOString()
+    function getSelectedNotes() {
+      const map = {
+        "note-baby":    "Нялх хүүхэдтэй",
+        "note-call":    "Хүргэхийн өмнө заавал залгах",
+        "note-door":    "Хаалганы ард орхино уу",
+        "note-contact": "Хөрш рүү залгах боломжтой"
       };
-      localStorage.setItem("current_order", JSON.stringify(order));
+      return Object.entries(map)
+        .filter(([id]) => document.getElementById(id)?.checked)
+        .map(([, label]) => label);
+    }
 
-      // Clear cart
-      const users = JSON.parse(localStorage.getItem("shop_users") || "[]");
-      const idx = users.findIndex(u => u.id === me.id);
-      if (idx !== -1) { users[idx].cart = []; localStorage.setItem("shop_users", JSON.stringify(users)); }
+    // Save & go to tracking
+    window._placeOrder = async function(payMethod) {
+      const isUB = locType === "ub";
+      const delivery = {
+        name:     (document.getElementById("fname").value + " " + document.getElementById("lname").value).trim(),
+        phone:    document.getElementById("phone").value,
+        email:    document.getElementById("email").value,
+        district: isUB ? document.getElementById("district").value : document.getElementById("aimag").value,
+        khoroo:   isUB ? document.getElementById("khoroo").value   : document.getElementById("sum").value,
+        building: document.getElementById("building").value,
+        apartment:document.getElementById("apartment").value,
+        locType,
+        notes: getSelectedNotes()
+      };
 
-      location.href = "tracking.html";
+      try {
+        const order = await apiPlaceOrder({
+          items: cart.map(p => ({ id: p.id, qty: p.qty || 1 })),
+          delivery,
+          payment: payMethod,
+          subtotal, delFee, ecoFee
+        });
+        localStorage.setItem("current_order", JSON.stringify(order));
+        clearCart();
+        location.href = "tracking.html";
+      } catch (err) {
+        alert("Захиалга үүсгэхэд алдаа гарлаа: " + err.message);
+      }
     };
   </script>
 

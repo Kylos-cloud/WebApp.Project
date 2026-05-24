@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SHOP — Хадгалсан</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         .page-content {
             max-width: 900px;
@@ -195,6 +195,10 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                             d="m21 21-3.5-3.5M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z" />
                     </svg></a>
+                <a href="index.html#contact" class="icon-contact" aria-label="Холбоо барих"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 9h10M7 13h6m-1 8c4.97 0 9-3.806 9-8.5S16.97 4 12 4s-9 3.806-9 8.5c0 1.41.363 2.738 1.004 3.905L3 21l5.343-1.32c1.099.466 2.354.82 3.657.82Z" />
+                    </svg></a>
                 <a href="basket.html" class="icon-cart"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -204,7 +208,7 @@
         </div>
         <nav class="menu">
             <ul>
-                <li>☰ БҮХ АНГИЛАЛ</li>
+                <li onclick="openMenu()">☰ БҮХ АНГИЛАЛ</li>
                 <li><a href="index.html#brand">BRANDS</a></li>
                 <li><a href="index.html#sales">SALES</a></li>
             </ul>
@@ -251,9 +255,12 @@
             </svg><span>Профайл</span></a>
     </nav>
 
-    <script src="script.js"></script>
+    <script src="js/categoryMenu.js"></script>
+    <script src="js/script.js"></script>
+    <script type="module" src="js/searchAll.js"></script>
+    <script type="module" src="js/badges.js"></script>
     <script type="module">
-        import { getMe, getSaved, removeFromSaved, addToCart, isInCart, formatPrice } from "./store.js";
+        import { getMe, getSaved, removeFromSaved, addToCart, isInCart, formatPrice } from "./js/store.js";
 
         const me = getMe();
         if (!me) {

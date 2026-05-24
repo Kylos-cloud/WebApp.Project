@@ -1,5 +1,6 @@
 import { ProductStore }    from "./ProductStore.js";
 import { ProductRenderer } from "./ProductRenderer.js";
+import { API_BASE }        from "../js/store.js";
 
 const productsEl    = document.getElementById("productsGrid");
 const saleEl        = document.getElementById("saleGrid");
@@ -9,7 +10,7 @@ const searchInput   = document.getElementById("mainSearchInput");
 const searchDropdown = document.getElementById("searchDropdown");
 
 async function loadData() {
-  const res  = await fetch("products.json");
+  const res  = await fetch(`${API_BASE}/products/all`);
   const data = await res.json();
   return data;
 }
@@ -17,19 +18,6 @@ async function loadData() {
 async function init() {
   const data = await loadData();
   if (!data) return;
-
-  // Merge admin-panel products (saved via localStorage) into the product list
-  try {
-    const adminRaw = localStorage.getItem("adminProducts");
-    if (adminRaw) {
-      const adminProducts = JSON.parse(adminRaw);
-      if (Array.isArray(adminProducts) && adminProducts.length) {
-        const existingIds = new Set(data.products.map(p => p.id));
-        const newOnes = adminProducts.filter(p => !existingIds.has(p.id));
-        data.products = [...newOnes, ...data.products];
-      }
-    }
-  } catch (e) { /* ignore corrupt localStorage */ }
 
   const store = new ProductStore(data);
   window._store = store;
@@ -49,6 +37,43 @@ async function init() {
   if (saleEl) {
     const saleRenderer = new ProductRenderer({ productsEl: saleEl });
     saleRenderer.renderProducts(store.getSaleProducts());
+  }
+
+  // ── handle category navigation from other pages (URL params) ─────────
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlCatKey = urlParams.get("category");
+  if (urlCatKey) {
+    const urlSubIdx  = urlParams.get("sub");
+    const urlItemIdx = urlParams.get("item");
+    const filtered = store.allProducts.filter(p => p.category === urlCatKey);
+    mainRenderer.renderProducts(filtered);
+
+    const header = document.querySelector("#sales .section-header h2");
+    if (header) {
+      const catLabel = data.categories?.find(c => c.id === urlCatKey)?.name
+        ?? window.categoryData?.[urlCatKey]?.label
+        ?? urlCatKey;
+      if (urlSubIdx !== null && urlItemIdx !== null) {
+        const catData = window.categoryData?.[urlCatKey];
+        const itemName = catData?.subcategories?.[parseInt(urlSubIdx)]?.items?.[parseInt(urlItemIdx)];
+        header.textContent = itemName
+          ? `${catLabel} › ${itemName} — ${filtered.length} бараа`
+          : `${catLabel} — ${filtered.length} бараа`;
+      } else {
+        header.textContent = `${catLabel} — ${filtered.length} бараа`;
+      }
+    }
+
+    document.querySelectorAll(".filter-btn[data-filter]").forEach(b => {
+      b.classList.toggle("active-filter", b.dataset.filter === urlCatKey);
+    });
+
+    history.replaceState(null, "", window.location.pathname);
+
+    setTimeout(() => {
+      const salesSection = document.getElementById("sales");
+      if (salesSection) salesSection.scrollIntoView({ behavior: "smooth" });
+    }, 300);
   }
 
   // ── category menu navigation (3-level nav) ───────────────

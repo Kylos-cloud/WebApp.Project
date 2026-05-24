@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SHOP</title>
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -36,6 +36,12 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
               d="m21 21-3.5-3.5M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z" />
+          </svg>
+        </a>
+        <a href="#" class="icon-contact" onclick="openContact();return false;" aria-label="Холбоо барих">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M7 9h10M7 13h6m-1 8c4.97 0 9-3.806 9-8.5S16.97 4 12 4s-9 3.806-9 8.5c0 1.41.363 2.738 1.004 3.905L3 21l5.343-1.32c1.099.466 2.354.82 3.657.82Z" />
           </svg>
         </a>
         <a href="basket.html" class="icon-cart">
@@ -382,19 +388,19 @@
   <section class="products-section" id="sales">
     <header class="section-header">
       <h2>Бүх бараа</h2>
+      <div class="filter-btns">
+        <button class="filter-btn active-filter" data-filter="all">Бүгд</button>
+        <button class="filter-btn" data-filter="huvtsas">Хувцас</button>
+        <button class="filter-btn" data-filter="tsakhilgaan">Электроникс</button>
+        <button class="filter-btn" data-filter="goo-saikhan">Гоо сайхан</button>
+        <button class="filter-btn" data-filter="ayalal">Аялал</button>
+        <button class="filter-btn" data-filter="eruul">Эрүүл мэнд</button>
+        <button class="filter-btn" data-filter="ger-ahui">Гэр ахуй</button>
+        <button class="filter-btn" data-filter="togloom">Тоглоом</button>
+        <button class="filter-btn" data-filter="bichig">Бичиг хэрэг</button>
+        <button class="filter-btn" data-filter="tejeewr">Тэжээвэр амьтан</button>
+      </div>
     </header>
-    <div class="filter-btns">
-      <button class="filter-btn active-filter" data-filter="all">Бүгд</button>
-      <button class="filter-btn" data-filter="huvtsas">Хувцас</button>
-      <button class="filter-btn" data-filter="tsakhilgaan">Электроникс</button>
-      <button class="filter-btn" data-filter="goo-saikhan">Гоо сайхан</button>
-      <button class="filter-btn" data-filter="ayalal">Аялал</button>
-      <button class="filter-btn" data-filter="eruul">Эрүүл мэнд</button>
-      <button class="filter-btn" data-filter="ger-ahui">Гэр ахуй</button>
-      <button class="filter-btn" data-filter="togloom">Тоглоом</button>
-      <button class="filter-btn" data-filter="bichig">Бичиг хэрэг</button>
-      <button class="filter-btn" data-filter="tejeewr">Тэжээвэр амьтан</button>
-    </div>
     <section class="products" id="productsGrid">
       <!-- app.js динамикаар үүсгэнэ -->
     </section>
@@ -511,177 +517,43 @@
       </form>
     </div>
   </section>
-  <!-- RETURNS MODAL -->
-  <div class="contact-overlay" id="returnsOverlay" onclick="closeReturns()"></div>
-  <section class="contact-section" id="returns">
-    <button class="contact-close" onclick="closeReturns()">✕</button>
-    <div class="contact-inner">
 
-      <div class="contact-info">
-        <h2>Буцаалт</h2>
-        <p class="contact-tagline">Бараа буцаахад юу шаардлагатай вэ?</p>
-
-        <ul class="contact-list">
-          <li>
-            <span class="contact-icon-wrap">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 0 0 1.946-.806 3.42 3.42 0 0 1 4.438 0 3.42 3.42 0 0 0 1.946.806 3.42 3.42 0 0 1 3.138 3.138 3.42 3.42 0 0 0 .806 1.946 3.42 3.42 0 0 1 0 4.438 3.42 3.42 0 0 0-.806 1.946 3.42 3.42 0 0 1-3.138 3.138 3.42 3.42 0 0 0-1.946.806 3.42 3.42 0 0 1-4.438 0 3.42 3.42 0 0 0-1.946-.806 3.42 3.42 0 0 1-3.138-3.138 3.42 3.42 0 0 0-.806-1.946 3.42 3.42 0 0 1 0-4.438 3.42 3.42 0 0 0 .806-1.946 3.42 3.42 0 0 1 3.138-3.138z" />
-              </svg>
-            </span>
-            <div>
-              <strong>Анхны байдлаараа</strong>
-              <span>Бараа ашиглагдаагүй, гэмтээгүй байх</span>
-            </div>
-          </li>
-          <li>
-            <span class="contact-icon-wrap">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-9 5a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" />
-              </svg>
-            </span>
-            <div>
-              <strong>Баримт бичиг</strong>
-              <span>Худалдан авалтын баримт, захиалгын дугаар</span>
-            </div>
-          </li>
-          <li>
-            <span class="contact-icon-wrap">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5M16 3.5v4M8 3.5v4M3 8h18M18 21l3-3-3-3m0 6h-5" />
-              </svg>
-            </span>
-            <div>
-              <strong>3 хоногийн дотор</strong>
-              <span>Хүлээн авсан өдрөөс хойш 3 хоног</span>
-            </div>
-          </li>
-          <li>
-            <span class="contact-icon-wrap">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-              </svg>
-            </span>
-            <div>
-              <strong>Анхны савлагаа</strong>
-              <span>Барааны оригинал хайрцаг, уут шаардлагатай</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <form class="contact-form" onsubmit="handleReturnsSubmit(event)">
-        <h3>Буцаах хүсэлт</h3>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Нэр</label>
-            <input type="text" placeholder="Таны нэр" required />
-          </div>
-          <div class="form-group">
-            <label>Захиалгын дугаар</label>
-            <input type="text" placeholder="ORD-00000" required />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Буцаах шалтгаан</label>
-          <select required
-            style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--color-bg);color:var(--color-text);outline:none;">
-            <option value="">Сонгоно уу...</option>
-            <option>Гэмтэлтэй ирсэн</option>
-            <option>Буруу бараа ирсэн</option>
-            <option>Хэмжээ тохирохгүй</option>
-            <option>Санаандгүй захиалсан</option>
-            <option>Бусад</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Нэмэлт тайлбар</label>
-          <textarea placeholder="Буцаах шалтгааны талаар дэлгэрэнгүй..." rows="4" required></textarea>
-        </div>
-        <button type="submit" class="contact-submit">Хүсэлт илгээх</button>
-        <p class="contact-success" id="returnsSuccess">Буцаах хүсэлт амжилттай илгээгдлээ!</p>
-      </form>
-
-    </div>
-  </section>
   <!-- FAQ MODAL -->
   <div class="contact-overlay" id="faqOverlay" onclick="closeFaq()"></div>
   <section class="contact-section" id="faq">
-    <button class="contact-close" onclick="closeFaq()">✕</button>
-    <div class="contact-inner">
+    <button class="contact-close" onclick="closeFaq()" aria-label="Хаах">✕</button>
+    <div class="contact-inner faq-inner">
+      <div class="faq-body">
+        <h2>Түгээмэл асуулт хариулт</h2>
+        <p class="contact-tagline">Захиалга, төлбөр, хүргэлт, буцаалттай холбоотой түгээмэл асуултууд.</p>
 
-      <div class="contact-info">
-        <h2>Түгээмэл асуултууд</h2>
-        <p class="contact-tagline">Хэрэглэгчдийн хамгийн их асуудаг асуултууд</p>
-
-        <ul class="contact-list">
-          <li>
-            <span class="contact-icon-wrap">📦</span>
-            <div>
-              <strong>Хүргэлт хэр удах вэ?</strong>
-              <span>УБ хот дотор 1-2 хоног, аймаг 3-7 хоног</span>
-            </div>
-          </li>
-          <li>
-            <span class="contact-icon-wrap">↩️</span>
-            <div>
-              <strong>Буцаалт хэрхэн хийх вэ?</strong>
-              <span>3 хоногийн дотор, анхны савлагаатай буцаана</span>
-            </div>
-          </li>
-          <li>
-            <span class="contact-icon-wrap">💳</span>
-            <div>
-              <strong>Ямар төлбөр хүлээн авдаг вэ?</strong>
-              <span>Карт, QPay, SocialPay, бэлэн мөнгө</span>
-            </div>
-          </li>
-          <li>
-            <span class="contact-icon-wrap">🔐</span>
-            <div>
-              <strong>Бүртгэлгүйгээр захиалж болох уу?</strong>
-              <span>Үгүй, захиалахын тулд бүртгэл шаардлагатай</span>
-            </div>
-          </li>
-        </ul>
+        <details class="faq-item" open>
+          <summary>Захиалга хэрхэн хийх вэ?</summary>
+          <p>Та хүссэн бараагаа сонгож "Сагсанд нэмэх" товчийг дарна. Дараа нь сагс хэсгээс төлбөр төлөх рүү шилжинэ.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Хүргэлт хэр удааж очих вэ?</summary>
+          <p>Улаанбаатар хотод 1-2 хоног, орон нутагт 3-5 хоног дотор хүргэгдэнэ.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Төлбөрийн ямар хэлбэр байдаг вэ?</summary>
+          <p>Картын төлбөр (Visa/MasterCard), QPay, банкны шилжүүлэг болон хүргэлтийн үед бэлнээр хүлээн авна.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Барааг буцаах боломжтой юу?</summary>
+          <p>Тийм. Хүлээн авснаас хойш 14 хоногийн дотор анхны байдалд нь буцаах боломжтой. Дэлгэрэнгүйг <a
+              href="butsaalt.html">Буцаалт</a> хэсгээс үзнэ үү.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Бүртгэлгүйгээр захиалга хийж болох уу?</summary>
+          <p>Үгүй. Захиалгын түүх, хадгалсан бараагаа удирдахын тулд бүртгэлтэй байх шаардлагатай.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Захиалгаа хэрхэн хянах вэ?</summary>
+          <p>Профайл → "Захиалгын түүх" хэсгээс захиалга бүрийн төлөв, явцыг харах боломжтой.</p>
+        </details>
       </div>
-
-      <div class="contact-form">
-        <h3>Дэлгэрэнгүй асуултууд</h3>
-
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <details style="border:1.5px solid var(--color-border);border-radius:10px;padding:14px 16px;">
-            <summary style="font-weight:600;font-size:14px;cursor:pointer;">Захиалгаа хэрхэн цуцлах вэ?</summary>
-            <p style="margin:10px 0 0;font-size:13px;color:hsl(0,0%,45%);line-height:1.6;">Захиалга баталгаажснаас хойш
-              2 цагийн дотор цуцлах боломжтой. Профайл → Захиалгууд хэсгээс цуцална уу.</p>
-          </details>
-          <details style="border:1.5px solid var(--color-border);border-radius:10px;padding:14px 16px;">
-            <summary style="font-weight:600;font-size:14px;cursor:pointer;">Хүргэлтийн зардал хэд вэ?</summary>
-            <p style="margin:10px 0 0;font-size:13px;color:hsl(0,0%,45%);line-height:1.6;">УБ хот дотор 5,000₮.
-              100,000₮-с дээш захиалгад үнэгүй хүргэнэ.</p>
-          </details>
-          <details style="border:1.5px solid var(--color-border);border-radius:10px;padding:14px 16px;">
-            <summary style="font-weight:600;font-size:14px;cursor:pointer;">Нууц үгээ мартсан бол яах вэ?</summary>
-            <p style="margin:10px 0 0;font-size:13px;color:hsl(0,0%,45%);line-height:1.6;">Нэвтрэх хуудас дээрх "Нууц үг
-              мартсан?" дарж и-мэйлээрээ шинэчлэнэ үү.</p>
-          </details>
-          <details style="border:1.5px solid var(--color-border);border-radius:10px;padding:14px 16px;">
-            <summary style="font-weight:600;font-size:14px;cursor:pointer;">Хэсэгчлэн төлөх боломжтой юу?</summary>
-            <p style="margin:10px 0 0;font-size:13px;color:hsl(0,0%,45%);line-height:1.6;">Тийм, 50,000₮-с дээш
-              захиалгыг LendMN-ээр 3-12 сараар хуваан төлөх боломжтой.</p>
-          </details>
-          <details style="border:1.5px solid var(--color-border);border-radius:10px;padding:14px 16px;">
-            <summary style="font-weight:600;font-size:14px;cursor:pointer;">Захиалгынхаа явцыг хэрхэн хянах вэ?
-            </summary>
-            <p style="margin:10px 0 0;font-size:13px;color:hsl(0,0%,45%);line-height:1.6;">Профайл → Захиалгууд хэсгээс
-              хянана уу. Мөн и-мэйлд хүргэлтийн хяналтын холбоос ирнэ.</p>
-          </details>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -696,8 +568,8 @@
         <h4>ТУСЛАМЖ</h4>
         <p><a href="#" onclick="openContact();return false;" style="color:inherit;text-decoration:none;">Холбоо
             барих</a></p>
-        <p>Хүргэлт</p>
-        <p><a href="#" onclick="openReturns();return false;" style="color:inherit;text-decoration:none;">Буцаалт</a></p>
+        <p><a href="butsaalt.html#hurgelt" style="color:inherit;text-decoration:none;">Хүргэлт</a></p>
+        <p><a href="butsaalt.html" style="color:inherit;text-decoration:none;">Буцаалт</a></p>
         <p><a href="#" onclick="openFaq();return false;" style="color:inherit;text-decoration:none;">FAQ</a></p>
       </section>
 
@@ -712,9 +584,10 @@
     <small class="copyright"> © 2026 SHOP. All rights reserved. </small>
   </footer>
 
-  <script src="script.js"></script>
-  <!-- ES Module: app.js нь ProductStore, ProductRenderer модулиудыг import хийнэ -->
+  <script src="js/script.js"></script>
+  <!-- app.js нь ProductStore, ProductRenderer модулиудыг import хийнэ -->
   <script type="module" src="modules/app.js"></script>
+  <script type="module" src="js/badges.js"></script>
 
 
   <!-- BOTTOM NAV (mobile only) -->

@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHOP — Профайл</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background: #f5f5f5; }
+
+    /* ── PAGE TITLE ── */
+    .pf-page-title {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 22px 16px 0;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* ── 2-COLUMN LAYOUT ── */
+    .pf-wrap {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 18px 16px 100px;
+      display: grid;
+      grid-template-columns: 268px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    /* ── SIDEBAR ── */
+    .pf-sidebar { position: sticky; top: 76px; }
+
+    .ps-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+
+    .ps-user-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .ps-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: hsl(210,35%,88%);
+      color: hsl(210,40%,42%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      flex-shrink: 0;
+      border: 2px solid hsl(210,30%,78%);
+    }
+
+    .ps-user-info { flex: 1; min-width: 0; }
+    .ps-name { font-size: 14px; font-weight: 700; }
+    .ps-date { font-size: 11px; color: #aaa; margin-top: 3px; }
+    .ps-user-chev { color: #ccc; font-size: 18px; margin-left: auto; flex-shrink: 0; }
+
+    .ps-wallet {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid #f0f0f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+
+    .ps-wallet-cell {
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+    .ps-wallet-cell:first-child { border-right: 1px solid #f0f0f0; }
+
+    .ps-wallet-val {
+      font-size: 15px;
+      font-weight: 700;
+      color: hsl(0,0%,15%);
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
+    }
+
+    .ps-wallet-unit { font-size: 11px; color: #bbb; font-weight: 400; }
+    .ps-wallet-label { font-size: 11px; color: hsl(210,70%,50%); font-weight: 600; margin-top: 2px; }
+    .ps-wallet-note  { font-size: 10px; color: #ccc; }
+
+    .ps-coupon-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ps-coupon-num { font-size: 15px; font-weight: 700; }
+    .ps-coupon-chev { color: #ccc; font-size: 16px; }
+
+    /* Nav menu */
+    .ps-nav {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .ps-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid #f8f8f8;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: hsl(0,0%,15%);
+      transition: background 0.15s;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .ps-nav-item:last-child { border-bottom: none; }
+    .ps-nav-item:hover { background: #fafafa; }
+    .ps-nav-item.active { background: #f6f6f6; }
+
+    .ps-nav-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .ps-nav-text { flex: 1; min-width: 0; }
+    .ps-nav-title { font-size: 14px; font-weight: 600; }
+    .ps-nav-sub { font-size: 11px; color: #aaa; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ps-nav-chev { color: #ccc; font-size: 16px; flex-shrink: 0; }
+
+    /* ── MAIN CONTENT ── */
+    .pf-section { display: none; }
+    .pf-section.active { display: block; }
+
+    .pf-section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── ORDER TABS ── */
+    .order-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .otab {
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 1.5px solid #e8e8e8;
+      background: white;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #888;
+      font-family: Arial, sans-serif;
+      transition: all 0.2s;
+    }
+    .otab.active {
+      background: hsl(0,0%,12%);
+      color: white;
+      border-color: hsl(0,0%,12%);
+    }
+
+    /* ── ORDER CARD ── */
+    .order-card {
+      background: white;
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .order-card:hover {
+      box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+      transform: translateY(-1px);
+    }
+
+    .order-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f5f5f5;
+    }
+
+    .order-id-badge {
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .order-meta {
+      font-size: 12px;
+      color: #aaa;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .order-status-pill {
+      margin-left: auto;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+    .order-status-pill.confirmed { color: hsl(30,90%,45%); }
+    .order-status-pill.shipping  { color: hsl(210,80%,50%); }
+    .order-status-pill.delivered { color: hsl(140,50%,38%); }
+    .order-status-pill.cancelled { color: #aaa; }
+
+    .order-items-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .order-item-thumb {
+      width: 60px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #f0f0f0;
+      flex-shrink: 0;
+    }
+
+    .order-item-info { flex: 1; min-width: 0; }
+    .order-item-name {
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .order-item-sub { font-size: 12px; color: #aaa; margin-top: 3px; }
+
+    .order-more-dots { font-size: 20px; color: #ccc; letter-spacing: 3px; padding: 6px 0 0; }
+
+    .order-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid #f5f5f5;
+    }
+
+    .order-total-label { font-size: 13px; color: #aaa; margin-right: auto; }
+    .order-total-val { font-size: 15px; font-weight: 800; }
+
+    /* ── ORDER DETAIL ── */
+    .od-breadcrumb {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .od-breadcrumb .od-bc-link {
+      color: hsl(210,75%,52%);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .od-breadcrumb .od-bc-link:hover { text-decoration: underline; }
+
+    .od-title {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .od-status-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .od-status-text {
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .od-status-text.confirmed { color: hsl(30,90%,45%); }
+    .od-status-text.shipping  { color: hsl(210,80%,50%); }
+    .od-status-text.delivered { color: hsl(140,50%,38%); }
+    .od-status-text.cancelled { color: #aaa; }
+
+    .od-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+    .od-card-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+
+    /* Progress steps */
+    .od-steps { display: flex; flex-direction: column; }
+
+    .od-step-row { display: flex; gap: 14px; }
+
+    .od-step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 26px;
+      flex-shrink: 0;
+    }
+
+    .od-step-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .od-step-dot.done    { background: hsl(0,0%,15%); color: white; }
+    .od-step-dot.pending { background: #f0f0f0; color: #ccc; }
+
+    .od-step-line { width: 2px; min-height: 22px; flex: 1; margin: 2px 0; }
+    .od-step-line.done    { background: #ccc; }
+    .od-step-line.pending { background: #eee; }
+
+    .od-step-right { padding-bottom: 20px; }
+    .od-step-row:last-child .od-step-right { padding-bottom: 0; }
+
+    .od-step-label { font-size: 14px; font-weight: 600; }
+    .od-step-label.done    { color: hsl(0,0%,15%); }
+    .od-step-label.pending { color: #ccc; }
+    .od-step-time { font-size: 12px; color: #aaa; margin-top: 2px; }
+
+    /* Contact card */
+    .od-contact-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid #f0f0f0;
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .od-contact-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: #f4f4f4;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .od-contact-name  { font-size: 14px; font-weight: 700; }
+    .od-contact-phone { font-size: 13px; color: #888; margin-top: 2px; }
+
+    /* Purchase item rows */
+    .od-purchase-meta {
+      font-size: 12px;
+      color: #aaa;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .od-purchase-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .od-purchase-item:last-child { border-bottom: none; }
+
+    .od-purchase-img {
+      width: 68px; height: 74px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #f0f0f0;
+      flex-shrink: 0;
+    }
+
+    .od-purchase-name  { font-size: 13px; font-weight: 600; line-height: 1.4; }
+    .od-purchase-price { font-size: 13px; font-weight: 700; margin-top: 5px; }
+    .od-purchase-orig  { font-size: 12px; color: #bbb; text-decoration: line-through; margin-left: 6px; }
+    .od-purchase-qty   { margin-left: auto; font-size: 13px; font-weight: 600; flex-shrink: 0; color: #888; }
+
+    /* Price breakdown table */
+    .od-price-table { margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0f0f0; }
+
+    .od-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #666;
+      padding: 3px 0;
+    }
+    .od-price-row .pv { font-weight: 600; color: hsl(0,0%,18%); }
+    .od-price-row .pv.red   { color: hsl(350,70%,50%); }
+    .od-price-row .pv.green { color: hsl(140,50%,36%); }
+    .od-price-row.subtotal-row {
+      font-size: 15px;
+      font-weight: 800;
+      color: hsl(0,0%,12%);
+      padding: 10px 0 8px;
+    }
+    .od-price-row.subtotal-row .pv { font-size: 16px; font-weight: 900; color: hsl(0,0%,10%); }
+
+    /* Empty state */
+    .empty-orders {
+      text-align: center;
+      padding: 60px 20px;
+      background: white;
+      border-radius: 14px;
+    }
+    .empty-orders-icon  { font-size: 56px; margin-bottom: 14px; }
+    .empty-orders-title { font-size: 16px; font-weight: 700; color: hsl(0,0%,28%); margin-bottom: 8px; }
+    .empty-orders-sub   { font-size: 13px; color: #aaa; margin-bottom: 22px; }
+    .empty-shop-btn {
+      display: inline-block;
+      padding: 11px 28px;
+      background: hsl(0,0%,14%);
+      color: white;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .empty-shop-btn:hover { opacity: 0.85; }
+
+    /* Placeholder sections */
+    .placeholder-section {
+      background: white;
+      border-radius: 14px;
+      padding: 60px 20px;
+      text-align: center;
+      color: #aaa;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+    .placeholder-section .ph-icon  { font-size: 56px; margin-bottom: 14px; }
+    .placeholder-section .ph-title { font-size: 16px; font-weight: 700; color: #888; margin-bottom: 8px; }
+    .placeholder-section .ph-sub   { font-size: 13px; }
+
+    @media (max-width: 768px) {
+      .pf-wrap { grid-template-columns: 1fr; }
+      .pf-sidebar { position: static; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="top-bar">
+      <h1 class="logo"><a href="index.html">SHOP</a></h1>
+      <search class="search"><input type="text" placeholder="Бараа хайх..."></search>
+      <nav class="icons">
+        <a href="profile.html" class="icon-profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+          </svg>
+        </a>
+        <a href="index.html#contact" class="icon-contact" aria-label="Холбоо барих">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 9h10M7 13h6m-1 8c4.97 0 9-3.806 9-8.5S16.97 4 12 4s-9 3.806-9 8.5c0 1.41.363 2.738 1.004 3.905L3 21l5.343-1.32c1.099.466 2.354.82 3.657.82Z"/>
+          </svg>
+        </a>
+        <a href="basket.html" class="icon-cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+          </svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="pf-page-title">Профайл</div>
+
+  <div class="pf-wrap">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="pf-sidebar">
+
+      <!-- User info card -->
+      <div class="ps-card">
+        <div class="ps-user-row">
+          <div class="ps-avatar" id="psAvatar">А</div>
+          <div class="ps-user-info">
+            <div class="ps-name" id="psName">—</div>
+            <div class="ps-date" id="psDate">—</div>
+          </div>
+          <span class="ps-user-chev">›</span>
+        </div>
+
+        <!-- Points & coupon row -->
+        <div class="ps-wallet">
+          <div class="ps-wallet-cell">
+            <div class="ps-wallet-val">
+              <span id="psPoints">0</span>
+              <span class="ps-wallet-unit">SP</span>
+            </div>
+            <div class="ps-wallet-label">Shop point</div>
+            <div class="ps-wallet-note">1 SP = 1₮</div>
+          </div>
+          <div class="ps-wallet-cell">
+            <div class="ps-coupon-row">
+              <span class="ps-coupon-num">0ш</span>
+              <span class="ps-coupon-chev">›</span>
+            </div>
+            <div class="ps-wallet-label">Миний купон</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav menu -->
+      <div class="ps-card ps-nav">
+        <button class="ps-nav-item active" id="navOrders" onclick="showSection('orders')">
+          <div class="ps-nav-icon">🚚</div>
+          <div class="ps-nav-text">
+            <div class="ps-nav-title">Миний захиалгууд</div>
+            <div class="ps-nav-sub">Захиалсан, хүргэгдсэн, ...</div>
+          </div>
+          <span class="ps-nav-chev">›</span>
+        </button>
+        <button class="ps-nav-item" id="navSettings" onclick="showSection('settings')">
+          <div class="ps-nav-icon">⚙️</div>
+          <div class="ps-nav-text">
+            <div class="ps-nav-title">Тохиргоо</div>
+            <div class="ps-nav-sub">Хаяг, бусад холболт, бат...</div>
+          </div>
+          <span class="ps-nav-chev">›</span>
+        </button>
+        <button class="ps-nav-item" id="navHelp" onclick="showSection('help')">
+          <div class="ps-nav-icon">❓</div>
+          <div class="ps-nav-text">
+            <div class="ps-nav-title">Тусламж</div>
+            <div class="ps-nav-sub">Салбар, тугаэмал асуулт...</div>
+          </div>
+          <span class="ps-nav-chev">›</span>
+        </button>
+        <button class="ps-nav-item" id="navLogout" onclick="handleLogout()" style="color:hsl(350,70%,50%)">
+          <div class="ps-nav-icon" style="background:#fff0f2">🚪</div>
+          <div class="ps-nav-text">
+            <div class="ps-nav-title" style="color:hsl(350,70%,50%)">Гарах</div>
+            <div class="ps-nav-sub">Бүртгэлээс гарах</div>
+          </div>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main>
+
+      <!-- ── ORDERS SECTION ── -->
+      <div id="section-orders" class="pf-section active">
+        <div class="pf-section-title">🛒 Миний захиалгууд</div>
+
+        <div class="order-tabs">
+          <button class="otab active" id="tab-ordered"   onclick="switchOrderTab('ordered')">Захиалсан (<span id="cnt-ordered">0</span>)</button>
+          <button class="otab"        id="tab-delivered" onclick="switchOrderTab('delivered')">Хүргэгдсэн (<span id="cnt-delivered">0</span>)</button>
+          <button class="otab"        id="tab-cancelled" onclick="switchOrderTab('cancelled')">Цуцлагдсан (<span id="cnt-cancelled">0</span>)</button>
+        </div>
+
+        <div id="list-ordered"></div>
+        <div id="list-delivered" style="display:none"></div>
+        <div id="list-cancelled" style="display:none"></div>
+      </div>
+
+      <!-- ── ORDER DETAIL SECTION ── -->
+      <div id="section-order-detail" class="pf-section">
+
+        <div class="od-breadcrumb">
+          <span class="od-bc-link" onclick="showSection('orders')">Миний захиалгууд</span>
+          <span>/</span>
+          <span id="od-bc-id"></span>
+        </div>
+
+        <div class="od-title">[<span id="od-id-title"></span>] Захиалгын дэлгэрэнгүй</div>
+
+        <div class="od-status-line">
+          <span class="od-status-text" id="od-status-text">Баталгаажсан</span>
+          <span style="color:#ccc">›</span>
+        </div>
+
+        <!-- Progress steps card -->
+        <div class="od-card">
+          <div class="od-card-title">Захиалгын явц</div>
+          <div class="od-steps" id="od-steps"></div>
+        </div>
+
+        <!-- Contact card -->
+        <div class="od-card">
+          <div class="od-card-title">Холбоо барих</div>
+          <div class="od-contact-box">
+            <div class="od-contact-icon">📞</div>
+            <div>
+              <div class="od-contact-name"  id="od-contact-name">—</div>
+              <div class="od-contact-phone" id="od-contact-phone">—</div>
+            </div>
+          </div>
+          <div class="od-contact-box" id="od-notes-row" style="display:none; margin-top:10px">
+            <div class="od-contact-icon">📝</div>
+            <div>
+              <div class="od-contact-name">Нэмэлт анхааруулга</div>
+              <div class="od-contact-phone" id="od-notes">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Purchase card -->
+        <div class="od-card">
+          <div class="od-card-title">Худалдан авалт</div>
+          <div class="od-purchase-meta" id="od-purchase-meta"></div>
+          <div id="od-purchase-items"></div>
+          <div class="od-price-table" id="od-price-table"></div>
+        </div>
+
+      </div>
+
+      <!-- ── SETTINGS SECTION ── -->
+      <div id="section-settings" class="pf-section">
+        <div class="pf-section-title">⚙️ Тохиргоо</div>
+        <div class="placeholder-section">
+          <div class="ph-icon">⚙️</div>
+          <div class="ph-title">Тохиргоо</div>
+          <div class="ph-sub">Тун удахгүй нэмэгдэнэ...</div>
+        </div>
+      </div>
+
+      <!-- ── HELP SECTION ── -->
+      <div id="section-help" class="pf-section">
+        <div class="pf-section-title">❓ Тусламж</div>
+        <div class="placeholder-section">
+          <div class="ph-icon">❓</div>
+          <div class="ph-title">Тусламж</div>
+          <div class="ph-sub">Тун удахгүй нэмэгдэнэ...</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"/>
+      </svg>
+      <span>Нүүр</span>
+    </a>
+    <a href="index.html#sales" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
+      </svg>
+      <span>Ангилал</span>
+    </a>
+    <a href="basket.html" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+      </svg>
+      <span>Сагс</span>
+    </a>
+    <a href="hadgalsan.html" class="bottom-nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+      </svg>
+      <span>Хадгалсан</span>
+    </a>
+    <a href="profile.html" class="bottom-nav-item active">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+      </svg>
+      <span>Профайл</span>
+    </a>
+  </nav>
+
+  <script type="module" src="js/badges.js"></script>
+
+  <script type="module">
+    import { getMe, apiFetchOrders, formatPrice } from "./js/store.js";
+
+    const me = getMe();
+    if (!me) { location.href = "login.html"; }
+
+    // ── SIDEBAR ──
+    document.getElementById("psAvatar").textContent = (me.name || "?").charAt(0).toUpperCase();
+    document.getElementById("psName").textContent   = me.name || me.email;
+
+    const orders = await apiFetchOrders();
+    const shortId = id => String(id).padStart(8, "0").slice(-8).toUpperCase();
+
+    // Calculate total earned Shop Points: 1 SP per 100₮ spent
+    const totalPoints = orders.reduce((sum, o) => sum + Math.floor((o.total || 0) / 100), 0);
+    document.getElementById("psPoints").textContent = totalPoints.toLocaleString("mn-MN");
+
+    // ── STATUS LOGIC ──
+    // Auto-progress status based on time elapsed since order
+    function computeStatus(order) {
+      if (order.status === "cancelled") return "cancelled";
+      if (order.status === "delivered") return "delivered";
+
+      const ageHours = (Date.now() - new Date(order.timestamp)) / 3_600_000;
+
+      const district = order.delivery?.district || "";
+      const isProvince = order.delivery?.locType === "province";
+      const nearDistricts = ["Налайх", "Багануур"];
+      let deliveryDays = isProvince ? 7 : nearDistricts.includes(district) ? 5 : 3;
+
+      if (ageHours >= deliveryDays * 24) return "delivered";
+      if (ageHours >= 2) return "shipping";
+      return "confirmed";
+    }
+
+    const statusMeta = {
+      confirmed: { text: "Баталгаажсан", cls: "confirmed" },
+      shipping:  { text: "Хүргэлтэнд гарсан", cls: "shipping" },
+      delivered: { text: "Хүргэгдсэн", cls: "delivered" },
+      cancelled: { text: "Цуцлагдсан", cls: "cancelled" }
+    };
+
+    // ── CATEGORISE ORDERS ──
+    const orderedList   = orders.filter(o => { const s = computeStatus(o); return s === "confirmed" || s === "shipping"; });
+    const deliveredList = orders.filter(o => computeStatus(o) === "delivered");
+    const cancelledList = orders.filter(o => computeStatus(o) === "cancelled");
+
+    document.getElementById("cnt-ordered").textContent   = orderedList.length;
+    document.getElementById("cnt-delivered").textContent = deliveredList.length;
+    document.getElementById("cnt-cancelled").textContent = cancelledList.length;
+
+    // ── RENDER ORDER CARD ──
+    function fmtDate(isoStr) {
+      const d = new Date(isoStr);
+      const pad = n => String(n).padStart(2, "0");
+      return `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}`;
+    }
+
+    function renderOrderCard(order) {
+      const status   = computeStatus(order);
+      const badge    = statusMeta[status];
+      const totalQty = (order.items || []).reduce((s, p) => s + (p.qty || 1), 0);
+      const first    = order.items?.[0];
+      const extra    = (order.items?.length || 0) - 1;
+      const sId      = shortId(order.id);
+
+      return `
+        <div class="order-card" onclick="window._openDetail('${order.id}')">
+          <div class="order-card-header">
+            <div class="order-id-badge">🚚 #${sId}</div>
+            <div class="order-meta">
+              <span>📅 ${fmtDate(order.timestamp)}</span>
+              <span>🕐 ${totalQty}ш</span>
+            </div>
+            <div class="order-status-pill ${badge.cls}">${badge.text} ›</div>
+          </div>
+          ${first ? `
+            <div class="order-items-row">
+              <img class="order-item-thumb" src="${first.image}" alt="${first.name}" onerror="this.style.background='#eee'">
+              <div class="order-item-info">
+                <div class="order-item-name">${first.name}</div>
+                <div class="order-item-sub">${formatPrice(first.newPrice)} · x${first.qty || 1}</div>
+              </div>
+            </div>
+            ${extra > 0 ? `<div class="order-more-dots">...</div>` : ""}
+          ` : ""}
+          <div class="order-footer">
+            <span class="order-total-label">Нийт дүн:</span>
+            <span class="order-total-val">${formatPrice(order.total)}</span>
+          </div>
+        </div>`;
+    }
+
+    function renderList(id, list, emptyMsg) {
+      const el = document.getElementById(id);
+      if (!list.length) {
+        el.innerHTML = `
+          <div class="empty-orders">
+            <div class="empty-orders-icon">🛒</div>
+            <div class="empty-orders-title">${emptyMsg}</div>
+            <div class="empty-orders-sub">Та одоогоор захиалга хийгээгүй байна</div>
+            <a href="index.html" class="empty-shop-btn">Дэлгүүр үзэх</a>
+          </div>`;
+      } else {
+        el.innerHTML = list.map(renderOrderCard).join("");
+      }
+    }
+
+    renderList("list-ordered",   orderedList,   "Идэвхтэй захиалга байхгүй");
+    renderList("list-delivered", deliveredList, "Хүргэгдсэн захиалга байхгүй");
+    renderList("list-cancelled", cancelledList, "Цуцлагдсан захиалга байхгүй");
+
+    // ── OPEN ORDER DETAIL ──
+    window._openDetail = function(orderId) {
+      const order = orders.find(o => String(o.id) === String(orderId));
+      if (!order) return;
+
+      const status   = computeStatus(order);
+      const badge    = statusMeta[status];
+      const sId      = shortId(order.id);
+      const totalQty = (order.items || []).reduce((s, p) => s + (p.qty || 1), 0);
+      const pad = n => String(n).padStart(2, "0");
+
+      function fmtFull(isoStr) {
+        const d = new Date(isoStr);
+        return `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+      }
+
+      document.getElementById("od-bc-id").textContent   = "#" + sId;
+      document.getElementById("od-id-title").textContent = "#" + sId;
+
+      const statusEl = document.getElementById("od-status-text");
+      statusEl.textContent = badge.text;
+      statusEl.className   = `od-status-text ${badge.cls}`;
+
+      // Progress steps
+      const isShipping  = status === "shipping";
+      const isDelivered = status === "delivered";
+      const orderDate   = new Date(order.timestamp);
+      // Estimate shipped time as 2 hours after order
+      const shippedDate = new Date(orderDate.getTime() + 2 * 3_600_000);
+
+      document.getElementById("od-steps").innerHTML = `
+        <div class="od-step-row">
+          <div class="od-step-left">
+            <div class="od-step-dot done">✓</div>
+            <div class="od-step-line done"></div>
+          </div>
+          <div class="od-step-right">
+            <div class="od-step-label done">Захиалга үүссэн</div>
+            <div class="od-step-time">${fmtFull(order.timestamp)}</div>
+          </div>
+        </div>
+        <div class="od-step-row">
+          <div class="od-step-left">
+            <div class="od-step-dot done">✓</div>
+            <div class="od-step-line ${isShipping || isDelivered ? "done" : "pending"}"></div>
+          </div>
+          <div class="od-step-right">
+            <div class="od-step-label done">Төлбөр баталгаажуулах</div>
+            <div class="od-step-time">${fmtFull(order.timestamp)}</div>
+          </div>
+        </div>
+        <div class="od-step-row">
+          <div class="od-step-left">
+            <div class="od-step-dot ${isDelivered ? "done" : "pending"}">${isDelivered ? "✓" : "🕐"}</div>
+          </div>
+          <div class="od-step-right">
+            <div class="od-step-label ${isDelivered ? "done" : "pending"}">Бараа хүргэх</div>
+            <div class="od-step-time">${isDelivered ? fmtFull(shippedDate) : "— —"}</div>
+          </div>
+        </div>`;
+
+      // Contact
+      const del = order.delivery || {};
+      document.getElementById("od-contact-name").textContent  = del.name  || "—";
+      document.getElementById("od-contact-phone").textContent = del.phone || "—";
+
+      const notes = del.notes || [];
+      if (notes.length) {
+        document.getElementById("od-notes-row").style.display = "";
+        document.getElementById("od-notes").textContent = notes.join(" · ");
+      } else {
+        document.getElementById("od-notes-row").style.display = "none";
+      }
+
+      // Purchase meta
+      document.getElementById("od-purchase-meta").innerHTML =
+        `<span>📅 ${fmtDate(order.timestamp)}</span><span>🕐 ${totalQty}ш</span>`;
+
+      // Items
+      document.getElementById("od-purchase-items").innerHTML = (order.items || []).map(p => {
+        const hasDisc = p.oldPrice && p.oldPrice > p.newPrice;
+        return `
+          <div class="od-purchase-item">
+            <img class="od-purchase-img" src="${p.image}" alt="${p.name}" onerror="this.style.background='#eee'">
+            <div style="flex:1; min-width:0">
+              <div class="od-purchase-name">${p.name}</div>
+              <div style="margin-top:5px">
+                <span class="od-purchase-price">${formatPrice(p.newPrice)}</span>
+                ${hasDisc ? `<span class="od-purchase-orig">${formatPrice(p.oldPrice)}</span>` : ""}
+              </div>
+            </div>
+            <div class="od-purchase-qty">${p.qty || 1} x</div>
+          </div>`;
+      }).join("");
+
+      // Price breakdown
+      const originalTotal = (order.items || []).reduce((s, p) => s + (p.oldPrice || p.newPrice) * (p.qty || 1), 0);
+      const subtotal      = order.subtotal || (order.items || []).reduce((s, p) => s + p.newPrice * (p.qty || 1), 0);
+      const discount      = originalTotal - subtotal;
+      const delivery      = (order.delFee || 0) + (order.ecoFee || 0);
+      const pointsEarned  = Math.floor(order.total / 100);
+
+      const payLabels = {
+        qpay:"QPay / QR код", mbank:"М банк", storepay:"Storepay",
+        pocket:"Pocket", ardpay:"Ard Pay", simple:"Simple",
+        socialpay:"Social Pay", toki:"Toki", hipay:"Hipay",
+        wechat:"WeChat Pay", happypay:"HappyPay", lenddy:"LendDy",
+        card:"Банкны карт", cash:"Бэлэн мөнгө"
+      };
+
+      document.getElementById("od-price-table").innerHTML = `
+        <div class="od-price-row subtotal-row">
+          <span>Нийт төлсөн дүн</span>
+          <span class="pv">${formatPrice(order.total)}</span>
+        </div>
+        <div class="od-price-row">
+          <span>Үнийн дүн (${totalQty}ш)</span>
+          <span class="pv">${formatPrice(originalTotal)}</span>
+        </div>
+        ${discount > 0 ? `
+        <div class="od-price-row">
+          <span>Нийт хэмнэсэн</span>
+          <span class="pv red">-${formatPrice(discount)}</span>
+        </div>
+        <div class="od-price-row" style="font-size:12px; color:#aaa">
+          <span style="padding-left:16px">Хэмнэсэн</span>
+          <span class="pv red">-${formatPrice(discount)}</span>
+        </div>` : ""}
+        <div class="od-price-row" style="font-size:12px; color:#aaa">
+          <span style="padding-left:16px">Купон</span>
+          <span class="pv">-0₮</span>
+        </div>
+        <div class="od-price-row" style="font-size:12px; color:#aaa">
+          <span style="padding-left:16px">Shop point</span>
+          <span class="pv">-0 SP</span>
+        </div>
+        <div class="od-price-row">
+          <span>Хүргэлт</span>
+          <span class="pv">${formatPrice(delivery)}</span>
+        </div>
+        <div class="od-price-row">
+          <span>Миний купон</span>
+          <span class="pv">—</span>
+        </div>
+        <div class="od-price-row">
+          <span>Төлбөрийн хэрэгсэл</span>
+          <span class="pv">${payLabels[order.payment] || order.payment || "—"}</span>
+        </div>
+        <div class="od-price-row">
+          <span>Shop point</span>
+          <span class="pv green">+${pointsEarned} SP</span>
+        </div>`;
+
+      showSection("order-detail");
+    };
+
+    // Expose helpers to non-module script
+    window._fmtDate = fmtDate;
+  </script>
+
+  <script>
+    function showSection(name) {
+      document.querySelectorAll(".pf-section").forEach(s => s.classList.remove("active"));
+      document.getElementById("section-" + name).classList.add("active");
+
+      document.querySelectorAll(".ps-nav-item").forEach(b => b.classList.remove("active"));
+      const navMap = {
+        orders: "navOrders", "order-detail": "navOrders",
+        settings: "navSettings",
+        help: "navHelp"
+      };
+      const target = navMap[name];
+      if (target) document.getElementById(target)?.classList.add("active");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function switchOrderTab(tab) {
+      document.querySelectorAll(".otab").forEach(t => t.classList.remove("active"));
+      document.getElementById("tab-" + tab).classList.add("active");
+      document.getElementById("list-ordered").style.display   = tab === "ordered"   ? "" : "none";
+      document.getElementById("list-delivered").style.display = tab === "delivered" ? "" : "none";
+      document.getElementById("list-cancelled").style.display = tab === "cancelled" ? "" : "none";
+    }
+
+    function handleLogout() {
+      localStorage.removeItem("shop_token");
+      localStorage.removeItem("shop_current_user");
+      location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>
