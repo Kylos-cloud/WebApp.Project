@@ -453,16 +453,55 @@ function handleContactSubmit(e) {
 
 document.querySelectorAll(".menu-item").forEach(item => {
   item.addEventListener("click", function () {
-    document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
-    this.classList.add("active");
 
-    // Mobile дээр subcategory харуулахгүй, шууд navigate хийнэ
-    if (window.innerWidth <= 768) {
-      navigateToCategory(this.dataset.category);
+    // ── DESKTOP ──
+    if (window.innerWidth > 768) {
+      document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
+      this.classList.add("active");
+      renderSubcategories(this.dataset.category);
       return;
     }
 
-    renderSubcategories(this.dataset.category);
+    // ── MOBILE accordion ──
+    const isOpen = this.classList.contains("active");
+
+    // Бүгдийг хаах
+    document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
+    document.querySelectorAll(".mobile-sub").forEach(s => s.remove());
+
+    if (isOpen) return;
+
+    // Нээх
+    this.classList.add("active");
+    const catKey = this.dataset.category;
+    const data = categoryData[catKey];
+    if (!data) return;
+
+    const sub = document.createElement("div");
+    sub.className = "mobile-sub";
+
+    let html = `
+      <button class="mobile-sub-all" onclick="navigateToCategory('${catKey}')">
+        ${data.label} — бүгдийг үзэх →
+      </button>
+    `;
+
+    data.subcategories.forEach((s, si) => {
+      html += `<div class="mobile-sub-section">${s.name}</div>`;
+      s.items.forEach((itm, ii) => {
+        html += `
+          <div class="mobile-sub-item" onclick="navigateToItem('${catKey}', ${si}, ${ii})">
+            <span>${itm}</span><span class="mobile-sub-arrow">›</span>
+          </div>`;
+      });
+    });
+
+    sub.innerHTML = html;
+    this.insertAdjacentElement("afterend", sub);
+  });
+
+  item.addEventListener("dblclick", function () {
+    navigateToCategory(this.dataset.category);
   });
 });
 function openReturns() {
