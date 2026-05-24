@@ -297,7 +297,8 @@
                 <div class="summary-row"><span>Бараа</span><span id="subtotal">0₮</span></div>
                 <div class="summary-row"><span>Хүргэлт</span><span>5,000₮</span></div>
                 <div class="summary-row total"><span>Нийт дүн</span><span id="total">5,000₮</span></div>
-                <button class="checkout-btn" id="checkoutBtn" onclick="handleCheckout()">Захиалга үргэлжлүүлэх →</button>
+                <button class="checkout-btn" id="checkoutBtn" onclick="handleCheckout()">Захиалга үргэлжлүүлэх
+                    →</button>
             </aside>
         </div>
     </main>
@@ -352,6 +353,9 @@
             renderCart();
         }
 
+        // Сагсны мөрийг id+size-аар онцлох (ижил бараа өөр размераар тус тусдаа мөр болно)
+        function rowKey(id, size) { return `${id}__${size || ''}`; }
+
         function renderCart() {
             const cart = getCart();
             const itemsEl = document.getElementById("cartItems");
@@ -367,25 +371,30 @@
             emptyEl.style.display = "none";
             layoutEl.style.display = "grid";
 
-            itemsEl.innerHTML = cart.map(p => `
-        <article class="cart-item" data-id="${p.id}">
+            itemsEl.innerHTML = cart.map(p => {
+                const sizeAttr = (p.size || '').replace(/"/g, '&quot;');
+                const key = rowKey(p.id, p.size);
+                const sizeLabel = p.size ? ` · Размер ${p.size}` : '';
+                return `
+        <article class="cart-item" data-key="${key}">
           <img class="cart-item-img" src="${p.image}" alt="${p.name}" onerror="this.style.background='#f0f0f0'">
           <div class="cart-item-info">
             <div>
               <p class="cart-item-name">${p.name}</p>
-              <p class="cart-item-meta">${p.brand}</p>
+              <p class="cart-item-meta">${p.brand}${sizeLabel}</p>
             </div>
             <div class="cart-item-bottom">
               <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty(${p.id}, -1)">−</button>
-                <span class="qty-num" id="qty-${p.id}">${p.qty || 1}</span>
-                <button class="qty-btn" onclick="changeQty(${p.id}, 1)">+</button>
+                <button class="qty-btn" onclick="changeQty(${p.id}, '${sizeAttr}', -1)">−</button>
+                <span class="qty-num" id="qty-${key}">${p.qty || 1}</span>
+                <button class="qty-btn" onclick="changeQty(${p.id}, '${sizeAttr}', 1)">+</button>
               </div>
               <span class="cart-item-price">${formatPrice(p.newPrice * (p.qty || 1))}</span>
-              <button class="cart-item-remove" onclick="removeItem(${p.id})">✕</button>
+              <button class="cart-item-remove" onclick="removeItem(${p.id}, '${sizeAttr}')">✕</button>
             </div>
           </div>
-        </article>`).join("");
+        </article>`;
+            }).join("");
 
             updateTotals();
         }
@@ -397,37 +406,49 @@
             document.getElementById("total").textContent = formatPrice(subtotal + 5000);
         }
 
-        window.changeQty = function (id, delta) {
+        window.changeQty = function (id, size, delta) {
+            const sizeKey = size || null;
             const cart = getCart();
-            const item = cart.find(p => p.id === id);
+            const item = cart.find(p => p.id === id && (p.size || null) === sizeKey);
             if (!item) return;
             const newQty = Math.max(1, (item.qty || 1) + delta);
-            updateCartQty(id, newQty);
-            const qtyEl = document.getElementById(`qty-${id}`);
+            updateCartQty(id, newQty, sizeKey);
+            const key = rowKey(id, size);
+            const qtyEl = document.getElementById(`qty-${key}`);
             if (qtyEl) qtyEl.textContent = newQty;
-            // update price display
-            const article = document.querySelector(`.cart-item[data-id="${id}"]`);
+            const article = document.querySelector(`.cart-item[data-key="${key}"]`);
             if (article) article.querySelector(".cart-item-price").textContent = formatPrice(item.newPrice * newQty);
             updateTotals();
         };
 
-        window.removeItem = function (id) {
-            const article = document.querySelector(`.cart-item[data-id="${id}"]`);
+        window.removeItem = function (id, size) {
+            const key = rowKey(id, size);
+            const article = document.querySelector(`.cart-item[data-key="${key}"]`);
             if (article) {
                 article.style.transition = "opacity 0.3s ease, transform 0.3s ease";
                 article.style.opacity = "0";
                 article.style.transform = "translateX(20px)";
                 setTimeout(() => {
-                    removeFromCart(id);
+                    removeFromCart(id, size || null);
                     renderCart();
                 }, 300);
             }
         };
 
         window.handleCheckout = function () {
-            location.href = "checkout.html";
+            const cart = getCart();
+            if (!cart.length) {
+                alert("Сагс хоосон байна. Бараа нэмнэ үү.");
+                return;
+            }
+            if (!getMe()) {
+                window.location.href = "login.html";
+                return;
+            }
+            window.location.href = "checkout.html";
         };
     </script>
+
 </body>
 
 </html>

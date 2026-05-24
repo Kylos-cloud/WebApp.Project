@@ -7,7 +7,9 @@
   <title>SHOP — Захиалга</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    body { background: #f0f0f0; }
+    body {
+      background: #f0f0f0;
+    }
 
     /* ── BREADCRUMB ── */
     .breadcrumb {
@@ -20,11 +22,28 @@
       font-size: 13px;
       flex-wrap: wrap;
     }
-    .breadcrumb a { color: hsl(210, 75%, 55%); text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .breadcrumb .sep { color: #bbb; }
-    .bc-step { color: #bbb; }
-    .bc-step.active { color: hsl(0, 0%, 15%); font-weight: 600; }
+
+    .breadcrumb a {
+      color: hsl(210, 75%, 55%);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb .sep {
+      color: #bbb;
+    }
+
+    .bc-step {
+      color: #bbb;
+    }
+
+    .bc-step.active {
+      color: hsl(0, 0%, 15%);
+      font-weight: 600;
+    }
 
     /* ── LAYOUT ── */
     .co-wrap {
@@ -38,8 +57,13 @@
     }
 
     /* ── STEP SECTIONS ── */
-    .step-sec { display: none; }
-    .step-sec.active { display: block; }
+    .step-sec {
+      display: none;
+    }
+
+    .step-sec.active {
+      display: block;
+    }
 
     /* ── CARD ── */
     .co-card {
@@ -48,16 +72,18 @@
       padding: 20px 22px;
       margin-bottom: 14px;
     }
+
     .co-card h2 {
       font-size: 18px;
       font-weight: 700;
       margin-bottom: 18px;
     }
+
     .co-card h3 {
       font-size: 14px;
       font-weight: 700;
       margin-bottom: 14px;
-      color: hsl(0,0%,25%);
+      color: hsl(0, 0%, 25%);
     }
 
     /* ── NO-ADDRESS BOX ── */
@@ -67,6 +93,7 @@
       gap: 20px;
       padding: 8px 0 16px;
     }
+
     .no-addr-blob {
       width: 80px;
       height: 80px;
@@ -78,9 +105,23 @@
       font-size: 38px;
       flex-shrink: 0;
     }
-    .no-addr-blob span { display: block; }
-    .no-addr-text h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
-    .no-addr-text p { font-size: 13px; color: #999; margin-bottom: 10px; }
+
+    .no-addr-blob span {
+      display: block;
+    }
+
+    .no-addr-text h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .no-addr-text p {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
     .add-addr-btn {
       display: inline-flex;
       align-items: center;
@@ -95,18 +136,51 @@
       cursor: pointer;
       transition: opacity 0.2s;
     }
-    .add-addr-btn:hover { opacity: 0.85; }
 
-    .addr-form { display: none; padding-top: 14px; border-top: 1px solid #eee; margin-top: 10px; }
-    .addr-form.show { display: block; }
+    .add-addr-btn:hover {
+      opacity: 0.85;
+    }
+
+    .addr-form {
+      display: none;
+      padding-top: 14px;
+      border-top: 1px solid #eee;
+      margin-top: 10px;
+    }
+
+    .addr-form.show {
+      display: block;
+    }
 
     /* ── FORM FIELDS ── */
-    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-    .frow.single { grid-template-columns: 1fr; }
-    .field { display: flex; flex-direction: column; gap: 5px; }
-    .field label { font-size: 12px; color: #888; }
-    .field label .req { color: hsl(350,80%,55%); }
-    .field input, .field select {
+    .frow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .frow.single {
+      grid-template-columns: 1fr;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .field label .req {
+      color: hsl(350, 80%, 55%);
+    }
+
+    .field input,
+    .field select {
       padding: 10px 12px;
       border: 1.5px solid #e4e4e4;
       border-radius: 8px;
@@ -115,7 +189,11 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    .field input:focus, .field select:focus { border-color: hsl(0,0%,20%); }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: hsl(0, 0%, 20%);
+    }
 
     /* ── И-БАРИМТ ── */
     .receipt-opts {
@@ -123,6 +201,7 @@
       border-radius: 10px;
       overflow: hidden;
     }
+
     .receipt-opt {
       display: flex;
       align-items: center;
@@ -134,12 +213,29 @@
       font-size: 14px;
       font-weight: 500;
     }
-    .receipt-opt:last-child { border-bottom: none; }
-    .receipt-opt:hover { background: #fafafa; }
-    .receipt-opt input { width: 18px; height: 18px; accent-color: hsl(260,45%,50%); flex-shrink: 0; }
+
+    .receipt-opt:last-child {
+      border-bottom: none;
+    }
+
+    .receipt-opt:hover {
+      background: #fafafa;
+    }
+
+    .receipt-opt input {
+      width: 18px;
+      height: 18px;
+      accent-color: hsl(260, 45%, 50%);
+      flex-shrink: 0;
+    }
 
     /* ── NOTES CHECKBOXES ── */
-    .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .notes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
     .note-check {
       display: flex;
       align-items: center;
@@ -147,7 +243,12 @@
       font-size: 13px;
       cursor: pointer;
     }
-    .note-check input { width: 16px; height: 16px; accent-color: hsl(260,45%,50%); }
+
+    .note-check input {
+      width: 16px;
+      height: 16px;
+      accent-color: hsl(260, 45%, 50%);
+    }
 
     /* ── DELIVERY TYPE ── */
     .delivery-card {
@@ -159,10 +260,11 @@
       border-radius: 10px;
       margin-bottom: 10px;
     }
+
     .delivery-icon {
       width: 40px;
       height: 40px;
-      background: hsl(0,0%,93%);
+      background: hsl(0, 0%, 93%);
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -170,19 +272,43 @@
       font-size: 22px;
       flex-shrink: 0;
     }
-    .delivery-meta { flex: 1; }
-    .delivery-name { font-size: 14px; font-weight: 600; }
-    .delivery-sub { font-size: 12px; color: #999; margin-top: 2px; }
-    .delivery-count { font-size: 13px; color: #888; margin-left: auto; }
+
+    .delivery-meta {
+      flex: 1;
+    }
+
+    .delivery-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .delivery-sub {
+      font-size: 12px;
+      color: #999;
+      margin-top: 2px;
+    }
+
+    .delivery-count {
+      font-size: 13px;
+      color: #888;
+      margin-left: auto;
+    }
 
     /* ── CONFIRM STEP ── */
-    .confirm-items-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .confirm-items-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
     .confirm-thumb {
       position: relative;
       width: 60px;
       height: 60px;
       flex-shrink: 0;
     }
+
     .confirm-thumb img {
       width: 60px;
       height: 60px;
@@ -190,13 +316,14 @@
       border-radius: 8px;
       background: #eee;
     }
+
     .confirm-thumb-badge {
       position: absolute;
       top: -6px;
       right: -6px;
       width: 20px;
       height: 20px;
-      background: hsl(350,80%,58%);
+      background: hsl(350, 80%, 58%);
       color: white;
       font-size: 10px;
       font-weight: 700;
@@ -205,7 +332,13 @@
       align-items: center;
       justify-content: center;
     }
-    .confirm-divider { border: none; border-top: 1px dashed #e8e8e8; margin: 12px 0; }
+
+    .confirm-divider {
+      border: none;
+      border-top: 1px dashed #e8e8e8;
+      margin: 12px 0;
+    }
+
     .confirm-row {
       display: flex;
       align-items: flex-start;
@@ -214,10 +347,30 @@
       border-bottom: 1px solid #f5f5f5;
       font-size: 14px;
     }
-    .confirm-row:last-child { border-bottom: none; }
-    .confirm-row-icon { color: #bbb; flex-shrink: 0; margin-top: 2px; font-size: 16px; }
-    .confirm-label { font-size: 11px; color: #bbb; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.3px; }
-    .confirm-val { font-weight: 600; font-size: 14px; }
+
+    .confirm-row:last-child {
+      border-bottom: none;
+    }
+
+    .confirm-row-icon {
+      color: #bbb;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 16px;
+    }
+
+    .confirm-label {
+      font-size: 11px;
+      color: #bbb;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .confirm-val {
+      font-weight: 600;
+      font-size: 14px;
+    }
 
     /* ── WALLET ── */
     .wallet-row {
@@ -226,12 +379,16 @@
       gap: 12px;
       padding: 12px 0;
     }
-    .wallet-row + .wallet-row { border-top: 1px solid #f0f0f0; }
+
+    .wallet-row+.wallet-row {
+      border-top: 1px solid #f0f0f0;
+    }
+
     .wallet-icon-box {
       width: 38px;
       height: 38px;
       border-radius: 8px;
-      background: hsl(260,45%,50%);
+      background: hsl(260, 45%, 50%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -241,9 +398,21 @@
       flex-shrink: 0;
       font-family: Arial, sans-serif;
     }
-    .wallet-info { flex: 1; }
-    .wallet-name { font-size: 14px; font-weight: 700; }
-    .wallet-bal { font-size: 12px; color: #aaa; }
+
+    .wallet-info {
+      flex: 1;
+    }
+
+    .wallet-name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .wallet-bal {
+      font-size: 12px;
+      color: #aaa;
+    }
+
     .wallet-use-btn {
       display: flex;
       align-items: center;
@@ -255,19 +424,28 @@
       font-weight: 600;
       cursor: pointer;
       background: white;
-      color: hsl(0,0%,25%);
+      color: hsl(0, 0%, 25%);
     }
 
     /* ── PAYMENT STEP ── */
-    .pay-group { margin-bottom: 20px; }
+    .pay-group {
+      margin-bottom: 20px;
+    }
+
     .pay-group-label {
       font-size: 13px;
       font-weight: 700;
-      color: hsl(0,0%,20%);
+      color: hsl(0, 0%, 20%);
       margin-bottom: 10px;
       padding: 0 2px;
     }
-    .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .pay-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
     .pay-row {
       display: flex;
       align-items: center;
@@ -279,7 +457,12 @@
       border: 1.5px solid transparent;
       transition: border-color 0.15s, background 0.15s;
     }
-    .pay-row:hover { border-color: #ddd; background: #fafafa; }
+
+    .pay-row:hover {
+      border-color: #ddd;
+      background: #fafafa;
+    }
+
     .pay-icon-box {
       width: 42px;
       height: 42px;
@@ -291,10 +474,28 @@
       flex-shrink: 0;
       font-weight: 900;
     }
-    .pay-row-info { flex: 1; min-width: 0; }
-    .pay-row-name { font-size: 13px; font-weight: 700; }
-    .pay-row-sub { font-size: 11px; color: #aaa; margin-top: 2px; }
-    .pay-row-arrow { color: #ccc; font-size: 15px; flex-shrink: 0; }
+
+    .pay-row-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pay-row-name {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .pay-row-sub {
+      font-size: 11px;
+      color: #aaa;
+      margin-top: 2px;
+    }
+
+    .pay-row-arrow {
+      color: #ccc;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
 
     /* ── BUTTONS ── */
     .continue-btn {
@@ -309,8 +510,14 @@
       cursor: pointer;
       transition: opacity 0.2s, transform 0.1s;
     }
-    .continue-btn:hover { opacity: 0.88; }
-    .continue-btn:active { transform: scale(0.99); }
+
+    .continue-btn:hover {
+      opacity: 0.88;
+    }
+
+    .continue-btn:active {
+      transform: scale(0.99);
+    }
 
     .back-link {
       display: block;
@@ -320,34 +527,112 @@
       color: #aaa;
       cursor: pointer;
     }
-    .back-link:hover { color: hsl(0,0%,20%); }
+
+    .back-link:hover {
+      color: hsl(0, 0%, 20%);
+    }
 
     /* ── SIDEBAR ── */
-    .sidebar { position: sticky; top: 76px; }
-    .s-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 12px; }
-    .s-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
-    .s-items { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
-    .s-item { display: flex; gap: 10px; align-items: center; }
-    .s-item img {
-      width: 46px; height: 50px; object-fit: cover;
-      border-radius: 7px; background: #eee; flex-shrink: 0;
+    .sidebar {
+      position: sticky;
+      top: 76px;
     }
+
+    .s-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+
+    .s-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .s-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .s-item {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .s-item img {
+      width: 46px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 7px;
+      background: #eee;
+      flex-shrink: 0;
+    }
+
     .s-item-name {
-      font-size: 13px; font-weight: 600;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       max-width: 160px;
     }
-    .s-item-qty { font-size: 11px; color: #aaa; }
-    .s-item-price { font-size: 13px; font-weight: 700; margin-left: auto; flex-shrink: 0; }
-    .s-sec-label { font-size: 12px; font-weight: 700; color: #aaa; margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.3px; }
-    .s-row { display: flex; justify-content: space-between; font-size: 13px; color: #888; margin-bottom: 6px; }
-    .s-row span:last-child { font-weight: 600; color: hsl(0,0%,20%); }
-    .s-row.total { font-size: 15px; font-weight: 800; color: hsl(0,0%,15%); padding-top: 12px; border-top: 1px solid #eee; margin-top: 6px; }
-    .s-row.total span:last-child { color: hsl(0,0%,15%); }
+
+    .s-item-qty {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    .s-item-price {
+      font-size: 13px;
+      font-weight: 700;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .s-sec-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #aaa;
+      margin: 12px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .s-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .s-row span:last-child {
+      font-weight: 600;
+      color: hsl(0, 0%, 20%);
+    }
+
+    .s-row.total {
+      font-size: 15px;
+      font-weight: 800;
+      color: hsl(0, 0%, 15%);
+      padding-top: 12px;
+      border-top: 1px solid #eee;
+      margin-top: 6px;
+    }
+
+    .s-row.total span:last-child {
+      color: hsl(0, 0%, 15%);
+    }
+
     .s-continue-btn {
       width: 100%;
       padding: 13px;
-      background: hsl(350,78%,58%);
+      background: hsl(350, 78%, 58%);
       color: white;
       border: none;
       border-radius: 10px;
@@ -357,19 +642,26 @@
       margin-top: 14px;
       transition: opacity 0.2s;
     }
-    .s-continue-btn:hover { opacity: 0.88; }
+
+    .s-continue-btn:hover {
+      opacity: 0.88;
+    }
 
     /* ── PAYMENT MODAL ── */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.55);
+      background: rgba(0, 0, 0, 0.55);
       z-index: 2000;
       display: none;
       align-items: center;
       justify-content: center;
     }
-    .modal-overlay.show { display: flex; }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
     .modal-box {
       background: white;
       border-radius: 16px;
@@ -378,6 +670,7 @@
       overflow: hidden;
       animation: fadeSlideUp 0.3s ease;
     }
+
     .modal-hd {
       display: flex;
       align-items: flex-start;
@@ -385,19 +678,35 @@
       padding: 16px 20px;
       border-bottom: 1px solid #f0f0f0;
     }
-    .modal-hd-label { font-size: 11px; color: #aaa; margin-bottom: 2px; }
+
+    .modal-hd-label {
+      font-size: 11px;
+      color: #aaa;
+      margin-bottom: 2px;
+    }
+
     .modal-timer-val {
       font-size: 16px;
       font-weight: 700;
-      color: hsl(0,0%,20%);
+      color: hsl(0, 0%, 20%);
       letter-spacing: 0.5px;
     }
+
     .modal-close-btn {
-      background: none; border: none;
-      font-size: 22px; color: #aaa;
-      cursor: pointer; line-height: 1; padding: 0;
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: #aaa;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
     }
-    .modal-body { padding: 24px 22px; text-align: center; }
+
+    .modal-body {
+      padding: 24px 22px;
+      text-align: center;
+    }
+
     .modal-pay-hd {
       display: flex;
       align-items: center;
@@ -405,61 +714,124 @@
       gap: 10px;
       margin-bottom: 6px;
     }
+
     .modal-pay-icon {
-      width: 36px; height: 36px;
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
     }
-    .modal-pay-title { font-size: 18px; font-weight: 700; }
-    .modal-inst { font-size: 13px; color: #aaa; margin-bottom: 20px; }
+
+    .modal-pay-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .modal-inst {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
     .modal-qr-wrap {
-      width: 200px; height: 200px;
+      width: 200px;
+      height: 200px;
       margin: 0 auto 16px;
       border-radius: 10px;
       border: 1px solid #e8e8e8;
       overflow: hidden;
       background: white;
     }
-    .modal-qr-wrap svg { width: 100%; height: 100%; }
-    .modal-amt-label { font-size: 12px; color: #aaa; margin-bottom: 4px; }
-    .modal-amt { font-size: 26px; font-weight: 900; margin-bottom: 4px; }
+
+    .modal-qr-wrap svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .modal-amt-label {
+      font-size: 12px;
+      color: #aaa;
+      margin-bottom: 4px;
+    }
+
+    .modal-amt {
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
     .modal-ft {
       display: flex;
       gap: 10px;
       padding: 0 22px 20px;
     }
+
     .modal-back-btn {
-      flex: 1; padding: 12px;
+      flex: 1;
+      padding: 12px;
       border: 1.5px solid #ddd;
       border-radius: 8px;
-      font-size: 14px; font-weight: 600;
-      cursor: pointer; background: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
     }
+
     .modal-confirm-btn {
-      flex: 2; padding: 12px;
+      flex: 2;
+      padding: 12px;
       background: hsl(180, 55%, 38%);
-      color: white; border: none;
+      color: white;
+      border: none;
       border-radius: 8px;
-      font-size: 14px; font-weight: 700;
+      font-size: 14px;
+      font-weight: 700;
       cursor: pointer;
       transition: opacity 0.2s;
     }
-    .modal-confirm-btn:hover { opacity: 0.85; }
+
+    .modal-confirm-btn:hover {
+      opacity: 0.85;
+    }
 
     /* Card modal */
-    .card-modal-form { text-align: left; }
+    .card-modal-form {
+      text-align: left;
+    }
+
     .card-preview-box {
-      background: linear-gradient(135deg, hsl(220,25%,22%), hsl(220,35%,38%));
+      background: linear-gradient(135deg, hsl(220, 25%, 22%), hsl(220, 35%, 38%));
       color: white;
       border-radius: 12px;
       padding: 18px 20px;
       margin-bottom: 18px;
       font-family: 'Courier New', monospace;
     }
-    .card-prev-logo { font-size: 18px; font-weight: 900; letter-spacing: 3px; margin-bottom: 18px; opacity: 0.9; }
-    .card-prev-num { font-size: 17px; letter-spacing: 3px; margin-bottom: 14px; }
-    .card-prev-meta { display: flex; justify-content: space-between; font-size: 11px; opacity: 0.75; }
+
+    .card-prev-logo {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+      opacity: 0.9;
+    }
+
+    .card-prev-num {
+      font-size: 17px;
+      letter-spacing: 3px;
+      margin-bottom: 14px;
+    }
+
+    .card-prev-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      opacity: 0.75;
+    }
 
     /* ── INLINE VALIDATION ── */
     .field.has-error input,
@@ -467,6 +839,7 @@
       border-color: hsl(350, 78%, 55%) !important;
       background: hsl(350, 100%, 98%);
     }
+
     .field-err {
       font-size: 12px;
       color: hsl(350, 75%, 50%);
@@ -479,6 +852,7 @@
       opacity: 0;
       transition: max-height 0.25s ease, opacity 0.25s ease, margin-top 0.25s ease;
     }
+
     .field.has-error .field-err {
       max-height: 30px;
       opacity: 1;
@@ -494,6 +868,7 @@
       overflow: hidden;
       margin-bottom: 16px;
     }
+
     .loc-btn {
       flex: 1;
       padding: 11px 14px;
@@ -510,22 +885,48 @@
       transition: background 0.2s, color 0.2s;
       border-right: 1.5px solid #e4e4e4;
     }
-    .loc-btn:last-child { border-right: none; }
+
+    .loc-btn:last-child {
+      border-right: none;
+    }
+
     .loc-btn.active {
-      background: hsl(0,0%,13%);
+      background: hsl(0, 0%, 13%);
       color: white;
     }
 
     /* ── KHOROO DROPDOWN ── */
-    .sub-field { display: none; }
-    .sub-field.show { display: flex; flex-direction: column; gap: 5px; }
+    .sub-field {
+      display: none;
+    }
+
+    .sub-field.show {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
 
     @media (max-width: 768px) {
-      .co-wrap { grid-template-columns: 1fr; }
-      .sidebar { position: static; order: -1; }
-      .pay-grid { grid-template-columns: 1fr; }
-      .notes-grid { grid-template-columns: 1fr; }
-      .frow { grid-template-columns: 1fr; }
+      .co-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        order: -1;
+      }
+
+      .pay-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .notes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .frow {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -538,17 +939,20 @@
       <nav class="icons">
         <a href="profile.html" class="icon-profile">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+            <path stroke="currentColor" stroke-width="2"
+              d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
         </a>
         <a href="index.html#contact" class="icon-contact" aria-label="Холбоо барих">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 9h10M7 13h6m-1 8c4.97 0 9-3.806 9-8.5S16.97 4 12 4s-9 3.806-9 8.5c0 1.41.363 2.738 1.004 3.905L3 21l5.343-1.32c1.099.466 2.354.82 3.657.82Z"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M7 9h10M7 13h6m-1 8c4.97 0 9-3.806 9-8.5S16.97 4 12 4s-9 3.806-9 8.5c0 1.41.363 2.738 1.004 3.905L3 21l5.343-1.32c1.099.466 2.354.82 3.657.82Z" />
           </svg>
         </a>
         <a href="basket.html" class="icon-cart">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
           </svg>
         </a>
       </nav>
@@ -615,13 +1019,27 @@
               <label>Аймаг <span class="req">*</span></label>
               <select id="aimag" onchange="onAimagChange()">
                 <option value="">Аймаг сонгох...</option>
-                <option>Архангай</option><option>Баян-Өлгий</option><option>Баянхонгор</option>
-                <option>Булган</option><option>Говь-Алтай</option><option>Говьсүмбэр</option>
-                <option>Дархан-Уул</option><option>Дорноговь</option><option>Дорнод</option>
-                <option>Дундговь</option><option>Завхан</option><option>Орхон</option>
-                <option>Өвөрхангай</option><option>Өмнөговь</option><option>Сэлэнгэ</option>
-                <option>Сүхбаатар</option><option>Төв</option><option>Увс</option>
-                <option>Ховд</option><option>Хөвсгөл</option><option>Хэнтий</option>
+                <option>Архангай</option>
+                <option>Баян-Өлгий</option>
+                <option>Баянхонгор</option>
+                <option>Булган</option>
+                <option>Говь-Алтай</option>
+                <option>Говьсүмбэр</option>
+                <option>Дархан-Уул</option>
+                <option>Дорноговь</option>
+                <option>Дорнод</option>
+                <option>Дундговь</option>
+                <option>Завхан</option>
+                <option>Орхон</option>
+                <option>Өвөрхангай</option>
+                <option>Өмнөговь</option>
+                <option>Сэлэнгэ</option>
+                <option>Сүхбаатар</option>
+                <option>Төв</option>
+                <option>Увс</option>
+                <option>Ховд</option>
+                <option>Хөвсгөл</option>
+                <option>Хэнтий</option>
               </select>
               <span class="field-err">⚠ Аймаг сонгоно уу</span>
             </div>
@@ -784,7 +1202,8 @@
                 <div class="pay-row-arrow">›</div>
               </div>
               <div class="pay-row" onclick="openModal('mbank')">
-                <div class="pay-icon-box" style="background:hsl(140,55%,35%); color:white; font-size:14px; font-family:serif">M</div>
+                <div class="pay-icon-box"
+                  style="background:hsl(140,55%,35%); color:white; font-size:14px; font-family:serif">M</div>
                 <div class="pay-row-info">
                   <div class="pay-row-name">М банк.</div>
                   <div class="pay-row-sub">Мобайл апп-аар</div>
@@ -954,46 +1373,74 @@
         <div class="modal-inst" id="modalInst">Аппликейшн нэвтрүүлэн QR код уншуулна уу</div>
         <div class="modal-qr-wrap">
           <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="200" height="200" fill="white"/>
+            <rect width="200" height="200" fill="white" />
             <!-- Top-left -->
-            <rect x="12" y="12" width="56" height="56" fill="black"/><rect x="20" y="20" width="40" height="40" fill="white"/><rect x="28" y="28" width="24" height="24" fill="black"/>
+            <rect x="12" y="12" width="56" height="56" fill="black" />
+            <rect x="20" y="20" width="40" height="40" fill="white" />
+            <rect x="28" y="28" width="24" height="24" fill="black" />
             <!-- Top-right -->
-            <rect x="132" y="12" width="56" height="56" fill="black"/><rect x="140" y="20" width="40" height="40" fill="white"/><rect x="148" y="28" width="24" height="24" fill="black"/>
+            <rect x="132" y="12" width="56" height="56" fill="black" />
+            <rect x="140" y="20" width="40" height="40" fill="white" />
+            <rect x="148" y="28" width="24" height="24" fill="black" />
             <!-- Bottom-left -->
-            <rect x="12" y="132" width="56" height="56" fill="black"/><rect x="20" y="140" width="40" height="40" fill="white"/><rect x="28" y="148" width="24" height="24" fill="black"/>
+            <rect x="12" y="132" width="56" height="56" fill="black" />
+            <rect x="20" y="140" width="40" height="40" fill="white" />
+            <rect x="28" y="148" width="24" height="24" fill="black" />
             <!-- Data cells -->
-            <rect x="78" y="12" width="10" height="10" fill="black"/><rect x="92" y="12" width="10" height="10" fill="black"/><rect x="106" y="12" width="10" height="10" fill="black"/>
-            <rect x="78" y="26" width="10" height="10" fill="black"/><rect x="106" y="26" width="10" height="10" fill="black"/>
-            <rect x="92" y="40" width="10" height="10" fill="black"/>
-            <rect x="78" y="54" width="10" height="10" fill="black"/><rect x="92" y="54" width="10" height="10" fill="black"/><rect x="106" y="54" width="10" height="10" fill="black"/>
-            <rect x="12" y="78" width="10" height="10" fill="black"/><rect x="26" y="78" width="10" height="10" fill="black"/>
-            <rect x="40" y="92" width="10" height="10" fill="black"/>
-            <rect x="12" y="106" width="10" height="10" fill="black"/><rect x="40" y="106" width="10" height="10" fill="black"/>
-            <rect x="78" y="78" width="10" height="10" fill="black"/><rect x="92" y="78" width="10" height="10" fill="black"/>
-            <rect x="106" y="78" width="10" height="10" fill="black"/><rect x="120" y="78" width="10" height="10" fill="black"/>
-            <rect x="78" y="92" width="10" height="10" fill="black"/><rect x="106" y="92" width="10" height="10" fill="black"/>
-            <rect x="134" y="92" width="10" height="10" fill="black"/>
-            <rect x="78" y="106" width="10" height="10" fill="black"/><rect x="92" y="106" width="10" height="10" fill="black"/>
-            <rect x="120" y="106" width="10" height="10" fill="black"/>
-            <rect x="132" y="78" width="10" height="10" fill="black"/><rect x="148" y="78" width="10" height="10" fill="black"/>
-            <rect x="162" y="78" width="10" height="10" fill="black"/><rect x="176" y="78" width="10" height="10" fill="black"/>
-            <rect x="132" y="92" width="10" height="10" fill="black"/><rect x="162" y="92" width="10" height="10" fill="black"/>
-            <rect x="176" y="92" width="10" height="10" fill="black"/>
-            <rect x="148" y="106" width="10" height="10" fill="black"/><rect x="176" y="106" width="10" height="10" fill="black"/>
-            <rect x="78" y="120" width="10" height="10" fill="black"/><rect x="92" y="120" width="10" height="10" fill="black"/>
-            <rect x="78" y="134" width="10" height="10" fill="black"/><rect x="106" y="134" width="10" height="10" fill="black"/>
-            <rect x="134" y="134" width="10" height="10" fill="black"/>
-            <rect x="78" y="148" width="10" height="10" fill="black"/><rect x="92" y="148" width="10" height="10" fill="black"/>
-            <rect x="106" y="148" width="10" height="10" fill="black"/><rect x="134" y="148" width="10" height="10" fill="black"/>
-            <rect x="148" y="132" width="10" height="10" fill="black"/><rect x="162" y="132" width="10" height="10" fill="black"/>
-            <rect x="176" y="132" width="10" height="10" fill="black"/>
-            <rect x="148" y="148" width="10" height="10" fill="black"/><rect x="176" y="148" width="10" height="10" fill="black"/>
-            <rect x="162" y="162" width="10" height="10" fill="black"/>
-            <rect x="148" y="176" width="10" height="10" fill="black"/><rect x="162" y="176" width="10" height="10" fill="black"/>
+            <rect x="78" y="12" width="10" height="10" fill="black" />
+            <rect x="92" y="12" width="10" height="10" fill="black" />
+            <rect x="106" y="12" width="10" height="10" fill="black" />
+            <rect x="78" y="26" width="10" height="10" fill="black" />
+            <rect x="106" y="26" width="10" height="10" fill="black" />
+            <rect x="92" y="40" width="10" height="10" fill="black" />
+            <rect x="78" y="54" width="10" height="10" fill="black" />
+            <rect x="92" y="54" width="10" height="10" fill="black" />
+            <rect x="106" y="54" width="10" height="10" fill="black" />
+            <rect x="12" y="78" width="10" height="10" fill="black" />
+            <rect x="26" y="78" width="10" height="10" fill="black" />
+            <rect x="40" y="92" width="10" height="10" fill="black" />
+            <rect x="12" y="106" width="10" height="10" fill="black" />
+            <rect x="40" y="106" width="10" height="10" fill="black" />
+            <rect x="78" y="78" width="10" height="10" fill="black" />
+            <rect x="92" y="78" width="10" height="10" fill="black" />
+            <rect x="106" y="78" width="10" height="10" fill="black" />
+            <rect x="120" y="78" width="10" height="10" fill="black" />
+            <rect x="78" y="92" width="10" height="10" fill="black" />
+            <rect x="106" y="92" width="10" height="10" fill="black" />
+            <rect x="134" y="92" width="10" height="10" fill="black" />
+            <rect x="78" y="106" width="10" height="10" fill="black" />
+            <rect x="92" y="106" width="10" height="10" fill="black" />
+            <rect x="120" y="106" width="10" height="10" fill="black" />
+            <rect x="132" y="78" width="10" height="10" fill="black" />
+            <rect x="148" y="78" width="10" height="10" fill="black" />
+            <rect x="162" y="78" width="10" height="10" fill="black" />
+            <rect x="176" y="78" width="10" height="10" fill="black" />
+            <rect x="132" y="92" width="10" height="10" fill="black" />
+            <rect x="162" y="92" width="10" height="10" fill="black" />
+            <rect x="176" y="92" width="10" height="10" fill="black" />
+            <rect x="148" y="106" width="10" height="10" fill="black" />
+            <rect x="176" y="106" width="10" height="10" fill="black" />
+            <rect x="78" y="120" width="10" height="10" fill="black" />
+            <rect x="92" y="120" width="10" height="10" fill="black" />
+            <rect x="78" y="134" width="10" height="10" fill="black" />
+            <rect x="106" y="134" width="10" height="10" fill="black" />
+            <rect x="134" y="134" width="10" height="10" fill="black" />
+            <rect x="78" y="148" width="10" height="10" fill="black" />
+            <rect x="92" y="148" width="10" height="10" fill="black" />
+            <rect x="106" y="148" width="10" height="10" fill="black" />
+            <rect x="134" y="148" width="10" height="10" fill="black" />
+            <rect x="148" y="132" width="10" height="10" fill="black" />
+            <rect x="162" y="132" width="10" height="10" fill="black" />
+            <rect x="176" y="132" width="10" height="10" fill="black" />
+            <rect x="148" y="148" width="10" height="10" fill="black" />
+            <rect x="176" y="148" width="10" height="10" fill="black" />
+            <rect x="162" y="162" width="10" height="10" fill="black" />
+            <rect x="148" y="176" width="10" height="10" fill="black" />
+            <rect x="162" y="176" width="10" height="10" fill="black" />
             <!-- Center highlight -->
-            <rect x="88" y="88" width="24" height="24" rx="4" fill="black"/>
-            <rect x="92" y="92" width="16" height="16" rx="2" fill="white"/>
-            <rect x="95" y="95" width="10" height="10" rx="2" id="qrCenter" fill="#0068FF"/>
+            <rect x="88" y="88" width="24" height="24" rx="4" fill="black" />
+            <rect x="92" y="92" width="16" height="16" rx="2" fill="white" />
+            <rect x="95" y="95" width="10" height="10" rx="2" id="qrCenter" fill="#0068FF" />
           </svg>
         </div>
         <div class="modal-amt-label">Захиалгын дүн</div>
@@ -1060,7 +1507,8 @@
       <div class="modal-body">
         <div style="font-size:48px; margin-bottom:12px">💵</div>
         <div style="font-size:16px; font-weight:700; margin-bottom:8px">Хүргэлтийн үед жолоочид өгнө</div>
-        <div style="font-size:13px; color:#aaa; margin-bottom:20px">Жолооч хүргэлт хийхдээ таниас төлбөрийг хүлээн авна.</div>
+        <div style="font-size:13px; color:#aaa; margin-bottom:20px">Жолооч хүргэлт хийхдээ таниас төлбөрийг хүлээн авна.
+        </div>
         <div class="modal-amt-label">Нийт дүн</div>
         <div class="modal-amt" id="cashAmt">0₮</div>
       </div>
@@ -1089,31 +1537,31 @@
     if (me.email) document.getElementById("email").value = me.email;
 
     const subtotal = cart.reduce((s, p) => s + p.newPrice * (p.qty || 1), 0);
-    const ecoFee   = 380;
-    const delFee   = 5000;
-    const total    = subtotal + delFee + ecoFee;
+    const ecoFee = 380;
+    const delFee = 5000;
+    const total = subtotal + delFee + ecoFee;
 
     // Sidebar items
     document.getElementById("sideItems").innerHTML = cart.map(p => `
       <div class="s-item">
         <img src="${p.image}" alt="${p.name}" onerror="this.style.background='#eee'">
         <div style="flex:1;min-width:0">
-          <div class="s-item-name">${p.name}</div>
+          <div class="s-item-name">${p.name}${p.size ? ` <span style="color:#999;font-weight:400">· ${p.size}</span>` : ''}</div>
           <div class="s-item-qty">x${p.qty || 1}</div>
         </div>
         <div class="s-item-price">${formatPrice(p.newPrice * (p.qty || 1))}</div>
       </div>`).join("");
 
     document.getElementById("sideProdRows").innerHTML = cart.map(p =>
-      `<div class="s-row"><span>${p.name.slice(0,22)}... x${p.qty||1}</span><span>${formatPrice(p.newPrice*(p.qty||1))}</span></div>`
+      `<div class="s-row"><span>${p.name.slice(0, 22)}${p.size ? ' (' + p.size + ')' : ''} x${p.qty || 1}</span><span>${formatPrice(p.newPrice * (p.qty || 1))}</span></div>`
     ).join("");
     document.getElementById("sideTotal").textContent = formatPrice(total);
-    document.getElementById("modalAmt").textContent  = formatPrice(total);
+    document.getElementById("modalAmt").textContent = formatPrice(total);
     document.getElementById("cardPayAmt").textContent = formatPrice(total);
-    document.getElementById("cashAmt").textContent   = formatPrice(total);
+    document.getElementById("cashAmt").textContent = formatPrice(total);
 
     // Confirm step fill
-    window._fillConfirm = function() {
+    window._fillConfirm = function () {
       const fn = document.getElementById("fname").value;
       const ln = document.getElementById("lname").value;
       const ph = document.getElementById("phone").value;
@@ -1121,7 +1569,7 @@
       const bl = document.getElementById("building").value;
       const ap = document.getElementById("apartment").value;
       const rc = document.querySelector('input[name="receipt"]:checked').value;
-      const rcLabel = { individual:"Хувь хүн", org:"Албан байгуллага", taxpayer:"Татвар төлөгч иргэн" }[rc];
+      const rcLabel = { individual: "Хувь хүн", org: "Албан байгуллага", taxpayer: "Татвар төлөгч иргэн" }[rc];
 
       let addrStr;
       if (locType === "ub") {
@@ -1134,10 +1582,10 @@
         addrStr = `${ai} аймаг, ${su} сум, ${bl}, ${ap} тоот`;
       }
 
-      document.getElementById("cnfItemCount").textContent = cart.reduce((s,p)=>s+(p.qty||1),0);
-      document.getElementById("cnfCustomer").textContent  = `${fn} ${ln} — ${rcLabel}`;
-      document.getElementById("cnfAddress").textContent   = addrStr;
-      document.getElementById("cnfContact").textContent   = `${ph}  ·  ${em}`;
+      document.getElementById("cnfItemCount").textContent = cart.reduce((s, p) => s + (p.qty || 1), 0);
+      document.getElementById("cnfCustomer").textContent = `${fn} ${ln} — ${rcLabel}`;
+      document.getElementById("cnfAddress").textContent = addrStr;
+      document.getElementById("cnfContact").textContent = `${ph}  ·  ${em}`;
 
       const notes = getSelectedNotes();
       document.getElementById("cnfNotesRow").style.display = notes.length ? "" : "none";
@@ -1146,15 +1594,15 @@
       document.getElementById("cnfThumbs").innerHTML = cart.map(p => `
         <div class="confirm-thumb">
           <img src="${p.image}" alt="${p.name}" onerror="this.style.background='#eee'">
-          <div class="confirm-thumb-badge">x${p.qty||1}</div>
+          <div class="confirm-thumb-badge">x${p.qty || 1}</div>
         </div>`).join("");
     };
 
     function getSelectedNotes() {
       const map = {
-        "note-baby":    "Нялх хүүхэдтэй",
-        "note-call":    "Хүргэхийн өмнө заавал залгах",
-        "note-door":    "Хаалганы ард орхино уу",
+        "note-baby": "Нялх хүүхэдтэй",
+        "note-call": "Хүргэхийн өмнө заавал залгах",
+        "note-door": "Хаалганы ард орхино уу",
         "note-contact": "Хөрш рүү залгах боломжтой"
       };
       return Object.entries(map)
@@ -1163,23 +1611,23 @@
     }
 
     // Save & go to tracking
-    window._placeOrder = async function(payMethod) {
+    window._placeOrder = async function (payMethod) {
       const isUB = locType === "ub";
       const delivery = {
-        name:     (document.getElementById("fname").value + " " + document.getElementById("lname").value).trim(),
-        phone:    document.getElementById("phone").value,
-        email:    document.getElementById("email").value,
+        name: (document.getElementById("fname").value + " " + document.getElementById("lname").value).trim(),
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
         district: isUB ? document.getElementById("district").value : document.getElementById("aimag").value,
-        khoroo:   isUB ? document.getElementById("khoroo").value   : document.getElementById("sum").value,
+        khoroo: isUB ? document.getElementById("khoroo").value : document.getElementById("sum").value,
         building: document.getElementById("building").value,
-        apartment:document.getElementById("apartment").value,
+        apartment: document.getElementById("apartment").value,
         locType,
         notes: getSelectedNotes()
       };
 
       try {
         const order = await apiPlaceOrder({
-          items: cart.map(p => ({ id: p.id, qty: p.qty || 1 })),
+          items: cart.map(p => ({ id: p.id, qty: p.qty || 1, size: p.size || null })),
           delivery,
           payment: payMethod,
           subtotal, delFee, ecoFee
@@ -1201,39 +1649,39 @@
 
     // ── LOCATION DATA ──
     const UB_KHOROOS = {
-      "Баянзүрх":       Array.from({length:30}, (_,i) => `${i+1}-р хороо`),
-      "Сүхбаатар":      Array.from({length:20}, (_,i) => `${i+1}-р хороо`),
-      "Хан-Уул":        Array.from({length:24}, (_,i) => `${i+1}-р хороо`),
-      "Чингэлтэй":      Array.from({length:24}, (_,i) => `${i+1}-р хороо`),
-      "Баянгол":        Array.from({length:27}, (_,i) => `${i+1}-р хороо`),
-      "Сонгинохайрхан": Array.from({length:32}, (_,i) => `${i+1}-р хороо`),
-      "Налайх":         Array.from({length:5},  (_,i) => `${i+1}-р хороо`),
-      "Багануур":       Array.from({length:5},  (_,i) => `${i+1}-р хороо`),
-      "Багахангай":     Array.from({length:3},  (_,i) => `${i+1}-р хороо`),
+      "Баянзүрх": Array.from({ length: 30 }, (_, i) => `${i + 1}-р хороо`),
+      "Сүхбаатар": Array.from({ length: 20 }, (_, i) => `${i + 1}-р хороо`),
+      "Хан-Уул": Array.from({ length: 24 }, (_, i) => `${i + 1}-р хороо`),
+      "Чингэлтэй": Array.from({ length: 24 }, (_, i) => `${i + 1}-р хороо`),
+      "Баянгол": Array.from({ length: 27 }, (_, i) => `${i + 1}-р хороо`),
+      "Сонгинохайрхан": Array.from({ length: 32 }, (_, i) => `${i + 1}-р хороо`),
+      "Налайх": Array.from({ length: 5 }, (_, i) => `${i + 1}-р хороо`),
+      "Багануур": Array.from({ length: 5 }, (_, i) => `${i + 1}-р хороо`),
+      "Багахангай": Array.from({ length: 3 }, (_, i) => `${i + 1}-р хороо`),
     };
 
     const PROVINCE_SUMS = {
-      "Архангай":    ["Эрдэнэбулган","Батцэнгэл","Булган","Цэцэрлэг","Хайрхан","Өгийнуур","Өлзийт","Тариат","Хашаат","Цахир","Жаргалант","Ихтамир","Чулуут","Хотонт","Эрдэнэмандал","Өгийнуур","Их-Тамир"],
-      "Баян-Өлгий": ["Өлгий","Алтай","Баяннуур","Бугат","Булган","Дэлүүн","Цэнгэл","Улаанхус","Толбо","Ногооннуур","Сагсай","Буянт","Цагааннуур"],
-      "Баянхонгор":  ["Баянхонгор","Баацагаан","Богд","Бөмбөгөр","Бүрд","Галуут","Гурванбулаг","Жаргалант","Жинст","Заг","Их-Уул","Нарийнтээл","Өлзийт","Хүрээмарал","Цэцэг","Шинэжинст","Эрдэнэцогт","Баянбулаг","Баянговь","Баянлиг"],
-      "Булган":      ["Булган","Баяннуур","Бүрэгхангай","Гурванбулаг","Дашинчилэн","Жаргалант","Могод","Орхон","Рашаант","Сайхан","Тэшиг","Хангал","Хутаг-Өндөр","Хялганат","Цэцэрлэг","Баян-Агт"],
-      "Говь-Алтай":  ["Алтай","Баян-Уул","Бигэр","Бугат","Дарив","Делгэр","Есөнбулаг","Жаргалан","Халиун","Хөхморьт","Цогт","Тайшир","Тонхил","Төгрөг","Шарга","Эрдэнэ","Чандмань"],
-      "Говьсүмбэр":  ["Чойр","Баянтал","Шивээговь"],
-      "Дархан-Уул":  ["Дархан","Орхон","Хонгор","Шарын гол"],
-      "Дорноговь":   ["Сайншанд","Айраг","Алтанширээ","Дэлгэрэх","Замын-Үүд","Их-Хэт","Мандах","Өргөн","Сайхандулаан","Улаанбадрах","Хатанбулаг","Хөвсгөл","Эрдэнэ"],
-      "Дорнод":      ["Чойбалсан","Баян-Уул","Баяндун","Баянтүмэн","Булган","Гурванзагал","Дашбалбар","Матад","Сэргэлэн","Халхгол","Хэрлэн","Цагаан-Овоо","Чулуунхороот"],
-      "Дундговь":    ["Мандалговь","Адаацаг","Баянжаргалан","Гурвансайхан","Дэлгэрхангай","Дэлгэрцогт","Дэлгэр","Луус","Өлзийт","Сайхандулаан","Сайнцагаан","Хулд","Цагаандэлгэр","Эрдэнэдалай"],
-      "Завхан":      ["Улиастай","Алдархаан","Асгат","Баянтэс","Дөрвөлжин","Завханмандал","Идэр","Их-Уул","Нөмрөг","Отгон","Санжит","Сонгино","Тэлмэн","Тосонцэнгэл","Түдэвтэй","Ургамал","Цагаанхайрхан","Цэцэн-Уул","Шилүүстэй","Эрдэнэхайрхан","Яруу"],
-      "Орхон":       ["Эрдэнэт","Баян-Өндөр"],
-      "Өвөрхангай":  ["Арвайхээр","Баруунбаян-Улаан","Бат-Өлзий","Баян-Өндөр","Баянгол","Богд","Бүрд","Гучин-Ус","Есөнзүйл","Зүүнбаян-Улаан","Нарийнтээл","Өлзийт","Сант","Тарагт","Төгрөг","Уянга","Хархорин","Хужирт"],
-      "Өмнөговь":   ["Даланзадгад","Баян-Овоо","Булган","Гурвантэс","Мандал-Овоо","Манлай","Ноён","Номгон","Сэврэй","Хүрмэн","Цогт-Овоо","Цогтцэций","Ханбогд","Баяндалай","Мандах"],
-      "Сэлэнгэ":    ["Сүхбаатар","Алтанбулаг","Баянгол","Ерөө","Жавхлант","Зүүнбүрэн","Мандал","Орхонтуул","Сайхан","Сант","Түшиг","Хушаат","Хүдэр","Цагааннуур","Шаамар","Орхон"],
-      "Сүхбаатар":  ["Баруун-Урт","Асгат","Баяндэлгэр","Дарьганга","Мөнххаан","Наран","Онгон","Түвшинширээ","Уулбаян","Халзан","Эрдэнэцагаан"],
-      "Төв":        ["Зуунмод","Алтанбулаг","Аргалант","Архуст","Батсүмбэр","Баян","Баянбарат","Баянжаргалан","Баян-Өнжүүл","Баяндэлгэр","Борнуур","Бүрэн","Дэлгэрхаан","Жаргалант","Заамар","Лүн","Мөнгөнморьт","Өндөрширээт","Сэргэлэн","Угтаалцайдам","Цээл","Эрдэнэ","Эрдэнэсант"],
-      "Увс":        ["Улаангом","Баруунтуруун","Бөхмөрөн","Давст","Завхан","Зүүнговь","Зүүнхангай","Малчин","Наранбулаг","Өмнөговь","Өндөрхангай","Сагил","Тариалан","Тэс","Түргэн","Хяргас","Цагаанхайрхан"],
-      "Ховд":       ["Ховд","Алтай","Буянт","Дарви","Дөргөн","Зэрэг","Манхан","Мөнххайрхан","Мянгад","Үенч","Цэцэг","Чандмань","Эрдэнэбүрэн","Жаргалант","Дуут","Булган"],
-      "Хөвсгөл":   ["Мөрөн","Алаг-Эрдэнэ","Арбулаг","Баянзүрх","Бүрэнтогтох","Галт","Жаргалант","Их-Уул","Рашаант","Рэнчинлхүмбэ","Тариалан","Тосонцэнгэл","Түнэл","Улаан-Уул","Цагааннуур","Цэцэрлэг","Чандмань-Өндөр","Цагаан-Уул","Ханх","Эрдэнэбулган"],
-      "Хэнтий":    ["Чингис","Батноров","Батширээт","Биндэр","Галшар","Дадал","Дэлгэрхаан","Жаргалтхаан","Мөрөн","Норовлин","Өмнөдэлгэр","Баян-Адрага","Баян-Овоо","Баянмөнх","Баяндун","Цэнхэрмандал","Эрдэнэцагаан","Хэрлэн"],
+      "Архангай": ["Эрдэнэбулган", "Батцэнгэл", "Булган", "Цэцэрлэг", "Хайрхан", "Өгийнуур", "Өлзийт", "Тариат", "Хашаат", "Цахир", "Жаргалант", "Ихтамир", "Чулуут", "Хотонт", "Эрдэнэмандал", "Өгийнуур", "Их-Тамир"],
+      "Баян-Өлгий": ["Өлгий", "Алтай", "Баяннуур", "Бугат", "Булган", "Дэлүүн", "Цэнгэл", "Улаанхус", "Толбо", "Ногооннуур", "Сагсай", "Буянт", "Цагааннуур"],
+      "Баянхонгор": ["Баянхонгор", "Баацагаан", "Богд", "Бөмбөгөр", "Бүрд", "Галуут", "Гурванбулаг", "Жаргалант", "Жинст", "Заг", "Их-Уул", "Нарийнтээл", "Өлзийт", "Хүрээмарал", "Цэцэг", "Шинэжинст", "Эрдэнэцогт", "Баянбулаг", "Баянговь", "Баянлиг"],
+      "Булган": ["Булган", "Баяннуур", "Бүрэгхангай", "Гурванбулаг", "Дашинчилэн", "Жаргалант", "Могод", "Орхон", "Рашаант", "Сайхан", "Тэшиг", "Хангал", "Хутаг-Өндөр", "Хялганат", "Цэцэрлэг", "Баян-Агт"],
+      "Говь-Алтай": ["Алтай", "Баян-Уул", "Бигэр", "Бугат", "Дарив", "Делгэр", "Есөнбулаг", "Жаргалан", "Халиун", "Хөхморьт", "Цогт", "Тайшир", "Тонхил", "Төгрөг", "Шарга", "Эрдэнэ", "Чандмань"],
+      "Говьсүмбэр": ["Чойр", "Баянтал", "Шивээговь"],
+      "Дархан-Уул": ["Дархан", "Орхон", "Хонгор", "Шарын гол"],
+      "Дорноговь": ["Сайншанд", "Айраг", "Алтанширээ", "Дэлгэрэх", "Замын-Үүд", "Их-Хэт", "Мандах", "Өргөн", "Сайхандулаан", "Улаанбадрах", "Хатанбулаг", "Хөвсгөл", "Эрдэнэ"],
+      "Дорнод": ["Чойбалсан", "Баян-Уул", "Баяндун", "Баянтүмэн", "Булган", "Гурванзагал", "Дашбалбар", "Матад", "Сэргэлэн", "Халхгол", "Хэрлэн", "Цагаан-Овоо", "Чулуунхороот"],
+      "Дундговь": ["Мандалговь", "Адаацаг", "Баянжаргалан", "Гурвансайхан", "Дэлгэрхангай", "Дэлгэрцогт", "Дэлгэр", "Луус", "Өлзийт", "Сайхандулаан", "Сайнцагаан", "Хулд", "Цагаандэлгэр", "Эрдэнэдалай"],
+      "Завхан": ["Улиастай", "Алдархаан", "Асгат", "Баянтэс", "Дөрвөлжин", "Завханмандал", "Идэр", "Их-Уул", "Нөмрөг", "Отгон", "Санжит", "Сонгино", "Тэлмэн", "Тосонцэнгэл", "Түдэвтэй", "Ургамал", "Цагаанхайрхан", "Цэцэн-Уул", "Шилүүстэй", "Эрдэнэхайрхан", "Яруу"],
+      "Орхон": ["Эрдэнэт", "Баян-Өндөр"],
+      "Өвөрхангай": ["Арвайхээр", "Баруунбаян-Улаан", "Бат-Өлзий", "Баян-Өндөр", "Баянгол", "Богд", "Бүрд", "Гучин-Ус", "Есөнзүйл", "Зүүнбаян-Улаан", "Нарийнтээл", "Өлзийт", "Сант", "Тарагт", "Төгрөг", "Уянга", "Хархорин", "Хужирт"],
+      "Өмнөговь": ["Даланзадгад", "Баян-Овоо", "Булган", "Гурвантэс", "Мандал-Овоо", "Манлай", "Ноён", "Номгон", "Сэврэй", "Хүрмэн", "Цогт-Овоо", "Цогтцэций", "Ханбогд", "Баяндалай", "Мандах"],
+      "Сэлэнгэ": ["Сүхбаатар", "Алтанбулаг", "Баянгол", "Ерөө", "Жавхлант", "Зүүнбүрэн", "Мандал", "Орхонтуул", "Сайхан", "Сант", "Түшиг", "Хушаат", "Хүдэр", "Цагааннуур", "Шаамар", "Орхон"],
+      "Сүхбаатар": ["Баруун-Урт", "Асгат", "Баяндэлгэр", "Дарьганга", "Мөнххаан", "Наран", "Онгон", "Түвшинширээ", "Уулбаян", "Халзан", "Эрдэнэцагаан"],
+      "Төв": ["Зуунмод", "Алтанбулаг", "Аргалант", "Архуст", "Батсүмбэр", "Баян", "Баянбарат", "Баянжаргалан", "Баян-Өнжүүл", "Баяндэлгэр", "Борнуур", "Бүрэн", "Дэлгэрхаан", "Жаргалант", "Заамар", "Лүн", "Мөнгөнморьт", "Өндөрширээт", "Сэргэлэн", "Угтаалцайдам", "Цээл", "Эрдэнэ", "Эрдэнэсант"],
+      "Увс": ["Улаангом", "Баруунтуруун", "Бөхмөрөн", "Давст", "Завхан", "Зүүнговь", "Зүүнхангай", "Малчин", "Наранбулаг", "Өмнөговь", "Өндөрхангай", "Сагил", "Тариалан", "Тэс", "Түргэн", "Хяргас", "Цагаанхайрхан"],
+      "Ховд": ["Ховд", "Алтай", "Буянт", "Дарви", "Дөргөн", "Зэрэг", "Манхан", "Мөнххайрхан", "Мянгад", "Үенч", "Цэцэг", "Чандмань", "Эрдэнэбүрэн", "Жаргалант", "Дуут", "Булган"],
+      "Хөвсгөл": ["Мөрөн", "Алаг-Эрдэнэ", "Арбулаг", "Баянзүрх", "Бүрэнтогтох", "Галт", "Жаргалант", "Их-Уул", "Рашаант", "Рэнчинлхүмбэ", "Тариалан", "Тосонцэнгэл", "Түнэл", "Улаан-Уул", "Цагааннуур", "Цэцэрлэг", "Чандмань-Өндөр", "Цагаан-Уул", "Ханх", "Эрдэнэбулган"],
+      "Хэнтий": ["Чингис", "Батноров", "Батширээт", "Биндэр", "Галшар", "Дадал", "Дэлгэрхаан", "Жаргалтхаан", "Мөрөн", "Норовлин", "Өмнөдэлгэр", "Баян-Адрага", "Баян-Овоо", "Баянмөнх", "Баяндун", "Цэнхэрмандал", "Эрдэнэцагаан", "Хэрлэн"],
     };
 
     // ── LOCATION TYPE TOGGLE ──
@@ -1241,7 +1689,7 @@
       locType = type;
       document.getElementById("btn-ub").classList.toggle("active", type === "ub");
       document.getElementById("btn-province").classList.toggle("active", type === "province");
-      document.getElementById("ub-row").style.display       = type === "ub" ? "" : "none";
+      document.getElementById("ub-row").style.display = type === "ub" ? "" : "none";
       document.getElementById("province-row").style.display = type === "province" ? "" : "none";
       // Reset only the child dropdowns
       setKhorooOptions("khoroo", []);
@@ -1251,7 +1699,7 @@
     function setKhorooOptions(selectId, opts) {
       const sel = document.getElementById(selectId);
       const placeholder = selectId === "khoroo" ? "Эхлээд дүүрэг сонгоно уу" : "Эхлээд аймаг сонгоно уу";
-      sel.innerHTML = `<option value="">${opts.length ? (selectId==="khoroo"?"Хороо сонгох...":"Сум сонгох...") : placeholder}</option>`
+      sel.innerHTML = `<option value="">${opts.length ? (selectId === "khoroo" ? "Хороо сонгох..." : "Сум сонгох...") : placeholder}</option>`
         + opts.map(o => `<option>${o}</option>`).join("");
       sel.disabled = opts.length === 0;
       sel.style.color = opts.length ? "" : "#aaa";
@@ -1284,18 +1732,18 @@
 
       if (locType === "ub") {
         if (!document.getElementById("district").value) { showErr("field-district"); ok = false; }
-        if (!document.getElementById("khoroo").value)   { showErr("field-khoroo");   ok = false; }
+        if (!document.getElementById("khoroo").value) { showErr("field-khoroo"); ok = false; }
       } else {
         if (!document.getElementById("aimag").value) { showErr("field-aimag"); ok = false; }
-        if (!document.getElementById("sum").value)   { showErr("field-sum");   ok = false; }
+        if (!document.getElementById("sum").value) { showErr("field-sum"); ok = false; }
       }
 
-      if (!document.getElementById("building").value.trim())   { showErr("field-building");   ok = false; }
-      if (!document.getElementById("apartment").value.trim())  { showErr("field-apartment");  ok = false; }
-      if (!document.getElementById("fname").value.trim())      { showErr("field-fname");       ok = false; }
-      if (!document.getElementById("lname").value.trim())      { showErr("field-lname");       ok = false; }
-      if (!document.getElementById("phone").value.trim())      { showErr("field-phone");       ok = false; }
-      if (!document.getElementById("email").value.trim())      { showErr("field-email");       ok = false; }
+      if (!document.getElementById("building").value.trim()) { showErr("field-building"); ok = false; }
+      if (!document.getElementById("apartment").value.trim()) { showErr("field-apartment"); ok = false; }
+      if (!document.getElementById("fname").value.trim()) { showErr("field-fname"); ok = false; }
+      if (!document.getElementById("lname").value.trim()) { showErr("field-lname"); ok = false; }
+      if (!document.getElementById("phone").value.trim()) { showErr("field-phone"); ok = false; }
+      if (!document.getElementById("email").value.trim()) { showErr("field-email"); ok = false; }
 
       if (!ok) {
         // Scroll to first error
@@ -1327,24 +1775,24 @@
     }
 
     function sidebarContinue() {
-      if (currentStep === "address")  goStep("confirm");
+      if (currentStep === "address") goStep("confirm");
       else if (currentStep === "confirm") goStep("payment");
     }
 
     // ── PAYMENT METHODS ──
     const payMeta = {
-      qpay:      { title: "QPay",          icon: "QR",    bg: "hsl(210,80%,55%)", inst: "QPay аппаар QR код уншуулна уу" },
-      mbank:     { title: "М банк",        icon: "M",     bg: "hsl(140,55%,35%)", inst: "М банк аппаар QR код уншуулна уу" },
-      storepay:  { title: "Storepay",      icon: "SP",    bg: "hsl(200,80%,50%)", inst: "Storepay аппаар QR код уншуулна уу" },
-      pocket:    { title: "Pocket",        icon: "P",     bg: "hsl(350,75%,55%)", inst: "Pocket аппаар QR код уншуулна уу" },
-      ardpay:    { title: "Ard Pay",       icon: "ARD",   bg: "hsl(350,75%,50%)", inst: "Ard Pay аппаар QR код уншуулна уу" },
-      simple:    { title: "Simple",        icon: "Si",    bg: "hsl(45,90%,52%)", inst: "Simple аппаар QR код уншуулна уу" },
-      socialpay: { title: "Social Pay",    icon: "SP",    bg: "hsl(215,85%,55%)", inst: "SocialPay аппаар QR код уншуулна уу" },
-      toki:      { title: "Toki",          icon: "T",     bg: "hsl(35,90%,50%)", inst: "Toki аппаар QR код уншуулна уу" },
-      hipay:     { title: "Hipay",         icon: "Hi",    bg: "hsl(350,75%,52%)", inst: "Hipay аппаар QR код уншуулна уу" },
-      wechat:    { title: "WeChat Pay",    icon: "W",     bg: "hsl(140,55%,40%)", inst: "WeChat аппаар QR код уншуулна уу" },
-      happypay:  { title: "HappyPay",      icon: "HP",    bg: "hsl(210,75%,50%)", inst: "HappyPay аппаар QR код уншуулна уу" },
-      lenddy:    { title: "LendDy",        icon: "LD",    bg: "hsl(20,80%,52%)", inst: "LendDy аппаар QR код уншуулна уу" },
+      qpay: { title: "QPay", icon: "QR", bg: "hsl(210,80%,55%)", inst: "QPay аппаар QR код уншуулна уу" },
+      mbank: { title: "М банк", icon: "M", bg: "hsl(140,55%,35%)", inst: "М банк аппаар QR код уншуулна уу" },
+      storepay: { title: "Storepay", icon: "SP", bg: "hsl(200,80%,50%)", inst: "Storepay аппаар QR код уншуулна уу" },
+      pocket: { title: "Pocket", icon: "P", bg: "hsl(350,75%,55%)", inst: "Pocket аппаар QR код уншуулна уу" },
+      ardpay: { title: "Ard Pay", icon: "ARD", bg: "hsl(350,75%,50%)", inst: "Ard Pay аппаар QR код уншуулна уу" },
+      simple: { title: "Simple", icon: "Si", bg: "hsl(45,90%,52%)", inst: "Simple аппаар QR код уншуулна уу" },
+      socialpay: { title: "Social Pay", icon: "SP", bg: "hsl(215,85%,55%)", inst: "SocialPay аппаар QR код уншуулна уу" },
+      toki: { title: "Toki", icon: "T", bg: "hsl(35,90%,50%)", inst: "Toki аппаар QR код уншуулна уу" },
+      hipay: { title: "Hipay", icon: "Hi", bg: "hsl(350,75%,52%)", inst: "Hipay аппаар QR код уншуулна уу" },
+      wechat: { title: "WeChat Pay", icon: "W", bg: "hsl(140,55%,40%)", inst: "WeChat аппаар QR код уншуулна уу" },
+      happypay: { title: "HappyPay", icon: "HP", bg: "hsl(210,75%,50%)", inst: "HappyPay аппаар QR код уншуулна уу" },
+      lenddy: { title: "LendDy", icon: "LD", bg: "hsl(20,80%,52%)", inst: "LendDy аппаар QR код уншуулна уу" },
     };
 
     function openModal(type) {
@@ -1391,7 +1839,7 @@
       function tick() {
         const m = Math.floor(s / 60);
         const sec = s % 60;
-        display.textContent = `${String(m).padStart(2,"0")} : ${String(sec).padStart(2,"0")}`;
+        display.textContent = `${String(m).padStart(2, "0")} : ${String(sec).padStart(2, "0")}`;
         if (s <= 0) { clearInterval(timerInterval); closeModal(); }
         s--;
       }
@@ -1405,25 +1853,25 @@
     }
 
     function confirmCardPayment() {
-      const num  = document.getElementById("cNum").value.replace(/\s/g,"");
+      const num = document.getElementById("cNum").value.replace(/\s/g, "");
       const name = document.getElementById("cName").value.trim();
-      const exp  = document.getElementById("cExp").value.trim();
-      const cvv  = document.getElementById("cCvv").value.trim();
+      const exp = document.getElementById("cExp").value.trim();
+      const cvv = document.getElementById("cCvv").value.trim();
       let ok = true;
 
       // Show red border on card fields inline
       const fields = [
-        { el: document.getElementById("cNum"),  valid: num.length >= 16 },
+        { el: document.getElementById("cNum"), valid: num.length >= 16 },
         { el: document.getElementById("cName"), valid: name.length > 0 },
-        { el: document.getElementById("cExp"),  valid: exp.length >= 5 },
-        { el: document.getElementById("cCvv"),  valid: cvv.length >= 3 },
+        { el: document.getElementById("cExp"), valid: exp.length >= 5 },
+        { el: document.getElementById("cCvv"), valid: cvv.length >= 3 },
       ];
       fields.forEach(f => {
         f.el.style.borderColor = f.valid ? "" : "hsl(350,78%,55%)";
-        f.el.style.background  = f.valid ? "" : "hsl(350,100%,98%)";
+        f.el.style.background = f.valid ? "" : "hsl(350,100%,98%)";
         f.el.addEventListener("input", () => {
           f.el.style.borderColor = "";
-          f.el.style.background  = "";
+          f.el.style.background = "";
         }, { once: true });
         if (!f.valid) ok = false;
       });
@@ -1435,22 +1883,22 @@
 
     // Card preview
     function fmtCard(el) {
-      const v = el.value.replace(/\D/g,"").slice(0,16);
+      const v = el.value.replace(/\D/g, "").slice(0, 16);
       el.value = v.match(/.{1,4}/g)?.join(" ") || v;
     }
     function fmtExp(el) {
-      let v = el.value.replace(/\D/g,"").slice(0,4);
-      if (v.length >= 3) v = v.slice(0,2)+"/"+v.slice(2);
+      let v = el.value.replace(/\D/g, "").slice(0, 4);
+      if (v.length >= 3) v = v.slice(0, 2) + "/" + v.slice(2);
       el.value = v;
     }
     function updateCP() {
-      const num  = document.getElementById("cNum").value || "";
+      const num = document.getElementById("cNum").value || "";
       const name = document.getElementById("cName").value || "CARD HOLDER";
-      const exp  = document.getElementById("cExp").value || "MM/YY";
-      const pad  = (num.replace(/ /g,"")+"•".repeat(16)).slice(0,16).replace(/(.{4})/g,"$1 ").trim();
-      document.getElementById("cpNum").textContent  = pad;
+      const exp = document.getElementById("cExp").value || "MM/YY";
+      const pad = (num.replace(/ /g, "") + "•".repeat(16)).slice(0, 16).replace(/(.{4})/g, "$1 ").trim();
+      document.getElementById("cpNum").textContent = pad;
       document.getElementById("cpName").textContent = name.toUpperCase();
-      document.getElementById("cpExp").textContent  = exp;
+      document.getElementById("cpExp").textContent = exp;
     }
   </script>
 </body>

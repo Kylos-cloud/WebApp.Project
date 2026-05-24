@@ -1,16 +1,16 @@
-import { ProductStore }    from "./ProductStore.js";
+import { ProductStore } from "./ProductStore.js";
 import { ProductRenderer } from "./ProductRenderer.js";
-import { API_BASE }        from "../js/store.js";
+import { API_BASE } from "../js/store.js";
 
-const productsEl    = document.getElementById("productsGrid");
-const saleEl        = document.getElementById("saleGrid");
-const brandsEl      = document.getElementById("brandsContainer");
-const statsEl       = document.getElementById("statsBar");
-const searchInput   = document.getElementById("mainSearchInput");
+const productsEl = document.getElementById("productsGrid");
+const saleEl = document.getElementById("saleGrid");
+const brandsEl = document.getElementById("brandsContainer");
+const statsEl = document.getElementById("statsBar");
+const searchInput = document.getElementById("mainSearchInput");
 const searchDropdown = document.getElementById("searchDropdown");
 
 async function loadData() {
-  const res  = await fetch(`${API_BASE}/products/all`);
+  const res = await fetch(`${API_BASE}/products/all`);
   const data = await res.json();
   return data;
 }
@@ -27,10 +27,10 @@ async function init() {
   mainRenderer.renderProducts(store.allProducts);
   mainRenderer.renderBrands(store.allBrands);
   mainRenderer.renderStats({
-    total:         store.allProducts.length,
-    avgRating:     store.getAverageRating(),
+    total: store.allProducts.length,
+    avgRating: store.getAverageRating(),
     totalDiscount: store.getTotalDiscount(),
-    brandNames:    store.getBrandNames()
+    brandNames: store.getBrandNames()
   });
 
 
@@ -43,7 +43,7 @@ async function init() {
   const urlParams = new URLSearchParams(window.location.search);
   const urlCatKey = urlParams.get("category");
   if (urlCatKey) {
-    const urlSubIdx  = urlParams.get("sub");
+    const urlSubIdx = urlParams.get("sub");
     const urlItemIdx = urlParams.get("item");
     const filtered = store.allProducts.filter(p => p.category === urlCatKey);
     mainRenderer.renderProducts(filtered);
@@ -106,13 +106,15 @@ async function init() {
     hideDropdown();
   });
 
-  // ── filter товч ──────────────────────────────────────────
+  // ── filter товч + category зураг дарах ─────────────────
+  // Зөвхөн .filter-btn биш бас .categories хэсгийн зурагтай <a data-filter>
+  // дээр дарахад мөн филтер ажиллаж, #sales хэсэг рүү smooth scroll хийнэ.
   document.addEventListener("click", e => {
-    const btn = e.target.closest(".filter-btn[data-filter]");
+    const btn = e.target.closest("[data-filter]");
     if (!btn) return;
     e.preventDefault();
 
-    const cat      = btn.dataset.filter;
+    const cat = btn.dataset.filter;
     const filtered = cat === "all" ? store.allProducts : store.getByCategory(cat);
     mainRenderer.renderProducts(filtered);
     if (searchInput) searchInput.value = "";
@@ -125,7 +127,13 @@ async function init() {
     if (header) {
       const label = cat === "all" ? "Бүх бараа"
         : data.categories?.find(c => c.id === cat)?.name ?? cat;
-      header.textContent = label;
+      header.textContent = `${label} — ${filtered.length} бараа`;
+    }
+
+    // Хэрэглэгчид доош зөөгдсөн мэдрэмж өгөхийн тулд #sales рүү smooth scroll
+    const salesSection = document.getElementById("sales");
+    if (salesSection) {
+      setTimeout(() => salesSection.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
     }
   });
 

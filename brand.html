@@ -104,8 +104,8 @@
   <script type="module" src="js/searchAll.js"></script>
   <script type="module" src="js/badges.js"></script>
   <script type="module">
-    import { ProductStore } from "./modules/ProductStore.js";
-    import { ProductRenderer } from "./modules/ProductRenderer.js";
+    import { ProductStore } from "./js/modules/ProductStore.js";
+    import { ProductRenderer } from "./js/modules/ProductRenderer.js";
     import { API_BASE } from "./js/store.js";
 
     async function init() {
@@ -118,46 +118,50 @@
         return;
       }
 
-      const res = await fetch(`${API_BASE}/products/all`);
-      const data = await res.json();
-      const store = new ProductStore(data);
+      try {
+        const res = await fetch(`${API_BASE}/products/all`);
+        if (!res.ok) throw new Error("Server алдаа: " + res.status);
+        const data = await res.json();
+        const store = new ProductStore(data);
 
-      // Брэндийн мэдээлэл олох
-      const brandInfo = data.brands.find(
-        b => b.name.toLowerCase() === brandName.toLowerCase()
-      );
+        // Брэндийн мэдээлэл олох (case-insensitive)
+        const brandInfo = data.brands.find(
+          b => b.name.toLowerCase() === brandName.toLowerCase()
+        );
 
-      // Hero хэсэг
-      document.title = `SHOP — ${brandName}`;
-      document.getElementById("brandHero").innerHTML = `
-        ${brandInfo
-          ? `<img class="brand-hero-logo" src="${brandInfo.image}" alt="${brandName}"
-                  onerror="this.style.display='none'">`
-          : ""}
-        <div class="brand-hero-info">
-          <h1>${brandName.toUpperCase()}</h1>
-          <p>${store.allProducts.filter(p =>
-            p.brand.toLowerCase() === brandName.toLowerCase()
-          ).length} бараа</p>
-        </div>`;
+        // Hero хэсэг
+        document.title = `SHOP — ${brandName}`;
+        const matchedProducts = store.allProducts.filter(
+          p => (p.brand || "").toLowerCase() === brandName.toLowerCase()
+        );
 
-      document.getElementById("brandProductTitle").textContent =
-        `${brandName} — бүх бараа`;
+        document.getElementById("brandHero").innerHTML = `
+          ${brandInfo
+            ? `<img class="brand-hero-logo" src="${brandInfo.image}" alt="${brandName}"
+                    onerror="this.style.display='none'">`
+            : ""}
+          <div class="brand-hero-info">
+            <h1>${brandName.toUpperCase()}</h1>
+            <p>${matchedProducts.length} бараа</p>
+          </div>`;
 
-      // Барааг шүүж харуулах
-      const filtered = store.allProducts.filter(
-        p => p.brand.toLowerCase() === brandName.toLowerCase()
-      );
+        document.getElementById("brandProductTitle").textContent =
+          `${brandName} — бүх бараа`;
 
-      const renderer = new ProductRenderer({
-        productsEl: document.getElementById("brandProductsGrid")
-      });
+        const renderer = new ProductRenderer({
+          productsEl: document.getElementById("brandProductsGrid")
+        });
 
-      if (filtered.length === 0) {
+        if (matchedProducts.length === 0) {
+          document.getElementById("brandProductsGrid").innerHTML =
+            `<p class="empty-msg">${brandName} брэндийн бараа олдсонгүй.</p>`;
+        } else {
+          renderer.renderProducts(matchedProducts);
+        }
+      } catch (err) {
+        console.error("Brand хуудас ачаалахад алдаа гарлаа:", err);
         document.getElementById("brandProductsGrid").innerHTML =
-          `<p class="empty-msg">${brandName} брэндийн бараа олдсонгүй.</p>`;
-      } else {
-        renderer.renderProducts(filtered);
+          `<p class="empty-msg">Сервертэй холбогдоход алдаа гарлаа. Дахин оролдоно уу.</p>`;
       }
     }
 

@@ -7,24 +7,27 @@ let _instanceCount = 0;
 
 export class ProductRenderer {
   constructor({ productsEl, brandsEl, categoriesEl, statsEl }) {
-    this.productsEl   = productsEl;
-    this.brandsEl     = brandsEl;
+    this.productsEl = productsEl;
+    this.brandsEl = brandsEl;
     this.categoriesEl = categoriesEl;
-    this.statsEl      = statsEl;
+    this.statsEl = statsEl;
 
     // Тус бүрийн instance-д өөр өөр id өгнө
     this._uid = "lmw_" + (++_instanceCount);
 
     this._currentProducts = [];
-    this._visibleCount    = PAGE_SIZE;
+    this._visibleCount = PAGE_SIZE;
   }
 
   _productCard(p) {
-    const discount   = Math.round(((p.oldPrice - p.newPrice) / p.oldPrice) * 100);
-    const tagHTML    = p.tag
+    const discount = Math.round(((p.oldPrice - p.newPrice) / p.oldPrice) * 100);
+    const tagHTML = p.tag
       ? `<span class="product-tag product-tag--${p.tag}">${p.tag === "sale" ? "SALE" : "NEW"}</span>`
       : "";
-    const stockClass = p.stock > 0 ? "" : "product--outofstock";
+    // stock нь 0 байх ёстой л үед дууссан гэж тооцно. undefined/null бол DB-аас
+    // ачаалагдаагүй гэж үзэж дууссан биш гэж үзнэ.
+    const isOutOfStock = (typeof p.stock === 'number') && p.stock === 0;
+    const stockClass = isOutOfStock ? "product--outofstock" : "";
 
     return `
       <article class="product ${stockClass}" data-id="${p.id}" data-category="${p.category}">
@@ -33,7 +36,7 @@ export class ProductRenderer {
             <img src="${p.image}" alt="${p.name}" loading="lazy"
                  onerror="this.style.display='none'">
             ${tagHTML}
-            ${p.stock === 0 ? `<span class="product-tag product-tag--out">ДУУССАН</span>` : ""}
+            ${isOutOfStock ? `<span class="product-tag product-tag--out">ДУУССАН</span>` : ""}
           </figure>
           <h3>${p.name}</h3>
           <p class="price">
@@ -50,7 +53,7 @@ export class ProductRenderer {
     if (!this.productsEl) return;
 
     this._currentProducts = products;
-    this._visibleCount    = PAGE_SIZE;
+    this._visibleCount = PAGE_SIZE;
     this._removeLoadMore();
 
     if (!products.length) {
@@ -78,7 +81,7 @@ export class ProductRenderer {
       card.style.cssText = "opacity:0;transform:translateY(24px);transition:opacity .35s ease,transform .35s ease";
       this.productsEl.appendChild(card);
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        card.style.opacity   = "1";
+        card.style.opacity = "1";
         card.style.transform = "translateY(0)";
         setTimeout(() => { card.style.cssText = ""; }, 360);
       }));
@@ -105,7 +108,7 @@ export class ProductRenderer {
     this.productsEl.insertAdjacentElement("afterend", wrap);
 
     wrap.querySelector(".load-more-btn")
-        .addEventListener("click", () => this._loadMore());
+      .addEventListener("click", () => this._loadMore());
   }
 
   _removeLoadMore() {

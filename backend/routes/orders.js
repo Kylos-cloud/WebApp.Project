@@ -22,6 +22,7 @@ function rowToOrder(row, items = []) {
       name: i.name,
       image: i.image,
       brand: i.brand,
+      size: i.size || null,
       qty: i.qty,
       newPrice: i.price,
       oldPrice: i.old_price,
@@ -41,7 +42,7 @@ router.post('/', authRequired, async (req, res) => {
 
     const ids = items.map(i => i.id ?? i.product_id);
     const productRows = await client.query(
-      'SELECT id, name, image, brand, new_price, old_price, stock FROM products WHERE id = ANY($1::int[])',
+      'SELECT id, name, image, brand, new_price, old_price, stock, size_stock FROM products WHERE id = ANY($1::int[])',
       [ids]
     );
     const productMap = new Map(productRows.rows.map(p => [p.id, p]));
@@ -51,13 +52,25 @@ router.post('/', authRequired, async (req, res) => {
       const pid = item.id ?? item.product_id;
       const p = productMap.get(pid);
       if (!p) throw new Error(`Product ${pid} not found`);
-      if (p.stock < item.qty) throw new Error(`Not enough stock for ${p.name}`);
+      const size = item.size || null;
+
+      // size_stock JSON-той бөгөөд размер тодорхойлогдсон бол тухайн размерын нөөц шалгана
+      if (size && p.size_stock && typeof p.size_stock === 'object') {
+        const sizeQty = parseInt(p.size_stock[size]) || 0;
+        if (sizeQty < item.qty) {
+          throw new Error(`${p.name} (${size}) размерийн нөөц хүрэхгүй байна (${sizeQty} ширхэг үлдсэн)`);
+        }
+      } else if (p.stock < item.qty) {
+        throw new Error(`${p.name}-ийн нөөц хүрэхгүй байна (${p.stock} ширхэг үлдсэн)`);
+      }
+
       computedSubtotal += p.new_price * item.qty;
       return {
         product_id: pid,
         name: p.name,
         image: p.image,
         brand: p.brand,
+        size,
         qty: item.qty,
         price: p.new_price,
         old_price: p.old_price,
@@ -77,12 +90,28 @@ router.post('/', authRequired, async (req, res) => {
     const itemRows = [];
     for (const e of enriched) {
       const r = await client.query(
-        `INSERT INTO order_items (order_id, product_id, name, image, brand, qty, price, old_price)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-        [order.id, e.product_id, e.name, e.image, e.brand, e.qty, e.price, e.old_price]
+        `INSERT INTO order_items (order_id, product_id, name, image, brand, size, qty, price, old_price)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+        [order.id, e.product_id, e.name, e.image, e.brand, e.size, e.qty, e.price, e.old_price]
       );
       itemRows.push(r.rows[0]);
-      await client.query('UPDATE products SET stock = stock - $1 WHERE id = $2', [e.qty, e.product_id]);
+
+      // Нөөцийг буулгана: size бий бол size_stock-аас, үгүй бол нийтээс
+      if (e.size) {
+        await client.query(
+          `UPDATE products
+             SET size_stock = jsonb_set(
+                   COALESCE(size_stock, '{}'::jsonb),
+                   ARRAY[$1::text],
+                   to_jsonb(GREATEST(0, COALESCE((size_stock->>$1)::int, 0) - $2))
+                 ),
+                 stock = GREATEST(0, stock - $2)
+           WHERE id = $3`,
+          [e.size, e.qty, e.product_id]
+        );
+      } else {
+        await client.query('UPDATE products SET stock = GREATEST(0, stock - $1) WHERE id = $2', [e.qty, e.product_id]);
+      }
     }
 
     await client.query('COMMIT');

@@ -37,6 +37,7 @@ CREATE TABLE products (
   brand TEXT,
   rating NUMERIC(2,1),
   stock INTEGER DEFAULT 0,
+  size_stock JSONB,
   sku TEXT,
   description TEXT
 );
@@ -61,6 +62,7 @@ CREATE TABLE order_items (
   name TEXT NOT NULL,
   image TEXT,
   brand TEXT,
+  size TEXT,
   qty INTEGER NOT NULL,
   price INTEGER NOT NULL,
   old_price INTEGER

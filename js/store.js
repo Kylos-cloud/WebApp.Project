@@ -6,7 +6,7 @@ const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
 export const API_BASE = isLocal ? "http://localhost:3000/api" : PRODUCTION_API;
 
 const TOKEN_KEY = "shop_token";
-const AUTH_KEY  = "shop_current_user";
+const AUTH_KEY = "shop_current_user";
 
 // ── TOKEN ─────────────────────────────────────────────────
 export function getToken() { return localStorage.getItem(TOKEN_KEY); }
@@ -97,34 +97,55 @@ export function isInSaved(productId) {
 // ── CART ──────────────────────────────────────────────────
 export function getCart() { return readArr(userKey("cart")); }
 
-export function addToCart(product) {
+/**
+ * Сагсанд бараа нэмэх
+ * @param {object} product - бүтээгдэхүүний дэлгэрэнгүй
+ * @param {number} qty - нэмэх тоо ширхэг (default 1)
+ * @param {string|null} size - сонгосон размер (хувцас, гутал)
+ *
+ * Хэрэв ижил id+size хослолтой бараа сагсанд байгаа бол qty-г нь нэмнэ.
+ * Өөр размертай бол шинэ мөр болгож нэмнэ.
+ */
+export function addToCart(product, qty = 1, size = null) {
   const key = userKey("cart");
   const list = readArr(key);
-  const existing = list.find(p => p.id === product.id);
+  const addQty = Math.max(1, parseInt(qty) || 1);
+
+  // Ижил id + ижил size бүхий мөрийг хайна
+  const existing = list.find(p => p.id === product.id && (p.size || null) === (size || null));
   if (existing) {
-    existing.qty = (existing.qty || 1) + 1;
+    existing.qty = (existing.qty || 1) + addQty;
   } else {
-    list.push({ ...product, qty: 1 });
+    list.push({ ...product, qty: addQty, size: size || null });
   }
   writeArr(key, list);
 }
 
-export function removeFromCart(productId) {
-  const key = userKey("cart");
-  writeArr(key, readArr(key).filter(p => p.id !== productId));
-}
-
-export function updateCartQty(productId, qty) {
+/**
+ * Сагснаас тодорхой мөрийг устгах. size өгсөн бол ижил size-тай мөрийг л устгана.
+ */
+export function removeFromCart(productId, size = null) {
   const key = userKey("cart");
   const list = readArr(key);
-  const item = list.find(p => p.id === productId);
+  const filtered = list.filter(p => {
+    if (p.id !== productId) return true;
+    if (size === null) return false; // size заагаагүй бол id-аар бүгдийг устгана
+    return (p.size || null) !== size;
+  });
+  writeArr(key, filtered);
+}
+
+export function updateCartQty(productId, qty, size = null) {
+  const key = userKey("cart");
+  const list = readArr(key);
+  const item = list.find(p => p.id === productId && (size === null || (p.size || null) === size));
   if (item) { item.qty = Math.max(1, qty); writeArr(key, list); }
 }
 
 export function clearCart() { writeArr(userKey("cart"), []); }
 
-export function isInCart(productId) {
-  return getCart().some(p => p.id === productId);
+export function isInCart(productId, size = null) {
+  return getCart().some(p => p.id === productId && (size === null || (p.size || null) === size));
 }
 
 export function getCartTotal() {
