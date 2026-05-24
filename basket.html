@@ -335,7 +335,17 @@
     <script type="module" src="js/searchAll.js"></script>
     <script type="module" src="js/badges.js"></script>
     <script type="module">
-        import { getMe, getCart, removeFromCart, updateCartQty, formatPrice } from "./js/store.js";
+        import { getMe, getCart, removeFromCart, updateCartQty, formatPrice, formatVariant, variantKey } from "./js/store.js";
+
+        // Row is identified by (productId, variantAttrs). We use the same key
+        // we send into the cart so this stays consistent if more attrs appear.
+        function rowKey(id, attrs) { return `${id}__${variantKey(attrs)}`; }
+
+        // Indexed lookup so onclick handlers don't need to encode arbitrary attrs into HTML.
+        // MUST be declared before renderCart() is invoked — renderCart reassigns it,
+        // and a `let` in temporal-dead-zone would throw mid-render and leave the
+        // page stuck with the summary visible but no items (exactly the bug we hit).
+        let rowIndex = new Map();
 
         // Auth guard
         const me = getMe();
@@ -353,11 +363,14 @@
             renderCart();
         }
 
-        // Сагсны мөрийг id+size-аар онцлох (ижил бараа өөр размераар тус тусдаа мөр болно)
-        function rowKey(id, size) { return `${id}__${size || ''}`; }
-
         function renderCart() {
-            const cart = getCart();
+            // Drop any rows missing the basics we need to render — these can creep
+            // in from older cart shapes (pre-variant) or interrupted writes. Without
+            // this filter the row would render as a sliver of empty HTML and the
+            // page ends up looking blank with only the summary sidebar visible.
+            const cart = getCart().filter(p =>
+                p && typeof p.id === "number" && typeof p.newPrice === "number" && p.name
+            );
             const itemsEl = document.getElementById("cartItems");
             const emptyEl = document.getElementById("cartEmpty");
             const layoutEl = document.getElementById("cartLayout");
@@ -371,26 +384,28 @@
             emptyEl.style.display = "none";
             layoutEl.style.display = "grid";
 
+            rowIndex = new Map();
             itemsEl.innerHTML = cart.map(p => {
-                const sizeAttr = (p.size || '').replace(/"/g, '&quot;');
-                const key = rowKey(p.id, p.size);
-                const sizeLabel = p.size ? ` · Размер ${p.size}` : '';
+                const key = rowKey(p.id, p.variantAttrs);
+                rowIndex.set(key, { id: p.id, attrs: p.variantAttrs || null, newPrice: p.newPrice });
+                const variantStr = formatVariant(p.variantAttrs);
+                const variantLabel = variantStr ? ` · ${variantStr}` : '';
                 return `
         <article class="cart-item" data-key="${key}">
           <img class="cart-item-img" src="${p.image}" alt="${p.name}" onerror="this.style.background='#f0f0f0'">
           <div class="cart-item-info">
             <div>
               <p class="cart-item-name">${p.name}</p>
-              <p class="cart-item-meta">${p.brand}${sizeLabel}</p>
+              <p class="cart-item-meta">${p.brand || ''}${variantLabel}</p>
             </div>
             <div class="cart-item-bottom">
               <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty(${p.id}, '${sizeAttr}', -1)">−</button>
+                <button class="qty-btn" onclick="changeQty('${key}', -1)">−</button>
                 <span class="qty-num" id="qty-${key}">${p.qty || 1}</span>
-                <button class="qty-btn" onclick="changeQty(${p.id}, '${sizeAttr}', 1)">+</button>
+                <button class="qty-btn" onclick="changeQty('${key}', 1)">+</button>
               </div>
               <span class="cart-item-price">${formatPrice(p.newPrice * (p.qty || 1))}</span>
-              <button class="cart-item-remove" onclick="removeItem(${p.id}, '${sizeAttr}')">✕</button>
+              <button class="cart-item-remove" onclick="removeItem('${key}')">✕</button>
             </div>
           </div>
         </article>`;
@@ -399,21 +414,26 @@
             updateTotals();
         }
 
+        function getValidCart() {
+            return getCart().filter(p =>
+                p && typeof p.id === "number" && typeof p.newPrice === "number" && p.name
+            );
+        }
+
         function updateTotals() {
-            const cart = getCart();
-            const subtotal = cart.reduce((s, p) => s + p.newPrice * (p.qty || 1), 0);
+            const subtotal = getValidCart().reduce((s, p) => s + p.newPrice * (p.qty || 1), 0);
             document.getElementById("subtotal").textContent = formatPrice(subtotal);
             document.getElementById("total").textContent = formatPrice(subtotal + 5000);
         }
 
-        window.changeQty = function (id, size, delta) {
-            const sizeKey = size || null;
+        window.changeQty = function (key, delta) {
+            const row = rowIndex.get(key);
+            if (!row) return;
             const cart = getCart();
-            const item = cart.find(p => p.id === id && (p.size || null) === sizeKey);
+            const item = cart.find(p => p.id === row.id && rowKey(p.id, p.variantAttrs) === key);
             if (!item) return;
             const newQty = Math.max(1, (item.qty || 1) + delta);
-            updateCartQty(id, newQty, sizeKey);
-            const key = rowKey(id, size);
+            updateCartQty(row.id, newQty, row.attrs);
             const qtyEl = document.getElementById(`qty-${key}`);
             if (qtyEl) qtyEl.textContent = newQty;
             const article = document.querySelector(`.cart-item[data-key="${key}"]`);
@@ -421,15 +441,16 @@
             updateTotals();
         };
 
-        window.removeItem = function (id, size) {
-            const key = rowKey(id, size);
+        window.removeItem = function (key) {
+            const row = rowIndex.get(key);
+            if (!row) return;
             const article = document.querySelector(`.cart-item[data-key="${key}"]`);
             if (article) {
                 article.style.transition = "opacity 0.3s ease, transform 0.3s ease";
                 article.style.opacity = "0";
                 article.style.transform = "translateX(20px)";
                 setTimeout(() => {
-                    removeFromCart(id, size || null);
+                    removeFromCart(row.id, row.attrs);
                     renderCart();
                 }, 300);
             }

@@ -1521,7 +1521,7 @@
 
   <script type="module" src="js/badges.js"></script>
   <script type="module">
-    import { getMe, getCart, clearCart, apiPlaceOrder, formatPrice } from "./js/store.js";
+    import { getMe, getCart, clearCart, apiPlaceOrder, formatPrice, formatVariant } from "./js/store.js";
 
     const me = getMe();
     if (!me) location.href = "login.html";
@@ -1542,19 +1542,23 @@
     const total = subtotal + delFee + ecoFee;
 
     // Sidebar items
-    document.getElementById("sideItems").innerHTML = cart.map(p => `
+    document.getElementById("sideItems").innerHTML = cart.map(p => {
+      const variantStr = formatVariant(p.variantAttrs);
+      return `
       <div class="s-item">
         <img src="${p.image}" alt="${p.name}" onerror="this.style.background='#eee'">
         <div style="flex:1;min-width:0">
-          <div class="s-item-name">${p.name}${p.size ? ` <span style="color:#999;font-weight:400">· ${p.size}</span>` : ''}</div>
+          <div class="s-item-name">${p.name}${variantStr ? ` <span style="color:#999;font-weight:400">· ${variantStr}</span>` : ''}</div>
           <div class="s-item-qty">x${p.qty || 1}</div>
         </div>
         <div class="s-item-price">${formatPrice(p.newPrice * (p.qty || 1))}</div>
-      </div>`).join("");
+      </div>`;
+    }).join("");
 
-    document.getElementById("sideProdRows").innerHTML = cart.map(p =>
-      `<div class="s-row"><span>${p.name.slice(0, 22)}${p.size ? ' (' + p.size + ')' : ''} x${p.qty || 1}</span><span>${formatPrice(p.newPrice * (p.qty || 1))}</span></div>`
-    ).join("");
+    document.getElementById("sideProdRows").innerHTML = cart.map(p => {
+      const variantStr = formatVariant(p.variantAttrs);
+      return `<div class="s-row"><span>${p.name.slice(0, 22)}${variantStr ? ' (' + variantStr + ')' : ''} x${p.qty || 1}</span><span>${formatPrice(p.newPrice * (p.qty || 1))}</span></div>`;
+    }).join("");
     document.getElementById("sideTotal").textContent = formatPrice(total);
     document.getElementById("modalAmt").textContent = formatPrice(total);
     document.getElementById("cardPayAmt").textContent = formatPrice(total);
@@ -1627,7 +1631,7 @@
 
       try {
         const order = await apiPlaceOrder({
-          items: cart.map(p => ({ id: p.id, qty: p.qty || 1, size: p.size || null })),
+          items: cart.map(p => ({ id: p.id, qty: p.qty || 1, variantAttrs: p.variantAttrs || null })),
           delivery,
           payment: payMethod,
           subtotal, delFee, ecoFee

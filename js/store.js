@@ -95,57 +95,75 @@ export function isInSaved(productId) {
 }
 
 // ── CART ──────────────────────────────────────────────────
+// Cart rows are keyed by (productId, variantAttrs). variantAttrs is a JSON
+// object like {color:"Black", storage:"128GB"} or null for variant-less products.
+
 export function getCart() { return readArr(userKey("cart")); }
 
+// Stable serialization of a variant attrs object — used to key cart rows.
+export function variantKey(attrs) {
+  if (!attrs) return "";
+  const keys = Object.keys(attrs).sort();
+  return keys.map(k => `${k}=${attrs[k]}`).join("|");
+}
+
+function sameVariant(a, b) {
+  return variantKey(a) === variantKey(b);
+}
+
 /**
- * Сагсанд бараа нэмэх
- * @param {object} product - бүтээгдэхүүний дэлгэрэнгүй
- * @param {number} qty - нэмэх тоо ширхэг (default 1)
- * @param {string|null} size - сонгосон размер (хувцас, гутал)
- *
- * Хэрэв ижил id+size хослолтой бараа сагсанд байгаа бол qty-г нь нэмнэ.
- * Өөр размертай бол шинэ мөр болгож нэмнэ.
+ * Add to cart.
+ * @param {object} product - product object (with id, name, newPrice, image, brand)
+ * @param {number} qty
+ * @param {object|null} variantAttrs - e.g. {size:"M", color:"Black"} or null
+ * @param {number} unitPrice - effective price after priceDelta. Falls back to product.newPrice.
+ * @param {string|null} variantImage - per-variant photo (e.g. the chosen color); falls back to product.image.
  */
-export function addToCart(product, qty = 1, size = null) {
+export function addToCart(product, qty = 1, variantAttrs = null, unitPrice = null, variantImage = null) {
   const key = userKey("cart");
   const list = readArr(key);
   const addQty = Math.max(1, parseInt(qty) || 1);
+  const price = unitPrice ?? product.newPrice;
+  const image = variantImage || product.image;
 
-  // Ижил id + ижил size бүхий мөрийг хайна
-  const existing = list.find(p => p.id === product.id && (p.size || null) === (size || null));
+  const existing = list.find(p => p.id === product.id && sameVariant(p.variantAttrs, variantAttrs));
   if (existing) {
     existing.qty = (existing.qty || 1) + addQty;
+    // Refresh price/image in case priceDelta or variant photo changed
+    existing.newPrice = price;
+    existing.image = image;
   } else {
-    list.push({ ...product, qty: addQty, size: size || null });
+    list.push({
+      id: product.id,
+      name: product.name,
+      image,
+      brand: product.brand,
+      newPrice: price,
+      oldPrice: product.oldPrice,
+      variantAttrs: variantAttrs || null,
+      qty: addQty,
+    });
   }
   writeArr(key, list);
 }
 
-/**
- * Сагснаас тодорхой мөрийг устгах. size өгсөн бол ижил size-тай мөрийг л устгана.
- */
-export function removeFromCart(productId, size = null) {
+export function removeFromCart(productId, variantAttrs = null) {
   const key = userKey("cart");
   const list = readArr(key);
-  const filtered = list.filter(p => {
-    if (p.id !== productId) return true;
-    if (size === null) return false; // size заагаагүй бол id-аар бүгдийг устгана
-    return (p.size || null) !== size;
-  });
-  writeArr(key, filtered);
+  writeArr(key, list.filter(p => !(p.id === productId && sameVariant(p.variantAttrs, variantAttrs))));
 }
 
-export function updateCartQty(productId, qty, size = null) {
+export function updateCartQty(productId, qty, variantAttrs = null) {
   const key = userKey("cart");
   const list = readArr(key);
-  const item = list.find(p => p.id === productId && (size === null || (p.size || null) === size));
+  const item = list.find(p => p.id === productId && sameVariant(p.variantAttrs, variantAttrs));
   if (item) { item.qty = Math.max(1, qty); writeArr(key, list); }
 }
 
 export function clearCart() { writeArr(userKey("cart"), []); }
 
-export function isInCart(productId, size = null) {
-  return getCart().some(p => p.id === productId && (size === null || (p.size || null) === size));
+export function isInCart(productId, variantAttrs = null) {
+  return getCart().some(p => p.id === productId && sameVariant(p.variantAttrs, variantAttrs));
 }
 
 export function getCartTotal() {
@@ -179,4 +197,10 @@ export async function apiPlaceOrder(payload) {
 // ── UTILITY ───────────────────────────────────────────────
 export function formatPrice(n) {
   return (n ?? 0).toLocaleString("mn-MN") + "₮";
+}
+
+// Pretty-print variant attrs for UI: {size:"M", color:"Black"} → "M · Black"
+export function formatVariant(attrs) {
+  if (!attrs) return "";
+  return Object.values(attrs).filter(v => v != null && v !== "").join(" · ");
 }

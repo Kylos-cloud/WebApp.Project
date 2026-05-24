@@ -29,28 +29,28 @@ async function main() {
   }
   console.log(`Inserted ${data.brands.length} brands.`);
 
+  let variantCount = 0;
   for (const p of data.products) {
-    // sizeStock талбар JSON хэлбэрээр хадгална (хэрэв бичсэн бол).
-    const sizeStockJson = p.sizeStock ? JSON.stringify(p.sizeStock) : null;
+    const variantOptsJson = p.variantOptions ? JSON.stringify(p.variantOptions) : null;
     await db.query(
       `INSERT INTO products
-         (id, name, category, tag, image, old_price, new_price, brand, rating, stock, size_stock)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-       ON CONFLICT (id) DO UPDATE SET
-         name       = EXCLUDED.name,
-         category   = EXCLUDED.category,
-         tag        = EXCLUDED.tag,
-         image      = EXCLUDED.image,
-         old_price  = EXCLUDED.old_price,
-         new_price  = EXCLUDED.new_price,
-         brand      = EXCLUDED.brand,
-         rating     = EXCLUDED.rating,
-         stock      = EXCLUDED.stock,
-         size_stock = EXCLUDED.size_stock`,
-      [p.id, p.name, p.category, p.tag, p.image, p.oldPrice, p.newPrice, p.brand, p.rating, p.stock, sizeStockJson]
+         (id, name, category, tag, image, old_price, new_price, brand, rating, stock, variant_options)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
+      [p.id, p.name, p.category, p.tag, p.image, p.oldPrice, p.newPrice, p.brand, p.rating, p.stock, variantOptsJson]
     );
+
+    if (Array.isArray(p.variants)) {
+      for (const v of p.variants) {
+        await db.query(
+          `INSERT INTO product_variants (product_id, attrs, stock, price_delta, image)
+           VALUES ($1, $2, $3, $4, $5)`,
+          [p.id, JSON.stringify(v.attrs), v.stock || 0, v.priceDelta || 0, v.image || null]
+        );
+        variantCount++;
+      }
+    }
   }
-  console.log(`Inserted ${data.products.length} products.`);
+  console.log(`Inserted ${data.products.length} products and ${variantCount} variants.`);
 
   await db.query(
     `SELECT setval('products_id_seq', (SELECT MAX(id) FROM products));

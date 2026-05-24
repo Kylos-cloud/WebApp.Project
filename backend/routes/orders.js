@@ -19,15 +19,24 @@ function rowToOrder(row, items = []) {
     items: items.map(i => ({
       id: i.product_id,
       product_id: i.product_id,
+      variant_id: i.variant_id,
+      variantAttrs: i.variant_attrs || null,
       name: i.name,
       image: i.image,
       brand: i.brand,
-      size: i.size || null,
       qty: i.qty,
       newPrice: i.price,
       oldPrice: i.old_price,
     })),
   };
+}
+
+// Compare two attr objects for equality (shallow, string values).
+function attrsEqual(a, b) {
+  if (!a || !b) return !a && !b;
+  const ak = Object.keys(a), bk = Object.keys(b);
+  if (ak.length !== bk.length) return false;
+  return ak.every(k => String(a[k]) === String(b[k]));
 }
 
 router.post('/', authRequired, async (req, res) => {
@@ -42,37 +51,65 @@ router.post('/', authRequired, async (req, res) => {
 
     const ids = items.map(i => i.id ?? i.product_id);
     const productRows = await client.query(
-      'SELECT id, name, image, brand, new_price, old_price, stock, size_stock FROM products WHERE id = ANY($1::int[])',
+      'SELECT id, name, image, brand, new_price, old_price, stock FROM products WHERE id = ANY($1::int[])',
       [ids]
     );
     const productMap = new Map(productRows.rows.map(p => [p.id, p]));
+
+    const variantRows = await client.query(
+      'SELECT id, product_id, attrs, stock, price_delta, image FROM product_variants WHERE product_id = ANY($1::int[])',
+      [ids]
+    );
+    const variantsByProduct = new Map();
+    for (const v of variantRows.rows) {
+      if (!variantsByProduct.has(v.product_id)) variantsByProduct.set(v.product_id, []);
+      variantsByProduct.get(v.product_id).push(v);
+    }
 
     let computedSubtotal = 0;
     const enriched = items.map(item => {
       const pid = item.id ?? item.product_id;
       const p = productMap.get(pid);
       if (!p) throw new Error(`Product ${pid} not found`);
-      const size = item.size || null;
 
-      // size_stock JSON-той бөгөөд размер тодорхойлогдсон бол тухайн размерын нөөц шалгана
-      if (size && p.size_stock && typeof p.size_stock === 'object') {
-        const sizeQty = parseInt(p.size_stock[size]) || 0;
-        if (sizeQty < item.qty) {
-          throw new Error(`${p.name} (${size}) размерийн нөөц хүрэхгүй байна (${sizeQty} ширхэг үлдсэн)`);
+      const reqAttrs = item.variantAttrs || null;
+      const productVariants = variantsByProduct.get(pid) || [];
+
+      let variant = null;
+      if (productVariants.length > 0) {
+        // Product has variants — require the client to specify which one.
+        if (!reqAttrs) {
+          throw new Error(`${p.name}: вариант сонгоно уу`);
         }
-      } else if (p.stock < item.qty) {
-        throw new Error(`${p.name}-ийн нөөц хүрэхгүй байна (${p.stock} ширхэг үлдсэн)`);
+        variant = productVariants.find(v => attrsEqual(v.attrs, reqAttrs));
+        if (!variant) {
+          throw new Error(`${p.name}: тохирох вариант олдсонгүй`);
+        }
+        if (variant.stock < item.qty) {
+          const attrStr = Object.values(reqAttrs).join(' / ');
+          throw new Error(`${p.name} (${attrStr})-ийн нөөц хүрэхгүй байна (${variant.stock} ширхэг үлдсэн)`);
+        }
+      } else {
+        // No variants — fall back to top-level stock.
+        if (p.stock < item.qty) {
+          throw new Error(`${p.name}-ийн нөөц хүрэхгүй байна (${p.stock} ширхэг үлдсэн)`);
+        }
       }
 
-      computedSubtotal += p.new_price * item.qty;
+      const unitPrice = p.new_price + (variant ? variant.price_delta || 0 : 0);
+      computedSubtotal += unitPrice * item.qty;
+
       return {
         product_id: pid,
+        variant_id: variant ? variant.id : null,
+        variant_attrs: variant ? variant.attrs : null,
         name: p.name,
-        image: p.image,
+        // Snapshot the variant-specific image when available so order
+        // history always shows the photo the customer was looking at.
+        image: (variant && variant.image) || p.image,
         brand: p.brand,
-        size,
         qty: item.qty,
-        price: p.new_price,
+        price: unitPrice,
         old_price: p.old_price,
       };
     });
@@ -90,27 +127,29 @@ router.post('/', authRequired, async (req, res) => {
     const itemRows = [];
     for (const e of enriched) {
       const r = await client.query(
-        `INSERT INTO order_items (order_id, product_id, name, image, brand, size, qty, price, old_price)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
-        [order.id, e.product_id, e.name, e.image, e.brand, e.size, e.qty, e.price, e.old_price]
+        `INSERT INTO order_items (order_id, product_id, variant_id, variant_attrs, name, image, brand, qty, price, old_price)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+        [order.id, e.product_id, e.variant_id, e.variant_attrs ? JSON.stringify(e.variant_attrs) : null,
+         e.name, e.image, e.brand, e.qty, e.price, e.old_price]
       );
       itemRows.push(r.rows[0]);
 
-      // Нөөцийг буулгана: size бий бол size_stock-аас, үгүй бол нийтээс
-      if (e.size) {
+      // Decrement stock: prefer variant-level, fall back to product-level.
+      if (e.variant_id) {
         await client.query(
-          `UPDATE products
-             SET size_stock = jsonb_set(
-                   COALESCE(size_stock, '{}'::jsonb),
-                   ARRAY[$1::text],
-                   to_jsonb(GREATEST(0, COALESCE((size_stock->>$1)::int, 0) - $2))
-                 ),
-                 stock = GREATEST(0, stock - $2)
-           WHERE id = $3`,
-          [e.size, e.qty, e.product_id]
+          'UPDATE product_variants SET stock = GREATEST(0, stock - $1) WHERE id = $2',
+          [e.qty, e.variant_id]
+        );
+        // Keep aggregate in sync.
+        await client.query(
+          'UPDATE products SET stock = GREATEST(0, stock - $1) WHERE id = $2',
+          [e.qty, e.product_id]
         );
       } else {
-        await client.query('UPDATE products SET stock = GREATEST(0, stock - $1) WHERE id = $2', [e.qty, e.product_id]);
+        await client.query(
+          'UPDATE products SET stock = GREATEST(0, stock - $1) WHERE id = $2',
+          [e.qty, e.product_id]
+        );
       }
     }
 

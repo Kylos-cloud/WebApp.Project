@@ -515,33 +515,65 @@ nav a {
 /*HERO */
 
 .hero {
+  position: relative;
   height: 520px;
-  background: url("../image/hero.webp") center/cover no-repeat;
+  background:
+    linear-gradient(100deg, rgba(15, 15, 20, 0.72) 0%, rgba(15, 15, 20, 0.35) 55%, rgba(15, 15, 20, 0.15) 100%),
+    url("https://images.unsplash.com/photo-1483985988355-763728e1935b?w=2000&q=80&auto=format&fit=crop") center/cover no-repeat;
   display: flex;
   align-items: center;
   padding-left: 120px;
+  color: white;
 }
 
-.hero button {
+.hero-text {
+  max-width: 540px;
+}
+
+.hero-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 18px;
+  letter-spacing: -1px;
+}
+
+.hero-sub {
+  font-size: 16px;
+  line-height: 1.55;
+  margin-bottom: 28px;
+  max-width: 440px;
+  opacity: 0.9;
+}
+
+.hero-cta {
+  display: inline-block;
   padding: 14px 32px;
   border: 2px solid white;
-
-  background: transparent;
-
-  color: white;
-
-  font-size: 16px;
-
+  background: white;
+  color: #111;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   border-radius: 30px;
-
   cursor: pointer;
-
-  transition: 0.3s;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
-.hero button:hover {
-  background: --color-white;
-  color: black;
+.hero-cta:hover {
+  background: transparent;
+  color: white;
+  transform: translateY(-2px);
 }
 
 /*CATEGORIES*/
@@ -1001,8 +1033,11 @@ nav a {
   .icon-search-toggle.hidden { display: none; }
 
   /* HERO */
-  .hero { height: 220px; padding-left: 20px; }
-  .hero button { padding: 10px 22px; font-size: 14px; }
+  .hero { height: 360px; padding-left: 20px; padding-right: 20px; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 2px; margin-bottom: 10px; }
+  .hero-title { font-size: 28px; margin-bottom: 12px; }
+  .hero-sub { font-size: 13px; margin-bottom: 20px; }
+  .hero-cta { padding: 11px 24px; font-size: 12px; }
 
   /* PRODUCTS — 2 columns */
   .products {

@@ -10,7 +10,28 @@
       "newPrice": 60000,
       "brand": "Loewe",
       "rating": 4.5,
-      "stock": 12
+      "stock": 12,
+      "variantOptions": {
+        "size": [
+          "200ml",
+          "500ml"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "200ml"
+          },
+          "stock": 6
+        },
+        {
+          "attrs": {
+            "size": "500ml"
+          },
+          "stock": 6,
+          "priceDelta": 30000
+        }
+      ]
     },
     {
       "id": 2,
@@ -22,7 +43,36 @@
       "newPrice": 390000,
       "brand": "Maison Margiela",
       "rating": 4.8,
-      "stock": 5
+      "stock": 6,
+      "variantOptions": {
+        "size": [
+          "30ml",
+          "50ml",
+          "100ml"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "30ml"
+          },
+          "stock": 2,
+          "priceDelta": -50000
+        },
+        {
+          "attrs": {
+            "size": "50ml"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "100ml"
+          },
+          "stock": 2,
+          "priceDelta": 80000
+        }
+      ]
     },
     {
       "id": 3,
@@ -34,7 +84,36 @@
       "newPrice": 340000,
       "brand": "Byredo",
       "rating": 4.7,
-      "stock": 7
+      "stock": 7,
+      "variantOptions": {
+        "size": [
+          "30ml",
+          "50ml",
+          "100ml"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "30ml"
+          },
+          "stock": 3,
+          "priceDelta": -50000
+        },
+        {
+          "attrs": {
+            "size": "50ml"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "100ml"
+          },
+          "stock": 2,
+          "priceDelta": 80000
+        }
+      ]
     },
     {
       "id": 4,
@@ -46,7 +125,27 @@
       "newPrice": 10,
       "brand": "Acne Studios",
       "rating": 4.6,
-      "stock": 8
+      "stock": 8,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Tan"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Tan"
+          },
+          "stock": 4
+        }
+      ]
     },
     {
       "id": 5,
@@ -58,7 +157,84 @@
       "newPrice": 740000,
       "brand": "Generic",
       "rating": 4.2,
-      "stock": 15
+      "stock": 18,
+      "variantOptions": {
+        "size": [
+          "21\"",
+          "25\"",
+          "29\""
+        ],
+        "color": [
+          "Black",
+          "Navy",
+          "Sand"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "21\"",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "21\"",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "21\"",
+            "color": "Sand"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "25\"",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "25\"",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "25\"",
+            "color": "Sand"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "29\"",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "29\"",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "29\"",
+            "color": "Sand"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 6,
@@ -69,7 +245,7 @@
       "oldPrice": 130000,
       "newPrice": 97000,
       "brand": "Wellness",
-      "rating": 4.0,
+      "rating": 4,
       "stock": 0
     },
     {
@@ -81,8 +257,127 @@
       "oldPrice": 6500000,
       "newPrice": 6100000,
       "brand": "Apple",
-      "rating": 5.0,
-      "stock": 4
+      "rating": 5,
+      "stock": 24,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "White",
+          "Blue",
+          "Natural Titanium"
+        ],
+        "storage": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black",
+            "storage": "128GB"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=iPhone%2017%20Pro%20Max%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Black",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=iPhone%2017%20Pro%20Max%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Black",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=iPhone%2017%20Pro%20Max%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "White",
+            "storage": "128GB"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=iPhone%2017%20Pro%20Max%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "White",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=iPhone%2017%20Pro%20Max%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "White",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=iPhone%2017%20Pro%20Max%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Blue",
+            "storage": "128GB"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a3a8c/ffffff?text=iPhone%2017%20Pro%20Max%0ABlue&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Blue",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000,
+          "image": "https://placehold.co/900x900/1a3a8c/ffffff?text=iPhone%2017%20Pro%20Max%0ABlue&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Blue",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000,
+          "image": "https://placehold.co/900x900/1a3a8c/ffffff?text=iPhone%2017%20Pro%20Max%0ABlue&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Natural Titanium",
+            "storage": "128GB"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/b8b0a8/1a1a1a?text=iPhone%2017%20Pro%20Max%0ANatural%20Titanium&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Natural Titanium",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000,
+          "image": "https://placehold.co/900x900/b8b0a8/1a1a1a?text=iPhone%2017%20Pro%20Max%0ANatural%20Titanium&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Natural Titanium",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000,
+          "image": "https://placehold.co/900x900/b8b0a8/1a1a1a?text=iPhone%2017%20Pro%20Max%0ANatural%20Titanium&font=montserrat"
+        }
+      ]
     },
     {
       "id": 8,
@@ -94,15 +389,184 @@
       "newPrice": 300000,
       "brand": "Generic",
       "rating": 3.9,
-      "stock": 25,
-      "sizeStock": {
-        "XS": 3,
-        "S": 5,
-        "M": 7,
-        "L": 6,
-        "XL": 3,
-        "XXL": 1
-      }
+      "stock": 40,
+      "variantOptions": {
+        "size": [
+          "XS",
+          "S",
+          "M",
+          "L",
+          "XL"
+        ],
+        "color": [
+          "Black",
+          "White",
+          "Beige",
+          "Navy"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=T-Shirt%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=T-Shirt%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Beige"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/d4c5a9/1a1a1a?text=T-Shirt%0ABeige&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Navy"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/0a1f3a/ffffff?text=T-Shirt%0ANavy&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=T-Shirt%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=T-Shirt%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Beige"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/d4c5a9/1a1a1a?text=T-Shirt%0ABeige&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Navy"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/0a1f3a/ffffff?text=T-Shirt%0ANavy&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=T-Shirt%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=T-Shirt%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Beige"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/d4c5a9/1a1a1a?text=T-Shirt%0ABeige&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Navy"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/0a1f3a/ffffff?text=T-Shirt%0ANavy&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=T-Shirt%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=T-Shirt%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Beige"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/d4c5a9/1a1a1a?text=T-Shirt%0ABeige&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Navy"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/0a1f3a/ffffff?text=T-Shirt%0ANavy&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=T-Shirt%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=T-Shirt%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Beige"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/d4c5a9/1a1a1a?text=T-Shirt%0ABeige&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Navy"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/0a1f3a/ffffff?text=T-Shirt%0ANavy&font=montserrat"
+        }
+      ]
     },
     {
       "id": 9,
@@ -114,7 +578,37 @@
       "newPrice": 300000,
       "brand": "Sony",
       "rating": 4.3,
-      "stock": 18
+      "stock": 18,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "White",
+          "Beige"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 6,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=Wireless%20Earbuds%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 6,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=Wireless%20Earbuds%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Beige"
+          },
+          "stock": 6,
+          "image": "https://placehold.co/900x900/d4c5a9/1a1a1a?text=Wireless%20Earbuds%0ABeige&font=montserrat"
+        }
+      ]
     },
     {
       "id": 10,
@@ -126,19 +620,193 @@
       "newPrice": 300000,
       "brand": "Generic",
       "rating": 4.1,
-      "stock": 20,
-      "sizeStock": {
-        "36": 1,
-        "37": 2,
-        "38": 3,
-        "39": 3,
-        "40": 4,
-        "41": 3,
-        "42": 2,
-        "43": 1,
-        "44": 1,
-        "45": 0
-      }
+      "stock": 42,
+      "variantOptions": {
+        "size": [
+          "38",
+          "39",
+          "40",
+          "41",
+          "42",
+          "43",
+          "44"
+        ],
+        "color": [
+          "Black",
+          "White",
+          "Brown"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "38",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=Leather%20Sneakers%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "38",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=Leather%20Sneakers%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "38",
+            "color": "Brown"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/5c3a1e/ffffff?text=Leather%20Sneakers%0ABrown&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=Leather%20Sneakers%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=Leather%20Sneakers%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "Brown"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/5c3a1e/ffffff?text=Leather%20Sneakers%0ABrown&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=Leather%20Sneakers%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=Leather%20Sneakers%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "Brown"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/5c3a1e/ffffff?text=Leather%20Sneakers%0ABrown&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=Leather%20Sneakers%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=Leather%20Sneakers%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "Brown"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/5c3a1e/ffffff?text=Leather%20Sneakers%0ABrown&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=Leather%20Sneakers%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=Leather%20Sneakers%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "Brown"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/5c3a1e/ffffff?text=Leather%20Sneakers%0ABrown&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=Leather%20Sneakers%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=Leather%20Sneakers%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "Brown"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/5c3a1e/ffffff?text=Leather%20Sneakers%0ABrown&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "Black"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/1a1a1a/ffffff?text=Leather%20Sneakers%0ABlack&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "White"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/f5f5f5/1a1a1a?text=Leather%20Sneakers%0AWhite&font=montserrat"
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "Brown"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/5c3a1e/ffffff?text=Leather%20Sneakers%0ABrown&font=montserrat"
+        }
+      ]
     },
     {
       "id": 11,
@@ -150,7 +818,99 @@
       "newPrice": 5500000,
       "brand": "Samsung",
       "rating": 4.8,
-      "stock": 6
+      "stock": 18,
+      "variantOptions": {
+        "color": [
+          "Titanium Black",
+          "Titanium Gray",
+          "Titanium Violet"
+        ],
+        "storage": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Titanium Black",
+            "storage": "128GB"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/2a2a2a/ffffff?text=S25%20Ultra%0ATitanium%20Black&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Titanium Black",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000,
+          "image": "https://placehold.co/900x900/2a2a2a/ffffff?text=S25%20Ultra%0ATitanium%20Black&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Titanium Black",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000,
+          "image": "https://placehold.co/900x900/2a2a2a/ffffff?text=S25%20Ultra%0ATitanium%20Black&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Titanium Gray",
+            "storage": "128GB"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/8a8a8a/ffffff?text=S25%20Ultra%0ATitanium%20Gray&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Titanium Gray",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000,
+          "image": "https://placehold.co/900x900/8a8a8a/ffffff?text=S25%20Ultra%0ATitanium%20Gray&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Titanium Gray",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000,
+          "image": "https://placehold.co/900x900/8a8a8a/ffffff?text=S25%20Ultra%0ATitanium%20Gray&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Titanium Violet",
+            "storage": "128GB"
+          },
+          "stock": 2,
+          "image": "https://placehold.co/900x900/6b5b8c/ffffff?text=S25%20Ultra%0ATitanium%20Violet&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Titanium Violet",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000,
+          "image": "https://placehold.co/900x900/6b5b8c/ffffff?text=S25%20Ultra%0ATitanium%20Violet&font=montserrat"
+        },
+        {
+          "attrs": {
+            "color": "Titanium Violet",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000,
+          "image": "https://placehold.co/900x900/6b5b8c/ffffff?text=S25%20Ultra%0ATitanium%20Violet&font=montserrat"
+        }
+      ]
     },
     {
       "id": 12,
@@ -162,7 +922,93 @@
       "newPrice": 7900000,
       "brand": "Apple",
       "rating": 4.9,
-      "stock": 9
+      "stock": 18,
+      "variantOptions": {
+        "color": [
+          "Space Gray",
+          "Silver",
+          "Midnight"
+        ],
+        "storage": [
+          "256GB",
+          "512GB",
+          "1TB"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Space Gray",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000
+        },
+        {
+          "attrs": {
+            "color": "Space Gray",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000
+        },
+        {
+          "attrs": {
+            "color": "Space Gray",
+            "storage": "1TB"
+          },
+          "stock": 2,
+          "priceDelta": 700000
+        },
+        {
+          "attrs": {
+            "color": "Silver",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000
+        },
+        {
+          "attrs": {
+            "color": "Silver",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000
+        },
+        {
+          "attrs": {
+            "color": "Silver",
+            "storage": "1TB"
+          },
+          "stock": 2,
+          "priceDelta": 700000
+        },
+        {
+          "attrs": {
+            "color": "Midnight",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000
+        },
+        {
+          "attrs": {
+            "color": "Midnight",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000
+        },
+        {
+          "attrs": {
+            "color": "Midnight",
+            "storage": "1TB"
+          },
+          "stock": 2,
+          "priceDelta": 700000
+        }
+      ]
     },
     {
       "id": 13,
@@ -174,7 +1020,34 @@
       "newPrice": 890000,
       "brand": "Sony",
       "rating": 4.7,
-      "stock": 11
+      "stock": 11,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "White",
+          "Beige"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Beige"
+          },
+          "stock": 3
+        }
+      ]
     },
     {
       "id": 14,
@@ -186,7 +1059,66 @@
       "newPrice": 3950000,
       "brand": "Apple",
       "rating": 4.8,
-      "stock": 7
+      "stock": 12,
+      "variantOptions": {
+        "color": [
+          "Space Gray",
+          "Silver"
+        ],
+        "storage": [
+          "128GB",
+          "256GB",
+          "512GB"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Space Gray",
+            "storage": "128GB"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Space Gray",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000
+        },
+        {
+          "attrs": {
+            "color": "Space Gray",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000
+        },
+        {
+          "attrs": {
+            "color": "Silver",
+            "storage": "128GB"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Silver",
+            "storage": "256GB"
+          },
+          "stock": 2,
+          "priceDelta": 150000
+        },
+        {
+          "attrs": {
+            "color": "Silver",
+            "storage": "512GB"
+          },
+          "stock": 2,
+          "priceDelta": 400000
+        }
+      ]
     },
     {
       "id": 15,
@@ -222,7 +1154,34 @@
       "newPrice": 390000,
       "brand": "Keychron",
       "rating": 4.5,
-      "stock": 16
+      "stock": 16,
+      "variantOptions": {
+        "switch": [
+          "Red",
+          "Blue",
+          "Brown"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "switch": "Red"
+          },
+          "stock": 6
+        },
+        {
+          "attrs": {
+            "switch": "Blue"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "switch": "Brown"
+          },
+          "stock": 5
+        }
+      ]
     },
     {
       "id": 18,
@@ -246,19 +1205,172 @@
       "newPrice": 320000,
       "brand": "Nike",
       "rating": 4.7,
-      "stock": 22,
-      "sizeStock": {
-        "36": 2,
-        "37": 3,
-        "38": 3,
-        "39": 3,
-        "40": 3,
-        "41": 3,
-        "42": 2,
-        "43": 2,
-        "44": 1,
-        "45": 0
-      }
+      "stock": 42,
+      "variantOptions": {
+        "size": [
+          "38",
+          "39",
+          "40",
+          "41",
+          "42",
+          "43",
+          "44"
+        ],
+        "color": [
+          "Black",
+          "White",
+          "Brown"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "38",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "38",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "38",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "Brown"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 20,
@@ -270,19 +1382,172 @@
       "newPrice": 460000,
       "brand": "Adidas",
       "rating": 4.5,
-      "stock": 19,
-      "sizeStock": {
-        "36": 1,
-        "37": 2,
-        "38": 2,
-        "39": 3,
-        "40": 3,
-        "41": 3,
-        "42": 2,
-        "43": 1,
-        "44": 1,
-        "45": 1
-      }
+      "stock": 42,
+      "variantOptions": {
+        "size": [
+          "38",
+          "39",
+          "40",
+          "41",
+          "42",
+          "43",
+          "44"
+        ],
+        "color": [
+          "Black",
+          "White",
+          "Brown"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "38",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "38",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "38",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "Brown"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 21,
@@ -295,14 +1560,127 @@
       "brand": "Levi's",
       "rating": 4.3,
       "stock": 30,
-      "sizeStock": {
-        "28": 4,
-        "30": 5,
-        "32": 7,
-        "34": 6,
-        "36": 5,
-        "38": 3
-      }
+      "variantOptions": {
+        "size": [
+          "28",
+          "30",
+          "32",
+          "34",
+          "36"
+        ],
+        "color": [
+          "Indigo",
+          "Black",
+          "Light Wash"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "28",
+            "color": "Indigo"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "28",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "28",
+            "color": "Light Wash"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "30",
+            "color": "Indigo"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "30",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "30",
+            "color": "Light Wash"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "32",
+            "color": "Indigo"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "32",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "32",
+            "color": "Light Wash"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "34",
+            "color": "Indigo"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "34",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "34",
+            "color": "Light Wash"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "36",
+            "color": "Indigo"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "36",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "36",
+            "color": "Light Wash"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 22,
@@ -314,13 +1692,164 @@
       "newPrice": 490000,
       "brand": "Zara",
       "rating": 4.2,
-      "stock": 14,
-      "sizeStock": {
-        "XS": 3,
-        "S": 4,
-        "M": 4,
-        "L": 3
-      }
+      "stock": 40,
+      "variantOptions": {
+        "size": [
+          "XS",
+          "S",
+          "M",
+          "L",
+          "XL"
+        ],
+        "color": [
+          "Black",
+          "White",
+          "Beige",
+          "Navy"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Navy"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 23,
@@ -332,15 +1861,164 @@
       "newPrice": 65000,
       "brand": "H&M",
       "rating": 3.8,
-      "stock": 35,
-      "sizeStock": {
-        "XS": 5,
-        "S": 7,
-        "M": 8,
-        "L": 8,
-        "XL": 5,
-        "XXL": 2
-      }
+      "stock": 40,
+      "variantOptions": {
+        "size": [
+          "XS",
+          "S",
+          "M",
+          "L",
+          "XL"
+        ],
+        "color": [
+          "Black",
+          "White",
+          "Beige",
+          "Navy"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Navy"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 24,
@@ -352,19 +2030,172 @@
       "newPrice": 240000,
       "brand": "Converse",
       "rating": 4.4,
-      "stock": 28,
-      "sizeStock": {
-        "36": 2,
-        "37": 3,
-        "38": 4,
-        "39": 4,
-        "40": 4,
-        "41": 4,
-        "42": 3,
-        "43": 2,
-        "44": 1,
-        "45": 1
-      }
+      "stock": 42,
+      "variantOptions": {
+        "size": [
+          "38",
+          "39",
+          "40",
+          "41",
+          "42",
+          "43",
+          "44"
+        ],
+        "color": [
+          "Black",
+          "White",
+          "Brown"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "38",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "38",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "38",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "Brown"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 25,
@@ -376,17 +2207,172 @@
       "newPrice": 590000,
       "brand": "UGG",
       "rating": 4.6,
-      "stock": 10,
-      "sizeStock": {
-        "35": 1,
-        "36": 1,
-        "37": 2,
-        "38": 2,
-        "39": 1,
-        "40": 1,
-        "41": 1,
-        "42": 1
-      }
+      "stock": 42,
+      "variantOptions": {
+        "size": [
+          "38",
+          "39",
+          "40",
+          "41",
+          "42",
+          "43",
+          "44"
+        ],
+        "color": [
+          "Black",
+          "White",
+          "Brown"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "38",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "38",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "38",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "39",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "40",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "41",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "42",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "43",
+            "color": "Brown"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "44",
+            "color": "Brown"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 26,
@@ -398,13 +2384,128 @@
       "newPrice": 310000,
       "brand": "ALO",
       "rating": 4.8,
-      "stock": 17,
-      "sizeStock": {
-        "XS": 4,
-        "S": 5,
-        "M": 5,
-        "L": 3
-      }
+      "stock": 30,
+      "variantOptions": {
+        "size": [
+          "XS",
+          "S",
+          "M",
+          "L",
+          "XL"
+        ],
+        "color": [
+          "Black",
+          "Olive",
+          "Navy"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Olive"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Olive"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Olive"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Olive"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Olive"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Navy"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 27,
@@ -416,7 +2517,34 @@
       "newPrice": 1850000,
       "brand": "Dyson",
       "rating": 4.9,
-      "stock": 6
+      "stock": 6,
+      "variantOptions": {
+        "color": [
+          "Iron/Fuchsia",
+          "Prussian Blue",
+          "Vinca Blue"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Iron/Fuchsia"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Prussian Blue"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Vinca Blue"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 28,
@@ -428,7 +2556,28 @@
       "newPrice": 140000,
       "brand": "Mixsoon",
       "rating": 4.6,
-      "stock": 23
+      "stock": 23,
+      "variantOptions": {
+        "size": [
+          "30ml",
+          "50ml"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "30ml"
+          },
+          "stock": 12
+        },
+        {
+          "attrs": {
+            "size": "50ml"
+          },
+          "stock": 11,
+          "priceDelta": 40000
+        }
+      ]
     },
     {
       "id": 29,
@@ -440,7 +2589,28 @@
       "newPrice": 750000,
       "brand": "La Mer",
       "rating": 4.7,
-      "stock": 9
+      "stock": 9,
+      "variantOptions": {
+        "size": [
+          "30ml",
+          "50ml"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "30ml"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "size": "50ml"
+          },
+          "stock": 4,
+          "priceDelta": 40000
+        }
+      ]
     },
     {
       "id": 30,
@@ -452,7 +2622,28 @@
       "newPrice": 180000,
       "brand": "Tatcha",
       "rating": 4.5,
-      "stock": 14
+      "stock": 14,
+      "variantOptions": {
+        "size": [
+          "30ml",
+          "50ml"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "30ml"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "size": "50ml"
+          },
+          "stock": 7,
+          "priceDelta": 40000
+        }
+      ]
     },
     {
       "id": 31,
@@ -464,7 +2655,34 @@
       "newPrice": 115000,
       "brand": "Charlotte Tilbury",
       "rating": 4.8,
-      "stock": 21
+      "stock": 21,
+      "variantOptions": {
+        "shade": [
+          "Pillow Talk",
+          "Rose Nude",
+          "Berry"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "shade": "Pillow Talk"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "shade": "Rose Nude"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "shade": "Berry"
+          },
+          "stock": 7
+        }
+      ]
     },
     {
       "id": 32,
@@ -476,7 +2694,28 @@
       "newPrice": 290000,
       "brand": "Sulwhasoo",
       "rating": 4.7,
-      "stock": 11
+      "stock": 11,
+      "variantOptions": {
+        "size": [
+          "30ml",
+          "50ml"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "30ml"
+          },
+          "stock": 6
+        },
+        {
+          "attrs": {
+            "size": "50ml"
+          },
+          "stock": 5,
+          "priceDelta": 40000
+        }
+      ]
     },
     {
       "id": 33,
@@ -488,7 +2727,27 @@
       "newPrice": 2200000,
       "brand": "Dyson",
       "rating": 4.8,
-      "stock": 7
+      "stock": 7,
+      "variantOptions": {
+        "color": [
+          "Yellow/Nickel",
+          "Gold"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Yellow/Nickel"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Gold"
+          },
+          "stock": 3
+        }
+      ]
     },
     {
       "id": 34,
@@ -500,7 +2759,34 @@
       "newPrice": 130000,
       "brand": "Generic",
       "rating": 4.3,
-      "stock": 18
+      "stock": 18,
+      "variantOptions": {
+        "color": [
+          "Gray",
+          "Beige",
+          "Navy"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Gray"
+          },
+          "stock": 6
+        },
+        {
+          "attrs": {
+            "color": "Beige"
+          },
+          "stock": 6
+        },
+        {
+          "attrs": {
+            "color": "Navy"
+          },
+          "stock": 6
+        }
+      ]
     },
     {
       "id": 35,
@@ -512,7 +2798,84 @@
       "newPrice": 720000,
       "brand": "Le Creuset",
       "rating": 4.9,
-      "stock": 12
+      "stock": 18,
+      "variantOptions": {
+        "size": [
+          "3qt",
+          "6qt",
+          "8qt"
+        ],
+        "color": [
+          "Red",
+          "Blue",
+          "Cream"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "3qt",
+            "color": "Red"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "3qt",
+            "color": "Blue"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "3qt",
+            "color": "Cream"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "6qt",
+            "color": "Red"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "6qt",
+            "color": "Blue"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "6qt",
+            "color": "Cream"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "8qt",
+            "color": "Red"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "8qt",
+            "color": "Blue"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "8qt",
+            "color": "Cream"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 36,
@@ -524,7 +2887,34 @@
       "newPrice": 1050000,
       "brand": "Nespresso",
       "rating": 4.6,
-      "stock": 9
+      "stock": 9,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Chrome",
+          "Red"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Chrome"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Red"
+          },
+          "stock": 3
+        }
+      ]
     },
     {
       "id": 37,
@@ -536,7 +2926,84 @@
       "newPrice": 220000,
       "brand": "Generic",
       "rating": 4.4,
-      "stock": 20
+      "stock": 20,
+      "variantOptions": {
+        "size": [
+          "Twin",
+          "Queen",
+          "King"
+        ],
+        "color": [
+          "White",
+          "Gray",
+          "Beige"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "Twin",
+            "color": "White"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "size": "Twin",
+            "color": "Gray"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "size": "Twin",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "Queen",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "Queen",
+            "color": "Gray"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "Queen",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "King",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "King",
+            "color": "Gray"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "King",
+            "color": "Beige"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 38,
@@ -560,7 +3027,84 @@
       "newPrice": 860000,
       "brand": "Away",
       "rating": 4.7,
-      "stock": 8
+      "stock": 18,
+      "variantOptions": {
+        "size": [
+          "21\"",
+          "25\"",
+          "29\""
+        ],
+        "color": [
+          "Black",
+          "Navy",
+          "Sand"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "21\"",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "21\"",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "21\"",
+            "color": "Sand"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "25\"",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "25\"",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "25\"",
+            "color": "Sand"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "29\"",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "29\"",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "29\"",
+            "color": "Sand"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 40,
@@ -572,7 +3116,41 @@
       "newPrice": 590000,
       "brand": "Osprey",
       "rating": 4.8,
-      "stock": 13
+      "stock": 13,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Olive",
+          "Red",
+          "Sand"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Olive"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Red"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Sand"
+          },
+          "stock": 3
+        }
+      ]
     },
     {
       "id": 41,
@@ -583,8 +3161,35 @@
       "oldPrice": 65000,
       "newPrice": 45000,
       "brand": "Generic",
-      "rating": 4.0,
-      "stock": 40
+      "rating": 4,
+      "stock": 40,
+      "variantOptions": {
+        "color": [
+          "Gray",
+          "Black",
+          "Blue"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Gray"
+          },
+          "stock": 14
+        },
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 13
+        },
+        {
+          "attrs": {
+            "color": "Blue"
+          },
+          "stock": 13
+        }
+      ]
     },
     {
       "id": 42,
@@ -608,7 +3213,34 @@
       "newPrice": 430000,
       "brand": "Whoop",
       "rating": 4.5,
-      "stock": 10
+      "stock": 10,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "White",
+          "Red"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Red"
+          },
+          "stock": 3
+        }
+      ]
     },
     {
       "id": 44,
@@ -620,7 +3252,34 @@
       "newPrice": 1500000,
       "brand": "Vitamix",
       "rating": 4.8,
-      "stock": 6
+      "stock": 6,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Red",
+          "White"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Red"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 45,
@@ -644,7 +3303,34 @@
       "newPrice": 920000,
       "brand": "Theragun",
       "rating": 4.7,
-      "stock": 8
+      "stock": 8,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "White",
+          "Red"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Red"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 47,
@@ -656,7 +3342,34 @@
       "newPrice": 365000,
       "brand": "Manduka",
       "rating": 4.6,
-      "stock": 15
+      "stock": 15,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Purple",
+          "Blue"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "color": "Purple"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "color": "Blue"
+          },
+          "stock": 5
+        }
+      ]
     },
     {
       "id": 48,
@@ -668,15 +3381,164 @@
       "newPrice": 280000,
       "brand": "Nike",
       "rating": 4.4,
-      "stock": 24,
-      "sizeStock": {
-        "XS": 3,
-        "S": 5,
-        "M": 6,
-        "L": 5,
-        "XL": 4,
-        "XXL": 1
-      }
+      "stock": 40,
+      "variantOptions": {
+        "size": [
+          "XS",
+          "S",
+          "M",
+          "L",
+          "XL"
+        ],
+        "color": [
+          "Black",
+          "White",
+          "Beige",
+          "Navy"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Navy"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 49,
@@ -688,7 +3550,41 @@
       "newPrice": 430000,
       "brand": "Fjallraven",
       "rating": 4.5,
-      "stock": 16
+      "stock": 16,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Olive",
+          "Red",
+          "Sand"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Olive"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Red"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Sand"
+          },
+          "stock": 4
+        }
+      ]
     },
     {
       "id": 50,
@@ -700,7 +3596,66 @@
       "newPrice": 450000,
       "brand": "Amazon",
       "rating": 4.6,
-      "stock": 19
+      "stock": 19,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Denim"
+        ],
+        "storage": [
+          "8GB",
+          "16GB",
+          "32GB"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black",
+            "storage": "8GB"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Black",
+            "storage": "16GB"
+          },
+          "stock": 3,
+          "priceDelta": 30000
+        },
+        {
+          "attrs": {
+            "color": "Black",
+            "storage": "32GB"
+          },
+          "stock": 3,
+          "priceDelta": 80000
+        },
+        {
+          "attrs": {
+            "color": "Denim",
+            "storage": "8GB"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Denim",
+            "storage": "16GB"
+          },
+          "stock": 3,
+          "priceDelta": 30000
+        },
+        {
+          "attrs": {
+            "color": "Denim",
+            "storage": "32GB"
+          },
+          "stock": 3,
+          "priceDelta": 80000
+        }
+      ]
     },
     {
       "id": 51,
@@ -712,14 +3667,164 @@
       "newPrice": 680000,
       "brand": "Patagonia",
       "rating": 4.8,
-      "stock": 11,
-      "sizeStock": {
-        "XS": 2,
-        "S": 3,
-        "M": 3,
-        "L": 2,
-        "XL": 1
-      }
+      "stock": 40,
+      "variantOptions": {
+        "size": [
+          "XS",
+          "S",
+          "M",
+          "L",
+          "XL"
+        ],
+        "color": [
+          "Black",
+          "White",
+          "Beige",
+          "Navy"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XS",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "S",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "M",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "L",
+            "color": "Navy"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Black"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "White"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Beige"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "size": "XL",
+            "color": "Navy"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 52,
@@ -731,7 +3836,41 @@
       "newPrice": 88000,
       "brand": "Hydro Flask",
       "rating": 4.7,
-      "stock": 27
+      "stock": 27,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Indigo",
+          "Lavender",
+          "Olive"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "color": "Indigo"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "color": "Lavender"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "color": "Olive"
+          },
+          "stock": 6
+        }
+      ]
     },
     {
       "id": 53,
@@ -743,7 +3882,27 @@
       "newPrice": 62000,
       "brand": "Anker",
       "rating": 4.5,
-      "stock": 38
+      "stock": 38,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "White"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 19
+        },
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 19
+        }
+      ]
     },
     {
       "id": 54,
@@ -755,7 +3914,34 @@
       "newPrice": 625000,
       "brand": "Casio",
       "rating": 4.6,
-      "stock": 13
+      "stock": 13,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Silver",
+          "Rose Gold"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "color": "Silver"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Rose Gold"
+          },
+          "stock": 4
+        }
+      ]
     },
     {
       "id": 55,
@@ -767,7 +3953,34 @@
       "newPrice": 390000,
       "brand": "Ray-Ban",
       "rating": 4.5,
-      "stock": 17
+      "stock": 17,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Tortoise",
+          "Gold"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 6
+        },
+        {
+          "attrs": {
+            "color": "Tortoise"
+          },
+          "stock": 6
+        },
+        {
+          "attrs": {
+            "color": "Gold"
+          },
+          "stock": 5
+        }
+      ]
     },
     {
       "id": 56,
@@ -779,7 +3992,34 @@
       "newPrice": 165000,
       "brand": "Fenty Beauty",
       "rating": 4.7,
-      "stock": 22
+      "stock": 22,
+      "variantOptions": {
+        "shade": [
+          "110 Light",
+          "240 Medium",
+          "390 Deep"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "shade": "110 Light"
+          },
+          "stock": 8
+        },
+        {
+          "attrs": {
+            "shade": "240 Medium"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "shade": "390 Deep"
+          },
+          "stock": 7
+        }
+      ]
     },
     {
       "id": 57,
@@ -791,7 +4031,28 @@
       "newPrice": 145000,
       "brand": "Kiehl's",
       "rating": 4.6,
-      "stock": 20
+      "stock": 20,
+      "variantOptions": {
+        "size": [
+          "30ml",
+          "50ml"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "30ml"
+          },
+          "stock": 10
+        },
+        {
+          "attrs": {
+            "size": "50ml"
+          },
+          "stock": 10,
+          "priceDelta": 40000
+        }
+      ]
     },
     {
       "id": 58,
@@ -803,7 +4064,34 @@
       "newPrice": 25000,
       "brand": "Generic",
       "rating": 4.1,
-      "stock": 35
+      "stock": 35,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Purple",
+          "Blue"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 12
+        },
+        {
+          "attrs": {
+            "color": "Purple"
+          },
+          "stock": 12
+        },
+        {
+          "attrs": {
+            "color": "Blue"
+          },
+          "stock": 11
+        }
+      ]
     },
     {
       "id": 59,
@@ -815,7 +4103,34 @@
       "newPrice": 510000,
       "brand": "Coleman",
       "rating": 4.3,
-      "stock": 9
+      "stock": 9,
+      "variantOptions": {
+        "color": [
+          "Green",
+          "Orange",
+          "Gray"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Green"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Orange"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Gray"
+          },
+          "stock": 3
+        }
+      ]
     },
     {
       "id": 60,
@@ -827,7 +4142,34 @@
       "newPrice": 340000,
       "brand": "Instant Pot",
       "rating": 4.7,
-      "stock": 14
+      "stock": 14,
+      "variantOptions": {
+        "size": [
+          "3qt",
+          "6qt",
+          "8qt"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "3qt"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "size": "6qt"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "size": "8qt"
+          },
+          "stock": 4
+        }
+      ]
     },
     {
       "id": 61,
@@ -839,7 +4181,41 @@
       "newPrice": 43000,
       "brand": "Moleskine",
       "rating": 4.5,
-      "stock": 28
+      "stock": 28,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Red",
+          "Sapphire",
+          "Forest Green"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "color": "Red"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "color": "Sapphire"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "color": "Forest Green"
+          },
+          "stock": 7
+        }
+      ]
     },
     {
       "id": 62,
@@ -851,7 +4227,106 @@
       "newPrice": 105000,
       "brand": "Lamy",
       "rating": 4.7,
-      "stock": 16
+      "stock": 24,
+      "variantOptions": {
+        "color": [
+          "Yellow",
+          "Red",
+          "Black",
+          "Blue"
+        ],
+        "nib": [
+          "F",
+          "M",
+          "B"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Yellow",
+            "nib": "F"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Yellow",
+            "nib": "M"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Yellow",
+            "nib": "B"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Red",
+            "nib": "F"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Red",
+            "nib": "M"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Red",
+            "nib": "B"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Black",
+            "nib": "F"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Black",
+            "nib": "M"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Black",
+            "nib": "B"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Blue",
+            "nib": "F"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Blue",
+            "nib": "M"
+          },
+          "stock": 2
+        },
+        {
+          "attrs": {
+            "color": "Blue",
+            "nib": "B"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 63,
@@ -875,7 +4350,41 @@
       "newPrice": 220000,
       "brand": "Sony",
       "rating": 4.7,
-      "stock": 18
+      "stock": 18,
+      "variantOptions": {
+        "color": [
+          "White",
+          "Black",
+          "Galactic Purple",
+          "Cobalt Blue"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "color": "Galactic Purple"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Cobalt Blue"
+          },
+          "stock": 4
+        }
+      ]
     },
     {
       "id": 65,
@@ -899,7 +4408,36 @@
       "newPrice": 95000,
       "brand": "Purina",
       "rating": 4.5,
-      "stock": 30
+      "stock": 30,
+      "variantOptions": {
+        "size": [
+          "5kg",
+          "12kg",
+          "20kg"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "5kg"
+          },
+          "stock": 10,
+          "priceDelta": -40000
+        },
+        {
+          "attrs": {
+            "size": "12kg"
+          },
+          "stock": 10
+        },
+        {
+          "attrs": {
+            "size": "20kg"
+          },
+          "stock": 10,
+          "priceDelta": 80000
+        }
+      ]
     },
     {
       "id": 67,
@@ -911,7 +4449,27 @@
       "newPrice": 175000,
       "brand": "Generic",
       "rating": 4.3,
-      "stock": 14
+      "stock": 14,
+      "variantOptions": {
+        "color": [
+          "Beige",
+          "Gray"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Beige"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "color": "Gray"
+          },
+          "stock": 7
+        }
+      ]
     },
     {
       "id": 68,
@@ -923,7 +4481,34 @@
       "newPrice": 110000,
       "brand": "Wellness",
       "rating": 4.2,
-      "stock": 25
+      "stock": 25,
+      "variantOptions": {
+        "flavor": [
+          "Vanilla",
+          "Chocolate",
+          "Strawberry"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "flavor": "Vanilla"
+          },
+          "stock": 9
+        },
+        {
+          "attrs": {
+            "flavor": "Chocolate"
+          },
+          "stock": 8
+        },
+        {
+          "attrs": {
+            "flavor": "Strawberry"
+          },
+          "stock": 8
+        }
+      ]
     },
     {
       "id": 69,
@@ -935,7 +4520,27 @@
       "newPrice": 1150000,
       "brand": "Nintendo",
       "rating": 4.8,
-      "stock": 7
+      "stock": 7,
+      "variantOptions": {
+        "color": [
+          "White",
+          "Neon"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Neon"
+          },
+          "stock": 3
+        }
+      ]
     },
     {
       "id": 70,
@@ -959,7 +4564,34 @@
       "newPrice": 70000,
       "brand": "Generic",
       "rating": 4.3,
-      "stock": 22
+      "stock": 22,
+      "variantOptions": {
+        "color": [
+          "White",
+          "Beige",
+          "Charcoal"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 8
+        },
+        {
+          "attrs": {
+            "color": "Beige"
+          },
+          "stock": 7
+        },
+        {
+          "attrs": {
+            "color": "Charcoal"
+          },
+          "stock": 7
+        }
+      ]
     },
     {
       "id": 72,
@@ -971,7 +4603,34 @@
       "newPrice": 365000,
       "brand": "Polaroid",
       "rating": 4.4,
-      "stock": 10
+      "stock": 10,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "White",
+          "Mint"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Mint"
+          },
+          "stock": 3
+        }
+      ]
     },
     {
       "id": 73,
@@ -983,7 +4642,62 @@
       "newPrice": 62000,
       "brand": "Bodum",
       "rating": 4.5,
-      "stock": 19
+      "stock": 19,
+      "variantOptions": {
+        "size": [
+          "12oz",
+          "34oz",
+          "51oz"
+        ],
+        "color": [
+          "Black",
+          "Copper"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "12oz",
+            "color": "Black"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "size": "12oz",
+            "color": "Copper"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "size": "34oz",
+            "color": "Black"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "size": "34oz",
+            "color": "Copper"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "size": "51oz",
+            "color": "Black"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "size": "51oz",
+            "color": "Copper"
+          },
+          "stock": 3
+        }
+      ]
     },
     {
       "id": 74,
@@ -995,7 +4709,34 @@
       "newPrice": 92000,
       "brand": "Glossier",
       "rating": 4.6,
-      "stock": 24
+      "stock": 24,
+      "variantOptions": {
+        "shade": [
+          "Beam",
+          "Storm",
+          "Dusk"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "shade": "Beam"
+          },
+          "stock": 8
+        },
+        {
+          "attrs": {
+            "shade": "Storm"
+          },
+          "stock": 8
+        },
+        {
+          "attrs": {
+            "shade": "Dusk"
+          },
+          "stock": 8
+        }
+      ]
     },
     {
       "id": 75,
@@ -1007,7 +4748,34 @@
       "newPrice": 820000,
       "brand": "Beats",
       "rating": 4.5,
-      "stock": 8
+      "stock": 8,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "White",
+          "Beige"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 3
+        },
+        {
+          "attrs": {
+            "color": "Beige"
+          },
+          "stock": 2
+        }
+      ]
     },
     {
       "id": 76,
@@ -1019,7 +4787,34 @@
       "newPrice": 270000,
       "brand": "Acne Studios",
       "rating": 4.3,
-      "stock": 15
+      "stock": 15,
+      "variantOptions": {
+        "color": [
+          "Black",
+          "Beige",
+          "Navy"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "color": "Beige"
+          },
+          "stock": 5
+        },
+        {
+          "attrs": {
+            "color": "Navy"
+          },
+          "stock": 5
+        }
+      ]
     },
     {
       "id": 77,
@@ -1031,7 +4826,34 @@
       "newPrice": 32000,
       "brand": "Spigen",
       "rating": 4.4,
-      "stock": 42
+      "stock": 42,
+      "variantOptions": {
+        "color": [
+          "Clear",
+          "Black",
+          "Blue"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "Clear"
+          },
+          "stock": 14
+        },
+        {
+          "attrs": {
+            "color": "Black"
+          },
+          "stock": 14
+        },
+        {
+          "attrs": {
+            "color": "Blue"
+          },
+          "stock": 14
+        }
+      ]
     },
     {
       "id": 78,
@@ -1055,7 +4877,28 @@
       "newPrice": 92000,
       "brand": "Aesop",
       "rating": 4.7,
-      "stock": 18
+      "stock": 18,
+      "variantOptions": {
+        "size": [
+          "30ml",
+          "50ml"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "size": "30ml"
+          },
+          "stock": 9
+        },
+        {
+          "attrs": {
+            "size": "50ml"
+          },
+          "stock": 9,
+          "priceDelta": 40000
+        }
+      ]
     },
     {
       "id": 80,
@@ -1067,7 +4910,34 @@
       "newPrice": 210000,
       "brand": "IKEA",
       "rating": 4.4,
-      "stock": 11
+      "stock": 11,
+      "variantOptions": {
+        "color": [
+          "White",
+          "Black-Brown",
+          "Oak Effect"
+        ]
+      },
+      "variants": [
+        {
+          "attrs": {
+            "color": "White"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Black-Brown"
+          },
+          "stock": 4
+        },
+        {
+          "attrs": {
+            "color": "Oak Effect"
+          },
+          "stock": 3
+        }
+      ]
     }
   ],
   "brands": [
