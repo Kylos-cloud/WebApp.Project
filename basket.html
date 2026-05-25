@@ -335,17 +335,14 @@
     <script type="module" src="js/searchAll.js"></script>
     <script type="module" src="js/badges.js"></script>
     <script type="module">
-        import { getMe, getCart, removeFromCart, updateCartQty, formatPrice, formatVariant, variantKey } from "./js/store.js";
+        import { getMe, getCart, removeFromCart, updateCartQty, formatPrice, formatVariant } from "./js/store.js";
 
-        // Row is identified by (productId, variantAttrs). We use the same key
-        // we send into the cart so this stays consistent if more attrs appear.
-        function rowKey(id, attrs) { return `${id}__${variantKey(attrs)}`; }
-
-        // Indexed lookup so onclick handlers don't need to encode arbitrary attrs into HTML.
-        // MUST be declared before renderCart() is invoked — renderCart reassigns it,
-        // and a `let` in temporal-dead-zone would throw mid-render and leave the
-        // page stuck with the summary visible but no items (exactly the bug we hit).
-        let rowIndex = new Map();
+        // Cart rows are addressed by their position in the rendered list. Using
+        // an integer index — rather than a serialized variant key — sidesteps
+        // any HTML-attribute escaping issues (e.g. variant values like `21"`
+        // containing a literal double-quote would break data-key="...").
+        // Rebuilt on every render, so removes/re-renders stay in sync.
+        let rowIndex = [];
 
         // Auth guard
         const me = getMe();
@@ -384,32 +381,30 @@
             emptyEl.style.display = "none";
             layoutEl.style.display = "grid";
 
-            rowIndex = new Map();
-            itemsEl.innerHTML = cart.map(p => {
-                const key = rowKey(p.id, p.variantAttrs);
-                rowIndex.set(key, { id: p.id, attrs: p.variantAttrs || null, newPrice: p.newPrice });
+            rowIndex = cart.map(p => ({ id: p.id, attrs: p.variantAttrs || null, newPrice: p.newPrice }));
+            itemsEl.innerHTML = cart.map((p, i) => {
                 const variantStr = formatVariant(p.variantAttrs);
                 const variantLabel = variantStr ? ` · ${variantStr}` : '';
-                // Buttons use data-action / data-key so the parent listener can
-                // pick up the click reliably. Inline onclick="removeItem(...)"
-                // breaks if the module errors before window.removeItem is set,
-                // which is exactly the kind of silent failure we just hit.
+                const name = esc(p.name);
+                const image = esc(p.image);
+                const brand = esc(p.brand || '');
+                const vLabel = esc(variantLabel);
                 return `
-        <article class="cart-item" data-key="${key}">
-          <img class="cart-item-img" src="${p.image}" alt="${p.name}" onerror="this.style.background='#f0f0f0'">
+        <article class="cart-item" data-idx="${i}">
+          <img class="cart-item-img" src="${image}" alt="${name}" onerror="this.style.background='#f0f0f0'">
           <div class="cart-item-info">
             <div>
-              <p class="cart-item-name">${p.name}</p>
-              <p class="cart-item-meta">${p.brand || ''}${variantLabel}</p>
+              <p class="cart-item-name">${name}</p>
+              <p class="cart-item-meta">${brand}${vLabel}</p>
             </div>
             <div class="cart-item-bottom">
               <div class="qty-control">
-                <button class="qty-btn" data-action="dec" data-key="${key}" type="button">−</button>
-                <span class="qty-num" id="qty-${key}">${p.qty || 1}</span>
-                <button class="qty-btn" data-action="inc" data-key="${key}" type="button">+</button>
+                <button class="qty-btn" data-action="dec" data-idx="${i}" type="button">−</button>
+                <span class="qty-num" data-qty="${i}">${p.qty || 1}</span>
+                <button class="qty-btn" data-action="inc" data-idx="${i}" type="button">+</button>
               </div>
               <span class="cart-item-price">${formatPrice(p.newPrice * (p.qty || 1))}</span>
-              <button class="cart-item-remove" data-action="remove" data-key="${key}" type="button" aria-label="Устгах">✕</button>
+              <button class="cart-item-remove" data-action="remove" data-idx="${i}" type="button" aria-label="Устгах">✕</button>
             </div>
           </div>
         </article>`;
@@ -418,16 +413,26 @@
             updateTotals();
         }
 
-        // Single delegated listener for all cart-item buttons. Survives re-render
-        // and avoids the inline-onclick / window-binding fragility entirely.
+        // Tiny HTML escaper so product names / variant labels can't break our
+        // attribute strings (e.g. a name containing `"` or `<`).
+        function esc(s) {
+            return String(s ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        // Single delegated listener for every cart-item button. Survives
+        // re-renders and avoids the inline-onclick / window-binding fragility.
         document.getElementById("cartItems").addEventListener("click", e => {
             const btn = e.target.closest("[data-action]");
             if (!btn) return;
-            const key = btn.dataset.key;
+            const idx = Number(btn.dataset.idx);
             const action = btn.dataset.action;
-            if (action === "remove") removeItem(key);
-            else if (action === "inc") changeQty(key, +1);
-            else if (action === "dec") changeQty(key, -1);
+            if (action === "remove") removeItem(idx);
+            else if (action === "inc") changeQty(idx, +1);
+            else if (action === "dec") changeQty(idx, -1);
         });
 
         function getValidCart() {
@@ -442,25 +447,27 @@
             document.getElementById("total").textContent = formatPrice(subtotal + 5000);
         }
 
-        function changeQty(key, delta) {
-            const row = rowIndex.get(key);
+        function changeQty(idx, delta) {
+            const row = rowIndex[idx];
             if (!row) return;
-            const cart = getCart();
-            const item = cart.find(p => p.id === row.id && rowKey(p.id, p.variantAttrs) === key);
+            const cart = getValidCart();
+            const item = cart[idx];
             if (!item) return;
             const newQty = Math.max(1, (item.qty || 1) + delta);
             updateCartQty(row.id, newQty, row.attrs);
-            const qtyEl = document.getElementById(`qty-${key}`);
-            if (qtyEl) qtyEl.textContent = newQty;
-            const article = document.querySelector(`.cart-item[data-key="${key}"]`);
-            if (article) article.querySelector(".cart-item-price").textContent = formatPrice(item.newPrice * newQty);
+            const article = document.querySelector(`.cart-item[data-idx="${idx}"]`);
+            if (article) {
+                const qtyEl = article.querySelector("[data-qty]");
+                if (qtyEl) qtyEl.textContent = newQty;
+                article.querySelector(".cart-item-price").textContent = formatPrice(row.newPrice * newQty);
+            }
             updateTotals();
         }
 
-        function removeItem(key) {
-            const row = rowIndex.get(key);
+        function removeItem(idx) {
+            const row = rowIndex[idx];
             if (!row) return;
-            const article = document.querySelector(`.cart-item[data-key="${key}"]`);
+            const article = document.querySelector(`.cart-item[data-idx="${idx}"]`);
             if (article) {
                 article.style.transition = "opacity 0.3s ease, transform 0.3s ease";
                 article.style.opacity = "0";
