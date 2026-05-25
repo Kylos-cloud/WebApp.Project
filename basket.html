@@ -390,6 +390,10 @@
                 rowIndex.set(key, { id: p.id, attrs: p.variantAttrs || null, newPrice: p.newPrice });
                 const variantStr = formatVariant(p.variantAttrs);
                 const variantLabel = variantStr ? ` · ${variantStr}` : '';
+                // Buttons use data-action / data-key so the parent listener can
+                // pick up the click reliably. Inline onclick="removeItem(...)"
+                // breaks if the module errors before window.removeItem is set,
+                // which is exactly the kind of silent failure we just hit.
                 return `
         <article class="cart-item" data-key="${key}">
           <img class="cart-item-img" src="${p.image}" alt="${p.name}" onerror="this.style.background='#f0f0f0'">
@@ -400,12 +404,12 @@
             </div>
             <div class="cart-item-bottom">
               <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty('${key}', -1)">−</button>
+                <button class="qty-btn" data-action="dec" data-key="${key}" type="button">−</button>
                 <span class="qty-num" id="qty-${key}">${p.qty || 1}</span>
-                <button class="qty-btn" onclick="changeQty('${key}', 1)">+</button>
+                <button class="qty-btn" data-action="inc" data-key="${key}" type="button">+</button>
               </div>
               <span class="cart-item-price">${formatPrice(p.newPrice * (p.qty || 1))}</span>
-              <button class="cart-item-remove" onclick="removeItem('${key}')">✕</button>
+              <button class="cart-item-remove" data-action="remove" data-key="${key}" type="button" aria-label="Устгах">✕</button>
             </div>
           </div>
         </article>`;
@@ -413,6 +417,18 @@
 
             updateTotals();
         }
+
+        // Single delegated listener for all cart-item buttons. Survives re-render
+        // and avoids the inline-onclick / window-binding fragility entirely.
+        document.getElementById("cartItems").addEventListener("click", e => {
+            const btn = e.target.closest("[data-action]");
+            if (!btn) return;
+            const key = btn.dataset.key;
+            const action = btn.dataset.action;
+            if (action === "remove") removeItem(key);
+            else if (action === "inc") changeQty(key, +1);
+            else if (action === "dec") changeQty(key, -1);
+        });
 
         function getValidCart() {
             return getCart().filter(p =>
@@ -426,7 +442,7 @@
             document.getElementById("total").textContent = formatPrice(subtotal + 5000);
         }
 
-        window.changeQty = function (key, delta) {
+        function changeQty(key, delta) {
             const row = rowIndex.get(key);
             if (!row) return;
             const cart = getCart();
@@ -439,9 +455,9 @@
             const article = document.querySelector(`.cart-item[data-key="${key}"]`);
             if (article) article.querySelector(".cart-item-price").textContent = formatPrice(item.newPrice * newQty);
             updateTotals();
-        };
+        }
 
-        window.removeItem = function (key) {
+        function removeItem(key) {
             const row = rowIndex.get(key);
             if (!row) return;
             const article = document.querySelector(`.cart-item[data-key="${key}"]`);
@@ -453,8 +469,12 @@
                     removeFromCart(row.id, row.attrs);
                     renderCart();
                 }, 300);
+            } else {
+                // Element missing (already animated away, etc) — just commit the data change.
+                removeFromCart(row.id, row.attrs);
+                renderCart();
             }
-        };
+        }
 
         window.handleCheckout = function () {
             const cart = getCart();
