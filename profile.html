@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="mn">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SHOP — Профайл</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    body { background: #f5f5f5; }
+    body {
+      background: #f5f5f5;
+    }
 
     /* ── PAGE TITLE ── */
     .pf-page-title {
@@ -29,14 +32,17 @@
     }
 
     /* ── SIDEBAR ── */
-    .pf-sidebar { position: sticky; top: 76px; }
+    .pf-sidebar {
+      position: sticky;
+      top: 76px;
+    }
 
     .ps-card {
       background: white;
       border-radius: 14px;
       padding: 18px;
       margin-bottom: 12px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
     }
 
     .ps-user-row {
@@ -50,21 +56,39 @@
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      background: hsl(210,35%,88%);
-      color: hsl(210,40%,42%);
+      background: hsl(210, 35%, 88%);
+      color: hsl(210, 40%, 42%);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 22px;
       font-weight: 700;
       flex-shrink: 0;
-      border: 2px solid hsl(210,30%,78%);
+      border: 2px solid hsl(210, 30%, 78%);
     }
 
-    .ps-user-info { flex: 1; min-width: 0; }
-    .ps-name { font-size: 14px; font-weight: 700; }
-    .ps-date { font-size: 11px; color: #aaa; margin-top: 3px; }
-    .ps-user-chev { color: #ccc; font-size: 18px; margin-left: auto; flex-shrink: 0; }
+    .ps-user-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ps-name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .ps-date {
+      font-size: 11px;
+      color: #aaa;
+      margin-top: 3px;
+    }
+
+    .ps-user-chev {
+      color: #ccc;
+      font-size: 18px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
 
     .ps-wallet {
       display: grid;
@@ -79,28 +103,53 @@
       padding: 10px 12px;
       cursor: pointer;
     }
-    .ps-wallet-cell:first-child { border-right: 1px solid #f0f0f0; }
+
+    .ps-wallet-cell:first-child {
+      border-right: 1px solid #f0f0f0;
+    }
 
     .ps-wallet-val {
       font-size: 15px;
       font-weight: 700;
-      color: hsl(0,0%,15%);
+      color: hsl(0, 0%, 15%);
       display: flex;
       align-items: baseline;
       gap: 3px;
     }
 
-    .ps-wallet-unit { font-size: 11px; color: #bbb; font-weight: 400; }
-    .ps-wallet-label { font-size: 11px; color: hsl(210,70%,50%); font-weight: 600; margin-top: 2px; }
-    .ps-wallet-note  { font-size: 10px; color: #ccc; }
+    .ps-wallet-unit {
+      font-size: 11px;
+      color: #bbb;
+      font-weight: 400;
+    }
+
+    .ps-wallet-label {
+      font-size: 11px;
+      color: hsl(210, 70%, 50%);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .ps-wallet-note {
+      font-size: 10px;
+      color: #ccc;
+    }
 
     .ps-coupon-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .ps-coupon-num { font-size: 15px; font-weight: 700; }
-    .ps-coupon-chev { color: #ccc; font-size: 16px; }
+
+    .ps-coupon-num {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .ps-coupon-chev {
+      color: #ccc;
+      font-size: 16px;
+    }
 
     /* Nav menu */
     .ps-nav {
@@ -121,13 +170,22 @@
       text-align: left;
       font-family: Arial, sans-serif;
       font-size: 14px;
-      color: hsl(0,0%,15%);
+      color: hsl(0, 0%, 15%);
       transition: background 0.15s;
       border-bottom: 1px solid #f5f5f5;
     }
-    .ps-nav-item:last-child { border-bottom: none; }
-    .ps-nav-item:hover { background: #fafafa; }
-    .ps-nav-item.active { background: #f6f6f6; }
+
+    .ps-nav-item:last-child {
+      border-bottom: none;
+    }
+
+    .ps-nav-item:hover {
+      background: #fafafa;
+    }
+
+    .ps-nav-item.active {
+      background: #f6f6f6;
+    }
 
     .ps-nav-icon {
       width: 38px;
@@ -141,14 +199,39 @@
       flex-shrink: 0;
     }
 
-    .ps-nav-text { flex: 1; min-width: 0; }
-    .ps-nav-title { font-size: 14px; font-weight: 600; }
-    .ps-nav-sub { font-size: 11px; color: #aaa; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .ps-nav-chev { color: #ccc; font-size: 16px; flex-shrink: 0; }
+    .ps-nav-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ps-nav-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .ps-nav-sub {
+      font-size: 11px;
+      color: #aaa;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .ps-nav-chev {
+      color: #ccc;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
 
     /* ── MAIN CONTENT ── */
-    .pf-section { display: none; }
-    .pf-section.active { display: block; }
+    .pf-section {
+      display: none;
+    }
+
+    .pf-section.active {
+      display: block;
+    }
 
     .pf-section-title {
       font-size: 20px;
@@ -179,10 +262,11 @@
       font-family: Arial, sans-serif;
       transition: all 0.2s;
     }
+
     .otab.active {
-      background: hsl(0,0%,12%);
+      background: hsl(0, 0%, 12%);
       color: white;
-      border-color: hsl(0,0%,12%);
+      border-color: hsl(0, 0%, 12%);
     }
 
     /* ── ORDER CARD ── */
@@ -191,12 +275,13 @@
       border-radius: 14px;
       padding: 16px 18px;
       margin-bottom: 12px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
       cursor: pointer;
       transition: box-shadow 0.2s, transform 0.15s;
     }
+
     .order-card:hover {
-      box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
       transform: translateY(-1px);
     }
 
@@ -234,10 +319,22 @@
       gap: 3px;
       flex-shrink: 0;
     }
-    .order-status-pill.confirmed { color: hsl(30,90%,45%); }
-    .order-status-pill.shipping  { color: hsl(210,80%,50%); }
-    .order-status-pill.delivered { color: hsl(140,50%,38%); }
-    .order-status-pill.cancelled { color: #aaa; }
+
+    .order-status-pill.confirmed {
+      color: hsl(30, 90%, 45%);
+    }
+
+    .order-status-pill.shipping {
+      color: hsl(210, 80%, 50%);
+    }
+
+    .order-status-pill.delivered {
+      color: hsl(140, 50%, 38%);
+    }
+
+    .order-status-pill.cancelled {
+      color: #aaa;
+    }
 
     .order-items-row {
       display: flex;
@@ -255,7 +352,11 @@
       flex-shrink: 0;
     }
 
-    .order-item-info { flex: 1; min-width: 0; }
+    .order-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
     .order-item-name {
       font-size: 13px;
       font-weight: 600;
@@ -263,9 +364,19 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .order-item-sub { font-size: 12px; color: #aaa; margin-top: 3px; }
 
-    .order-more-dots { font-size: 20px; color: #ccc; letter-spacing: 3px; padding: 6px 0 0; }
+    .order-item-sub {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 3px;
+    }
+
+    .order-more-dots {
+      font-size: 20px;
+      color: #ccc;
+      letter-spacing: 3px;
+      padding: 6px 0 0;
+    }
 
     .order-footer {
       display: flex;
@@ -276,8 +387,16 @@
       border-top: 1px solid #f5f5f5;
     }
 
-    .order-total-label { font-size: 13px; color: #aaa; margin-right: auto; }
-    .order-total-val { font-size: 15px; font-weight: 800; }
+    .order-total-label {
+      font-size: 13px;
+      color: #aaa;
+      margin-right: auto;
+    }
+
+    .order-total-val {
+      font-size: 15px;
+      font-weight: 800;
+    }
 
     /* ── ORDER DETAIL ── */
     .od-breadcrumb {
@@ -288,12 +407,16 @@
       align-items: center;
       gap: 4px;
     }
+
     .od-breadcrumb .od-bc-link {
-      color: hsl(210,75%,52%);
+      color: hsl(210, 75%, 52%);
       cursor: pointer;
       text-decoration: none;
     }
-    .od-breadcrumb .od-bc-link:hover { text-decoration: underline; }
+
+    .od-breadcrumb .od-bc-link:hover {
+      text-decoration: underline;
+    }
 
     .od-title {
       font-size: 19px;
@@ -307,28 +430,52 @@
       gap: 6px;
       margin-bottom: 18px;
     }
+
     .od-status-text {
       font-size: 13px;
       font-weight: 700;
     }
-    .od-status-text.confirmed { color: hsl(30,90%,45%); }
-    .od-status-text.shipping  { color: hsl(210,80%,50%); }
-    .od-status-text.delivered { color: hsl(140,50%,38%); }
-    .od-status-text.cancelled { color: #aaa; }
+
+    .od-status-text.confirmed {
+      color: hsl(30, 90%, 45%);
+    }
+
+    .od-status-text.shipping {
+      color: hsl(210, 80%, 50%);
+    }
+
+    .od-status-text.delivered {
+      color: hsl(140, 50%, 38%);
+    }
+
+    .od-status-text.cancelled {
+      color: #aaa;
+    }
 
     .od-card {
       background: white;
       border-radius: 14px;
       padding: 18px 20px;
       margin-bottom: 12px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
     }
-    .od-card-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+
+    .od-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
 
     /* Progress steps */
-    .od-steps { display: flex; flex-direction: column; }
+    .od-steps {
+      display: flex;
+      flex-direction: column;
+    }
 
-    .od-step-row { display: flex; gap: 14px; }
+    .od-step-row {
+      display: flex;
+      gap: 14px;
+    }
 
     .od-step-left {
       display: flex;
@@ -349,20 +496,58 @@
       font-weight: 700;
       flex-shrink: 0;
     }
-    .od-step-dot.done    { background: hsl(0,0%,15%); color: white; }
-    .od-step-dot.pending { background: #f0f0f0; color: #ccc; }
 
-    .od-step-line { width: 2px; min-height: 22px; flex: 1; margin: 2px 0; }
-    .od-step-line.done    { background: #ccc; }
-    .od-step-line.pending { background: #eee; }
+    .od-step-dot.done {
+      background: hsl(0, 0%, 15%);
+      color: white;
+    }
 
-    .od-step-right { padding-bottom: 20px; }
-    .od-step-row:last-child .od-step-right { padding-bottom: 0; }
+    .od-step-dot.pending {
+      background: #f0f0f0;
+      color: #ccc;
+    }
 
-    .od-step-label { font-size: 14px; font-weight: 600; }
-    .od-step-label.done    { color: hsl(0,0%,15%); }
-    .od-step-label.pending { color: #ccc; }
-    .od-step-time { font-size: 12px; color: #aaa; margin-top: 2px; }
+    .od-step-line {
+      width: 2px;
+      min-height: 22px;
+      flex: 1;
+      margin: 2px 0;
+    }
+
+    .od-step-line.done {
+      background: #ccc;
+    }
+
+    .od-step-line.pending {
+      background: #eee;
+    }
+
+    .od-step-right {
+      padding-bottom: 20px;
+    }
+
+    .od-step-row:last-child .od-step-right {
+      padding-bottom: 0;
+    }
+
+    .od-step-label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .od-step-label.done {
+      color: hsl(0, 0%, 15%);
+    }
+
+    .od-step-label.pending {
+      color: #ccc;
+    }
+
+    .od-step-time {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 2px;
+    }
 
     /* Contact card */
     .od-contact-box {
@@ -373,15 +558,29 @@
       border-radius: 12px;
       padding: 14px 16px;
     }
+
     .od-contact-icon {
-      width: 44px; height: 44px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: #f4f4f4;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
     }
-    .od-contact-name  { font-size: 14px; font-weight: 700; }
-    .od-contact-phone { font-size: 13px; color: #888; margin-top: 2px; }
+
+    .od-contact-name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .od-contact-phone {
+      font-size: 13px;
+      color: #888;
+      margin-top: 2px;
+    }
 
     /* Purchase item rows */
     .od-purchase-meta {
@@ -399,23 +598,53 @@
       padding: 10px 0;
       border-bottom: 1px solid #f5f5f5;
     }
-    .od-purchase-item:last-child { border-bottom: none; }
+
+    .od-purchase-item:last-child {
+      border-bottom: none;
+    }
 
     .od-purchase-img {
-      width: 68px; height: 74px;
+      width: 68px;
+      height: 74px;
       object-fit: cover;
       border-radius: 10px;
       background: #f0f0f0;
       flex-shrink: 0;
     }
 
-    .od-purchase-name  { font-size: 13px; font-weight: 600; line-height: 1.4; }
-    .od-purchase-price { font-size: 13px; font-weight: 700; margin-top: 5px; }
-    .od-purchase-orig  { font-size: 12px; color: #bbb; text-decoration: line-through; margin-left: 6px; }
-    .od-purchase-qty   { margin-left: auto; font-size: 13px; font-weight: 600; flex-shrink: 0; color: #888; }
+    .od-purchase-name {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .od-purchase-price {
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 5px;
+    }
+
+    .od-purchase-orig {
+      font-size: 12px;
+      color: #bbb;
+      text-decoration: line-through;
+      margin-left: 6px;
+    }
+
+    .od-purchase-qty {
+      margin-left: auto;
+      font-size: 13px;
+      font-weight: 600;
+      flex-shrink: 0;
+      color: #888;
+    }
 
     /* Price breakdown table */
-    .od-price-table { margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0f0f0; }
+    .od-price-table {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #f0f0f0;
+    }
 
     .od-price-row {
       display: flex;
@@ -425,16 +654,32 @@
       color: #666;
       padding: 3px 0;
     }
-    .od-price-row .pv { font-weight: 600; color: hsl(0,0%,18%); }
-    .od-price-row .pv.red   { color: hsl(350,70%,50%); }
-    .od-price-row .pv.green { color: hsl(140,50%,36%); }
+
+    .od-price-row .pv {
+      font-weight: 600;
+      color: hsl(0, 0%, 18%);
+    }
+
+    .od-price-row .pv.red {
+      color: hsl(350, 70%, 50%);
+    }
+
+    .od-price-row .pv.green {
+      color: hsl(140, 50%, 36%);
+    }
+
     .od-price-row.subtotal-row {
       font-size: 15px;
       font-weight: 800;
-      color: hsl(0,0%,12%);
+      color: hsl(0, 0%, 12%);
       padding: 10px 0 8px;
     }
-    .od-price-row.subtotal-row .pv { font-size: 16px; font-weight: 900; color: hsl(0,0%,10%); }
+
+    .od-price-row.subtotal-row .pv {
+      font-size: 16px;
+      font-weight: 900;
+      color: hsl(0, 0%, 10%);
+    }
 
     /* Empty state */
     .empty-orders {
@@ -443,20 +688,39 @@
       background: white;
       border-radius: 14px;
     }
-    .empty-orders-icon  { font-size: 56px; margin-bottom: 14px; }
-    .empty-orders-title { font-size: 16px; font-weight: 700; color: hsl(0,0%,28%); margin-bottom: 8px; }
-    .empty-orders-sub   { font-size: 13px; color: #aaa; margin-bottom: 22px; }
+
+    .empty-orders-icon {
+      font-size: 56px;
+      margin-bottom: 14px;
+    }
+
+    .empty-orders-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: hsl(0, 0%, 28%);
+      margin-bottom: 8px;
+    }
+
+    .empty-orders-sub {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 22px;
+    }
+
     .empty-shop-btn {
       display: inline-block;
       padding: 11px 28px;
-      background: hsl(0,0%,14%);
+      background: hsl(0, 0%, 14%);
       color: white;
       border-radius: 10px;
       font-size: 14px;
       font-weight: 700;
       text-decoration: none;
     }
-    .empty-shop-btn:hover { opacity: 0.85; }
+
+    .empty-shop-btn:hover {
+      opacity: 0.85;
+    }
 
     /* Placeholder sections */
     .placeholder-section {
@@ -465,15 +729,33 @@
       padding: 60px 20px;
       text-align: center;
       color: #aaa;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
     }
-    .placeholder-section .ph-icon  { font-size: 56px; margin-bottom: 14px; }
-    .placeholder-section .ph-title { font-size: 16px; font-weight: 700; color: #888; margin-bottom: 8px; }
-    .placeholder-section .ph-sub   { font-size: 13px; }
+
+    .placeholder-section .ph-icon {
+      font-size: 56px;
+      margin-bottom: 14px;
+    }
+
+    .placeholder-section .ph-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .placeholder-section .ph-sub {
+      font-size: 13px;
+    }
 
     @media (max-width: 768px) {
-      .pf-wrap { grid-template-columns: 1fr; }
-      .pf-sidebar { position: static; }
+      .pf-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .pf-sidebar {
+        position: static;
+      }
     }
   </style>
 </head>
@@ -486,17 +768,20 @@
       <nav class="icons">
         <a href="profile.html" class="icon-profile">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+            <path stroke="currentColor" stroke-width="2"
+              d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
         </a>
         <a href="index.html#contact" class="icon-contact" aria-label="Холбоо барих">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 9h10M7 13h6m-1 8c4.97 0 9-3.806 9-8.5S16.97 4 12 4s-9 3.806-9 8.5c0 1.41.363 2.738 1.004 3.905L3 21l5.343-1.32c1.099.466 2.354.82 3.657.82Z"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M7 9h10M7 13h6m-1 8c4.97 0 9-3.806 9-8.5S16.97 4 12 4s-9 3.806-9 8.5c0 1.41.363 2.738 1.004 3.905L3 21l5.343-1.32c1.099.466 2.354.82 3.657.82Z" />
           </svg>
         </a>
         <a href="basket.html" class="icon-cart">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
           </svg>
         </a>
       </nav>
@@ -563,7 +848,7 @@
           <div class="ps-nav-icon">❓</div>
           <div class="ps-nav-text">
             <div class="ps-nav-title">Тусламж</div>
-            <div class="ps-nav-sub">Салбар, тугаэмал асуулт...</div>
+            <div class="ps-nav-sub">Салбар, түгээмал асуулт...</div>
           </div>
           <span class="ps-nav-chev">›</span>
         </button>
@@ -586,9 +871,12 @@
         <div class="pf-section-title">🛒 Миний захиалгууд</div>
 
         <div class="order-tabs">
-          <button class="otab active" id="tab-ordered"   onclick="switchOrderTab('ordered')">Захиалсан (<span id="cnt-ordered">0</span>)</button>
-          <button class="otab"        id="tab-delivered" onclick="switchOrderTab('delivered')">Хүргэгдсэн (<span id="cnt-delivered">0</span>)</button>
-          <button class="otab"        id="tab-cancelled" onclick="switchOrderTab('cancelled')">Цуцлагдсан (<span id="cnt-cancelled">0</span>)</button>
+          <button class="otab active" id="tab-ordered" onclick="switchOrderTab('ordered')">Захиалсан (<span
+              id="cnt-ordered">0</span>)</button>
+          <button class="otab" id="tab-delivered" onclick="switchOrderTab('delivered')">Хүргэгдсэн (<span
+              id="cnt-delivered">0</span>)</button>
+          <button class="otab" id="tab-cancelled" onclick="switchOrderTab('cancelled')">Цуцлагдсан (<span
+              id="cnt-cancelled">0</span>)</button>
         </div>
 
         <div id="list-ordered"></div>
@@ -624,7 +912,7 @@
           <div class="od-contact-box">
             <div class="od-contact-icon">📞</div>
             <div>
-              <div class="od-contact-name"  id="od-contact-name">—</div>
+              <div class="od-contact-name" id="od-contact-name">—</div>
               <div class="od-contact-phone" id="od-contact-phone">—</div>
             </div>
           </div>
@@ -673,31 +961,35 @@
   <nav class="bottom-nav">
     <a href="index.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"/>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
       </svg>
       <span>Нүүр</span>
     </a>
     <a href="index.html#sales" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
+        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
       </svg>
       <span>Ангилал</span>
     </a>
     <a href="basket.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
       </svg>
       <span>Сагс</span>
     </a>
     <a href="hadgalsan.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
       </svg>
       <span>Хадгалсан</span>
     </a>
     <a href="profile.html" class="bottom-nav-item active">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+        <path stroke="currentColor" stroke-width="2"
+          d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
       </svg>
       <span>Профайл</span>
     </a>
@@ -713,7 +1005,7 @@
 
     // ── SIDEBAR ──
     document.getElementById("psAvatar").textContent = (me.name || "?").charAt(0).toUpperCase();
-    document.getElementById("psName").textContent   = me.name || me.email;
+    document.getElementById("psName").textContent = me.name || me.email;
 
     const orders = await apiFetchOrders();
     const shortId = id => String(id).padStart(8, "0").slice(-8).toUpperCase();
@@ -742,17 +1034,17 @@
 
     const statusMeta = {
       confirmed: { text: "Баталгаажсан", cls: "confirmed" },
-      shipping:  { text: "Хүргэлтэнд гарсан", cls: "shipping" },
+      shipping: { text: "Хүргэлтэнд гарсан", cls: "shipping" },
       delivered: { text: "Хүргэгдсэн", cls: "delivered" },
       cancelled: { text: "Цуцлагдсан", cls: "cancelled" }
     };
 
     // ── CATEGORISE ORDERS ──
-    const orderedList   = orders.filter(o => { const s = computeStatus(o); return s === "confirmed" || s === "shipping"; });
+    const orderedList = orders.filter(o => { const s = computeStatus(o); return s === "confirmed" || s === "shipping"; });
     const deliveredList = orders.filter(o => computeStatus(o) === "delivered");
     const cancelledList = orders.filter(o => computeStatus(o) === "cancelled");
 
-    document.getElementById("cnt-ordered").textContent   = orderedList.length;
+    document.getElementById("cnt-ordered").textContent = orderedList.length;
     document.getElementById("cnt-delivered").textContent = deliveredList.length;
     document.getElementById("cnt-cancelled").textContent = cancelledList.length;
 
@@ -760,16 +1052,16 @@
     function fmtDate(isoStr) {
       const d = new Date(isoStr);
       const pad = n => String(n).padStart(2, "0");
-      return `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}`;
+      return `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())}`;
     }
 
     function renderOrderCard(order) {
-      const status   = computeStatus(order);
-      const badge    = statusMeta[status];
+      const status = computeStatus(order);
+      const badge = statusMeta[status];
       const totalQty = (order.items || []).reduce((s, p) => s + (p.qty || 1), 0);
-      const first    = order.items?.[0];
-      const extra    = (order.items?.length || 0) - 1;
-      const sId      = shortId(order.id);
+      const first = order.items?.[0];
+      const extra = (order.items?.length || 0) - 1;
+      const sId = shortId(order.id);
 
       return `
         <div class="order-card" onclick="window._openDetail('${order.id}')">
@@ -813,37 +1105,37 @@
       }
     }
 
-    renderList("list-ordered",   orderedList,   "Идэвхтэй захиалга байхгүй");
+    renderList("list-ordered", orderedList, "Идэвхтэй захиалга байхгүй");
     renderList("list-delivered", deliveredList, "Хүргэгдсэн захиалга байхгүй");
     renderList("list-cancelled", cancelledList, "Цуцлагдсан захиалга байхгүй");
 
     // ── OPEN ORDER DETAIL ──
-    window._openDetail = function(orderId) {
+    window._openDetail = function (orderId) {
       const order = orders.find(o => String(o.id) === String(orderId));
       if (!order) return;
 
-      const status   = computeStatus(order);
-      const badge    = statusMeta[status];
-      const sId      = shortId(order.id);
+      const status = computeStatus(order);
+      const badge = statusMeta[status];
+      const sId = shortId(order.id);
       const totalQty = (order.items || []).reduce((s, p) => s + (p.qty || 1), 0);
       const pad = n => String(n).padStart(2, "0");
 
       function fmtFull(isoStr) {
         const d = new Date(isoStr);
-        return `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+        return `${d.getFullYear()}/${pad(d.getMonth() + 1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
       }
 
-      document.getElementById("od-bc-id").textContent   = "#" + sId;
+      document.getElementById("od-bc-id").textContent = "#" + sId;
       document.getElementById("od-id-title").textContent = "#" + sId;
 
       const statusEl = document.getElementById("od-status-text");
       statusEl.textContent = badge.text;
-      statusEl.className   = `od-status-text ${badge.cls}`;
+      statusEl.className = `od-status-text ${badge.cls}`;
 
       // Progress steps
-      const isShipping  = status === "shipping";
+      const isShipping = status === "shipping";
       const isDelivered = status === "delivered";
-      const orderDate   = new Date(order.timestamp);
+      const orderDate = new Date(order.timestamp);
       // Estimate shipped time as 2 hours after order
       const shippedDate = new Date(orderDate.getTime() + 2 * 3_600_000);
 
@@ -880,7 +1172,7 @@
 
       // Contact
       const del = order.delivery || {};
-      document.getElementById("od-contact-name").textContent  = del.name  || "—";
+      document.getElementById("od-contact-name").textContent = del.name || "—";
       document.getElementById("od-contact-phone").textContent = del.phone || "—";
 
       const notes = del.notes || [];
@@ -914,17 +1206,17 @@
 
       // Price breakdown
       const originalTotal = (order.items || []).reduce((s, p) => s + (p.oldPrice || p.newPrice) * (p.qty || 1), 0);
-      const subtotal      = order.subtotal || (order.items || []).reduce((s, p) => s + p.newPrice * (p.qty || 1), 0);
-      const discount      = originalTotal - subtotal;
-      const delivery      = (order.delFee || 0) + (order.ecoFee || 0);
-      const pointsEarned  = Math.floor(order.total / 100);
+      const subtotal = order.subtotal || (order.items || []).reduce((s, p) => s + p.newPrice * (p.qty || 1), 0);
+      const discount = originalTotal - subtotal;
+      const delivery = (order.delFee || 0) + (order.ecoFee || 0);
+      const pointsEarned = Math.floor(order.total / 100);
 
       const payLabels = {
-        qpay:"QPay / QR код", mbank:"М банк", storepay:"Storepay",
-        pocket:"Pocket", ardpay:"Ard Pay", simple:"Simple",
-        socialpay:"Social Pay", toki:"Toki", hipay:"Hipay",
-        wechat:"WeChat Pay", happypay:"HappyPay", lenddy:"LendDy",
-        card:"Банкны карт", cash:"Бэлэн мөнгө"
+        qpay: "QPay / QR код", mbank: "М банк", storepay: "Storepay",
+        pocket: "Pocket", ardpay: "Ard Pay", simple: "Simple",
+        socialpay: "Social Pay", toki: "Toki", hipay: "Hipay",
+        wechat: "WeChat Pay", happypay: "HappyPay", lenddy: "LendDy",
+        card: "Банкны карт", cash: "Бэлэн мөнгө"
       };
 
       document.getElementById("od-price-table").innerHTML = `
@@ -997,7 +1289,7 @@
     function switchOrderTab(tab) {
       document.querySelectorAll(".otab").forEach(t => t.classList.remove("active"));
       document.getElementById("tab-" + tab).classList.add("active");
-      document.getElementById("list-ordered").style.display   = tab === "ordered"   ? "" : "none";
+      document.getElementById("list-ordered").style.display = tab === "ordered" ? "" : "none";
       document.getElementById("list-delivered").style.display = tab === "delivered" ? "" : "none";
       document.getElementById("list-cancelled").style.display = tab === "cancelled" ? "" : "none";
     }
@@ -1010,4 +1302,5 @@
   </script>
 
 </body>
+
 </html>
