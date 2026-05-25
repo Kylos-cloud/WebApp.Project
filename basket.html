@@ -42,6 +42,18 @@
             animation: fadeSlideUp 0.3s ease forwards;
         }
 
+        /* Exit animation when ✕ is clicked. Must be its own @keyframes (not
+           a transition) because the entry `fadeSlideUp` animation with
+           `forwards` locks the element's final state and blocks transitions
+           on `opacity`/`transform` from firing. */
+        .cart-item.removing {
+            animation: cartItemOut 0.3s ease forwards;
+        }
+        @keyframes cartItemOut {
+            from { opacity: 1; transform: translateX(0); max-height: 200px; }
+            to   { opacity: 0; transform: translateX(40px); max-height: 0; padding-top: 0; padding-bottom: 0; margin: 0; }
+        }
+
         .cart-item-img {
             width: 100px;
             height: 110px;
@@ -469,15 +481,12 @@
             if (!row) return;
             const article = document.querySelector(`.cart-item[data-idx="${idx}"]`);
             if (article) {
-                article.style.transition = "opacity 0.3s ease, transform 0.3s ease";
-                article.style.opacity = "0";
-                article.style.transform = "translateX(20px)";
+                article.classList.add("removing");
                 setTimeout(() => {
                     removeFromCart(row.id, row.attrs);
                     renderCart();
                 }, 300);
             } else {
-                // Element missing (already animated away, etc) — just commit the data change.
                 removeFromCart(row.id, row.attrs);
                 renderCart();
             }
