@@ -235,7 +235,17 @@ h2 {
   padding: 0 3px;
   line-height: 1;
   pointer-events: none;
+  box-sizing: border-box;
+  border: 1.5px solid var(--color-white, #fff);
   animation: badgePop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Anchor the badge to the icon (which is centered in the wide flex column),
+   not the column's right edge. */
+.bottom-nav-item .nav-badge {
+  top: 2px;
+  right: auto;
+  left: calc(50% + 4px);
 }
 
 @keyframes badgePop {
