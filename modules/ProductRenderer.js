@@ -36,7 +36,7 @@ export class ProductRenderer {
             <img src="${p.image}" alt="${p.name}" loading="lazy"
                  onerror="this.style.display='none'">
             ${tagHTML}
-            ${isOutOfStock ? `<span class="product-tag product-tag--out">ДУУССАН</span>` : ""}
+            // ${isOutOfStock ? `<span class="product-tag product-tag--out">ДУУССАН</span>` : ""}
           </figure>
           <h3>${p.name}</h3>
           <p class="price">
