@@ -242,10 +242,22 @@
         .form-row { display:flex; gap:12px; }
         .form-row .form-field { flex:1; }
         .modal-footer { padding:18px 28px; border-top:1px solid var(--color-border); display:flex; gap:10px; justify-content:flex-end; position:sticky; bottom:0; background:var(--color-surface); }
-        .img-preview { width:100%; height:140px; border-radius:var(--radius-md); background:var(--color-bg1); margin-bottom:18px; overflow:hidden; display:flex; align-items:center; justify-content:center; border:1px dashed var(--color-border); }
+        .img-preview { width:100%; height:160px; border-radius:var(--radius-md); background:var(--color-bg1); margin-bottom:14px; overflow:hidden; display:flex; align-items:center; justify-content:center; border:1px dashed var(--color-border); position:relative; }
         .img-preview img { width:100%; height:100%; object-fit:cover; }
-        .img-preview-placeholder { color:var(--color-muted); font-size:13px; display:flex; flex-direction:column; align-items:center; gap:6px; }
-        .img-preview-placeholder svg { width:26px; height:26px; opacity:.4; }
+        .img-preview-placeholder { color:var(--color-muted); font-size:13px; display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px; text-align:center; }
+        .img-preview-placeholder svg { width:28px; height:28px; opacity:.4; }
+        .img-preview-clear { position:absolute; top:8px; right:8px; width:28px; height:28px; border-radius:50%; border:none; background:rgba(0,0,0,.55); color:white; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+        .img-preview-clear:hover { background:rgba(0,0,0,.8); }
+        .img-source-tabs { display:flex; gap:0; margin-bottom:10px; border-bottom:1px solid var(--color-border); }
+        .img-source-tab { background:none; border:none; padding:8px 14px; font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; color:var(--color-muted); border-bottom:2px solid transparent; transition:all .15s; margin-bottom:-1px; }
+        .img-source-tab.active { color:var(--color-text); border-bottom-color:var(--color-text); font-weight:500; }
+        .img-source-tab:hover:not(.active) { color:var(--color-text); }
+        .file-drop { border:1px dashed var(--color-border); border-radius:var(--radius-sm); padding:18px 14px; text-align:center; cursor:pointer; transition:all .15s; background:var(--color-input); }
+        .file-drop:hover, .file-drop.drag { background:var(--color-bg); border-color:var(--color-text); }
+        .file-drop input { display:none; }
+        .file-drop p { font-size:13px; color:var(--color-muted); margin:4px 0 0; }
+        .file-drop strong { color:var(--color-text); font-weight:500; }
+        .img-help { font-size:11px; color:var(--color-muted); margin-top:6px; }
 
         /* ── PAGINATION ── */
         .pagination { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-top:1px solid var(--color-border); font-size:12px; color:var(--color-muted); gap:12px; flex-wrap:wrap; }
@@ -307,7 +319,7 @@
         <a href="javascript:void(0)" class="nav-item" id="nav-orders" onclick="switchSection('orders',this)">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5h6"/></svg>
             Захиалга
-            <span class="nav-badge" id="ordersBadge">5</span>
+            <span class="nav-badge" id="ordersBadge" style="display:none"></span>
         </a>
         <a href="javascript:void(0)" class="nav-item" id="nav-users" onclick="switchSection('users',this)">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -380,23 +392,23 @@
             <div class="stats-grid">
                 <article class="stat-card">
                     <h3 class="stat-label">Нийт борлуулалт</h3>
-                    <p class="stat-value" data-count="48.2" data-prefix="₮" data-suffix="M">₮48.2M</p>
-                    <p class="stat-change up">↑ 12.4% өнгөрсөн сараас</p>
+                    <p class="stat-value" id="stat-revenue">₮0</p>
+                    <p class="stat-change up" id="stat-revenue-sub">Хүргэгдсэн захиалгууд</p>
                 </article>
                 <article class="stat-card">
                     <h3 class="stat-label">Захиалга</h3>
-                    <p class="stat-value" data-count="1284" data-prefix="" data-suffix="">1,284</p>
-                    <p class="stat-change up">↑ 8.1% өнгөрсөн сараас</p>
+                    <p class="stat-value" id="stat-orders">0</p>
+                    <p class="stat-change up" id="stat-orders-sub">Бүх захиалга</p>
                 </article>
                 <article class="stat-card">
                     <h3 class="stat-label">Хэрэглэгч</h3>
-                    <p class="stat-value" data-count="3491" data-prefix="" data-suffix="">3,491</p>
-                    <p class="stat-change up">↑ 5.3% өнгөрсөн сараас</p>
+                    <p class="stat-value" id="stat-users">0</p>
+                    <p class="stat-change up" id="stat-users-sub">Бүртгэгдсэн</p>
                 </article>
                 <article class="stat-card">
-                    <h3 class="stat-label">Буцаалт</h3>
-                    <p class="stat-value" data-count="23" data-prefix="" data-suffix="">23</p>
-                    <p class="stat-change down">↓ 2 өнгөрсөн сараас</p>
+                    <h3 class="stat-label">Бараа</h3>
+                    <p class="stat-value" id="stat-products">0</p>
+                    <p class="stat-change up" id="stat-products-sub">Каталогт</p>
                 </article>
             </div>
 
@@ -429,12 +441,8 @@
                         <h3 class="card-title">Сүүлийн захиалгууд</h3>
                         <button class="btn btn-outline btn-sm" onclick="switchSection('orders',document.getElementById('nav-orders'))">Бүгд</button>
                     </header>
-                    <div class="card-body">
-                        <article class="order-mini"><div><h4 class="order-id">#ORD-1050</h4><p class="order-customer">Сайнбаяр Г.</p></div><span class="badge badge-gray">Хүлээгдэж байгаа</span><p class="order-amount">₮156,000</p></article>
-                        <article class="order-mini"><div><h4 class="order-id">#ORD-1049</h4><p class="order-customer">Батболд Дорж</p></div><span class="badge badge-green">Хүргэсэн</span><p class="order-amount">₮124,000</p></article>
-                        <article class="order-mini"><div><h4 class="order-id">#ORD-1048</h4><p class="order-customer">Оюунцэцэг Н.</p></div><span class="badge badge-yellow">Явж байгаа</span><p class="order-amount">₮89,500</p></article>
-                        <article class="order-mini"><div><h4 class="order-id">#ORD-1047</h4><p class="order-customer">Мөнхбаяр Г.</p></div><span class="badge badge-yellow">Явж байгаа</span><p class="order-amount">₮210,000</p></article>
-                        <article class="order-mini"><div><h4 class="order-id">#ORD-1046</h4><p class="order-customer">Энхтуяа Б.</p></div><span class="badge badge-red">Цуцласан</span><p class="order-amount">₮67,000</p></article>
+                    <div class="card-body" id="recentOrdersWidget">
+                        <p style="padding:20px;color:var(--color-muted);font-size:13px;text-align:center">Уншиж байна...</p>
                     </div>
                 </article>
 
@@ -453,8 +461,18 @@
             <div id="product-app-root"></div>
         </section>
 
-        <!-- ══ ORDERS ══ -->
+        <!-- ══ ORDERS (React, real backend data) ══ -->
         <section class="section" id="section-orders">
+            <div id="orders-app-root"></div>
+        </section>
+
+        <!-- ══ USERS (React, real backend data) ══ -->
+        <section class="section" id="section-users">
+            <div id="users-app-root"></div>
+        </section>
+
+        <!-- ══ LEGACY HARDCODED MARKUP (kept hidden, slated for deletion) ══ -->
+        <section hidden>
             <div class="toolbar">
                 <div class="search-box">
                     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -517,42 +535,6 @@
             </article>
         </section>
 
-        <!-- ══ USERS ══ -->
-        <section class="section" id="section-users">
-            <div class="toolbar">
-                <div class="search-box">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                    <input type="text" placeholder="Хэрэглэгч хайх..." oninput="filterTable(this,'usersTable')">
-                </div>
-                <select class="filter-select"><option>Бүх үүрэг</option><option>Admin</option><option>Хэрэглэгч</option></select>
-            </div>
-            <article class="card">
-                <div class="table-wrap">
-                    <table id="usersTable">
-                        <thead><tr><th>Хэрэглэгч</th><th>И-мэйл</th><th>Бүртгүүлсэн</th><th>Захиалга</th><th>Үүрэг</th><th>Үйлдэл</th></tr></thead>
-                        <tbody>
-                            <tr>
-                                <td><figure><div class="user-avatar" style="width:34px;height:34px;font-size:13px">Б</div><figcaption><div class="product-name">Батболд Дорж</div></figcaption></figure></td>
-                                <td>batbold@example.mn</td><td>2025.11.14</td><td>12</td>
-                                <td><span class="badge badge-gray">Хэрэглэгч</span></td>
-                                <td><div class="action-btns"><button class="btn-icon" onclick="alert('Дэлгэрэнгүй')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon del" onclick="deleteRow(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button></div></td>
-                            </tr>
-                            <tr>
-                                <td><figure><div class="user-avatar" style="width:34px;height:34px;font-size:13px">А</div><figcaption><div class="product-name">Админ</div></figcaption></figure></td>
-                                <td>admin@shop.mn</td><td>2025.01.01</td><td>—</td>
-                                <td><span class="badge badge-green">Admin</span></td>
-                                <td><div class="action-btns"><button class="btn-icon" onclick="alert('Системийн администратор')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <footer class="pagination">
-                    <span>2 нийт 3,491 хэрэглэгчийн</span>
-                    <div class="page-btns"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">→</button></div>
-                </footer>
-            </article>
-        </section>
-
     </div>
 </main>
 
@@ -569,18 +551,69 @@
         const low = products.filter(p => p.stock <= 5).sort((a, b) => a.stock - b.stock);
         const widget = document.getElementById('lowStockWidget');
         const countEl = document.getElementById('lowStockCount');
-        if (!widget) return;
         if (countEl) countEl.textContent = low.length ? `${low.length} бараа` : '';
-        widget.innerHTML = low.length
+        if (widget) widget.innerHTML = low.length
             ? low.slice(0, 6).map(p => `
                 <article class="order-mini">
                     <div><h4 class="order-id">${esc(p.name)}</h4><p class="order-customer">${esc(p.category)}</p></div>
                     <span class="badge ${p.stock === 0 ? 'badge-red' : 'badge-yellow'}">${p.stock === 0 ? '0 үлдсэн' : p.stock + ' үлдсэн'}</span>
                 </article>`).join('')
             : '<p style="padding:24px;color:var(--color-muted);font-size:13px;text-align:center">Дууссан нөөц байхгүй ✓</p>';
+
+        // Product count stat
+        const productsStat = document.getElementById('stat-products');
+        if (productsStat) productsStat.textContent = products.length.toLocaleString('mn-MN');
     });
 
     function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function fmtT(n) { return '₮' + Number(n || 0).toLocaleString('mn-MN'); }
+
+    // Orders → revenue, count, recent-orders widget, sidebar badge.
+    const ORDER_BADGE_CLS = {
+        pending: 'badge-gray', shipping: 'badge-yellow',
+        delivered: 'badge-green', cancelled: 'badge-red', confirmed: 'badge-gray',
+    };
+    const ORDER_LABEL_MN = {
+        pending: 'Хүлээгдэж байгаа', shipping: 'Явж байгаа',
+        delivered: 'Хүргэсэн', cancelled: 'Цуцласан', confirmed: 'Баталгаажсан',
+    };
+    window.addEventListener('adminOrdersChanged', () => {
+        const orders = window.__adminOrders || [];
+        const revenue = orders.filter(o => o.status !== 'cancelled').reduce((s, o) => s + (o.total || 0), 0);
+        const pending = orders.filter(o => o.status === 'pending').length;
+
+        document.getElementById('stat-revenue').textContent = fmtT(revenue);
+        document.getElementById('stat-revenue-sub').textContent = `${orders.filter(o => o.status === 'delivered').length} захиалга хүргэгдсэн`;
+        document.getElementById('stat-orders').textContent = orders.length.toLocaleString('mn-MN');
+        document.getElementById('stat-orders-sub').textContent = `${pending} хүлээгдэж байгаа`;
+
+        const badge = document.getElementById('ordersBadge');
+        if (badge) {
+            if (pending > 0) { badge.textContent = pending; badge.style.display = ''; }
+            else { badge.style.display = 'none'; }
+        }
+
+        const recent = document.getElementById('recentOrdersWidget');
+        if (recent) {
+            recent.innerHTML = orders.length
+                ? orders.slice(0, 5).map(o => {
+                    const cls = ORDER_BADGE_CLS[o.status] || 'badge-gray';
+                    const label = ORDER_LABEL_MN[o.status] || o.status || '—';
+                    return `<article class="order-mini">
+                        <div><h4 class="order-id">#ORD-${o.id}</h4><p class="order-customer">${esc(o.user_name || o.user_email || '—')}</p></div>
+                        <span class="badge ${cls}">${esc(label)}</span>
+                        <p class="order-amount">${fmtT(o.total)}</p>
+                    </article>`;
+                }).join('')
+                : '<p style="padding:24px;color:var(--color-muted);font-size:13px;text-align:center">Захиалга алга</p>';
+        }
+    });
+
+    window.addEventListener('adminUsersChanged', () => {
+        const users = window.__adminUsers || [];
+        document.getElementById('stat-users').textContent = users.length.toLocaleString('mn-MN');
+        document.getElementById('stat-users-sub').textContent = `${users.filter(u => u.is_admin).length} admin`;
+    });
 
     /* ── Section navigation ── */
     const titles = {
@@ -606,7 +639,6 @@
         closeAllMenus();
         if (id === 'dashboard') {
             resetChartAnimation();
-            animateCounters();
         }
     }
 
@@ -683,28 +715,6 @@
         });
     }
 
-    /* ── Dashboard: animated counters ── */
-    function animateCounters() {
-        document.querySelectorAll('#section-dashboard .stat-value[data-count]').forEach(el => {
-            const target = parseFloat(el.dataset.count);
-            const prefix = el.dataset.prefix || '';
-            const suffix = el.dataset.suffix || '';
-            const decimals = String(target).includes('.') ? 1 : 0;
-            const isLarge = target > 100;
-            let start = null;
-            const dur = isLarge ? 1600 : 1000;
-            function tick(ts) {
-                if (!start) start = ts;
-                const prog = Math.min((ts - start) / dur, 1);
-                const ease = 1 - Math.pow(1 - prog, 3);
-                const val = target * ease;
-                el.textContent = prefix + (decimals ? val.toFixed(1) : Math.round(val).toLocaleString()) + suffix;
-                if (prog < 1) requestAnimationFrame(tick);
-            }
-            requestAnimationFrame(tick);
-        });
-    }
-
     /* ── Dashboard: chart re-animate ── */
     function resetChartAnimation() {
         document.querySelectorAll('.bar-fill').forEach(bar => {
@@ -713,9 +723,6 @@
             bar.style.animation = '';
         });
     }
-
-    /* ── Boot ── */
-    animateCounters();
 </script>
 
 <!-- ══════════════ REACT PRODUCT MANAGER ══════════════ -->
@@ -855,6 +862,39 @@
         );
     }
 
+    /* ── Image utils: resize big browser-uploaded images to a sane size ── */
+    // Files get downscaled to fit in 1200×1200 and re-encoded as JPEG 0.85.
+    // A 4-MB phone photo typically lands around 150-300 KB after this, which
+    // is small enough to stash directly in the products.image TEXT column
+    // as a data URL — no S3, no static-files endpoint required.
+    function resizeImageFile(file, maxDim = 1200, quality = 0.85) {
+        return new Promise((resolve, reject) => {
+            if (!file.type.startsWith('image/')) return reject(new Error('Зөвхөн зураг файл оруулна уу'));
+            const reader = new FileReader();
+            reader.onerror = () => reject(new Error('Файл уншиж чадсангүй'));
+            reader.onload = () => {
+                const img = new Image();
+                img.onerror = () => reject(new Error('Зураг ачаалж чадсангүй'));
+                img.onload = () => {
+                    let { width, height } = img;
+                    if (width > maxDim || height > maxDim) {
+                        const scale = maxDim / Math.max(width, height);
+                        width  = Math.round(width  * scale);
+                        height = Math.round(height * scale);
+                    }
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width; canvas.height = height;
+                    canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                    // Keep PNG for transparency, otherwise re-encode as JPEG.
+                    const outType = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+                    resolve(canvas.toDataURL(outType, quality));
+                };
+                img.src = reader.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
     /* ── Modal ── */
     function ProductModal({ mode, product, onSave, onClose }) {
         const blank = { name:'',sku:'',price:'',stock:'',category:'',description:'',image:'' };
@@ -862,11 +902,40 @@
             ? { name:product.name,sku:product.sku,price:product.price,stock:product.stock,category:product.category,description:product.description||'',image:product.image||'' }
             : blank);
         const [imgErr, setImgErr] = useState(false);
+        // Default to URL tab if editing a product whose image looks like a URL,
+        // otherwise default to file upload (the common case for new uploads).
+        const looksLikeUrl = (form.image || '').startsWith('http');
+        const [imgTab, setImgTab] = useState(looksLikeUrl ? 'url' : 'file');
+        const [uploading, setUploading] = useState(false);
+        const [dragOver, setDragOver] = useState(false);
+        const [uploadErr, setUploadErr] = useState('');
+        const fileInputRef = useRef(null);
         useEffect(() => { setImgErr(false); }, [form.image]);
 
         const set = f => e => setForm(p => ({ ...p, [f]: e.target.value }));
         const submit = e => { e.preventDefault(); onSave({ ...form, price:Number(form.price), stock:Number(form.stock) }); };
         const hasPreview = form.image && !imgErr;
+
+        async function handleFile(file) {
+            if (!file) return;
+            setUploadErr('');
+            setUploading(true);
+            try {
+                const dataUrl = await resizeImageFile(file);
+                setForm(p => ({ ...p, image: dataUrl }));
+            } catch (err) {
+                setUploadErr(err.message);
+            } finally {
+                setUploading(false);
+            }
+        }
+        function onFileChange(e) { handleFile(e.target.files?.[0]); e.target.value = ''; }
+        function onDrop(e) {
+            e.preventDefault();
+            setDragOver(false);
+            handleFile(e.dataTransfer.files?.[0]);
+        }
+        function clearImage() { setForm(p => ({ ...p, image:'' })); setUploadErr(''); }
 
         return (
             <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
@@ -878,13 +947,44 @@
                     <div className="modal-body">
                         <div className="img-preview">
                             {hasPreview
-                                ? <img src={form.image} alt="preview" onError={() => setImgErr(true)} />
+                                ? <>
+                                    <img src={form.image} alt="preview" onError={() => setImgErr(true)} />
+                                    <button type="button" className="img-preview-clear" onClick={clearImage} title="Зураг арилгах">✕</button>
+                                </>
                                 : <div className="img-preview-placeholder">
                                     <svg fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-                                    <span>Зургийн URL оруулна уу</span>
+                                    <span>{uploading ? 'Зураг боловсруулж байна...' : imgErr ? 'Зураг ачаалж чадсангүй' : 'Зураг сонгох эсвэл URL оруулна уу'}</span>
                                 </div>
                             }
                         </div>
+
+                        <div className="img-source-tabs">
+                            <button type="button" className={`img-source-tab${imgTab==='file'?' active':''}`} onClick={() => setImgTab('file')}>📁 Файл сонгох</button>
+                            <button type="button" className={`img-source-tab${imgTab==='url'?' active':''}`} onClick={() => setImgTab('url')}>🔗 URL</button>
+                        </div>
+
+                        {imgTab === 'file' ? (
+                            <div className="form-field">
+                                <label
+                                    className={`file-drop${dragOver?' drag':''}`}
+                                    onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+                                    onDragLeave={() => setDragOver(false)}
+                                    onDrop={onDrop}
+                                >
+                                    <input ref={fileInputRef} type="file" accept="image/*" onChange={onFileChange} />
+                                    <strong>{uploading ? 'Боловсруулж байна...' : 'Зураг сонгох'}</strong>
+                                    <p>эсвэл энд чирж тавиарай (JPG, PNG, WebP)</p>
+                                </label>
+                                {uploadErr && <p style={{color:'var(--color-red)',fontSize:12,marginTop:6}}>{uploadErr}</p>}
+                                <p className="img-help">Том зургийг 1200px хүртэл багасгаж, JPEG болгож хадгална.</p>
+                            </div>
+                        ) : (
+                            <div className="form-field">
+                                <input className="form-input" type="url" value={form.image.startsWith('data:')?'':form.image} onChange={set('image')} placeholder="https://..." />
+                                <p className="img-help">Гадаад линк ашиглаж байгаа бол энд оруулна уу.</p>
+                            </div>
+                        )}
+
                         <div className="form-row">
                             <div className="form-field">
                                 <label className="form-label">Барааны нэр</label>
@@ -912,18 +1012,14 @@
                                 {CATS.map(c => <option key={c}>{c}</option>)}
                             </select>
                         </div>
-                        <div className="form-field">
+                        <div className="form-field" style={{marginBottom:0}}>
                             <label className="form-label">Тайлбар</label>
                             <textarea className="form-input form-textarea" value={form.description} onChange={set('description')} placeholder="Барааны тайлбар..." />
-                        </div>
-                        <div className="form-field" style={{marginBottom:0}}>
-                            <label className="form-label">Зураг URL</label>
-                            <input className="form-input" type="url" value={form.image} onChange={set('image')} placeholder="https://..." />
                         </div>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-outline" onClick={onClose}>Цуцлах</button>
-                        <button type="submit" className="btn btn-dark">Хадгалах</button>
+                        <button type="submit" className="btn btn-dark" disabled={uploading}>{uploading ? 'Хүлээнэ үү...' : 'Хадгалах'}</button>
                     </div>
                 </form>
             </div>
@@ -1248,6 +1344,403 @@
     }
 
     ReactDOM.createRoot(document.getElementById('product-app-root')).render(<ProductApp />);
+
+    /* ══════════════════════════════════════════════
+       ORDERS APP (admin: see all orders, change status)
+       ══════════════════════════════════════════════ */
+    const ORDER_STATUS_META = {
+        pending:   { label: 'Хүлээгдэж байгаа', cls: 'badge-gray' },
+        shipping:  { label: 'Явж байгаа',       cls: 'badge-yellow' },
+        delivered: { label: 'Хүргэсэн',         cls: 'badge-green' },
+        cancelled: { label: 'Цуцласан',         cls: 'badge-red' },
+        confirmed: { label: 'Баталгаажсан',     cls: 'badge-gray' },
+    };
+    function statusMeta(s) { return ORDER_STATUS_META[s] || { label: s || '—', cls: 'badge-gray' }; }
+
+    async function apiFetchAllOrders() {
+        const res = await fetch(`${API_BASE}/orders/admin/all`, { headers: authHeaders() });
+        if (!res.ok) throw new Error('Захиалга татаж чадсангүй');
+        return res.json();
+    }
+    async function apiUpdateOrderStatus(id, status) {
+        const res = await fetch(`${API_BASE}/orders/${id}/status`, {
+            method: 'PATCH',
+            headers: authHeaders(),
+            body: JSON.stringify({ status }),
+        });
+        if (!res.ok) throw new Error((await res.json()).error || 'Статус өөрчилж чадсангүй');
+        return res.json();
+    }
+
+    function formatDate(iso) {
+        if (!iso) return '—';
+        const d = new Date(iso);
+        return d.toLocaleDateString('mn-MN', { year:'numeric', month:'2-digit', day:'2-digit' });
+    }
+
+    function OrdersApp() {
+        const [orders, setOrders] = useState([]);
+        const [loading, setLoading] = useState(true);
+        const [search, setSearch] = useState('');
+        const [statF, setStatF] = useState('');
+        const [openStatusMenu, setOpenStatusMenu] = useState(null);
+        const [detail, setDetail] = useState(null);
+        const [toast, setToast] = useState(null);
+        const toastTimer = useRef(null);
+
+        function showToast(msg, type='ok') {
+            clearTimeout(toastTimer.current);
+            setToast({ msg, type });
+            toastTimer.current = setTimeout(() => setToast(null), 2500);
+        }
+
+        useEffect(() => {
+            apiFetchAllOrders()
+                .then(list => { setOrders(list); setLoading(false); })
+                .catch(err => { showToast(err.message, 'del'); setLoading(false); });
+        }, []);
+
+        // Expose for the dashboard recent-orders widget.
+        useEffect(() => { window.__adminOrders = orders; window.dispatchEvent(new Event('adminOrdersChanged')); }, [orders]);
+
+        async function changeStatus(id, status) {
+            try {
+                const updated = await apiUpdateOrderStatus(id, status);
+                setOrders(prev => prev.map(o => o.id === id ? { ...o, status: updated.status } : o));
+                setOpenStatusMenu(null);
+                showToast('Статус өөрчлөгдлөө');
+            } catch (err) {
+                showToast(err.message, 'del');
+            }
+        }
+
+        const q = search.toLowerCase();
+        const filtered = orders.filter(o => {
+            const mQ = !q
+                || String(o.id).includes(q)
+                || (o.user_email || '').toLowerCase().includes(q)
+                || (o.user_name  || '').toLowerCase().includes(q);
+            const mS = !statF || o.status === statF;
+            return mQ && mS;
+        });
+
+        const stats = {
+            pending:   orders.filter(o => o.status === 'pending').length,
+            shipping:  orders.filter(o => o.status === 'shipping').length,
+            delivered: orders.filter(o => o.status === 'delivered').length,
+            revenue:   orders.filter(o => o.status !== 'cancelled').reduce((s, o) => s + (o.total || 0), 0),
+        };
+
+        return (
+            <>
+                <div className="toolbar">
+                    <div className="search-box">
+                        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="ID, нэр, и-мэйл хайх..." />
+                    </div>
+                    <select className="filter-select" value={statF} onChange={e => setStatF(e.target.value)}>
+                        <option value="">Бүх статус</option>
+                        <option value="pending">Хүлээгдэж байгаа</option>
+                        <option value="shipping">Явж байгаа</option>
+                        <option value="delivered">Хүргэсэн</option>
+                        <option value="cancelled">Цуцласан</option>
+                        <option value="confirmed">Баталгаажсан</option>
+                    </select>
+                </div>
+
+                <div className="card" style={{marginBottom:16}}>
+                    <div className="stats-bar">
+                        <span>Нийт: <strong>{orders.length}</strong></span>
+                        <span>Хүлээгдэж байгаа: <strong style={{color:'hsl(0,0%,40%)'}}>{stats.pending}</strong></span>
+                        <span>Явж байгаа: <strong style={{color:'hsl(40,70%,35%)'}}>{stats.shipping}</strong></span>
+                        <span>Хүргэсэн: <strong style={{color:'hsl(140,50%,35%)'}}>{stats.delivered}</strong></span>
+                        <span style={{marginLeft:'auto'}}>Орлого: <strong>{fmt(stats.revenue)}</strong></span>
+                    </div>
+                </div>
+
+                <div className="card">
+                    <div className="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Захиалга</th><th>Хэрэглэгч</th><th>Огноо</th><th>Бараа</th><th>Дүн</th><th>Статус</th><th>Үйлдэл</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {loading && <tr><td colSpan="7" style={{textAlign:'center',padding:32,color:'var(--color-muted)'}}>Уншиж байна...</td></tr>}
+                                {!loading && filtered.length === 0 && (
+                                    <tr><td colSpan="7">
+                                        <div className="empty-state">
+                                            <svg fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/></svg>
+                                            <p>Захиалга алга</p>
+                                        </div>
+                                    </td></tr>
+                                )}
+                                {filtered.map(o => {
+                                    const s = statusMeta(o.status);
+                                    const menuOpen = openStatusMenu === o.id;
+                                    return (
+                                        <tr key={o.id}>
+                                            <td><strong>#ORD-{o.id}</strong></td>
+                                            <td>
+                                                <div className="product-name">{o.user_name || '—'}</div>
+                                                <div className="product-sku">{o.user_email || '—'}</div>
+                                            </td>
+                                            <td>{formatDate(o.timestamp)}</td>
+                                            <td>{(o.items || []).length}</td>
+                                            <td style={{fontWeight:500}}>{fmt(o.total)}</td>
+                                            <td>
+                                                <div className="status-wrap" onClick={e => { e.stopPropagation(); setOpenStatusMenu(menuOpen ? null : o.id); }}>
+                                                    <span className={`badge ${s.cls}`}>{s.label}</span>
+                                                    {menuOpen && (
+                                                        <div className="status-menu open" onClick={e => e.stopPropagation()}>
+                                                            <button onClick={() => changeStatus(o.id, 'pending')}>⬜ Хүлээгдэж байгаа</button>
+                                                            <button onClick={() => changeStatus(o.id, 'shipping')}>🚚 Явж байгаа</button>
+                                                            <button onClick={() => changeStatus(o.id, 'delivered')}>✅ Хүргэсэн</button>
+                                                            <button onClick={() => changeStatus(o.id, 'cancelled')}>❌ Цуцласан</button>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className="action-btns">
+                                                    <button className="btn-icon" onClick={() => setDetail(o)} title="Дэлгэрэнгүй">
+                                                        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {detail && <OrderDetailModal order={detail} onClose={() => setDetail(null)} />}
+                {toast && <div className={`toast${toast.type==='del'?' del':''}`}>{toast.msg}</div>}
+            </>
+        );
+    }
+
+    function OrderDetailModal({ order, onClose }) {
+        const s = statusMeta(order.status);
+        return (
+            <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
+                <div className="modal" onClick={e => e.stopPropagation()}>
+                    <div className="modal-header">
+                        <h3 className="modal-title">Захиалга #ORD-{order.id}</h3>
+                        <button type="button" className="modal-close" onClick={onClose}>✕</button>
+                    </div>
+                    <div className="modal-body">
+                        <div style={{display:'flex',justifyContent:'space-between',marginBottom:16,paddingBottom:14,borderBottom:'1px solid var(--color-border)'}}>
+                            <div>
+                                <div style={{fontSize:11,color:'var(--color-muted)',textTransform:'uppercase',letterSpacing:.5}}>Хэрэглэгч</div>
+                                <div style={{fontWeight:500,marginTop:2}}>{order.user_name || '—'}</div>
+                                <div style={{fontSize:12,color:'var(--color-muted)'}}>{order.user_email}</div>
+                            </div>
+                            <div style={{textAlign:'right'}}>
+                                <div style={{fontSize:11,color:'var(--color-muted)',textTransform:'uppercase',letterSpacing:.5}}>Огноо</div>
+                                <div style={{fontWeight:500,marginTop:2}}>{formatDate(order.timestamp)}</div>
+                                <span className={`badge ${s.cls}`} style={{marginTop:4}}>{s.label}</span>
+                            </div>
+                        </div>
+
+                        <div style={{fontSize:11,color:'var(--color-muted)',textTransform:'uppercase',letterSpacing:.5,marginBottom:8}}>Бараа ({(order.items||[]).length})</div>
+                        {(order.items || []).map((it, i) => (
+                            <div key={i} style={{display:'flex',gap:10,padding:'10px 0',borderBottom:'1px solid var(--color-border)'}}>
+                                {it.image && <img src={it.image} alt="" style={{width:42,height:42,borderRadius:6,objectFit:'cover'}} onError={e => e.target.style.visibility='hidden'} />}
+                                <div style={{flex:1,minWidth:0}}>
+                                    <div style={{fontWeight:500,fontSize:13}}>{it.name}</div>
+                                    {it.variantAttrs && <div style={{fontSize:11,color:'var(--color-muted)'}}>{Object.values(it.variantAttrs).join(' · ')}</div>}
+                                    <div style={{fontSize:11,color:'var(--color-muted)'}}>{it.qty} ширхэг × {fmt(it.newPrice)}</div>
+                                </div>
+                                <div style={{fontWeight:500,whiteSpace:'nowrap'}}>{fmt(it.qty * it.newPrice)}</div>
+                            </div>
+                        ))}
+
+                        <div style={{marginTop:14,paddingTop:14,borderTop:'1px solid var(--color-border)',display:'flex',flexDirection:'column',gap:4,fontSize:13}}>
+                            <div style={{display:'flex',justifyContent:'space-between'}}><span style={{color:'var(--color-muted)'}}>Барааны дүн</span><span>{fmt(order.subtotal)}</span></div>
+                            <div style={{display:'flex',justifyContent:'space-between'}}><span style={{color:'var(--color-muted)'}}>Хүргэлт</span><span>{fmt(order.delFee)}</span></div>
+                            {order.ecoFee > 0 && <div style={{display:'flex',justifyContent:'space-between'}}><span style={{color:'var(--color-muted)'}}>Эко хураамж</span><span>{fmt(order.ecoFee)}</span></div>}
+                            <div style={{display:'flex',justifyContent:'space-between',fontWeight:600,fontSize:15,marginTop:6}}><span>Нийт</span><span>{fmt(order.total)}</span></div>
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-dark" onClick={onClose}>Хаах</button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    ReactDOM.createRoot(document.getElementById('orders-app-root')).render(<OrdersApp />);
+
+    /* ══════════════════════════════════════════════
+       USERS APP (admin: list/promote/demote/delete)
+       ══════════════════════════════════════════════ */
+    async function apiFetchUsers() {
+        const res = await fetch(`${API_BASE}/users`, { headers: authHeaders() });
+        if (!res.ok) throw new Error('Хэрэглэгч татаж чадсангүй');
+        return res.json();
+    }
+    async function apiSetUserAdmin(id, isAdmin) {
+        const res = await fetch(`${API_BASE}/users/${id}`, {
+            method: 'PATCH',
+            headers: authHeaders(),
+            body: JSON.stringify({ is_admin: isAdmin }),
+        });
+        if (!res.ok) throw new Error((await res.json()).error || 'Шинэчилж чадсангүй');
+        return res.json();
+    }
+    async function apiDeleteUser(id) {
+        const res = await fetch(`${API_BASE}/users/${id}`, {
+            method: 'DELETE',
+            headers: authHeaders(),
+        });
+        if (!res.ok && res.status !== 204) throw new Error((await res.json()).error || 'Устгаж чадсангүй');
+    }
+
+    function UsersApp() {
+        const [users, setUsers] = useState([]);
+        const [loading, setLoading] = useState(true);
+        const [search, setSearch] = useState('');
+        const [roleF, setRoleF] = useState('');
+        const [toast, setToast] = useState(null);
+        const toastTimer = useRef(null);
+
+        function showToast(msg, type='ok') {
+            clearTimeout(toastTimer.current);
+            setToast({ msg, type });
+            toastTimer.current = setTimeout(() => setToast(null), 2500);
+        }
+
+        useEffect(() => {
+            apiFetchUsers()
+                .then(list => { setUsers(list); setLoading(false); })
+                .catch(err => { showToast(err.message, 'del'); setLoading(false); });
+        }, []);
+
+        // Expose for the dashboard stat card.
+        useEffect(() => { window.__adminUsers = users; window.dispatchEvent(new Event('adminUsersChanged')); }, [users]);
+
+        async function toggleAdmin(u) {
+            const next = !u.is_admin;
+            if (u.id === me.id && !next) { showToast('Өөрийн admin эрхийг хасах боломжгүй', 'del'); return; }
+            if (!confirm(next ? `${u.email}-г admin болгох уу?` : `${u.email}-ийн admin эрхийг хасах уу?`)) return;
+            try {
+                const updated = await apiSetUserAdmin(u.id, next);
+                setUsers(prev => prev.map(x => x.id === u.id ? { ...x, is_admin: updated.is_admin } : x));
+                showToast('Эрх шинэчлэгдлээ');
+            } catch (err) {
+                showToast(err.message, 'del');
+            }
+        }
+
+        async function del(u) {
+            if (u.id === me.id) { showToast('Өөрийгөө устгах боломжгүй', 'del'); return; }
+            if (!confirm(`${u.email}-г устгах уу? Энэ үйлдлийг буцаах боломжгүй.`)) return;
+            try {
+                await apiDeleteUser(u.id);
+                setUsers(prev => prev.filter(x => x.id !== u.id));
+                showToast('Хэрэглэгч устгагдлаа', 'del');
+            } catch (err) {
+                showToast(err.message, 'del');
+            }
+        }
+
+        const q = search.toLowerCase();
+        const filtered = users.filter(u => {
+            const mQ = !q || (u.email || '').toLowerCase().includes(q) || (u.name || '').toLowerCase().includes(q);
+            const mR = !roleF || (roleF === 'admin' ? u.is_admin : !u.is_admin);
+            return mQ && mR;
+        });
+
+        const adminCount = users.filter(u => u.is_admin).length;
+
+        return (
+            <>
+                <div className="toolbar">
+                    <div className="search-box">
+                        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Нэр, и-мэйл хайх..." />
+                    </div>
+                    <select className="filter-select" value={roleF} onChange={e => setRoleF(e.target.value)}>
+                        <option value="">Бүх үүрэг</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">Хэрэглэгч</option>
+                    </select>
+                </div>
+
+                <div className="card" style={{marginBottom:16}}>
+                    <div className="stats-bar">
+                        <span>Нийт: <strong>{users.length}</strong></span>
+                        <span>Admin: <strong style={{color:'hsl(140,50%,35%)'}}>{adminCount}</strong></span>
+                        <span>Хэрэглэгч: <strong>{users.length - adminCount}</strong></span>
+                    </div>
+                </div>
+
+                <div className="card">
+                    <div className="table-wrap">
+                        <table>
+                            <thead><tr><th>Хэрэглэгч</th><th>И-мэйл</th><th>Бүртгүүлсэн</th><th>Захиалга</th><th>Үүрэг</th><th>Үйлдэл</th></tr></thead>
+                            <tbody>
+                                {loading && <tr><td colSpan="6" style={{textAlign:'center',padding:32,color:'var(--color-muted)'}}>Уншиж байна...</td></tr>}
+                                {!loading && filtered.length === 0 && (
+                                    <tr><td colSpan="6">
+                                        <div className="empty-state">
+                                            <svg fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                                            <p>Хэрэглэгч олдсонгүй</p>
+                                        </div>
+                                    </td></tr>
+                                )}
+                                {filtered.map(u => {
+                                    const initial = (u.name || u.email || '?').trim().charAt(0).toUpperCase();
+                                    const isMe = u.id === me.id;
+                                    return (
+                                        <tr key={u.id}>
+                                            <td>
+                                                <figure>
+                                                    <div className="user-avatar" style={{width:34,height:34,fontSize:13}}>{initial}</div>
+                                                    <figcaption>
+                                                        <div className="product-name">{u.name || '—'}{isMe && <span style={{marginLeft:6,fontSize:10,color:'var(--color-muted)'}}>(та)</span>}</div>
+                                                    </figcaption>
+                                                </figure>
+                                            </td>
+                                            <td>{u.email}</td>
+                                            <td>{formatDate(u.created_at)}</td>
+                                            <td>{u.order_count}</td>
+                                            <td>
+                                                <span className={`badge ${u.is_admin ? 'badge-green' : 'badge-gray'}`}>
+                                                    {u.is_admin ? 'Admin' : 'Хэрэглэгч'}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div className="action-btns">
+                                                    <button className="btn-icon" onClick={() => toggleAdmin(u)} title={u.is_admin ? 'Admin хасах' : 'Admin болгох'} disabled={isMe}>
+                                                        {u.is_admin
+                                                            ? <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><line x1="3" y1="3" x2="21" y2="21"/></svg>
+                                                            : <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V5z"/></svg>}
+                                                    </button>
+                                                    <button className="btn-icon del" onClick={() => del(u)} title="Устгах" disabled={isMe}>
+                                                        <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {toast && <div className={`toast${toast.type==='del'?' del':''}`}>{toast.msg}</div>}
+            </>
+        );
+    }
+
+    ReactDOM.createRoot(document.getElementById('users-app-root')).render(<UsersApp />);
 </script>
 
 </body>

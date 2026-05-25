@@ -1,8 +1,10 @@
 const express = require('express');
 const db = require('../db');
-const { authRequired } = require('../middleware/auth');
+const { authRequired, adminRequired } = require('../middleware/auth');
 
 const router = express.Router();
+
+const ALLOWED_STATUSES = ['pending', 'shipping', 'delivered', 'cancelled', 'confirmed'];
 
 function rowToOrder(row, items = []) {
   return {
@@ -162,6 +164,44 @@ router.post('/', authRequired, async (req, res) => {
   } finally {
     client.release();
   }
+});
+
+// Admin: list every order in the system, joined with the customer's name/email.
+// Must come BEFORE the `/:id` route or Express tries to treat `admin` as an id.
+router.get('/admin/all', authRequired, adminRequired, async (req, res) => {
+  const ordersRes = await db.query(
+    `SELECT o.*, u.email AS user_email, u.name AS user_name
+       FROM orders o LEFT JOIN users u ON u.id = o.user_id
+      ORDER BY o.created_at DESC`
+  );
+  const orderIds = ordersRes.rows.map(o => o.id);
+  const itemsRes = orderIds.length
+    ? await db.query('SELECT * FROM order_items WHERE order_id = ANY($1::int[])', [orderIds])
+    : { rows: [] };
+  const itemsByOrder = new Map();
+  for (const it of itemsRes.rows) {
+    if (!itemsByOrder.has(it.order_id)) itemsByOrder.set(it.order_id, []);
+    itemsByOrder.get(it.order_id).push(it);
+  }
+  res.json(ordersRes.rows.map(o => ({
+    ...rowToOrder(o, itemsByOrder.get(o.id) || []),
+    user_email: o.user_email,
+    user_name: o.user_name,
+  })));
+});
+
+// Admin: update a single order's status (pending/shipping/delivered/cancelled).
+router.patch('/:id/status', authRequired, adminRequired, async (req, res) => {
+  const { status } = req.body;
+  if (!ALLOWED_STATUSES.includes(status)) {
+    return res.status(400).json({ error: 'Invalid status' });
+  }
+  const result = await db.query(
+    'UPDATE orders SET status = $1 WHERE id = $2 RETURNING *',
+    [status, req.params.id]
+  );
+  if (!result.rows[0]) return res.status(404).json({ error: 'Not found' });
+  res.json(rowToOrder(result.rows[0]));
 });
 
 router.get('/', authRequired, async (req, res) => {
