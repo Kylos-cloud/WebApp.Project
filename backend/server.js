@@ -16,7 +16,7 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: function (origin, callback) {
-        // Origin байхгүй (Postman, curl, server-to-server гэх мэт) → зөвшөөрнө
+        // Origin байхгүй 
         if (!origin) return callback(null, true);
         if (allowedOrigins.includes(origin)) return callback(null, true);
         // Локал орчинд (development-д) бүх localhost/127.0.0.1 ямар ч порт-ыг зөвшөөрнө

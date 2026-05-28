@@ -7,7 +7,9 @@
   <title>SHOP — Захиалга баталгаажсан</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    body { background: #f0f0f0; }
+    body {
+      background: #f0f0f0;
+    }
 
     .page-wrap {
       max-width: 680px;
@@ -17,7 +19,7 @@
 
     /* ── BANNER ── */
     .banner {
-      background: linear-gradient(135deg, hsl(140,45%,34%), hsl(160,42%,28%));
+      background: linear-gradient(135deg, hsl(140, 45%, 34%), hsl(160, 42%, 28%));
       color: white;
       border-radius: 14px;
       padding: 22px 24px;
@@ -26,19 +28,44 @@
       gap: 16px;
       margin-bottom: 18px;
     }
-    .banner-emoji { font-size: 40px; flex-shrink: 0; }
-    .banner-title { font-size: 19px; font-weight: 800; margin-bottom: 3px; }
-    .banner-sub   { font-size: 13px; opacity: 0.85; }
+
+    .banner-emoji {
+      font-size: 40px;
+      flex-shrink: 0;
+    }
+
+    .banner-title {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+
+    .banner-sub {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
     .order-badge {
       margin-left: auto;
-      background: rgba(255,255,255,0.18);
+      background: rgba(255, 255, 255, 0.18);
       border-radius: 10px;
       padding: 8px 14px;
       text-align: center;
       flex-shrink: 0;
     }
-    .ob-label { font-size: 10px; opacity: 0.75; text-transform: uppercase; letter-spacing: 1px; }
-    .ob-val   { font-size: 13px; font-weight: 800; letter-spacing: 1px; }
+
+    .ob-label {
+      font-size: 10px;
+      opacity: 0.75;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .ob-val {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
 
     /* ── CARD ── */
     .t-card {
@@ -46,8 +73,9 @@
       border-radius: 12px;
       padding: 20px 22px;
       margin-bottom: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
     }
+
     .t-card-title {
       font-size: 11px;
       font-weight: 700;
@@ -63,27 +91,42 @@
       align-items: center;
       gap: 16px;
     }
+
     .eta-icon-box {
       width: 52px;
       height: 52px;
       border-radius: 12px;
-      background: hsl(140,45%,92%);
+      background: hsl(140, 45%, 92%);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 26px;
       flex-shrink: 0;
     }
-    .eta-label { font-size: 12px; color: #aaa; margin-bottom: 4px; }
+
+    .eta-label {
+      font-size: 12px;
+      color: #aaa;
+      margin-bottom: 4px;
+    }
+
     .eta-value {
       font-size: 22px;
       font-weight: 800;
-      color: hsl(140,45%,32%);
+      color: hsl(140, 45%, 32%);
       margin-bottom: 2px;
     }
-    .eta-note { font-size: 12px; color: #aaa; }
 
-    .eta-divider { border: none; border-top: 1px solid #f0f0f0; margin: 14px 0; }
+    .eta-note {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .eta-divider {
+      border: none;
+      border-top: 1px solid #f0f0f0;
+      margin: 14px 0;
+    }
 
     .eta-detail-row {
       display: flex;
@@ -93,15 +136,29 @@
       color: #888;
       margin-bottom: 8px;
     }
-    .eta-detail-row:last-child { margin-bottom: 0; }
+
+    .eta-detail-row:last-child {
+      margin-bottom: 0;
+    }
+
     .eta-detail-row .dot {
-      width: 7px; height: 7px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       flex-shrink: 0;
     }
-    .dot-green { background: hsl(140,50%,40%); }
-    .dot-blue  { background: hsl(210,75%,52%); }
-    .dot-gray  { background: #ccc; }
+
+    .dot-green {
+      background: hsl(140, 50%, 40%);
+    }
+
+    .dot-blue {
+      background: hsl(210, 75%, 52%);
+    }
+
+    .dot-gray {
+      background: #ccc;
+    }
 
     /* ── DRIVER CARD ── */
     .driver-info {
@@ -110,27 +167,71 @@
       gap: 14px;
       margin-bottom: 16px;
     }
+
     .driver-av {
-      width: 58px; height: 58px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      background: linear-gradient(135deg, hsl(220,30%,24%), hsl(220,30%,42%));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px; flex-shrink: 0;
+      background: linear-gradient(135deg, hsl(220, 30%, 24%), hsl(220, 30%, 42%));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
     }
-    .driver-name   { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
-    .driver-car    { font-size: 13px; color: #999; margin-bottom: 4px; }
-    .driver-stars  { color: hsl(40,90%,45%); font-size: 13px; font-weight: 600; }
-    .driver-btns   { display: flex; gap: 10px; }
+
+    .driver-name {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .driver-car {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .driver-stars {
+      color: hsl(40, 90%, 45%);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .driver-btns {
+      display: flex;
+      gap: 10px;
+    }
+
     .d-btn {
-      flex: 1; padding: 11px;
-      border-radius: 30px; font-size: 13px; font-weight: 600;
-      cursor: pointer; border: none; text-decoration: none;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
+      flex: 1;
+      padding: 11px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
       transition: opacity 0.2s;
     }
-    .d-btn:hover { opacity: 0.8; }
-    .d-btn-call { background: hsl(140,50%,38%); color: white; }
-    .d-btn-msg  { background: #f0f0f0; color: hsl(0,0%,20%); }
+
+    .d-btn:hover {
+      opacity: 0.8;
+    }
+
+    .d-btn-call {
+      background: hsl(140, 50%, 38%);
+      color: white;
+    }
+
+    .d-btn-msg {
+      background: #f0f0f0;
+      color: hsl(0, 0%, 20%);
+    }
 
     /* ── STATUS STEPS ── */
     .steps-grid {
@@ -138,50 +239,136 @@
       flex-direction: column;
       gap: 0;
     }
+
     .step-row {
       display: flex;
       align-items: flex-start;
       gap: 12px;
     }
+
     .step-left {
       display: flex;
       flex-direction: column;
       align-items: center;
       flex-shrink: 0;
     }
+
     .step-dot {
-      width: 32px; height: 32px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 14px;
     }
-    .step-dot.done   { background: hsl(140,50%,38%); color: white; }
-    .step-dot.active { background: hsl(0,0%,14%); color: white; }
-    .step-dot.pending{ background: #eee; color: #bbb; font-size: 12px; }
-    .step-line { width: 2px; min-height: 28px; flex: 1; margin: 3px 0; }
-    .step-line.done   { background: hsl(140,50%,38%); }
-    .step-line.pending{ background: #e8e8e8; }
-    .step-right { padding-bottom: 20px; }
-    .step-row:last-child .step-right { padding-bottom: 0; }
-    .step-label { font-size: 14px; font-weight: 600; }
-    .step-label.done    { color: hsl(140,42%,32%); }
-    .step-label.active  { color: hsl(0,0%,14%); }
-    .step-label.pending { color: #ccc; }
-    .step-sub { font-size: 12px; color: #bbb; margin-top: 2px; }
+
+    .step-dot.done {
+      background: hsl(140, 50%, 38%);
+      color: white;
+    }
+
+    .step-dot.active {
+      background: hsl(0, 0%, 14%);
+      color: white;
+    }
+
+    .step-dot.pending {
+      background: #eee;
+      color: #bbb;
+      font-size: 12px;
+    }
+
+    .step-line {
+      width: 2px;
+      min-height: 28px;
+      flex: 1;
+      margin: 3px 0;
+    }
+
+    .step-line.done {
+      background: hsl(140, 50%, 38%);
+    }
+
+    .step-line.pending {
+      background: #e8e8e8;
+    }
+
+    .step-right {
+      padding-bottom: 20px;
+    }
+
+    .step-row:last-child .step-right {
+      padding-bottom: 0;
+    }
+
+    .step-label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .step-label.done {
+      color: hsl(140, 42%, 32%);
+    }
+
+    .step-label.active {
+      color: hsl(0, 0%, 14%);
+    }
+
+    .step-label.pending {
+      color: #ccc;
+    }
+
+    .step-sub {
+      font-size: 12px;
+      color: #bbb;
+      margin-top: 2px;
+    }
 
     /* ── ORDER ITEMS ── */
-    .items-list { display: flex; flex-direction: column; gap: 10px; }
-    .item-row { display: flex; gap: 12px; align-items: center; }
-    .item-row img {
-      width: 46px; height: 50px; object-fit: cover;
-      border-radius: 8px; background: #eee; flex-shrink: 0;
+    .items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .item-row-name { font-size: 13px; font-weight: 600; }
-    .item-row-sub  { font-size: 12px; color: #aaa; }
-    .item-row-price{ font-size: 13px; font-weight: 700; margin-left: auto; flex-shrink: 0; }
+
+    .item-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .item-row img {
+      width: 46px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #eee;
+      flex-shrink: 0;
+    }
+
+    .item-row-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .item-row-sub {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .item-row-price {
+      font-size: 13px;
+      font-weight: 700;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
     .items-total {
-      display: flex; justify-content: space-between;
-      font-size: 15px; font-weight: 800;
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+      font-weight: 800;
       padding-top: 12px;
       border-top: 1px solid #eee;
       margin-top: 6px;
@@ -189,16 +376,37 @@
 
     /* ── DELIVERY INFO ── */
     .info-row {
-      display: flex; gap: 10px;
+      display: flex;
+      gap: 10px;
       align-items: flex-start;
       padding: 10px 0;
       border-bottom: 1px solid #f5f5f5;
       font-size: 13px;
     }
-    .info-row:last-child { border-bottom: none; }
-    .info-icon  { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-    .info-label { font-size: 11px; color: #bbb; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.3px; }
-    .info-val   { font-weight: 600; font-size: 13px; color: hsl(0,0%,18%); }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-icon {
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .info-label {
+      font-size: 11px;
+      color: #bbb;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .info-val {
+      font-weight: 600;
+      font-size: 13px;
+      color: hsl(0, 0%, 18%);
+    }
 
     /* ── BACK BUTTON ── */
     .back-to-shop {
@@ -206,7 +414,7 @@
       text-align: center;
       margin-top: 8px;
       padding: 13px;
-      background: hsl(0,0%,14%);
+      background: hsl(0, 0%, 14%);
       color: white;
       border-radius: 10px;
       font-size: 14px;
@@ -214,11 +422,19 @@
       text-decoration: none;
       transition: opacity 0.2s;
     }
-    .back-to-shop:hover { opacity: 0.85; }
+
+    .back-to-shop:hover {
+      opacity: 0.85;
+    }
 
     @media (max-width: 500px) {
-      .banner { flex-wrap: wrap; }
-      .order-badge { margin-left: 0; }
+      .banner {
+        flex-wrap: wrap;
+      }
+
+      .order-badge {
+        margin-left: 0;
+      }
     }
   </style>
 </head>
@@ -231,17 +447,25 @@
       <nav class="icons">
         <a href="profile.html" class="icon-profile">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+            <path stroke="currentColor" stroke-width="2"
+              d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
         </a>
         <a href="index.html#contact" class="icon-contact" aria-label="Холбоо барих">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 9h10M7 13h6m-1 8c4.97 0 9-3.806 9-8.5S16.97 4 12 4s-9 3.806-9 8.5c0 1.41.363 2.738 1.004 3.905L3 21l5.343-1.32c1.099.466 2.354.82 3.657.82Z"/>
+          <svg width="24px" height="24px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="4.5"
+            stroke="#000000" fill="none">
+            <path d="M12.91,31.8V26.1a19.09,19.09,0,0,1,38.18,0v5.7" stroke-linecap="round" />
+            <path d="M12.06,31.8h4.7a0,0,0,0,1,0,0V45.18a0,0,0,0,1,0,0h-4.7a3,3,0,0,1-3-3V34.8A3,3,0,0,1,12.06,31.8Z"
+              stroke-linecap="round" />
+            <path d="M50.24,31.8h4.7a0,0,0,0,1,0,0V45.18a0,0,0,0,1,0,0h-4.7a3,3,0,0,1-3-3V34.8A3,3,0,0,1,50.24,31.8Z"
+              transform="translate(102.18 76.98) rotate(180)" stroke-linecap="round" />
+            <path d="M51.7,45.56v5a4,4,0,0,1-4,4H36.56" stroke-linecap="round" />
           </svg>
         </a>
         <a href="index.html" class="icon-cart">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
           </svg>
         </a>
       </nav>
@@ -296,7 +520,7 @@
         <div class="driver-av" id="driverAv">🧑</div>
         <div>
           <div class="driver-name" id="driverName">—</div>
-          <div class="driver-car"  id="driverCar">—</div>
+          <div class="driver-car" id="driverCar">—</div>
           <div class="driver-stars">★ <span id="driverRating">—</span></div>
         </div>
       </div>
@@ -402,26 +626,30 @@
       </div>
     </div>
 
-    <a href="profile.html" class="back-to-shop" style="background:hsl(0,0%,14%); margin-bottom:10px">Захиалгын түүх харах →</a>
+    <a href="profile.html" class="back-to-shop" style="background:hsl(0,0%,14%); margin-bottom:10px">Захиалгын түүх
+      харах →</a>
     <a href="index.html" class="back-to-shop" style="background:hsl(210,75%,52%)">Дэлгүүр үзэх →</a>
   </div>
 
   <nav class="bottom-nav">
     <a href="index.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"/>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
       </svg>
       <span>Нүүр</span>
     </a>
     <a href="basket.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
       </svg>
       <span>Сагс</span>
     </a>
     <a href="profile.html" class="bottom-nav-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+        <path stroke="currentColor" stroke-width="2"
+          d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
       </svg>
       <span>Профайл</span>
     </a>
@@ -440,12 +668,12 @@
     // Timestamp
     const orderDate = new Date(order.timestamp);
     document.getElementById("stepTime0").textContent =
-      orderDate.toLocaleString("mn-MN", { month:"long", day:"numeric", hour:"2-digit", minute:"2-digit" });
+      orderDate.toLocaleString("mn-MN", { month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" });
 
     // ── DELIVERY ESTIMATE by district ──
-    const cityDistricts = ["Баянзүрх","Сүхбаатар","Хан-Уул","Чингэлтэй","Баянгол","Сонгинохайрхан","Багахангай"];
-    const nearDistricts = ["Налайх","Багануур"];
-    const district  = order.delivery?.district || "";
+    const cityDistricts = ["Баянзүрх", "Сүхбаатар", "Хан-Уул", "Чингэлтэй", "Баянгол", "Сонгинохайрхан", "Багахангай"];
+    const nearDistricts = ["Налайх", "Багануур"];
+    const district = order.delivery?.district || "";
     const isProvince = order.delivery?.locType === "province";
 
     let etaDays, etaNote;
@@ -471,18 +699,18 @@
 
     // ── DRIVER ── (deterministic per order so it stays stable on refresh)
     const drivers = [
-      { av:"👨", name:"Болд Доржсүрэн",  car:"Toyota Prius · УНА-1234",         rating:"4.9", phone:"99112233" },
-      { av:"🧔", name:"Баяр Гантулга",   car:"Hyundai Tucson · УБА-5678",        rating:"4.8", phone:"88223344" },
-      { av:"👦", name:"Мөнхбаяр Ч.",     car:"Mitsubishi Outlander · УЦА-9012",  rating:"4.7", phone:"99334455" },
-      { av:"🧑", name:"Эрдэнэбат С.",    car:"Kia Sportage · УДА-3456",          rating:"5.0", phone:"88445566" },
+      { av: "👨", name: "Болд Доржсүрэн", car: "Toyota Prius · УНА-1234", rating: "4.9", phone: "99112233" },
+      { av: "🧔", name: "Баяр Гантулга", car: "Hyundai Tucson · УБА-5678", rating: "4.8", phone: "88223344" },
+      { av: "👦", name: "Мөнхбаяр Ч.", car: "Mitsubishi Outlander · УЦА-9012", rating: "4.7", phone: "99334455" },
+      { av: "🧑", name: "Эрдэнэбат С.", car: "Kia Sportage · УДА-3456", rating: "5.0", phone: "88445566" },
     ];
     const idNum = Number(String(order.id).replace(/\D/g, "")) || 0;
     const d = drivers[idNum % drivers.length];
-    document.getElementById("driverAv").textContent     = d.av;
-    document.getElementById("driverName").textContent   = d.name;
-    document.getElementById("driverCar").textContent    = d.car;
+    document.getElementById("driverAv").textContent = d.av;
+    document.getElementById("driverName").textContent = d.name;
+    document.getElementById("driverCar").textContent = d.car;
     document.getElementById("driverRating").textContent = d.rating;
-    document.getElementById("driverCall").href          = `tel:${d.phone}`;
+    document.getElementById("driverCall").href = `tel:${d.phone}`;
 
     // ── DELIVERY INFO ──
     const del = order.delivery || {};
@@ -490,15 +718,15 @@
       ? [del.district && del.district + " аймаг", del.khoroo && del.khoroo + " сум", del.building, del.apartment && del.apartment + " тоот"]
       : [del.district && del.district + " дүүрэг", del.khoroo, del.building && del.building + " байр", del.apartment && del.apartment + " тоот"];
     document.getElementById("infoAddress").textContent = addrParts.filter(Boolean).join(", ") || "—";
-    document.getElementById("infoName").textContent  = del.name  || "—";
+    document.getElementById("infoName").textContent = del.name || "—";
     document.getElementById("infoPhone").textContent = del.phone || "—";
 
     const payLabels = {
-      qpay:"QPay / QR код", mbank:"М банк", storepay:"Storepay",
-      pocket:"Pocket", ardpay:"Ard Pay", simple:"Simple",
-      socialpay:"Social Pay", toki:"Toki", hipay:"Hipay",
-      wechat:"WeChat Pay", happypay:"HappyPay", lenddy:"LendDy",
-      card:"Банкны карт", cash:"Бэлэн мөнгө"
+      qpay: "QPay / QR код", mbank: "М банк", storepay: "Storepay",
+      pocket: "Pocket", ardpay: "Ard Pay", simple: "Simple",
+      socialpay: "Social Pay", toki: "Toki", hipay: "Hipay",
+      wechat: "WeChat Pay", happypay: "HappyPay", lenddy: "LendDy",
+      card: "Банкны карт", cash: "Бэлэн мөнгө"
     };
     document.getElementById("infoPayment").textContent = payLabels[order.payment] || order.payment || "—";
 
@@ -514,9 +742,9 @@
         <img src="${p.image}" alt="${p.name}" onerror="this.style.background='#eee'">
         <div style="flex:1">
           <div class="item-row-name">${p.name}</div>
-          <div class="item-row-sub">${p.brand} · x${p.qty||1}</div>
+          <div class="item-row-sub">${p.brand} · x${p.qty || 1}</div>
         </div>
-        <div class="item-row-price">${formatPrice(p.newPrice*(p.qty||1))}</div>
+        <div class="item-row-price">${formatPrice(p.newPrice * (p.qty || 1))}</div>
       </div>`).join("");
 
     document.getElementById("orderTotal").textContent = formatPrice(order.total);

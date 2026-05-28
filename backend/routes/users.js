@@ -16,8 +16,6 @@ router.get('/', authRequired, adminRequired, async (req, res) => {
   res.json(result.rows);
 });
 
-// Admin: toggle is_admin on a user. Refuses to demote yourself so you can't
-// accidentally lock the last admin out of the panel.
 router.patch('/:id', authRequired, adminRequired, async (req, res) => {
   const { is_admin } = req.body;
   if (typeof is_admin !== 'boolean') {
@@ -34,7 +32,7 @@ router.patch('/:id', authRequired, adminRequired, async (req, res) => {
   res.json(result.rows[0]);
 });
 
-// Admin: delete a user. Same self-protection.
+// Admin self-protection.
 router.delete('/:id', authRequired, adminRequired, async (req, res) => {
   if (Number(req.params.id) === req.user.id) {
     return res.status(400).json({ error: 'Өөрийгөө устгах боломжгүй' });
