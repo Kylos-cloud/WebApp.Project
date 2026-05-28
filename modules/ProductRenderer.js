@@ -72,23 +72,25 @@ export class ProductRenderer {
     const from = this._visibleCount;
     this._visibleCount = Math.min(from + PAGE_SIZE, this._currentProducts.length);
 
-    this._currentProducts.slice(from, this._visibleCount).forEach(p => {
+    this._currentProducts.slice(from, this._visibleCount).forEach((p, i) => {
       const tmp = document.createElement("div");
       tmp.innerHTML = this._productCard(p).trim();
       const card = tmp.firstElementChild;
       // The CSS for .product already defines `animation: fadeSlideUp ...` which
-      // runs the moment the card lands in the DOM. We want to control the fade-in
-      // ourselves here, so disable that keyframe animation up front, then drive
-      // the entrance via inline transition.
-      card.style.cssText = "animation:none;opacity:0;transform:translateY(24px);transition:opacity .35s ease,transform .35s ease";
+      // would run the moment the card lands in the DOM. Disable it up front so
+      // we don't get a double-animation, then drive the entrance via inline
+      // transition with a small per-card stagger to match the initial render.
+      const delay = i * 40;
+      card.style.cssText = `animation:none;opacity:0;transform:translateY(24px);transition:opacity .35s ease ${delay}ms,transform .35s ease ${delay}ms`;
       this.productsEl.appendChild(card);
       requestAnimationFrame(() => requestAnimationFrame(() => {
         card.style.opacity = "1";
         card.style.transform = "translateY(0)";
-        // Once the JS transition finishes, drop the inline overrides. Keep
-        // animation:none so the keyframe animation (with its stale delay) never
-        // re-fires later.
-        setTimeout(() => { card.style.cssText = "animation:none"; }, 360);
+        // Once the JS transition finishes, strip the transition rule but keep
+        // animation:none and opacity:1 inline. Without the inline opacity the
+        // base `.product { opacity: 0 }` rule would re-hide the card since the
+        // keyframe animation (which normally fills it to 1) is suppressed.
+        setTimeout(() => { card.style.cssText = "animation:none;opacity:1"; }, 360 + delay);
       }));
     });
 
