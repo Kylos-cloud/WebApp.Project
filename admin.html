@@ -2357,9 +2357,25 @@
             };
         }
 
+        // Pull a useful message out of a failed response. The server may
+        // return JSON ({error: "..."}), an HTML error page (Render 500),
+        // or nothing at all — handle each case so callers always get a
+        // string with the HTTP status, not "Unexpected token '<'".
+        async function extractError(res, fallback) {
+            const text = await res.text().catch(() => '');
+            try {
+                const data = JSON.parse(text);
+                if (data && data.error) return `${data.error} (HTTP ${res.status})`;
+            } catch { /* not JSON */ }
+            const snippet = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 120);
+            return snippet
+                ? `${fallback} — HTTP ${res.status}: ${snippet}`
+                : `${fallback} (HTTP ${res.status})`;
+        }
+
         async function apiFetchProducts() {
             const res = await fetch(`${API_BASE}/products`);
-            if (!res.ok) throw new Error('Бараа татаж чадсангүй');
+            if (!res.ok) throw new Error(await extractError(res, 'Бараа татаж чадсангүй'));
             const data = await res.json();
             return data.map(backendToAdmin);
         }
@@ -2369,7 +2385,7 @@
                 headers: authHeaders(),
                 body: JSON.stringify(adminToBackend(adminData)),
             });
-            if (!res.ok) throw new Error((await res.json()).error || 'Үүсгэж чадсангүй');
+            if (!res.ok) throw new Error(await extractError(res, 'Үүсгэж чадсангүй'));
             return backendToAdmin(await res.json());
         }
         async function apiUpdate(id, adminData) {
@@ -2378,7 +2394,7 @@
                 headers: authHeaders(),
                 body: JSON.stringify(adminToBackend(adminData)),
             });
-            if (!res.ok) throw new Error((await res.json()).error || 'Засаж чадсангүй');
+            if (!res.ok) throw new Error(await extractError(res, 'Засаж чадсангүй'));
             return backendToAdmin(await res.json());
         }
         async function apiPatch(id, partial) {
@@ -2387,7 +2403,7 @@
                 headers: authHeaders(),
                 body: JSON.stringify(partial),
             });
-            if (!res.ok) throw new Error((await res.json()).error || 'Засаж чадсангүй');
+            if (!res.ok) throw new Error(await extractError(res, 'Засаж чадсангүй'));
             return backendToAdmin(await res.json());
         }
         async function apiDelete(id) {
@@ -2395,7 +2411,7 @@
                 method: 'DELETE',
                 headers: authHeaders(),
             });
-            if (!res.ok && res.status !== 204) throw new Error('Устгаж чадсангүй');
+            if (!res.ok && res.status !== 204) throw new Error(await extractError(res, 'Устгаж чадсангүй'));
         }
 
         // Products are loaded from the backend on mount (see ProductApp.useEffect).
@@ -2437,7 +2453,13 @@
                     const img = new Image();
                     img.onerror = () => reject(new Error('Зураг ачаалж чадсангүй'));
                     img.onload = () => {
-                        let { width, height } = img;
+                        // Some exotic/corrupt files (HEIC, certain camera PNGs) fire onload
+                        // but decode to a 0×0 image — toDataURL on a 0×0 canvas returns
+                        // the empty "data:," URI, which then renders as a broken image.
+                        if (!img.naturalWidth || !img.naturalHeight) {
+                            return reject(new Error('Зураг тайлж чадсангүй (формат дэмжигдэхгүй байж магадгүй)'));
+                        }
+                        let { naturalWidth: width, naturalHeight: height } = img;
                         if (width > maxDim || height > maxDim) {
                             const scale = maxDim / Math.max(width, height);
                             width = Math.round(width * scale);
@@ -2446,9 +2468,14 @@
                         const canvas = document.createElement('canvas');
                         canvas.width = width; canvas.height = height;
                         canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-                        // Keep PNG for transparency, otherwise re-encode as JPEG.
-                        const outType = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
-                        resolve(canvas.toDataURL(outType, quality));
+                        // Always re-encode as JPEG. PNG output keeps the file uncompressed
+                        // (a 4000px screenshot can be 1MB+); JPEG at quality 0.85 is plenty
+                        // for product photos and ~10× smaller.
+                        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        if (!dataUrl || !dataUrl.startsWith('data:image/')) {
+                            return reject(new Error('Зураг кодлож чадсангүй'));
+                        }
+                        resolve(dataUrl);
                     };
                     img.src = reader.result;
                 };

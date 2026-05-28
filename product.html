@@ -1620,7 +1620,10 @@
       // Thumbnail strip: combine the primary image, any admin-uploaded
       // gallery photos (product.images), and per-variant photos. If none
       // of those extras exist, repeat the primary so the strip still fills.
-      const galleryImgs = Array.isArray(product.images) ? product.images.filter(Boolean) : [];
+      // Drop malformed entries (empty strings, "data:," from failed encodes, etc.)
+      // so a single bad image doesn't show as a broken thumbnail.
+      const isValidImageSrc = s => typeof s === 'string' && s.length > 12 && (s.startsWith('http') || /^data:image\//.test(s));
+      const galleryImgs = Array.isArray(product.images) ? product.images.filter(isValidImageSrc) : [];
       const variantImgs = [...new Set(variants.map(v => v.image).filter(Boolean))];
       const extras = [...galleryImgs, ...variantImgs];
       const thumbSrcs = extras.length
