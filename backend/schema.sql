@@ -42,7 +42,10 @@ CREATE TABLE products (
   -- {"color": ["Black","White","Blue"], "storage": ["128GB","256GB"]}
   variant_options JSONB,
   sku TEXT,
-  description TEXT
+  description TEXT,
+  -- Optional gallery: array of additional photo URLs/data-URIs shown in the
+  -- thumbnail strip alongside the primary `image`.
+  images JSONB
 );
 
 -- One row per concrete variant combination (e.g. Black + 128GB iPhone).

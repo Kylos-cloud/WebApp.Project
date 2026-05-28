@@ -1589,7 +1589,8 @@
         ? `<div class="out-of-stock-overlay">ДУУССАН</div>`
         : "";
 
-      const desc = productDescriptions[product.id]
+      const desc = (product.description && product.description.trim())
+        || productDescriptions[product.id]
         || categoryFallbacks[product.category]
         || "Өндөр чанарын бараа. Танд сэтгэл ханамжтай худалдан авалт хийхийг хүсье.";
 
@@ -1616,11 +1617,15 @@
         ? `(${reviewCount} сэтгэгдэл)`
         : `(сэтгэгдэл байхгүй)`;
 
-      // Thumbnail strip: prefer one thumb per distinct variant image (so
-      // a 4-color iPhone shows 4 photos to flip through). Fall back to
-      // repeating the product image when no per-variant photos are set.
+      // Thumbnail strip: combine the primary image, any admin-uploaded
+      // gallery photos (product.images), and per-variant photos. If none
+      // of those extras exist, repeat the primary so the strip still fills.
+      const galleryImgs = Array.isArray(product.images) ? product.images.filter(Boolean) : [];
       const variantImgs = [...new Set(variants.map(v => v.image).filter(Boolean))];
-      const thumbSrcs = variantImgs.length ? [product.image, ...variantImgs] : [product.image, product.image, product.image, product.image];
+      const extras = [...galleryImgs, ...variantImgs];
+      const thumbSrcs = extras.length
+        ? [product.image, ...extras]
+        : [product.image, product.image, product.image, product.image];
       const thumbHTML = thumbSrcs.map((src, i) => `
         <div class="thumb ${i === 0 ? 'active' : ''}" onclick="selectThumb(this, '${src}')">
           <img src="${src}" alt="thumb ${i + 1}" onerror="this.style.background='#eee'">

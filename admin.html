@@ -1390,6 +1390,75 @@
             font-weight: 500;
         }
 
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+            gap: 8px;
+        }
+
+        .gallery-thumb {
+            position: relative;
+            aspect-ratio: 1;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: var(--color-input);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-thumb-remove {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 20px;
+            height: 20px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 11px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .gallery-thumb-remove:hover {
+            background: rgba(0, 0, 0, 0.85);
+        }
+
+        .gallery-add {
+            aspect-ratio: 1;
+            border: 1px dashed var(--color-border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--color-muted);
+            cursor: pointer;
+            background: var(--color-input);
+            transition: all .15s;
+        }
+
+        .gallery-add:hover {
+            background: var(--color-bg);
+            border-color: var(--color-text);
+            color: var(--color-text);
+        }
+
+        .gallery-add input {
+            display: none;
+        }
+
         .img-help {
             font-size: 11px;
             color: var(--color-muted);
@@ -2264,6 +2333,7 @@
                 sku: p.sku,
                 description: p.description || null,
                 image: p.image || null,
+                images: Array.isArray(p.images) ? p.images.filter(Boolean) : [],
                 category: CAT_MAP[p.category] || 'huvtsas',
                 oldPrice: Number(p.price),
                 newPrice: Number(p.price),
@@ -2280,6 +2350,7 @@
                 sku: p.sku || '',
                 description: p.description || '',
                 image: p.image || '',
+                images: Array.isArray(p.images) ? p.images : [],
                 category: SLUG_TO_MN[p.category] || p.category || '',
                 price: p.newPrice,
                 stock: p.stock,
@@ -2387,10 +2458,38 @@
 
         /* ── Modal ── */
         function ProductModal({ mode, product, onSave, onClose }) {
-            const blank = { name: '', sku: '', price: '', stock: '', category: '', description: '', image: '' };
+            const blank = { name: '', sku: '', price: '', stock: '', category: '', description: '', image: '', images: [] };
             const [form, setForm] = useState(product
-                ? { name: product.name, sku: product.sku, price: product.price, stock: product.stock, category: product.category, description: product.description || '', image: product.image || '' }
+                ? { name: product.name, sku: product.sku, price: product.price, stock: product.stock, category: product.category, description: product.description || '', image: product.image || '', images: Array.isArray(product.images) ? product.images : [] }
                 : blank);
+            const [galleryErr, setGalleryErr] = useState('');
+            const [galleryUploading, setGalleryUploading] = useState(false);
+            const galleryInputRef = useRef(null);
+            const MAX_GALLERY = 5;
+
+            async function addGalleryFiles(fileList) {
+                const files = Array.from(fileList || []);
+                if (!files.length) return;
+                setGalleryErr('');
+                setGalleryUploading(true);
+                try {
+                    const remaining = MAX_GALLERY - (form.images?.length || 0);
+                    const toProcess = files.slice(0, remaining);
+                    const dataUrls = await Promise.all(toProcess.map(resizeImageFile));
+                    setForm(p => ({ ...p, images: [...(p.images || []), ...dataUrls] }));
+                } catch (err) {
+                    setGalleryErr(err.message);
+                } finally {
+                    setGalleryUploading(false);
+                }
+            }
+            function onGalleryFileChange(e) { addGalleryFiles(e.target.files); e.target.value = ''; }
+            function removeGalleryImage(i) { setForm(p => ({ ...p, images: (p.images || []).filter((_, idx) => idx !== i) })); }
+            function addGalleryUrl(url) {
+                if (!url || !url.trim()) return;
+                if ((form.images?.length || 0) >= MAX_GALLERY) return;
+                setForm(p => ({ ...p, images: [...(p.images || []), url.trim()] }));
+            }
             const [imgErr, setImgErr] = useState(false);
             // Default to URL tab if editing a product whose image looks like a URL,
             // otherwise default to file upload (the common case for new uploads).
@@ -2474,6 +2573,33 @@
                                     <p className="img-help">Гадаад линк ашиглаж байгаа бол энд оруулна уу.</p>
                                 </div>
                             )}
+
+                            <div className="form-field">
+                                <label className="form-label">Нэмэлт зургууд ({(form.images || []).length}/{MAX_GALLERY})</label>
+                                <div className="gallery-grid">
+                                    {(form.images || []).map((src, i) => (
+                                        <div key={i} className="gallery-thumb">
+                                            <img src={src} alt={`gallery ${i + 1}`} onError={e => { e.target.style.background = '#eee'; }} />
+                                            <button type="button" className="gallery-thumb-remove" onClick={() => removeGalleryImage(i)} title="Хасах">✕</button>
+                                        </div>
+                                    ))}
+                                    {(form.images || []).length < MAX_GALLERY && (
+                                        <label className="gallery-add">
+                                            <input ref={galleryInputRef} type="file" accept="image/*" multiple onChange={onGalleryFileChange} />
+                                            <span>{galleryUploading ? '...' : '+ Нэмэх'}</span>
+                                        </label>
+                                    )}
+                                </div>
+                                <input
+                                    className="form-input"
+                                    type="url"
+                                    placeholder="эсвэл URL оруулаад Enter дар"
+                                    style={{ marginTop: 8 }}
+                                    onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addGalleryUrl(e.target.value); e.target.value = ''; } }}
+                                />
+                                {galleryErr && <p style={{ color: 'var(--color-red)', fontSize: 12, marginTop: 6 }}>{galleryErr}</p>}
+                                <p className="img-help">Хүртэл {MAX_GALLERY} нэмэлт зураг. Барааны дэлгэрэнгүй хэсэгт thumbnail болж харагдана.</p>
+                            </div>
 
                             <div className="form-row">
                                 <div className="form-field">

@@ -26,6 +26,7 @@ function rowToProduct(r, variants = []) {
     })),
     sku: r.sku,
     description: r.description,
+    images: Array.isArray(r.images) ? r.images : [],
   };
 }
 
@@ -92,36 +93,37 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', authRequired, adminRequired, async (req, res) => {
-  const { name, category, tag, image, oldPrice, newPrice, brand, rating, stock, variantOptions, sku, description } = req.body;
+  const { name, category, tag, image, oldPrice, newPrice, brand, rating, stock, variantOptions, sku, description, images } = req.body;
   const result = await db.query(
-    `INSERT INTO products (name, category, tag, image, old_price, new_price, brand, rating, stock, variant_options, sku, description)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`,
-    [name, category, tag, image, oldPrice, newPrice, brand, rating ?? 4.5, stock ?? 0, variantOptions ? JSON.stringify(variantOptions) : null, sku, description]
+    `INSERT INTO products (name, category, tag, image, old_price, new_price, brand, rating, stock, variant_options, sku, description, images)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`,
+    [name, category, tag, image, oldPrice, newPrice, brand, rating ?? 4.5, stock ?? 0, variantOptions ? JSON.stringify(variantOptions) : null, sku, description, Array.isArray(images) ? JSON.stringify(images) : null]
   );
   res.status(201).json(rowToProduct(result.rows[0]));
 });
 
 router.put('/:id', authRequired, adminRequired, async (req, res) => {
-  const { name, category, tag, image, oldPrice, newPrice, brand, rating, stock, variantOptions, sku, description } = req.body;
+  const { name, category, tag, image, oldPrice, newPrice, brand, rating, stock, variantOptions, sku, description, images } = req.body;
   const result = await db.query(
     `UPDATE products SET name=$1, category=$2, tag=$3, image=$4, old_price=$5,
-       new_price=$6, brand=$7, rating=$8, stock=$9, variant_options=$10, sku=$11, description=$12
-     WHERE id=$13 RETURNING *`,
-    [name, category, tag, image, oldPrice, newPrice, brand, rating, stock, variantOptions ? JSON.stringify(variantOptions) : null, sku, description, req.params.id]
+       new_price=$6, brand=$7, rating=$8, stock=$9, variant_options=$10, sku=$11, description=$12, images=$13
+     WHERE id=$14 RETURNING *`,
+    [name, category, tag, image, oldPrice, newPrice, brand, rating, stock, variantOptions ? JSON.stringify(variantOptions) : null, sku, description, Array.isArray(images) ? JSON.stringify(images) : null, req.params.id]
   );
   if (!result.rows[0]) return res.status(404).json({ error: 'Not found' });
   res.json(rowToProduct(result.rows[0]));
 });
 
 router.patch('/:id', authRequired, adminRequired, async (req, res) => {
-  const fields = ['name', 'category', 'tag', 'image', 'old_price', 'new_price', 'brand', 'rating', 'stock', 'variant_options', 'sku', 'description'];
+  const fields = ['name', 'category', 'tag', 'image', 'old_price', 'new_price', 'brand', 'rating', 'stock', 'variant_options', 'sku', 'description', 'images'];
   const map = { oldPrice: 'old_price', newPrice: 'new_price', variantOptions: 'variant_options' };
+  const jsonCols = new Set(['variant_options', 'images']);
   const sets = [];
   const values = [];
   for (const [k, v] of Object.entries(req.body)) {
     const col = map[k] || (fields.includes(k) ? k : null);
     if (!col) continue;
-    values.push(col === 'variant_options' && v !== null ? JSON.stringify(v) : v);
+    values.push(jsonCols.has(col) && v !== null ? JSON.stringify(v) : v);
     sets.push(`${col} = $${values.length}`);
   }
   if (!sets.length) return res.status(400).json({ error: 'No fields to update' });
