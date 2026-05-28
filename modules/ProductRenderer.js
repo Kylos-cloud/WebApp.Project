@@ -76,12 +76,19 @@ export class ProductRenderer {
       const tmp = document.createElement("div");
       tmp.innerHTML = this._productCard(p).trim();
       const card = tmp.firstElementChild;
-      card.style.cssText = "opacity:0;transform:translateY(24px);transition:opacity .35s ease,transform .35s ease";
+      // The CSS for .product already defines `animation: fadeSlideUp ...` which
+      // runs the moment the card lands in the DOM. We want to control the fade-in
+      // ourselves here, so disable that keyframe animation up front, then drive
+      // the entrance via inline transition.
+      card.style.cssText = "animation:none;opacity:0;transform:translateY(24px);transition:opacity .35s ease,transform .35s ease";
       this.productsEl.appendChild(card);
       requestAnimationFrame(() => requestAnimationFrame(() => {
         card.style.opacity = "1";
         card.style.transform = "translateY(0)";
-        setTimeout(() => { card.style.cssText = ""; }, 360);
+        // Once the JS transition finishes, drop the inline overrides. Keep
+        // animation:none so the keyframe animation (with its stale delay) never
+        // re-fires later.
+        setTimeout(() => { card.style.cssText = "animation:none"; }, 360);
       }));
     });
 
