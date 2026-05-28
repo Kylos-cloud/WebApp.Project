@@ -105,7 +105,14 @@ if (searchInput) {
     const items = document.querySelectorAll(".menu-item");
     items.forEach(item => {
       const text = item.textContent.toLowerCase();
-      item.style.display = text.includes(value) ? "flex" : "none";
+      const match = text.includes(value);
+      item.style.display = match ? "flex" : "none";
+      // Mobile accordion: hide the .mobile-sub that was inserted after this
+      // item so it doesn't float under unrelated search results.
+      const sub = item.nextElementSibling;
+      if (sub && sub.classList.contains("mobile-sub")) {
+        sub.style.display = match ? "" : "none";
+      }
     });
   });
 }
@@ -410,14 +417,6 @@ document.querySelectorAll(".bottom-nav-item").forEach(item => {
     this.classList.add("active");
   });
 });
-
-// Double-click navigates straight to category (desktop convenience)
-document.querySelectorAll(".menu-item").forEach(item => {
-  item.addEventListener("dblclick", function () {
-    navigateToCategory(this.dataset.category);
-  });
-});
-
 
 const btn = document.querySelector(".scroll-top");
 
